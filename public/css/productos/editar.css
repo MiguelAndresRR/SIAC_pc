@@ -1,4 +1,4 @@
-.modificar-producto-container {
+.modificar-productos-container {
     border-radius: 10px;
     height: auto;
     width: 100%;
@@ -11,14 +11,14 @@
     transition: all 0.1s ease-in-out;
 }
 
-.modificar-producto-container h2 {
+.modificar-productos-container h2 {
     place-items: left;
     justify-items: left;
     padding: 4px;
     margin-bottom: 20px;
 }
 
-.modificar-producto-container form {
+.modificar-productos-container form {
     display: flex;
     flex-direction: column;
     gap: 3px;
@@ -72,7 +72,7 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-.modificar-producto-container button {
+.modificar-productos-container button {
     width: 100%;
     border-radius: 10px;
     border: 2px solid transparent;
@@ -94,7 +94,7 @@ input[type="number"]::-webkit-outer-spin-button {
     }
 }
 
-.container-modal-editar {
+.container-modal-editar-productos {
     position: fixed;
     top: 0;
     left: 0;
@@ -110,12 +110,12 @@ input[type="number"]::-webkit-outer-spin-button {
     z-index: 1000;
 }
 
-.container-modal-editar.mostrar {
+.container-modal-editar-productos.mostrar {
     opacity: 1;
     visibility: visible;
 }
 
-.container-modal-editar .modal {
+.container-modal-editar-productos .modal {
     width: 100%;
     display: flex;
     margin: 0 500px;
@@ -130,7 +130,7 @@ form {
     display: flex;
 }
 
-.modificar-producto-container {
+.modificar-productos-container {
     background-color: white;
     opacity: none;
     width: 50%;

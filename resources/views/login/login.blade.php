@@ -65,5 +65,7 @@
             </div>
         </div>
     </div>
+    <script src="{{asset('js/dashboard/formulario.js')}}"></script>
 </body>
+
 </html>

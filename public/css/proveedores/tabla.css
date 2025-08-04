@@ -1,0 +1,151 @@
+table th,
+table td {
+    padding: 5px;
+    font-size: 14px;
+    border-collapse: collapse;
+}
+table td {
+    border-bottom: #cecece 2px solid;
+    border-right: #cecece 2px solid;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: black;
+}
+th:nth-child(1), td:nth-child(1) { width: 50px; }    /* ID */
+th:nth-child(2), td:nth-child(2) { width: 120px; }   /* Usuario */
+th:nth-child(3), td:nth-child(3) { width: 120px; }   /* Rol */
+th:nth-child(4), td:nth-child(4) { width: 150px; }   /* Nombres */
+th:nth-child(5), td:nth-child(5) { width: 150px; }   /* Apellidos */
+th:nth-child(6), td:nth-child(6) { width: 200px; }   /* Correo */
+th:nth-child(7), td:nth-child(7) { width: 130px; }   /* Teléfono */
+th:nth-child(8), td:nth-child(8) { width: 130px; }   /* Documento */
+th:nth-child(9), td:nth-child(9) { width: 100px; }   /* Botones */
+tbody {
+    background-color: #ffffff;
+    color: #000000;
+    & td {
+        text-align: center;
+        width: 10px;
+    }
+}
+.btn-confirmar {
+    background-color: #000000 !important;
+    color: #fff !important;
+    border: none;
+    padding: 8px 16px;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    outline: none;
+    margin-right: 5px;
+}
+
+.btn-confirmar:hover {
+    background-color: #ffffff !important;
+    border-radius: 10px;
+    color: #000000 !important;
+    transform: scale(1.05);
+    border: 2px solid #9e12e4;
+}
+
+.btn-cancelar {
+    background-color: #000000 !important;
+    color: #fff !important;
+    border: none;
+    padding: 8px 16px;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    outline: none;
+    margin-left: 5px;
+}
+
+.btn-cancelar:hover {
+    background-color: #ffffff !important;
+    border-radius: 10px;
+    color: #000000 !important;
+    transform: scale(1.05);
+    border: 2px solid #9e12e4;
+}
+#botones button {
+    width: 30%;
+    border-radius: 10px;
+    background-color: #000000;
+    color: #ffffff;
+    height: 40px;
+    border: 2px solid transparent;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+#botones .btn-editar:hover {
+    background-color: #ffd904;
+    transform: scale(1.05);
+    border: #ffb53e 2px solid;
+}
+#botones .btn-ver:hover {
+    background-color: #9e12e4;
+    transform: scale(1.05);
+    border: #ff00e6 2px solid;
+}
+#botones .borrar-boton:hover {
+    background-color: #fe2252;
+    transform: scale(1.05);
+    border: #ff2600 2px solid;
+}
+/* encabezado tabla */
+thead {
+    color: #ffffff;
+    margin: 0;
+    & th {
+        text-align: center;
+        background-color: #000000;
+        font-weight: bold;
+        font-size: 16px;
+        align-content: center;
+        padding: 4px;
+        height: 40px;
+        user-select: none;
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        & #crear-modal-proveedores {
+            background-color: #ffffff;
+            width: 100%;
+            color: #000000;
+            border: none;
+            border: 2px solid transparent;
+            outline: none;
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            &:hover {
+                background-color: #00ff4c;
+                color: #ffffff;
+                border: #0c9330 2px solid;
+            }
+        }
+    }
+}
+table {
+    width: 100%;
+    border-spacing: 0;
+}
+.container-proveedores-class {
+    height: 70vh;
+    overflow-y: auto;
+}
+.tableFixHead thead tr th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+td#botones {
+    min-width: 150px;
+}
+#botones button {
+    box-sizing: border-box;
+}

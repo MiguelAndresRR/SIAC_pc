@@ -19,4 +19,5 @@
 <body>
     @include('admin.layout.sidebar')
 </body>
+
 </html>

@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\proveedor\Proveedor;
-use App\Models\User;
+use App\Models\usuarios\User;
 
 class Compras extends Model
 {
     use HasFactory;
 
-    protected $table = 'compras';
+    protected $table = 'compra';
 
     protected $primaryKey = 'id_compra';
 

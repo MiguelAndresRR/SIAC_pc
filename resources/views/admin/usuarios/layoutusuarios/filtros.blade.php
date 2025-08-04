@@ -20,4 +20,3 @@
                 style="color: #ffffff;"></i></button>
     </div>
 </form>
-<script src="{{ asset('js/usuarios/filtrar.js')}}"></script>

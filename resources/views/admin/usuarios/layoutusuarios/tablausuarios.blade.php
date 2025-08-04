@@ -23,7 +23,7 @@
                 <tr>
                     <td>{{ $usuario->id_usuario }}</td>
                     <td>{{ $usuario->user }}</td>
-                    <td data-id-categoria="{{ $usuario->id_rol }}">{{ $usuario->rol->nombre_rol }}</td>
+                    <td data-id-categoria="{{ $usuario->id_rol }}">{{ $usuario->rol ? $usuario->rol->nombre_rol : 'Sin rol' }}</td>
                     <td>{{$usuario->nombre_usuario}}</td>
                     <td>{{$usuario->apellido_usuario}}</td>
                     <td>{{$usuario->correo_usuario}}</td>

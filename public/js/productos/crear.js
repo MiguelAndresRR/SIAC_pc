@@ -1,17 +1,25 @@
+function asignarEventosModalCrear() {
+    const btnAbrirModal = document.querySelector("#crear-modal-productos");
+    const btnCerrarModal = document.querySelector("#ocultar-modal-crear-productos");
+    const contModal = document.querySelector(".container-modal-crear-productos");
 
-    const btnOcultarModalCrear = document.querySelector("#ocultar-modal-crear");
-    const contModalCrear = document.querySelector(".container-modal-crear");
+    if (btnAbrirModal) {
+        btnAbrirModal.addEventListener("click", (e) => {
+            e.preventDefault();
+            contModal.classList.add("mostrar");
+            console.log("✅ Modal abierto");
+        });
+    }
 
-    btnOcultarModalCrear.addEventListener("click", (e) => {
-        e.preventDefault();
-        contModalCrear.classList.remove("mostrar");
-    });
+    if (btnCerrarModal) {
+        btnCerrarModal.addEventListener("click", (e) => {
+            e.preventDefault();
+            contModal.classList.remove("mostrar");
+            console.log("✅ Modal cerrado");
+        });
+    }
+}
 
-
-    document.addEventListener("click", function (e) {
-        const btn = e.target.closest("#crear-modal");
-        if (!btn) return;
-
-        e.preventDefault();
-        contModalCrear.classList.add("mostrar");
-    });
+// Al cargar la página
+asignarEventosModalCrear();
+window.asignarEventosModalCrear = asignarEventosModalCrear;

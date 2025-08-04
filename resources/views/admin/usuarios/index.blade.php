@@ -55,5 +55,12 @@
     @include('admin.usuarios.modal.edit')
     @include('admin.usuarios.modal.mostrar')
     @include('admin.usuarios.modal.create')
+    
+    <!-- Scripts JavaScript -->
+    <script src="{{ asset('js/usuarios/crear.js') }}"></script>
+    <script src="{{ asset('js/usuarios/editar.js') }}"></script>
+    <script src="{{ asset('js/usuarios/showboton.js') }}"></script>
+    <script src="{{ asset('js/usuarios/borrar.js') }}"></script>
+    <script src="{{ asset('js/usuarios/filtrar.js') }}"></script>
 </body>
 </html>

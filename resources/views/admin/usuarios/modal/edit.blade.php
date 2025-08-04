@@ -1,5 +1,5 @@
-<div class="container-modal-editar" id="container-modal-editar2" >
-    <div class="modificar-producto-container">
+<div class="container-modal-editar2" id="container-modal-editar2" >
+    <div class="modificar-usuario-container">
         <h2>Modificar usuario</h2>
         <form id="form_editar1" method="POST" enctype="multipart/form-data" action="">
             @csrf
@@ -46,7 +46,7 @@
                         title="Debe contener al menos una letra mayúscula, un carácter especial y mínimo 8 caracteres.">
 
                     <label for="id_rol-editar" class="form-label"><i class="fa-solid fa-user-tag"></i> Rol</label>
-                    <select name="id_rol-editar" id="id_rol-editar" class="form-control" required>
+                    <select name="id_rol" id="id_rol-editar" class="form-control" required>
                         <option value="" disabled {{ old('id_rol') ? '' : 'selected' }}>
                             Selecciona rol
                         </option>
@@ -60,11 +60,9 @@
                 </div>
             </div>
             <br>
-            <button type="submit" class="btn btn-success">Crear</button>
+            <button type="submit" class="btn btn-success">Actualizar</button>
             <p class="error" id="errorMessage"></p>
             <button type="button" class="btn btn-secondary" id="ocultar-modal-editar2">Cancelar</button>
         </form>
     </div>
 </div>
-
-<script src="{{ asset('js/usuarios/editar.js') }}"></script>

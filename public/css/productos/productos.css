@@ -4,10 +4,10 @@
     flex-direction: column;
     padding: 10px;
     width: 100vw;
-    
+    overflow-y: auto;
 }
 
-.registrar-producto-container {
+.registrar-productos-container {
     border-radius: 10px;
     height: auto;
     width: 100%;
@@ -19,16 +19,18 @@
     margin-bottom: 20px;
 }
 
-.registrar-producto-container h2 {
+.registrar-productos-container h2 {
     place-items: left;
     justify-items: left;
     padding: 4px;
     margin-bottom: 20px;
 }
-.registrar-producto-container form {
+
+.registrar-productos-container form {
     display: flex;
     flex-direction: column;
     gap: 3px;
+
     & input {
         border: 2px solid transparent;
         outline: none;
@@ -39,6 +41,7 @@
         color: #000000;
         font-size: 16px;
         margin-bottom: 10px;
+
         &:focus {
             border: 2px solid #9e12e4;
             box-shadow: 0 0 5px #9e12e4;
@@ -46,6 +49,7 @@
         }
     }
 }
+
 & select {
     border: 2px solid transparent;
     outline: none;
@@ -58,23 +62,24 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: #f0f0f0
-        url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')
-        no-repeat right 0.75rem center;
+    background: #f0f0f0 url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 0.75rem center;
     padding-right: 2rem;
     border-radius: 0.75rem;
+
     &:focus {
         border: 2px solid #9e12e4;
         box-shadow: 0 0 5px #9e12e4;
         transition: all 0.3s ease-in-out;
     }
 }
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-.registrar-producto-container button {
+
+.registrar-productos-container button {
     width: 100%;
     border-radius: 10px;
     border: 2px solid transparent;
@@ -86,6 +91,7 @@ input[type="number"]::-webkit-outer-spin-button {
     margin-bottom: 10px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+
     &:hover {
         background-color: #ffffff;
         border-radius: 10px;
@@ -94,7 +100,8 @@ input[type="number"]::-webkit-outer-spin-button {
         border: 2px solid #9e12e4;
     }
 }
-.container-modal-crear {
+
+.container-modal-crear-productos {
     position: fixed;
     top: 0;
     left: 0;
@@ -108,13 +115,16 @@ input[type="number"]::-webkit-outer-spin-button {
     align-items: center;
     justify-content: center;
     z-index: 1000;
+
 }
-.container-modal-crear.mostrar {
+
+.container-modal-crear-productos.mostrar {
     opacity: 1;
     visibility: visible;
 }
 
-.container-modal-crear .modal {
+
+.container-modal-crear-productos .modal {
     width: 100%;
     display: flex;
     margin: 0 500px;
@@ -123,11 +133,13 @@ input[type="number"]::-webkit-outer-spin-button {
     z-index: 1;
     opacity: 0.6;
 }
+
 form {
     width: 100%;
     display: flex;
 }
-.registrar-producto-container {
+
+.registrar-productos-container {
     background-color: white;
     opacity: none;
     width: 50%;
@@ -148,13 +160,16 @@ form {
     justify-content: left;
     gap: 10px;
     width: 100%;
+
 }
+
 .form-control {
     display: flex;
     align-items: center;
     gap: 3px;
 }
-#buscar {
+
+.form-control {
     padding: 10px;
     border-radius: 10px;
     border: 2px solid transparent;
@@ -162,14 +177,16 @@ form {
     background-color: #ffffff;
     color: #000000;
     font-size: 16px;
-
+    width: 500px;
     transition: all 0.3s ease-in-out;
+
     &:focus {
         border: 2px solid #9e12e4;
         box-shadow: 0 0 5px #9e12e4;
     }
 }
-#limpiar-filtros {
+
+#limpiar-filtros-productos {
     padding: 10px;
     border-radius: 10px;
     border: 2px solid transparent;
@@ -180,6 +197,10 @@ form {
     justify-content: center;
     width: 500px;
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+
     &:hover {
         background-color: #f48637 !important;
         border-radius: 10px;

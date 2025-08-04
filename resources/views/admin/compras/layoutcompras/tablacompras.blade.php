@@ -16,10 +16,10 @@
         <tbody id="container-compras-table">
             @foreach ($compras as $compra)
                 <tr>
-                    <td>{{ $compra->id_compra }}</td>
-                    <td>{{ $compra->id_usuario }}</td>
-                    <td>{{ $compra->fecha_compra }}</td>
-                    <td>{{ $compra->total_compra }}</td>
+                    <td data-id_compra="{{ $compra->id_producto }}" data-id_detalle_compra="{{ $compra->id_detalle_compra }}">
+                        {{ $compra->id_compra }}
+                    </td>
+
                     <td id="botones">
                         <button type="button" class="btn-ver" data-id_compra="{{ $compra->id_compra }}"
                             data-id_detalle_compra="{{ $compra->id_detalle_compra }}">

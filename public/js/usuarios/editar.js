@@ -1,10 +1,12 @@
 const btnOcultarModalEdit = document.querySelector("#ocultar-modal-editar2");
 const contModalEdit = document.querySelector("#container-modal-editar2");
 
-btnOcultarModalEdit.addEventListener("click", (e) => {
-    e.preventDefault();
-    contModalEdit.classList.remove("mostrar");
-});
+if (btnOcultarModalEdit) {
+    btnOcultarModalEdit.addEventListener("click", (e) => {
+        e.preventDefault();
+        contModalEdit.classList.remove("mostrar");
+    });
+}
 
 document.addEventListener("click", function (e) {
     const btn = e.target.closest("#btn-editar1");
@@ -12,8 +14,9 @@ document.addEventListener("click", function (e) {
 
     e.preventDefault();
     const id_usuario = btn.dataset.id_usuario;
+    console.log("Botón editar clickeado, ID:", id_usuario);
 
-    fetch(`/admin/usuarios/${id_usuario}`)
+    fetch(`/admin/usuarios/index/${id_usuario}`)
         .then((response) => response.json())
         .then((data) => {
             console.log('datos recibidos', data)

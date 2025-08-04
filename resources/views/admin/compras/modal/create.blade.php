@@ -5,8 +5,9 @@
             id="formularioCompras" class="necesita-validacion">
             @csrf
             <div class="datos-compra">
-                <label for="nombre_usuario">Usuario: {{ Auth::user()->user }}   </label> 
-                <input type="date" name="fecha_compra" id="fecha_compra" class="form-control" value="{{ date('Y-m-d') }}">
+                <label for="nombre_usuario">Usuario: {{ Auth::user()->user }} </label>
+                <input type="date" name="fecha_compra" id="fecha_compra" class="form-control"
+                    value="{{ date('Y-m-d') }}">
                 {{-- <label for="total_compra">Total de la compra: {{ $total_compra }}</label> --}}
             </div>
             <div class="detalle-compra">
@@ -15,6 +16,7 @@
                         <thead>
                             <tr>
                                 <th>Producto</th>
+                                <th>Proveedor</th>
                                 <th>Cantidad</th>
                                 <th>Precio Unitario</th>
                                 <th>Subtotal</th>
@@ -28,13 +30,18 @@
                         <tbody id="container-compras-table">
                             @foreach ($compras as $compra)
                                 <tr>
-                                    
+                                    <td>{{ $compra->nombre_producto }}</td>
+                                    <td>{{ $compra->nombre_proveedor }}</td>
+                                    <td>{{ $compra->cantidad }}</td>
+                                    <td>{{ $compra->precio_unitario }}</td>
+                                    <td>{{ $compra->subtotal }}</td>
                                     <td id="botones">
                                         <button type="button" class="btn-ver" data-id_compra="{{ $compra->id_compra }}"
                                             data-id_detalle_compra="{{ $compra->id_detalle_compra }}">
                                             <i class="fa-solid fa-eye"></i>
                                         </button>
-                                        <button type="button" class="btn-editar" data-id_compra="{{ $compra->id_compra }}"
+                                        <button type="button" class="btn-editar"
+                                            data-id_compra="{{ $compra->id_compra }}"
                                             data-id_detalle_compra="{{ $compra->id_detalle_compra }}">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </button>
@@ -44,7 +51,8 @@
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                         @if ($compra->id_compra && $compra->id_detalle_compra)
-                                            <form id="formEliminar{{ $compra->id_compra }}_{{ $compra->id_detalle_compra }}"
+                                            <form
+                                                id="formEliminar{{ $compra->id_compra }}_{{ $compra->id_detalle_compra }}"
                                                 method="POST"
                                                 action="{{ route('admin.compras.destroy', [$compra->id_compra, $compra->id_detalle_compra]) }}"
                                                 style="display: none;">
@@ -52,7 +60,7 @@
                                                 @method('DELETE')
                                             </form>
                                         @endif
-                
+
                                     </td>
                                 </tr>
                             @endforeach

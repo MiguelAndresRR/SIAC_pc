@@ -17,8 +17,9 @@
     <link rel="stylesheet" href="{{ asset('css/compras/editar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/compras/tabla.css') }}">
     <link rel="stylesheet" href="{{ asset('css/compras/paginacion.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/compras/crearDetallesCompra.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/compras/mostrar.css') }}">
+    
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
@@ -53,7 +54,7 @@
         </div>
     </div>
     @include('admin.compras.modal.edit')
-    @include('admin.compras.modal.mostrar')
+    {{-- @include('admin.compras.modal.mostrar') --}}
     @include('admin.compras.modal.create')
 </body>
 

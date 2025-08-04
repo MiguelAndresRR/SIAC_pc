@@ -1,7 +1,8 @@
-<div class="container-modal-editar">
-    <div class="modificar-producto-container">
+<div class="container-modal-editar-productos">
+    <div class="modificar-productos-container">
         <h2>Modificar producto</h2>
-        <form id="form_editar" method="POST" enctype="multipart/form-data" action="">
+        <form id="form_editar" method="POST" enctype="multipart/form-data"
+            action="{{ route('admin.productos.update', ['producto' => $producto->id_producto ?? 0]) }}">
             @csrf
             @method('PUT')
             <label for="nombre_producto"><i class="fa-solid fa-cubes"></i>Producto</label>
@@ -39,8 +40,8 @@
             <button type="submit">Guardar</button>
             <p class="error" id="errorMessage"></p>
         </form>
-        <button type="submit" class="btn" id="ocultar-modal-editar">Salir</button>
+        <button type="submit" class="btn" id="ocultar-modal-editar-productos">
+            Salir
+        </button>
     </div>
 </div>
-
-<script src="{{ asset('js/productos/editar.js') }}"></script>

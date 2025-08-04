@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const btnOcultarModalShow = document.querySelector("#ocultar-modal1");
-    const contModalShow = document.querySelector(".container-modal-show");
+    const btnOcultarModalShow = document.querySelector("#ocultar-modal-show-productos");
+    const contModalShow = document.querySelector(".container-modal-show-productos");
 
     if (btnOcultarModalShow) {
         btnOcultarModalShow.addEventListener("click", (e) => {

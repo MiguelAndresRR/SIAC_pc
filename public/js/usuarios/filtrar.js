@@ -1,7 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("filtro-form-usuarios");
+    console.log("Form encontrado:", form);
+
+    if (!form) {
+        console.error("No se encontró el formulario filtro-form-usuarios");
+        return;
+    }
 
     function filtro() {
+        console.log("Ejecutando filtro...");
         const formData = new FormData(form);
         const params = new URLSearchParams(formData).toString();
 
@@ -28,31 +35,48 @@ document.addEventListener("DOMContentLoaded", function () {
                         "No se encontró window.asignarEventosModalCrear"
                     );
                 }
+            })
+            .catch((error) => {
+                console.error("Error en filtro:", error);
             });
     }
 
     form.addEventListener("change", filtro);
 
-    document
-        .getElementById("nombre_usuario-buscar")
-        .addEventListener("input", () => {
+    const nombreInput = document.getElementById("nombre_usuario-buscar");
+    const documentoInput = document.getElementById("documento_usuario-buscar");
+    const limpiarBtn = document.getElementById("limpiar-filtros-usuarios");
+
+    console.log("Nombre input encontrado:", nombreInput);
+    console.log("Documento input encontrado:", documentoInput);
+    console.log("Limpiar botón encontrado:", limpiarBtn);
+
+    if (nombreInput) {
+        nombreInput.addEventListener("input", () => {
             clearTimeout(window.searchTimer);
             window.searchTimer = setTimeout(filtro, 50);
         });
+    }
 
-    document
-        .getElementById("documento_usuario-buscar")
-        .addEventListener("input", () => {
+    if (documentoInput) {
+        documentoInput.addEventListener("input", () => {
             clearTimeout(window.searchTimer);
             window.searchTimer = setTimeout(filtro, 50);
         });
+    }
 
-    document
-        .getElementById("limpiar-filtros-usuarios")
-        .addEventListener("click", function () {
+    if (limpiarBtn) {
+        console.log("Agregando evento click al botón limpiar");
+        limpiarBtn.addEventListener("click", function (e) {
+            console.log("Botón limpiar clickeado");
+            e.preventDefault();
+            e.stopPropagation();
             form.reset();
             filtro();
         });
+    } else {
+        console.error("No se encontró el botón limpiar-filtros-usuarios");
+    }
 
     document.addEventListener("click", function (e) {
         if (e.target.matches(".pagination a")) {

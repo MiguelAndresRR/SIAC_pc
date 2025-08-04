@@ -11,22 +11,22 @@ class ProveedorController extends Controller
     {
         $query = Proveedor::query();
 
-        if ($request->filled('buscar_proveedor_nombre')) {
-            $query->where('nombre_proveedor', 'like', '%' . $request->buscar_proveedor_nombre . '%');
+        if ($request->filled('buscar_proveedor')) {
+            $query->where('nombre_proveedor', 'like', '%' . $request->buscar_proveedor . '%');
         }
 
-        if ($request->filled('buscar_proveedor_nit')) {
-            $query->where('nit_proveedor', 'like', '%' . $request->buscar_proveedor_nit . '%');
+        if ($request->filled('nit_proveedor')) {
+            $query->where('nit_proveedor', 'like', '%' . $request->nit_proveedor . '%');
         }
 
         $porPagina = $request->input('entries', 15);
         $proveedores = $query->paginate($porPagina)->appends($request->query());
 
         if ($request->ajax()) {
-            return view('admin.proveedor.layoutproveedor.tablaproveedor', compact('proveedores'))->render();
+            return view('admin.proveedores.layoutproveedores.tablaproveedores', compact('proveedores'))->render();
         }
 
-        return view('admin.proveedor.index', compact('proveedores'));
+        return view('admin.proveedores.index', compact('proveedores'));
     }
 
     public function create(  )
@@ -49,13 +49,13 @@ class ProveedorController extends Controller
             ->first();
 
         if ($existingProveedor) {
-            return redirect()->route('admin.proveedor.index')->with('message', [
+            return redirect()->route('admin.proveedores.index')->with('message', [
                 'type' => 'error',
                 'text' => 'El proveedor ya existe en la base de datos.'
             ]);
         } else {
             Proveedor::create($request->all());
-            return redirect()->route('admin.proveedor.index')->with('message', [
+            return redirect()->route('admin.proveedores.index')->with('message', [
                 'type' => 'success',
                 'text' => 'El proveedor se ha creado correctamente.'
             ]);
@@ -74,9 +74,13 @@ class ProveedorController extends Controller
 
     public function edit(Proveedor $proveedor)
     {
-        $proveedores = Proveedor::all();
-
-        return view('admin.proveedor.index', compact('proveedores'));
+        return response()->json([
+            'nombre_proveedor' => $proveedor->nombre_proveedor,
+            'nit_proveedor' => $proveedor->nit_proveedor,
+            'direccion_proveedor' => $proveedor->direccion_proveedor,
+            'telefono_proveedor' => $proveedor->telefono_proveedor,
+            'correo_proveedor' => $proveedor->correo_proveedor
+        ]);
     }
 
     public function update(Request $request, Proveedor $proveedor)
@@ -99,7 +103,7 @@ class ProveedorController extends Controller
             ->first();
 
         if ($existingProveedor) {
-            return redirect()->route('admin.proveedor.index')->with('message', [
+            return redirect()->route('admin.proveedores.index')->with('message', [
                 'type' => 'error',
                 'text' => 'El proveedor ya existe en la base de datos.'
             ]);
@@ -111,7 +115,7 @@ class ProveedorController extends Controller
             $proveedor->correo_proveedor = $request->correo_proveedor;
             $proveedor->save();
 
-            return redirect()->route('admin.proveedor.index')->with('message', [
+            return redirect()->route('admin.proveedores.index')->with('message', [
                 'type' => 'success',
                 'text' => 'El proveedor se ha actualizado correctamente.'
             ]);

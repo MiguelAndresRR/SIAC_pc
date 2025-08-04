@@ -21,4 +21,3 @@
         <button id="ocultar-modal-usuarios" class="btn">Cerrar</button>
     </div>
 </div>
-<script src="{{ asset('js/usuarios/showboton.js') }}"></script>

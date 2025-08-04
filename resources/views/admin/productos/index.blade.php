@@ -7,22 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Productos</title>
     <meta charset="UTF-8">
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
     <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{ asset('css/productos/productos.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="{{ asset('css/productos/editar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/productos/tabla.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/productos/paginacion.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/productos/mostrar.css') }}">
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="{{ asset('css/productos/editar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/productos/mostrar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/productos/tabla.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/productos/paginacion.css') }}">
+
 </head>
 
 <body>
@@ -53,7 +53,15 @@
         </div>
     </div>
     @include('admin.productos.modal.edit')
-    @include('admin.productos.modal.mostrar')
     @include('admin.productos.modal.create')
+    @include('admin.productos.modal.show')
+
+    <!-- Scripts JavaScript -->
+    <script src="{{ asset('js/productos/crear.js') }}"></script>
+    <script src="{{ asset('js/productos/editar.js') }}"></script>
+    <script src="{{ asset('js/productos/showboton.js') }}"></script>
+    <script src="{{ asset('js/productos/borrar.js') }}"></script>
+    <script src="{{ asset('js/productos/filtrar.js') }}"></script>
+
 </body>
-</html>
+</head>

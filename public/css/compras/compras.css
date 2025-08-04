@@ -94,6 +94,27 @@ input[type="number"]::-webkit-outer-spin-button {
         border: 2px solid #9e12e4;
     }
 }
+
+.registrar-compras-container button {
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    outline: none;
+    background-color: black;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        background-color: #ffffff;
+        border-radius: 10px;
+        color: #000000;
+        transform: scale(1.03);
+        border: 2px solid #9e12e4;
+    }
+}
 .container-modal-crear-compras {
     position: fixed;
     top: 0;
@@ -130,7 +151,8 @@ form {
 .registrar-compras-container {
     background-color: white;
     opacity: none;
-    width: 50%;
+    width: 95%;
+    height:95%;
     align-items: none;
     justify-content: none;
     flex-direction: none;
@@ -150,6 +172,7 @@ form {
     width: 100%;
 }
 .form-control {
+
     display: flex;
     align-items: center;
     gap: 3px;

@@ -1,5 +1,5 @@
-const btnOcultarModalEdit = document.querySelector("#ocultar-modal-editar");
-const contModalEdit = document.querySelector(".container-modal-editar");
+const btnOcultarModalEdit = document.querySelector("#ocultar-modal-editar-productos");
+const contModalEdit = document.querySelector(".container-modal-editar-productos");
 
 btnOcultarModalEdit.addEventListener("click", (e) => {
     e.preventDefault();

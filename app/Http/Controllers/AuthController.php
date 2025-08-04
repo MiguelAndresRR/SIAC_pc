@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\usuarios\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,9 +43,6 @@ class AuthController extends Controller
                 return redirect()->route('user.dashboard');
             }
         }
-        return back()->withErrors([
-            'login_error' => 'Usuario, contraseña o rol incorrectos.'
-        ])->withInput();
     }
 
     public function logout(Request $request)

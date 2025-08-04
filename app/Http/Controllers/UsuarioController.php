@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\usuarios\User;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Rol;
+use App\Models\usuarios\Rol;
 
 class UsuarioController extends Controller
 {
@@ -104,10 +104,17 @@ class UsuarioController extends Controller
 
     public function edit(User $usuario)
     {
-        $usuarios = User::all();
-        $roles = Rol::all();
-
-        return view('admin.usuarios.index', compact('usuarios', 'roles'));
+        return response()->json([
+            'nombre_usuario' => $usuario->nombre_usuario,
+            'apellido_usuario' => $usuario->apellido_usuario,
+            'documento_usuario' => $usuario->documento_usuario,
+            'telefono_usuario' => $usuario->telefono_usuario,
+            'correo_usuario' => $usuario->correo_usuario,
+            'user' => $usuario->user,
+            'password' => $usuario->password,
+            'id_rol' => $usuario->id_rol,
+            'nombre_rol' => $usuario->rol ? $usuario->rol->nombre_rol : 'Sin categoría'
+        ]);
     }
 
     public function update(Request $request, User $usuario)

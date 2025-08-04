@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
-use App\Models\Unidad;
-use App\Models\Producto;
+use App\Models\productos\Categoria;
+use App\Models\productos\Unidad;
+use App\Models\productos\Producto;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -12,37 +12,31 @@ class ProductoController extends Controller
     /**
      * Display a listing of the resource.
      */
-
     public function index(Request $request)
     {
         $query = Producto::query();
-
-        if ($request->filled('buscar')) {
-            $query->where('nombre_producto', 'like', '%' . $request->buscar . '%');
+        if ($request->filled('buscar_productos')) {
+            $query->where('nombre_producto', 'like', '%' . $request->buscar_productos . '%');
         }
-
         if ($request->filled('categoria')) {
             $query->where('id_categoria_producto', $request->categoria);
         }
+
         if ($request->filled('unidad')) {
             $query->where('id_unidad_peso_producto', $request->unidad);
         }
 
-        $porPagina = $request->input('entries', 15);
-        $productos = $query->paginate($porPagina)->appends($request->query());
 
-        if ($request->ajax()) {
-            return view('admin.productos.layoutproductos.tablaproductos', compact('productos'))->render();
-        }
-
-
+        $porPagina = $request->input('PorPagina', 10); // 10 por defecto
+        $productos = $query->paginate($porPagina);
         $categorias = Categoria::all();
         $unidades = Unidad::all();
+        if ($request->ajax()) {
+            return view('admin.productos.layoutproductos.tablaproductos', compact('productos', 'categorias', 'unidades'))->render();
+        }
 
-        return view('admin.productos.index', compact('productos', 'categorias', 'unidades'));
+        return view('admin.productos.index', compact('productos', 'categorias', 'unidades', 'porPagina'));
     }
-
-
     public function create()
     {
         //
@@ -51,7 +45,7 @@ class ProductoController extends Controller
     {
         $request->validate([
             'nombre_producto' => 'required|string|max:20',
-            'precio_producto' => 'required|numeric|min:0',
+            'precio_producto' => 'required|numeric|min:0|max:999999.99',
             'id_categoria_producto' => 'required|exists:categoria_producto,id_categoria_producto',
             'id_unidad_peso_producto' => 'required|exists:unidad_peso_producto,id_unidad_peso_producto',
         ]);
@@ -88,23 +82,16 @@ class ProductoController extends Controller
         ]);
     }
 
-    public function edit(Producto $producto)
-    {
-        $categorias = Categoria::all();
-        $unidades = Unidad::all();
-
-        return view('admin.productos.index', compact('productos', 'categorias', 'unidades'));
-    }
+    public function edit(Producto $producto) {}
 
     public function update(Request $request, Producto $producto)
     {
         $request->validate([
             'nombre_producto' => 'required|string|max:20',
-            'precio_producto' => 'required|numeric|min:0|max:9999999.99',
+            'precio_producto' => 'required|numeric|min:0',
             'id_categoria_producto' => 'required|exists:categoria_producto,id_categoria_producto',
             'id_unidad_peso_producto' => 'required|exists:unidad_peso_producto,id_unidad_peso_producto',
         ]);
-
         $existingProduct = Producto::where('id_categoria_producto', $request->id_categoria_producto)
             ->where('id_unidad_peso_producto', $request->id_unidad_peso_producto)
             ->where('nombre_producto', $request->nombre_producto)
