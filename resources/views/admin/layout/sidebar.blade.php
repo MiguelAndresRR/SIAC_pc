@@ -19,7 +19,7 @@
                 <i class="fa-solid fa-paper-plane"></i>
                 <span class="span-subtittle">Reportes</span>
             </a>
-            <a onclick="window.location.href='{{ route('admin.dashboard') }}'" class="nav_link">
+            <a onclick="window.location.href='{{ route('admin.compras.index') }}'" class="nav_link">
                 <i class="fa-solid fa-bag-shopping"></i>
                 <span class="span-subtittle">Compras</span>
             </a>

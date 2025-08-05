@@ -2,10 +2,13 @@
 
 namespace App\Models\productos;
 
+use App\Models\compras\DetalleCompra;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\productos\Categoria;
 use App\Models\productos\Unidad;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 class Producto extends Model
 {
@@ -31,5 +34,8 @@ class Producto extends Model
     {
         return $this->belongsTo(Categoria::class, 'id_categoria_producto');
     }
-    
+    public function detalleCompra(): HasMany
+    {
+        return $this->hasMany(DetalleCompra::class, 'id_producto');
+    }
 }

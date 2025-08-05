@@ -5,7 +5,7 @@ namespace App\Models\compras;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\compras\Compras;
-use App\Models\Producto;
+use App\Models\productos\Producto;
 
 class DetalleCompra extends Model
 {
