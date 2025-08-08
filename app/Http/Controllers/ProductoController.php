@@ -82,7 +82,6 @@ class ProductoController extends Controller
         ]);
     }
 
-    public function edit(Producto $producto) {}
 
     public function update(Request $request, Producto $producto)
     {

@@ -5,7 +5,7 @@
                 <th>ID</th>
                 <th>Usuario</th>
                 <th>Fecha</th>
-                <th>Total</th>
+                <th>Proveedor</th>
                 <th>
                     <button type="submit" class="btn" id='crear-modal-compras'>
                         <i class="fa-solid fa-plus"></i>
@@ -16,15 +16,12 @@
         <tbody id="container-compras-table">
             @foreach ($compras as $compra)
                 <tr>
-                    <td data-id_compra="{{ $compra->id_producto }}" data-id_detalle_compra="{{ $compra->id_detalle_compra }}">
-                        {{ $compra->id_compra }}
-                    </td>
-
+                    <td data-id-usuario="{{ $compra->id_usuario }}">
+                        {{ $compra->usuario ? $compra->usuario->nombre_usuario : 'sin usuario' }}</td>
+                    <td>{{ $compra->fecha_compra }}</td>
+                    <td data-id-proveedor="{{ $compra->id_proveedor }}">
+                        {{ $compra->proveedor ? $compra->proveedor->nombre_proveedor : 'sin proveedor' }}</td>
                     <td id="botones">
-                        <button type="button" class="btn-ver" data-id_compra="{{ $compra->id_compra }}"
-                            data-id_detalle_compra="{{ $compra->id_detalle_compra }}">
-                            <i class="fa-solid fa-eye"></i>
-                        </button>
                         <button type="button" class="btn-editar" data-id_compra="{{ $compra->id_compra }}"
                             data-id_detalle_compra="{{ $compra->id_detalle_compra }}">
                             <i class="fa-solid fa-pen-to-square"></i>
@@ -43,7 +40,6 @@
                                 @method('DELETE')
                             </form>
                         @endif
-
                     </td>
                 </tr>
             @endforeach

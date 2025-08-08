@@ -28,11 +28,7 @@ class ProveedorController extends Controller
 
         return view('admin.proveedores.index', compact('proveedores'));
     }
-
-    public function create(  )
-    {
-        //
-    }
+    
     public function store(Request $request)
     {
         $request->validate([

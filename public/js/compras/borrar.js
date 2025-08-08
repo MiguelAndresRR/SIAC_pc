@@ -2,7 +2,16 @@ document.addEventListener("click", function (e) {
     const btn = e.target.closest(".borrar-boton");
     if (!btn) return;
 
-    const id_compras = btn.dataset.id_compras;
+    const id_compra = btn.dataset.id_compra;
+    const id_detalle_compra = btn.dataset.id_detalle_compra;
+
+    const formId = "formEliminar" + id_compra + "_" + id_detalle_compra;
+    const form = document.getElementById(formId);
+
+    if (!form) {
+        console.error("Formulario no encontrado:", formId);
+        return;
+    }
 
     Swal.fire({
         title: "¿Estás seguro?",
@@ -18,7 +27,7 @@ document.addEventListener("click", function (e) {
         buttonsStyling: false
     }).then((result) => {
         if (result.isConfirmed) {
-            document.getElementById("formEliminar" + id_compras).submit();
+            form.submit();
         }
     });
 });
