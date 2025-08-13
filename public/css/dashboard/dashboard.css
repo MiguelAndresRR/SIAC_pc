@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: row;
     height: 100vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     background: linear-gradient(45deg, #d3cce3, #fdfbfb, #c0d6e4, #e0c3fc);
     background-size: 300% 300%;
     animation: color 13s ease-in-out infinite;
@@ -16,9 +16,17 @@ body {
 }
 
 @keyframes color {
-    0%, 100% { background-position: 0% 50%; }
-    25%, 50% { background-position: 100% 50%; }
-    75% { background-position: 0% 50%; }
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    25%,
+    50% {
+        background-position: 100% 50%;
+    }
+    75% {
+        background-position: 0% 50%;
+    }
 }
 
 /* Sidebar */
@@ -98,4 +106,19 @@ body {
         flex-direction: column;
     }
 }
+.usuarioLogin {
+    color: white;
+    text-align: center;
 
+    padding: 5px;
+    font-size: 14px;
+    margin-top: auto;
+    margin-bottom: 10px;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}

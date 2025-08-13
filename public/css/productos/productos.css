@@ -142,7 +142,7 @@ form {
 .registrar-productos-container {
     background-color: white;
     opacity: none;
-    width: 50%;
+    width: auto;
     align-items: none;
     justify-content: none;
     flex-direction: none;

@@ -13,7 +13,7 @@
                 <option value="{{ $unidad->id_unidad_peso_producto }}">{{ $unidad->unidad_peso }}</option>
             @endforeach
         </select>
-        <select id="entries" class="form-control" {{ $productos->appends(request()->query())->links() }}>
+        <select name="PorPagina" id="entries" class="form-control" {{ $productos->appends(request()->query())->links() }}>
             <option disabled selected>Selecciona datos a mostrar</option>
             <option value="10" {{ request('PorPagina') == 10 ? 'selected' : '' }}>10</option>
             <option value="15" {{ request('PorPagina') == 15 ? 'selected' : '' }}>15</option>

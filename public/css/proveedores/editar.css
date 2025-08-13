@@ -209,6 +209,9 @@ form {
 
 .modificar-proveedores-container{
     background-color: white;
-    width: 50%;
-    height: 95%;
+    opacity: none;
+    width: auto;
+    align-items: none;
+    justify-content: none;
+    flex-direction: none;
 }

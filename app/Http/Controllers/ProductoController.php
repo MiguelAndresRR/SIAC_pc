@@ -126,7 +126,6 @@ class ProductoController extends Controller
         }
 
         $producto->delete();
-
         return redirect()->back()->with('message', [
             'type' => 'success',
             'text' => 'El producto se ha eliminado correctamente.'

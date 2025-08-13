@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("filtro-form-productos");
+    const form = document.getElementById("filtro-form-detallesCompras");
     console.log("Form encontrado:", form);
 
     if (!form) {
-        console.error("No se encontró el formulario filtro-form-productos");
+        console.error("No se encontró el formulario filtro-form-detallesCompras");
         return;
     }
 
@@ -12,14 +12,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData(form);
         const params = new URLSearchParams(formData).toString();
 
-        fetch(`/admin/productos?${params}`, {
+        fetch(`/admin/detallesCompras?${params}`, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },
         })
             .then((res) => res.text())
             .then((html) => {
-                document.getElementById("tabla-productos").innerHTML = html;
+                document.getElementById("tabla-detallesCompras").innerHTML = html;
 
                 if (typeof window.asignarEventosBotones === "function") {
                     console.log("Reasignando eventos a .btn-ver");
@@ -43,19 +43,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("change", filtro);
 
-    const nombreInput = document.getElementById("buscarProducto");
-    const limpiarBtn = document.getElementById("limpiar-filtros-productos");
+    // const nombreInput = document.getElementById("buscarProducto");
+    const limpiarBtn = document.getElementById("limpiar-filtros-detallesCompras"); 
 
-    console.log("Nombre input encontrado:", nombreInput);
+    // console.log("Nombre input encontrado:", nombreInput);
     console.log("Limpiar botón encontrado:", limpiarBtn);
 
-    if (nombreInput) {
-        nombreInput.addEventListener("input", () => {
-            clearTimeout(window.searchTimer);
-            window.searchTimer = setTimeout(filtro, 300);
-        });
-    }
-
+    // if (nombreInput) {
+    //     nombreInput.addEventListener("input", () => {
+    //         clearTimeout(window.searchTimer);
+    //         window.searchTimer = setTimeout(filtro, 50);
+    //     });
+    // }
+    
     if (limpiarBtn) {
         console.log("Agregando evento click al botón limpiar");
         limpiarBtn.addEventListener("click", function (e) {
@@ -66,28 +66,27 @@ document.addEventListener("DOMContentLoaded", function () {
             filtro();
         });
     } else {
-        console.error("No se encontró el botón limpiar-filtros-productos");
+        console.error("No se encontró el botón limpiar-filtros-detallesCompras");
     }
 
     document.addEventListener("click", function (e) {
         if (e.target.matches(".pagination a")) {
             e.preventDefault();
+            const url = e.target.getAttribute("href");
 
-            const url = new URL(e.target.href);
-            const formData = new FormData(form);
-
-            // Mantener todos los filtros junto con el page
-            formData.forEach((value, key) => {
-                url.searchParams.set(key, value);
-            });
-
-            fetch(url.toString(), {
-                headers: { "X-Requested-With": "XMLHttpRequest" },
+            fetch(url, {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                },
             })
                 .then((res) => res.text())
                 .then((html) => {
-                    document.getElementById("tabla-productos").innerHTML = html;
+                    document.getElementById("tabla-detallesCompras").innerHTML = html;
+
                     if (typeof window.asignarEventosBotones === "function") {
+                        console.log(
+                            "Reasignando eventos a .btn-ver (paginación)"
+                        );
                         window.asignarEventosBotones();
                     }
                 });

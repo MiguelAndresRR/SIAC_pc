@@ -99,6 +99,11 @@ tbody {
     outline: none;
     transition: all 0.3s ease-in-out;
 }
+#botones .btn-agregar:hover {
+    background-color: #e204ff;
+    transform: scale(1.05);
+    border: #ff3ec5 2px solid;
+}
 
 #botones .btn-editar:hover {
     background-color: #ffd904;
@@ -131,7 +136,7 @@ thead {
         -webkit-user-select: none; /* Safari */
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+/Edge */
-        & #crear-modal-compras{
+        & #crear-modal-compras {
             background-color: #ffffff;
             width: 100%;
             color: #000000;

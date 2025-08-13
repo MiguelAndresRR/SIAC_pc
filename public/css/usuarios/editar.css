@@ -239,5 +239,9 @@ form {
 }
 .modificar-usuario-container{
     background-color: white;
-    width: 50%;
+    opacity: none;
+    width: auto;
+    align-items: none;
+    justify-content: none;
+    flex-direction: none;
 }

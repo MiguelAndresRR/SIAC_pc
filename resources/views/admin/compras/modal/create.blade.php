@@ -4,11 +4,24 @@
         <form action="{{ route('admin.compras.store') }}" method="POST" enctype="multipart/form-data"
             id="formularioCompras" class="necesita-validacion">
             @csrf
-            <div class="datos-compra">
-                <label for="nombre_usuario">Usuario: {{ Auth::user()->user }} </label>
-                <input type="date" name="fecha_compra" id="fecha_compra" class="form-control"
-                    value="{{ date('Y-m-d') }}">
-            </div>
+            <label for="nombre_usuario"><i class="fa-solid fa-cubes"></i>Usuario</label>
+            <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario"
+                value="{{ Auth::user()->user }}" readonly><br>
+            <input type="date" name="fecha_compra" id="fecha_compra" class="form-control"
+                value="{{ date('Y-m-d') }}"><br>
+            <input type="hidden" name="id_usuario" id="id_usuario" class="form-control"
+                value="{{ auth::user()->id_usuario }}"><br>
+            <label for="id_proveedor"><i class="fa-solid fa-truck"></i>Proveedor</label>
+            <select name="id_proveedor" id="id_proveedor" class="form-control" required>
+                <option value="" disabled selected>Selecciona proveedor</option>
+                @foreach ($proveedores as $proveedor)
+                    <option value="{{ $proveedor->id_proveedor }}">
+                        {{ $proveedor->nombre_proveedor }}
+                    </option>
+                @endforeach
+            </select><br>
+            <input type="hidden" name="id_usuario" id="id_usuario" class="form-control"
+                value="{{ Auth::user()->id_usuario }}"><br>
             <button type="submit">Crear</button>
         </form>
         <button type="button" class="btn" id="ocultar-modal-crear-compras">Cancelar</button>

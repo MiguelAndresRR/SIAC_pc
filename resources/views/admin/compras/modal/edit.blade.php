@@ -4,21 +4,21 @@
         <form id="form_editar-compras" method="POST" enctype="multipart/form-data" action="">
             @csrf
             @method('PUT')
-            {{-- <label for="nombre_proveedor"><i class="fa-solid fa-building"></i>Nombre del proveedor</label>
-            <input type="text" class="form-control" id="nombre_proveedor" name="nombre_proveedor"
-                value="{{ old('nombre_proveedor') }}" placeholder="Nombre del proveedor" required><br>
-            <label for="nit_proveedor"><i class="fa-solid fa-id-card"></i>Nit del proveedor</label>
-            <input type="text" class="form-control" id="nit_proveedor" name="nit_proveedor"
-                value="{{ old('nit_proveedor') }}" placeholder="Nit del proveedor" required><br>
-            <label for="direccion_proveedor"><i class="fa-solid fa-map-marker-alt"></i>Direccion del proveedor</label>
-            <input type="text" class="form-control" id="direccion_proveedor" name="direccion_proveedor"
-                value="{{ old('direccion_proveedor') }}" placeholder="Direccion del proveedor" required><br>
-            <label for="telefono_proveedor"><i class="fa-solid fa-phone"></i>Telefono del proveedor</label>
-            <input type="text" class="form-control" id="telefono_proveedor" name="telefono_proveedor"
-                value="{{ old('telefono_proveedor') }}" placeholder="Telefono del proveedor" required><br>
-            <label for="correo_proveedor"><i class="fa-solid fa-envelope"></i>Correo del proveedor</label>
-            <input type="text" class="form-control" id="correo_proveedor" name="correo_proveedor"
-                value="{{ old('correo_proveedor') }}" placeholder="Correo del proveedor" required><br> --}}
+            <label for="user">Usuario:</label>
+            <input type="text" class="form-control" id="user" name="user"
+                value="" readonly ><br>
+            <label for="fecha_compra">Fecha de compra:</label>
+            <input type="date" class="form-control" id="fecha_compra" name="fecha_compra"
+                value="{{ date('Y-m-d') }}" required><br>
+            <label for="id_proveedor">Proveedor:</label>
+            <select name="id_proveedor" id="id_proveedor" class="form-control" required>
+                <option value="" disabled selected>Selecciona proveedor</option>
+                @foreach ($proveedores as $proveedor)
+                    <option value="{{ $proveedor->id_proveedor }}">
+                        {{ $proveedor->nombre_proveedor }}
+                    </option>
+                @endforeach
+            </select><br>
             <button type="submit">Guardar</button>
             <p class="error" id="errorMessage"></p>
         </form>

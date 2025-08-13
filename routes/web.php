@@ -6,7 +6,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ComprasController;
-use App\Http\Controllers\DetallesCompraController;
+use App\Http\Controllers\DetallesComprasController;
 
 Route::middleware('prevent-back')->group(function () {
     Route::redirect('/', 'login');
@@ -91,21 +91,34 @@ Route::middleware('prevent-back')->group(function () {
 
 
 
-        // //Detalles Compras
-        // Route::get('admin /detallesCompras/index', [DetallesCompraController::class, 'index'])->name('admin.compras.index');
-        // //Formulario para crear una nueva compras
-        // Route::get('admin/detallesCompras/create', [DetallesCompraController::class, 'create'])->name('admin.compras.create');
-        // //Guardar nueva compra (form create)
-        // Route::post('admin/detallesCompras/index', [DetallesCompraController::class, 'store'])->name('admin.compras.store');
-        // //Mostrar el formulario de edición
-        // Route::get('admin/detallesCompras/index/{detallesCompras}', [DetallesCompraController::class, 'edit'])->name('admin.detallesCompras.edit');
-        // //Mostrar compras
-        // Route::get('admin/detallesCompras/{detallesCompras}', [DetallesCompraController::class, 'show'])->name('admin.detallesCompras.show');
-        // //Actualizar compra (form edit)
-        // Route::put('admin/detallesCompras/{detallesCompras}', [DetallesCompraController::class, 'update'])->name('admin.detallesCompras.update');
-        // //Eliminar compra
-        // Route::delete('admin/detallesCompras/{detallesCompras}', [DetallesCompraController::class, 'destroy'])->name('admin.detallesCompras.destroy');
-        // //
+        // Lista de detalles de una compra específica
+        Route::get('admin/detallesCompras/{id_compra}', [DetallesComprasController::class, 'index'])
+            ->name('admin.detallesCompras.index');
+
+        // Formulario para crear un nuevo detalle de compra
+        Route::get('admin/detallesCompras/create', [DetallesComprasController::class, 'create'])
+            ->name('admin.detallesCompras.create');
+
+        // Guardar nuevo detalle de compra
+        Route::post('admin/detallesCompras', [DetallesComprasController::class, 'store'])
+            ->name('admin.detallesCompras.store');
+
+        // Mostrar el formulario de edición de un detalle
+        Route::get('admin/detallesCompras/{detallesCompras}/edit', [DetallesComprasController::class, 'edit'])
+            ->name('admin.detallesCompras.edit');
+
+        // Mostrar un detalle específico (si lo necesitas)
+        Route::get('admin/detallesCompras/{detallesCompras}', [DetallesComprasController::class, 'show'])
+            ->name('admin.detallesCompras.show');
+
+        // Actualizar detalle
+        Route::put('admin/detallesCompras/{detallesCompras}', [DetallesComprasController::class, 'update'])
+            ->name('admin.detallesCompras.update');
+
+        // Eliminar detalle
+        Route::delete('admin/detallesCompras/{detallesCompras}', [DetallesComprasController::class, 'destroy'])
+            ->name('admin.detallesCompras.destroy');
+
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });
 });

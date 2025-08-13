@@ -13,16 +13,16 @@
     <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="{{ asset('css/compras/compras.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesCompras/detallesCompras.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="{{ asset('css/compras/editar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/compras/tabla.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/compras/paginacion.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesCompras/editar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesCompras/tabla.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesCompras/paginacion.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/compras/mostrar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/compras/inputsearch.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesCompras/mostrar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesCompras/inputsearch.css') }}">
 
-    
+
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
@@ -47,17 +47,23 @@
         @endif
     </div>
     @include('admin.layout.sidebar')
-    <div class="content-compras">
+    <div class="content-detallesCompras">
         <div class="header">
-            <h1><i class="fa-solid fa-bag-shopping"></i>Compras</h1>
-        </div>
-        @include('admin.compras.layoutcompras.filtros')
-        <div id="tabla-compras">
-            @include('admin.compras.layoutcompras.tablacompras')
+            <div class="header-detallesCompras">
+                <h1><i class="fa-solid fa-bag-shopping"></i>Detalles Compra #{{ $id_compra }}</h1>
+            </div>
+            <div class="header-detallesCompras">
+                <button class="btn-back" onclick="window.history.go(-1)"><i class="fa-regular fa-circle-left"></i></button>
+            </div>
+            </div>
+        @include('admin.detallesCompras.layoutdetallesCompras.filtros')
+        <div id="tabla-detallesCompras">
+            @include('admin.detallesCompras.layoutdetallesCompras.tabladetallesCompras')
         </div>
     </div>
-    @include('admin.compras.modal.edit')
-    @include('admin.compras.modal.mostrar')
-    @include('admin.compras.modal.create')
+    @include('admin.detallesCompras.modal.edit')
+    @include('admin.detallesCompras.modal.mostrar')
+    @include('admin.detallesCompras.modal.create')
 </body>
+
 </html>

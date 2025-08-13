@@ -1,10 +1,18 @@
 table th,
 table td {
-    padding: 8px;
+    padding: 5px;
     font-size: 14px;
-    white-space: nowrap;
+    border-collapse: collapse;
 }
-
+table td {
+    border-bottom: #cecece 2px solid;
+    border-right: #cecece 2px solid;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: black;
+}
 /* Específico para columnas */
 th:nth-child(1),
 td:nth-child(1) {
@@ -12,24 +20,28 @@ td:nth-child(1) {
 } /* ID */
 th:nth-child(2),
 td:nth-child(2) {
-    width: 150px;
-} /* Producto */
+    width: 50px;
+} /* Proveedor */
 th:nth-child(3),
 td:nth-child(3) {
     width: 100px;
-} /* Precio */
+} /* Producto*/
 th:nth-child(4),
 td:nth-child(4) {
-    width: 120px;
-} /* Categoría */
+    width: 100px;
+} /* Fecha */
 th:nth-child(5),
 td:nth-child(5) {
-    width: 120px;
-} /* Unidad */
+    width: 100px;
+} /* Cantidad */
 th:nth-child(6),
 td:nth-child(6) {
+    width: 80px;
+} /* Correo */
+th:nth-child(7),
+td:nth-child(7) {
     width: 100px;
-}
+} /* Botones */
 tbody {
     background-color: #ffffff;
     color: #000000;
@@ -78,7 +90,7 @@ tbody {
     border: 2px solid #9e12e4;
 }
 #botones button {
-    width: 32%;
+    width: 30%;
     border-radius: 10px;
     background-color: #000000;
     color: #ffffff;
@@ -86,6 +98,11 @@ tbody {
     border: 2px solid transparent;
     outline: none;
     transition: all 0.3s ease-in-out;
+}
+#botones .btn-agregar:hover {
+    background-color: #e204ff;
+    transform: scale(1.05);
+    border: #ff3ec5 2px solid;
 }
 
 #botones .btn-editar:hover {
@@ -114,7 +131,12 @@ thead {
         font-size: 16px;
         align-content: center;
         padding: 4px;
-        & #crear-modal {
+        height: 40px;
+        user-select: none;
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        & #crear-modal-detallesCompras {
             background-color: #ffffff;
             width: 100%;
             color: #000000;
@@ -137,8 +159,8 @@ table {
     width: 100%;
     border-spacing: 0;
 }
-.container-productos-class {
-    height: 75%;
+.container-detallesCompras-class {
+    height: 70vh;
     overflow-y: auto;
 }
 .tableFixHead thead tr th {

@@ -46,7 +46,7 @@
 & select {
     border: 2px solid transparent;
     outline: none;
-
+    width: auto;
     padding: 10px;
     border-radius: 10px;
     background-color: #ffffff;
@@ -133,7 +133,7 @@ form {
 .modificar-productos-container {
     background-color: white;
     opacity: none;
-    width: 50%;
+    width: auto;
     align-items: none;
     justify-content: none;
     flex-direction: none;
