@@ -81,21 +81,22 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", function (e) {
         if (e.target.matches(".pagination a")) {
             e.preventDefault();
-            const url = e.target.getAttribute("href");
 
-            fetch(url, {
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest",
-                },
+            const url = new URL(e.target.href);
+            const formData = new FormData(form);
+
+            // Mantener todos los filtros junto con el page
+            formData.forEach((value, key) => {
+                url.searchParams.set(key, value);
+            });
+
+            fetch(url.toString(), {
+                headers: { "X-Requested-With": "XMLHttpRequest" },
             })
                 .then((res) => res.text())
                 .then((html) => {
                     document.getElementById("tabla-usuarios").innerHTML = html;
-
                     if (typeof window.asignarEventosBotones === "function") {
-                        console.log(
-                            "Reasignando eventos a .btn-ver (paginación)"
-                        );
                         window.asignarEventosBotones();
                     }
                 });

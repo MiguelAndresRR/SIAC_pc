@@ -6,8 +6,10 @@ use App\Models\compras\DetalleCompra;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\productos\Categoria;
 use App\Models\productos\Unidad;
+use App\Models\inventario\Inventario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 
 class Producto extends Model
@@ -37,5 +39,9 @@ class Producto extends Model
     public function detalleCompra(): HasMany
     {
         return $this->hasMany(DetalleCompra::class, 'id_producto');
+    }
+    public function inventario(): HasMany
+    {
+        return $this->hasMany(Inventario::class, 'id_producto');
     }
 }

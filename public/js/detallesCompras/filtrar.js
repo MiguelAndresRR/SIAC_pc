@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData(form);
         const params = new URLSearchParams(formData).toString();
 
-        fetch(`/admin/detallesCompras?${params}`, {
+        fetch(`/admin/detallesCompras/${id_compra}?${params}`, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },
@@ -43,18 +43,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("change", filtro);
 
-    // const nombreInput = document.getElementById("buscarProducto");
+    const nombreInput = document.getElementById("searchInputProductos");
     const limpiarBtn = document.getElementById("limpiar-filtros-detallesCompras"); 
 
-    // console.log("Nombre input encontrado:", nombreInput);
+    console.log("Nombre input encontrado:", nombreInput);
     console.log("Limpiar botón encontrado:", limpiarBtn);
 
-    // if (nombreInput) {
-    //     nombreInput.addEventListener("input", () => {
-    //         clearTimeout(window.searchTimer);
-    //         window.searchTimer = setTimeout(filtro, 50);
-    //     });
-    // }
+    if (nombreInput) {
+        nombreInput.addEventListener("input", () => {
+            clearTimeout(window.searchTimer);
+            window.searchTimer = setTimeout(filtro, 300);
+        });
+    }
     
     if (limpiarBtn) {
         console.log("Agregando evento click al botón limpiar");
@@ -72,21 +72,22 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", function (e) {
         if (e.target.matches(".pagination a")) {
             e.preventDefault();
-            const url = e.target.getAttribute("href");
 
-            fetch(url, {
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest",
-                },
+            const url = new URL(e.target.href);
+            const formData = new FormData(form);
+
+            // Mantener todos los filtros junto con el page
+            formData.forEach((value, key) => {
+                url.searchParams.set(key, value);
+            });
+
+            fetch(url.toString(), {
+                headers: { "X-Requested-With": "XMLHttpRequest" },
             })
                 .then((res) => res.text())
                 .then((html) => {
                     document.getElementById("tabla-detallesCompras").innerHTML = html;
-
                     if (typeof window.asignarEventosBotones === "function") {
-                        console.log(
-                            "Reasignando eventos a .btn-ver (paginación)"
-                        );
                         window.asignarEventosBotones();
                     }
                 });

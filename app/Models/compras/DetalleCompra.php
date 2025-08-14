@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\compras\Compras;
 use App\Models\productos\Producto;
+use App\Models\inventario\Inventario;
 
 class DetalleCompra extends Model
 {
@@ -31,5 +32,9 @@ class DetalleCompra extends Model
     public function producto(): BelongsTo
     {
         return $this->belongsTo(Producto::class, 'id_producto');
+    }
+    public function inventario()
+    {
+        return $this->hasMany(Inventario::class, 'id_detalle_compra');
     }
 }

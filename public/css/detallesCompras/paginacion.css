@@ -17,7 +17,7 @@
 }
 
 .paginacion-active {
-    background-color: #000000; /* azul */
+    background-color: hsl(0, 0%, 0%); /* azul */
     color: white;
     border: 2px solid transparent;
     transition: all 0.3s ease-in-out;

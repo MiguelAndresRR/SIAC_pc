@@ -15,7 +15,7 @@ Route::middleware('prevent-back')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('usuarios', [UsuarioController::class, 'index'])->name('admin.usuarios.index');
         Route::get('compras', [ComprasController::class, 'index'])->name('admin.compras.index');
-        // Route::get('detallesCompras', [DetallesCompraController::class, 'index'])->name('admin.detallesCompras.index');
+        Route::get('detallesCompras', [DetallesComprasController::class, 'index'])->name('admin.detallesCompras.index');
         Route::get('proveedores', [ProveedorController::class, 'index'])->name('admin.proveedores.index');
         Route::get('productos', [ProductoController::class, 'index'])->name('admin.productos.index');
     });
@@ -90,18 +90,17 @@ Route::middleware('prevent-back')->group(function () {
         Route::delete('admin/compras/{compra}', [ComprasController::class, 'destroy'])->name('admin.compras.destroy');
 
 
-
+        // Formulario para crear un nuevo detalle de compra
+        Route::get('admin/detallesCompras/create', [DetallesComprasController::class, 'create'])
+            ->name('admin.detallesCompras.create');
+        // Guardar nuevo detalle de compra
+        Route::post('admin/detallesCompras', [DetallesComprasController::class, 'store'])
+            ->name('admin.detallesCompras.store');
         // Lista de detalles de una compra específica
         Route::get('admin/detallesCompras/{id_compra}', [DetallesComprasController::class, 'index'])
             ->name('admin.detallesCompras.index');
 
-        // Formulario para crear un nuevo detalle de compra
-        Route::get('admin/detallesCompras/create', [DetallesComprasController::class, 'create'])
-            ->name('admin.detallesCompras.create');
 
-        // Guardar nuevo detalle de compra
-        Route::post('admin/detallesCompras', [DetallesComprasController::class, 'store'])
-            ->name('admin.detallesCompras.store');
 
         // Mostrar el formulario de edición de un detalle
         Route::get('admin/detallesCompras/{detallesCompras}/edit', [DetallesComprasController::class, 'edit'])

@@ -54,14 +54,25 @@ body {
     align-items: center;
     width: 100%;
     border-radius: 10px;
-    padding: 16px 20px;
+    padding: 16px;
     color: #ffffff;
     text-decoration: none;
-    transition: background-color 0.3s ease;
-    white-space: nowrap;
     border: 2px solid transparent;
     outline: none;
     transition: all 0.3s ease-in-out;
+}
+
+.sidebar a i {
+    flex: 0 0 30px; 
+    text-align: center;      
+    font-size: 18px;         
+}
+
+.sidebar a span {
+    flex: 1;                
+    text-align: left;     
+    margin-left: 10px;
+    white-space: nowrap;
 }
 
 .sidebar a:hover {

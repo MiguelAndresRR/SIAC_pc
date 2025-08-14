@@ -14,7 +14,7 @@
                     <label for="apellido_usuario" class="form-label"><i class="fa-solid fa-user"></i> Apellido</label>
                     <input type="text" class="form-control" id="apellido_usuario" name="apellido_usuario"
                         placeholder="Apellido" maxlength="50" required>
-                    <label for="documento_usuario" class="form-label"><i class="fa-solid fa-id-card"></i>
+                    <label for="documento_usuario" class="form-label"><i class="fa-solid fa-id-card" required></i>
                         Documento</label>
                     <input type="number" class="form-control" id="documento_usuario" name="documento_usuario"
                         placeholder="Número de documento" required>
@@ -39,7 +39,7 @@
                         title="Debe contener al menos una letra mayúscula, un carácter especial y mínimo 8 caracteres.">
                     <label for="id_rol" class="form-label"><i class="fa-solid fa-user-tag"></i> Rol</label>
                     <select name="id_rol" id="id_rol" class="form-control" required>
-                        <option value="" disabled {{ old('id_rol') ? '' : 'selected' }}>
+                        <option value="" disabled {{ old('id_rol') ? '' : 'selected' }} required>
                             Selecciona rol
                         </option>
                         @foreach ($roles as $rol)

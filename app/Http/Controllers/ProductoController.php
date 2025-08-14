@@ -15,9 +15,17 @@ class ProductoController extends Controller
     public function index(Request $request)
     {
         $query = Producto::query();
-        if ($request->filled('buscar_productos')) {
-            $query->where('nombre_producto', 'like', '%' . $request->buscar_productos . '%');
+        if ($request->filled('buscar_productos') && strlen(trim($request->buscar_productos)) >= 3) {
+            $palabras = explode(' ', $request->buscar_productos);
+
+            $query->where(function ($q) use ($palabras) {
+                foreach ($palabras as $palabra) {
+                    $q->where('nombre_producto', 'like', '%' . $palabra . '%');
+                }
+            });
         }
+
+
         if ($request->filled('categoria')) {
             $query->where('id_categoria_producto', $request->categoria);
         }

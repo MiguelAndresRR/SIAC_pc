@@ -13,15 +13,22 @@ class UsuarioController extends Controller
     public function index(Request $request)
     {
         $query = User::query();
-
-        if ($request->filled('buscar_nombre')) {
-            $query->where('nombre_usuario', 'like', '%' . $request->buscar_nombre . '%')
-            ->orWhere('apellido_usuario', 'like', '%' . $request->buscar_nombre . '%');
-        }
-
         if ($request->filled('buscar_documento')) {
-            $query->where('documento_usuario', 'like', '%' . $request->buscar_documento . '%');
+            $documento_usuario = preg_replace('/\D/', '', $request->buscar_documento);
+            $query->where('documento_usuario', 'like', $documento_usuario . '%');
         }
+
+        if ($request->filled('buscar_nombre') && strlen(trim($request->buscar_nombre)) >= 3) {
+            $termino_busqueda = trim($request->buscar_nombre);
+
+            $query->where(function ($q) use ($termino_busqueda) {
+                $q->where('nombre_usuario', 'like', '%' . $termino_busqueda . '%')
+                    ->orWhere('apellido_usuario', 'like', '%' . $termino_busqueda . '%');
+            });
+        }
+
+
+
 
         if ($request->filled('rol')) {
             $query->whereHas('rol', function ($query) use ($request) {
@@ -37,7 +44,7 @@ class UsuarioController extends Controller
         }
 
         $roles = Rol::all();
-        return view('admin.usuarios.index', compact('usuarios','roles'));
+        return view('admin.usuarios.index', compact('usuarios', 'roles'));
     }
 
     public function create()
@@ -66,8 +73,7 @@ class UsuarioController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        $existingUsuario = User::where('id_rol', $request->id_rol)
-            ->where('documento_usuario', $request->documento_usuario)
+        $existingUsuario = User::where('documento_usuario', $request->documento_usuario)
             ->where('telefono_usuario', $request->telefono_usuario)
             ->where('correo_usuario', $request->correo_usuario)
             ->where('user', $request->user)
@@ -138,15 +144,14 @@ class UsuarioController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        $existingProduct = User::where('id_rol', $request->id_rol)
-            ->where('documento_usuario', $request->documento_usuario)
+        $existingUsuario = User::where('documento_usuario', $request->documento_usuario)
             ->where('telefono_usuario', $request->telefono_usuario)
             ->where('correo_usuario', $request->correo_usuario)
             ->where('user', $request->user)
             ->where('id_usuario', '!=', $usuario->id_usuario)
             ->first();
 
-        if ($existingProduct) {
+        if ($existingUsuario) {
             return redirect()->route('admin.usuarios.index')->with('message', [
                 'type' => 'error',
                 'text' => 'El usuarios ya existe en la base de datos.'

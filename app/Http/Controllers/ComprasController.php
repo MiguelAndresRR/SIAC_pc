@@ -14,7 +14,7 @@ class ComprasController extends Controller
     public function index(Request $request)
     {
         $query = Compras::query();
-        //filtros
+
         if ($request->filled('fecha_desde') && $request->filled('fecha_hasta')) {
             $query->whereBetween('fecha_compra', [
                 $request->fecha_desde,
@@ -22,11 +22,15 @@ class ComprasController extends Controller
             ]);
         }
 
-        // Otros filtros...
-        if ($request->filled('id_proveedor')) {
-            $query->where('id_proveedor', $request->id_proveedor);
-        }
+        if ($request->filled('buscar_proveedor') && strlen(trim($request->buscar_proveedor)) >= 3) {
+            $palabras = explode(' ', $request->buscar_proveedor);
 
+            $query->where(function ($q) use ($palabras) {
+                foreach ($palabras as $palabra) {
+                    $q->where('nombre_proveedor', 'like', '%' . $palabra . '%');
+                }
+            });
+        }
 
         $porPagina = $request->input('PorPagina', 10);
         $compras = $query->paginate($porPagina);

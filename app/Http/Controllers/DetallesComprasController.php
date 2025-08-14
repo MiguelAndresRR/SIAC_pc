@@ -13,16 +13,25 @@ class DetallesComprasController extends Controller
 {
     public function index(Request $request, $id_compra)
     {
-        $porPagina = $request->input('PorPagina', 10);
+        $query = DetalleCompra::query()->where('id_compra', $id_compra);
+        if ($request->filled('buscar_productos') && strlen(trim($request->buscar_productos)) >= 3) {
+            $palabras = explode(' ', $request->buscar_productos);
 
+            $query->where(function ($q) use ($palabras) {
+                foreach ($palabras as $palabra) {
+                    $q->where('nombre_producto', 'like', '%' . $palabra . '%');
+                }
+            });
+        }
+        $porPagina = $request->input('PorPagina', 10);
         $detallesCompras = DetalleCompra::where('id_compra', $id_compra)
             ->paginate($porPagina);
-
+        $productos = Producto::all();
         if ($request->ajax()) {
-            return view('admin.detallesCompras.index', compact('detallesCompras', 'id_compra'))->render();
+            return view('admin.detallesCompras.index', compact('detallesCompras', 'id_compra', 'productos'))->render();
         }
 
-        return view('admin.detallesCompras.index', compact('detallesCompras', 'id_compra'));
+        return view('admin.detallesCompras.index', compact('detallesCompras', 'id_compra', 'productos'));
     }
 
     public function show(DetalleCompra $detalleCompra)

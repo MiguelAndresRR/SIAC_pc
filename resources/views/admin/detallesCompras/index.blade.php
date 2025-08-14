@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Productos</title>
     <meta charset="UTF-8">
-
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
@@ -20,7 +21,7 @@
     <link rel="stylesheet" href="{{ asset('css/detallesCompras/paginacion.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/detallesCompras/mostrar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/detallesCompras/inputsearch.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesCompras/inputSearch.css') }}">
 
 
     <link
@@ -53,9 +54,10 @@
                 <h1><i class="fa-solid fa-bag-shopping"></i>Detalles Compra #{{ $id_compra }}</h1>
             </div>
             <div class="header-detallesCompras">
-                <button class="btn-back" onclick="window.history.go(-1)"><i class="fa-regular fa-circle-left"></i></button>
+                <button class="btn-back" onclick="window.history.go(-1)"><i
+                        class="fa-regular fa-circle-left"></i></button>
             </div>
-            </div>
+        </div>
         @include('admin.detallesCompras.layoutdetallesCompras.filtros')
         <div id="tabla-detallesCompras">
             @include('admin.detallesCompras.layoutdetallesCompras.tabladetallesCompras')

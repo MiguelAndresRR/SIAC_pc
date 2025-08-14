@@ -5,11 +5,28 @@
             id="formulario_detallesCompras" class="necesita-validacion">
             @csrf
             <label for="nombre_producto"><i class="fa-solid fa-cubes"></i>Producto</label>
-            <input type="text" class="form-control" id="nombre_producto" name="nombre_producto"
-                value="{{ old('nombre_producto') }}" placeholder="nombre del producto" required><br>
+            <div class="search-container-productos" style="position: relative;">
+                <div class="input-error-producto">
+                    <span id="productoError" style="color: red; font-size: 0.8rem; display: none;">
+                        ⚠ El producto no existe
+                    </span>
+                </div>
+                <div class="search-input-box">
+                    <input type="text" onkeydown="return event.key !== 'Enter';" placeholder="Buscar producto..."
+                        class="form-control">
+                    <ul class="conteiner-productos-search" id="itemListProductos">
+                        @foreach ($productos as $producto)
+                            <li class="search-item" data-id_producto="{{ $producto->id_producto }}"
+                                data-nombre_producto="{{ $producto->nombre_producto }}">
+                                {{ $producto->nombre_producto }}
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
             <label for="cantidad"><i class="fa-solid fa-cubes"></i>Cantidad</label>
-            <input type="number" class="form-control" id="cantidad" name="cantidad"
-                value="{{ old('cantidad') }}" placeholder="cantidad comprada" required><br>
+            <input type="number" class="form-control" id="cantidad" name="cantidad" value="{{ old('cantidad') }}"
+                placeholder="cantidad comprada" required><br>
             <label for="precio_unidad"><i class="fa-solid fa-dollar-sign"></i>Precio Unidad</label>
             <input type="number" class="form-control" id="precio_unidad" name="precio_unidad"
                 value="{{ old('precio_unidad') }}" placeholder="Precio unitario producto..." required><br>
@@ -21,3 +38,4 @@
     </div>
 </div>
 <script src="{{ asset('js/detallesCompras/crear.js') }}"></script>
+<script src="{{ asset('js/inputSearchs/inputSearchProductos.js') }}"></script>

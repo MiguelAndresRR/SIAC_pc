@@ -21,7 +21,6 @@ function asignarEventosModalCrear() {
 
     
 }
-
 // Al cargar la página
 asignarEventosModalCrear();
 window.asignarEventosModalCrear = asignarEventosModalCrear;

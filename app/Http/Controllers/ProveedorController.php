@@ -11,13 +11,22 @@ class ProveedorController extends Controller
     {
         $query = Proveedor::query();
 
-        if ($request->filled('buscar_proveedor')) {
-            $query->where('nombre_proveedor', 'like', '%' . $request->buscar_proveedor . '%');
+        if ($request->filled('buscar_proveedor') && strlen(trim($request->buscar_proveedor)) >= 3) {
+            $palabras = explode(' ', $request->buscar_proveedor);
+
+            $query->where(function ($q) use ($palabras) {
+                foreach ($palabras as $palabra) {
+                    $q->where('buscar_proveedor', 'like', '%' . $palabra . '%');
+                }
+            });
         }
 
         if ($request->filled('nit_proveedor')) {
-            $query->where('nit_proveedor', 'like', '%' . $request->nit_proveedor . '%');
+            $nit = preg_replace('/\D/', '', $request->nit_proveedor);
+
+            $query->where('nit_proveedor', 'like', $nit . '%');
         }
+
 
         $porPagina = $request->input('entries', 15);
         $proveedores = $query->paginate($porPagina)->appends($request->query());
@@ -28,7 +37,7 @@ class ProveedorController extends Controller
 
         return view('admin.proveedores.index', compact('proveedores'));
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
