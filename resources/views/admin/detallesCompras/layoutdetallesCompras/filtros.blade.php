@@ -1,17 +1,12 @@
 <form id="filtro-form-detallesCompras" method="GET">
     @csrf
     <div class="filtros">
-        <input type="hidden" name="id_compra" id="idCompra" value="{{ $id_compra }}">
-        <div class="buscador-con-icono">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <select id="productoSelect" name="id_producto">
-                <option value="" selected disabled>Seleccione un producto</option>
-                @foreach ($productos as $producto)
-                    <option value="{{ $producto->id_producto }}">{{ $producto->nombre_producto }}</option>
-                @endforeach
-            </select>
-        </div>
-
+        <select id="productoSelect" name="" class="form-control">
+            <option value="">Buscar producto...</option>
+            @foreach ($productos as $producto)
+                <option value="{{ $producto->id_producto }}">{{ $producto->nombre_producto }}</option>
+            @endforeach
+        </select>
         <select name="PorPagina" id="entries" class="form-control">
             <option disabled selected>Selecciona datos a mostrar</option>
             <option value="10" {{ request('PorPagina') == 10 ? 'selected' : '' }}>5</option>
@@ -28,16 +23,13 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         new TomSelect('#productoSelect', {
-            placeholder: 'Buscar producto...',
+            plugins: ['remove_button'],
+            w8idth: '100%',
+            maxItems: 1,
             allowEmptyOption: true,
             create: false,
             dropdownClass: 'ts-dropdown',
             controlInput: '<input>',
         });
-        render: {
-            option: function(data, escape) {
-                return `<div class="option-item">${escape(data.text)}</div>`;
-            }
-        }
     });
 </script>

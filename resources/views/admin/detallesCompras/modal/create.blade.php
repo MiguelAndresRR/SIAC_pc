@@ -5,25 +5,12 @@
             id="formulario_detallesCompras" class="necesita-validacion">
             @csrf
             <label for="nombre_producto"><i class="fa-solid fa-cubes"></i>Producto</label>
-            <div class="search-container-productos" style="position: relative;">
-                <div class="input-error-producto">
-                    <span id="productoError" style="color: red; font-size: 0.8rem; display: none;">
-                        ⚠ El producto no existe
-                    </span>
-                </div>
-                <div class="search-input-box">
-                    <input type="text" onkeydown="return event.key !== 'Enter';" placeholder="Buscar producto..."
-                        class="form-control">
-                    <ul class="conteiner-productos-search" id="itemListProductos">
-                        @foreach ($productos as $producto)
-                            <li class="search-item" data-id_producto="{{ $producto->id_producto }}"
-                                data-nombre_producto="{{ $producto->nombre_producto }}">
-                                {{ $producto->nombre_producto }}
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
+                <select id="productoSelect1" name="id_producto" required>
+                    <option value="">Buscar producto...</option>
+                    @foreach ($productos as $producto)
+                        <option value="{{ $producto->id_producto }}">{{ $producto->nombre_producto }}</option>
+                    @endforeach
+                </select>
             <label for="cantidad"><i class="fa-solid fa-cubes"></i>Cantidad</label>
             <input type="number" class="form-control" id="cantidad" name="cantidad" value="{{ old('cantidad') }}"
                 placeholder="cantidad comprada" required><br>
@@ -38,4 +25,15 @@
     </div>
 </div>
 <script src="{{ asset('js/detallesCompras/crear.js') }}"></script>
-<script src="{{ asset('js/inputSearchs/inputSearchProductos.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        new TomSelect('#productoSelect1', {
+            plugins: ['remove_button'],
+            maxItems: 1,
+            allowEmptyOption: true,
+            create: false,
+            dropdownClass: 'ts-dropdown',
+            controlInput: '<input>',
+        });
+    });
+</script>

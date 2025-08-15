@@ -11,8 +11,10 @@ use App\Models\proveedor\Proveedor;
 
 class ComprasController extends Controller
 {
+
     public function index(Request $request)
     {
+        //filtros
         $query = Compras::query();
 
         if ($request->filled('fecha_desde') && $request->filled('fecha_hasta')) {
@@ -31,7 +33,7 @@ class ComprasController extends Controller
                 }
             });
         }
-
+        //paginación
         $porPagina = $request->input('PorPagina', 10);
         $compras = $query->paginate($porPagina);
         $proveedores = Proveedor::all();
@@ -44,17 +46,19 @@ class ComprasController extends Controller
 
     public function store(Request $request, Compras $compra)
     {
+        // Validar los datos de la solicitud
         $request->validate([
             'fecha_compra' => 'required|date',
             'id_proveedor' => 'required|exists:proveedor,id_proveedor'
 
         ]);
-
+        // Verificar si el proveedor existe
         $compra = Compras::create([
             'fecha_compra' => $request->fecha_compra,
             'id_usuario' => Auth::user()->id_usuario,
             'id_proveedor' => $request->id_proveedor
         ]);
+        // Verificar si se han enviado productos
         return redirect()->route('admin.compras.index')->with('message', [
             'type' => 'success',
             'text' => 'La compra se ha creado correctamente.'
@@ -63,6 +67,7 @@ class ComprasController extends Controller
 
     public function show(Compras $compra)
     {
+        // Retornar los detalles de la compra
         return response()->json([
             'id_compra' => $compra->id_compra,
             'fecha_compra' => $compra->fecha_compra,
@@ -75,11 +80,12 @@ class ComprasController extends Controller
 
     public function update(Request $request, Compras $compra)
     {
+        // Validar los datos de la solicitud
         $request->validate([
             'fecha_compra' => 'required|date',
             'id_proveedor' => 'required|exists:proveedor,id_proveedor'
         ]);
-
+        // Actualizar los datos de la compra
         $compra->fecha_compra = $request->fecha_compra;
         $compra->id_proveedor = $request->id_proveedor;
         $compra->save();
@@ -91,6 +97,7 @@ class ComprasController extends Controller
 
     public function destroy($id_compra)
     {
+        // Eliminar la compra
         $compra = Compras::find($id_compra);
         if (! $compra) {
             return redirect()->back()->with('message', [
@@ -98,6 +105,7 @@ class ComprasController extends Controller
                 'text' => 'LA compra no existe en la base de datos.'
             ]);
         }
+        // Verificar si la compra tiene detalles asociados y eliminarlos
         $compra->detalleCompra()->delete();
         $compra->delete();
         return redirect()->back()->with('message', [

@@ -1,19 +1,20 @@
 /* Campo de selección principal */
 .ts-control {
+        width: 450px;
     padding: 10px;
     border-radius: 10px;
     border: 2px solid transparent;
     outline: none;
-    background-color: #ffffff;
     color: #000000;
     font-size: 16px;
-    width: 410px;
     gap: 10px;
     display: flex;
     align-items: center;
     transition: all 0.3s ease-in-out;
 }
-
+.ts-wrapper:not(.dropdown-active) .ts-dropdown {
+    display: none;
+}
 .ts-control:focus-within {
     border: 2px solid #9e12e4;
     box-shadow: 0 0 5px #9e12e4;
@@ -30,13 +31,13 @@
 
 /* Dropdown de opciones */
 .ts-dropdown {
-    width: 410px;
+    width: 450px;
     border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 21);
     border: 2px solid transparent;
     margin-top: 5px;
     z-index: 9999;
+    padding: 0;
 }
 
 /* Opciones individuales */
@@ -44,43 +45,30 @@
     padding: 10px;
     font-size: 16px;
     color: #000000;
-    border-bottom: 1px solid #eee;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    border-radius: 10px;
+    margin: 3px;
+    border-bottom: none;
 }
 
 .ts-dropdown .option:hover {
     background-color: #9e12e4;
-    color: #ffffff;
+    color : #ffffff;
+    border-radius: 10px;
+    font-weight: bold;
+    
 }
+
 
 /* Opción seleccionada */
 .ts-dropdown .selected {
-    background-color: #f0f0f0;
+    background-color: #9e12e4;
+    border-radius: 10px;
     font-weight: bold;
+        width: 450px;
 }
 
 /* Placeholder */
 .ts-control::placeholder {
     color: #999;
-}
-.buscador-con-icono {
-  position: relative;
-  width: 410px;
-}
-
-.buscador-con-icono i {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  color: #999;
-  font-size: 18px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.buscador-con-icono select,
-.buscador-con-icono .ts-control {
-  padding-left: 35px !important;
 }

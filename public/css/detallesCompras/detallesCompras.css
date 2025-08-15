@@ -184,12 +184,14 @@ form {
 }
 
 .filtros {
+    align-content: center;
+    justify-content: center;
     display: flex;
     margin-bottom: 10px;
     padding: 10px;
     align-items: center;
     justify-content: space-between;
-    width: 110%;
+    width: 100%;
 }
 .form-control {
     display: flex;
@@ -204,9 +206,10 @@ form {
     background-color: #ffffff;
     color: #000000;
     font-size: 16px;
-    width: 410px;
-    gap: 10px;
+    width: 450px;
+    height: 40px;
     transition: all 0.3s ease-in-out;
+    border: 0;
     &:focus {
         border: 2px solid #9e12e4;
         box-shadow: 0 0 5px #9e12e4;
@@ -221,7 +224,8 @@ form {
     color: #ffffff;
     font-size: 16px;
     justify-content: center;
-    width: 410px;
+    cursor: pointer;
+
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     position: relative;
