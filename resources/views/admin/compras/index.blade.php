@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Compras</title>
     <meta charset="UTF-8">
-
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
@@ -20,7 +21,8 @@
     <link rel="stylesheet" href="{{ asset('css/compras/paginacion.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/compras/mostrar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/compras/inputsearch.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/compras/inputSearch.css') }}">
+
 
     
     <link
@@ -57,7 +59,6 @@
         </div>
     </div>
     @include('admin.compras.modal.edit')
-    @include('admin.compras.modal.mostrar')
     @include('admin.compras.modal.create')
 </body>
 </html>

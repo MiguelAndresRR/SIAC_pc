@@ -14,7 +14,7 @@ document.addEventListener("click", function (e) {
     const id_detalle_compra = btn.dataset.id_detalle_compra;
     console.log("Botón editar clickeado, ID:", id_detalle_compra);
 
-    fetch(`/admin/detallesCompras/${id_detalle_compra}`)
+    fetch(`/admin/compras/{id_compra}/detalless`)
         .then((response) => response.json())
         .then((data) => {
             console.log('datos recibidos', data)

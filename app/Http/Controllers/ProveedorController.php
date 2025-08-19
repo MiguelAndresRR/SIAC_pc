@@ -77,17 +77,6 @@ class ProveedorController extends Controller
         ]);
     }
 
-    public function edit(Proveedor $proveedor)
-    {
-        return response()->json([
-            'nombre_proveedor' => $proveedor->nombre_proveedor,
-            'nit_proveedor' => $proveedor->nit_proveedor,
-            'direccion_proveedor' => $proveedor->direccion_proveedor,
-            'telefono_proveedor' => $proveedor->telefono_proveedor,
-            'correo_proveedor' => $proveedor->correo_proveedor
-        ]);
-    }
-
     public function update(Request $request, Proveedor $proveedor)
     {
         $request->validate([

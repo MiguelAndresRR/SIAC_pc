@@ -16,23 +16,24 @@ class ComprasController extends Controller
     {
         //filtros
         $query = Compras::query();
-
-        if ($request->filled('fecha_desde') && $request->filled('fecha_hasta')) {
-            $query->whereBetween('fecha_compra', [
-                $request->fecha_desde,
-                $request->fecha_hasta
-            ]);
-        }
-
-        if ($request->filled('buscar_proveedor') && strlen(trim($request->buscar_proveedor)) >= 3) {
-            $palabras = explode(' ', $request->buscar_proveedor);
-
-            $query->where(function ($q) use ($palabras) {
-                foreach ($palabras as $palabra) {
-                    $q->where('nombre_proveedor', 'like', '%' . $palabra . '%');
-                }
+        //filtro proveedor
+        if ($request->filled('proveedorSelect')) {
+            $query->whereHas('proveedor', function ($query) use ($request) {
+                $query->where('nombre_proveedor', 'like', '%' . $request->proveedorSelect . '%');
             });
         }
+        //filtro fechas de compra
+        if ($request->filled('fechaInicio') && $request->filled('fechaFin')) {
+            $query->whereBetween('fecha_compra', [
+                $request->fechaInicio,
+                $request->fechaFin
+            ]);
+        } elseif ($request->filled('fechaInicio')) {
+            $query->where('fecha_compra', '>=', $request->fechaInicio);
+        } elseif ($request->filled('fechaFin')) {
+            $query->where('fecha_compra', '<=', $request->fechaFin);
+        }
+
         //paginación
         $porPagina = $request->input('PorPagina', 10);
         $compras = $query->paginate($porPagina);

@@ -54,8 +54,9 @@
                 <h1><i class="fa-solid fa-bag-shopping"></i>Detalles Compra #{{ $id_compra }}</h1>
             </div>
             <div class="header-detallesCompras">
-                <button class="btn-back" onclick="window.history.go(-1)"><i
-                        class="fa-regular fa-circle-left"></i></button>
+                <a href="{{ route('admin.compras.index') }}" class="btn-back">
+                    <i class="fa-regular fa-circle-left"></i>
+                </a>
             </div>
         </div>
         @include('admin.detallesCompras.layoutdetallesCompras.filtros')

@@ -13,11 +13,12 @@ class UsuarioController extends Controller
     public function index(Request $request)
     {
         $query = User::query();
+        // Filtro por documento
         if ($request->filled('buscar_documento')) {
             $documento_usuario = preg_replace('/\D/', '', $request->buscar_documento);
             $query->where('documento_usuario', 'like', $documento_usuario . '%');
         }
-
+        // Filtro por nombre o apellido
         if ($request->filled('buscar_nombre') && strlen(trim($request->buscar_nombre)) >= 3) {
             $termino_busqueda = trim($request->buscar_nombre);
 
@@ -29,7 +30,7 @@ class UsuarioController extends Controller
 
 
 
-
+        // Filtro por rol
         if ($request->filled('rol')) {
             $query->whereHas('rol', function ($query) use ($request) {
                 $query->where('nombre_rol', 'like', '%' . $request->rol . '%');

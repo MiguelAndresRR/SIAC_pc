@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData(form);
         const params = new URLSearchParams(formData).toString();
 
-        fetch(`/admin/detallesCompras/${id_compra}?${params}`, {
+        fetch(`/admin/compras/${id_compra}/detalles?${params}`, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("tabla-detallesCompras").innerHTML = html;
 
                 if (typeof window.asignarEventosBotones === "function") {
-                    console.log("Reasignando eventos a .btn-ver");
+                    console.log("Reasignando eventos a .btn-agregar");
                     window.asignarEventosBotones();
                 } else {
                     console.log("No se encontró window.asignarEventosBotones");
@@ -43,19 +43,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("change", filtro);
 
-    const nombreInput = document.getElementById("searchInputProductos");
-    const limpiarBtn = document.getElementById("limpiar-filtros-detallesCompras"); 
+    const limpiarBtn = document.getElementById("limpiar-filtros-detallesCompras");
 
-    console.log("Nombre input encontrado:", nombreInput);
     console.log("Limpiar botón encontrado:", limpiarBtn);
 
-    if (nombreInput) {
-        nombreInput.addEventListener("input", () => {
-            clearTimeout(window.searchTimer);
-            window.searchTimer = setTimeout(filtro, 300);
-        });
-    }
-    
     if (limpiarBtn) {
         console.log("Agregando evento click al botón limpiar");
         limpiarBtn.addEventListener("click", function (e) {
@@ -69,14 +60,13 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("No se encontró el botón limpiar-filtros-detallesCompras");
     }
 
+
     document.addEventListener("click", function (e) {
         if (e.target.matches(".pagination a")) {
             e.preventDefault();
 
             const url = new URL(e.target.href);
             const formData = new FormData(form);
-
-            // Mantener todos los filtros junto con el page
             formData.forEach((value, key) => {
                 url.searchParams.set(key, value);
             });

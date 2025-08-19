@@ -21,6 +21,5 @@ class PreventBack
         $response->headers->set('Pragma', 'no-cache');
         $response->headers->set('Expires', 'Sat, 01 jan 2000 00:00:00 GMT');
         return $response;
-
     }
 }

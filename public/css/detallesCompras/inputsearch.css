@@ -1,13 +1,11 @@
 /* Campo de selección principal */
 .ts-control {
-        width: 450px;
     padding: 10px;
     border-radius: 10px;
     border: 2px solid transparent;
     outline: none;
     color: #000000;
     font-size: 16px;
-    gap: 10px;
     display: flex;
     align-items: center;
     transition: all 0.3s ease-in-out;
@@ -70,5 +68,34 @@
 
 /* Placeholder */
 .ts-control::placeholder {
-    color: #999;
+    color: #ffffff;
 }
+
+/* A veces el fondo está en el contenedor principal */
+.ts-wrapper {
+  background: none !important;
+}
+.ts-wrapper.form-control {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none;
+    padding: 0;
+}
+.ts-wrapper.form-control.focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+#productoSelect1{
+    background-color: white;
+    width: 440px;
+    border-radius: 10px;
+    outline: none;
+    color: #000000;
+    
+    font-size: 16px;
+    margin-right: 10PX;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+

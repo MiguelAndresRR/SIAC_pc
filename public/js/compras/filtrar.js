@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("tabla-compras").innerHTML = html;
 
                 if (typeof window.asignarEventosBotones === "function") {
-                    console.log("Reasignando eventos a .btn-ver");
+                    console.log("Reasignando eventos a .btn-agregar");
                     window.asignarEventosBotones();
                 } else {
                     console.log("No se encontró window.asignarEventosBotones");
@@ -43,19 +43,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("change", filtro);
 
-    // const nombreInput = document.getElementById("buscarProducto");
-    const limpiarBtn = document.getElementById("limpiar-filtros-compras"); 
+    const limpiarBtn = document.getElementById("limpiar-filtros-compras");
 
-    // console.log("Nombre input encontrado:", nombreInput);
     console.log("Limpiar botón encontrado:", limpiarBtn);
 
-    // if (nombreInput) {
-    //     nombreInput.addEventListener("input", () => {
-    //         clearTimeout(window.searchTimer);
-    //         window.searchTimer = setTimeout(filtro, 50);
-    //     });
-    // }
-    
     if (limpiarBtn) {
         console.log("Agregando evento click al botón limpiar");
         limpiarBtn.addEventListener("click", function (e) {
@@ -66,8 +57,9 @@ document.addEventListener("DOMContentLoaded", function () {
             filtro();
         });
     } else {
-        console.error("No se encontró el botón limpiar-filtros-productos");
+        console.error("No se encontró el botón limpiar-filtros-compras");
     }
+
 
     document.addEventListener("click", function (e) {
         if (e.target.matches(".pagination a")) {
@@ -75,8 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const url = new URL(e.target.href);
             const formData = new FormData(form);
-
-            // Mantener todos los filtros junto con el page
             formData.forEach((value, key) => {
                 url.searchParams.set(key, value);
             });

@@ -172,7 +172,7 @@ form {
 .registrar-detallesCompras-container {
     background-color: white;
     opacity: none;
-    width: auto;
+    width: 45%;
     align-items: none;
     justify-content: none;
     flex-direction: none;
@@ -184,32 +184,29 @@ form {
 }
 
 .filtros {
-    align-content: center;
-    justify-content: center;
     display: flex;
+    align-items: center;
+    gap: 15px;
     margin-bottom: 10px;
     padding: 10px;
-    align-items: center;
-    justify-content: space-between;
     width: 100%;
 }
 .form-control {
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 10px;
 }
 .form-control {
+    width: 100%;
     padding: 10px;
     border-radius: 10px;
     border: 2px solid transparent;
     outline: none;
-    background-color: #ffffff;
     color: #000000;
     font-size: 16px;
-    width: 450px;
-    height: 40px;
+    display: flex;
+    align-items: center;
     transition: all 0.3s ease-in-out;
-    border: 0;
     &:focus {
         border: 2px solid #9e12e4;
         box-shadow: 0 0 5px #9e12e4;
@@ -217,6 +214,8 @@ form {
 }
 #limpiar-filtros-detallesCompras {
     padding: 10px;
+    width: 100%;
+    gap : 10px;
     border-radius: 10px;
     border: 2px solid transparent;
     outline: none;
@@ -225,7 +224,6 @@ form {
     font-size: 16px;
     justify-content: center;
     cursor: pointer;
-
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     position: relative;

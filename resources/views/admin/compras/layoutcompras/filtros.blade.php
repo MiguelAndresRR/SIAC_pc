@@ -1,22 +1,16 @@
 <form id="filtro-form-compras" method="GET">
     @csrf
     <div class="filtros">
-        <label class="inputdate" for="fechaInicio">Compra desde:</label>
+        <label class="inputdate" for="fechaInicio">Desde:</label>
         <input type="date" id="fechaInicio" name="fechaInicio" value="{{ request('fechaInicio') }}" class="form-control">
         <label class="inputdate" for="fechaFin">hasta:</label>
         <input type="date" id="fechaFin" name="fechaFin" value="{{ request('fechaFin') }}" class="form-control">
-        <div class="search-container">
-            <input type="text" name="buscar_proveedor" id="searchInputProveedores" placeholder="Buscar proveedor..."
-                class="form-control" onkeyup="filterProveedores()">
-            <ul id="itemListProveedores">
-                @foreach ($proveedores as $proveedor)
-                    <li class="search-item" data-id="{{ $proveedor->id_proveedor }}"
-                        data-nombre_proveedor="{{ $proveedor->nombre_proveedor }}">
-                        {{ $proveedor->nombre_proveedor }}
-                    </li>
-                @endforeach
-            </ul>
-        </div>
+        <select name="proveedorSelect" id="proveedorSelect" class="form-control">
+            <option disabled selected>Proveedores</option>
+            @foreach ($proveedores as $proveedor)
+                <option value="{{ $proveedor->nombre_proveedor }}">{{ $proveedor->nombre_proveedor }}</option>
+            @endforeach
+        </select>
         <select name="PorPagina" id="entries" class="form-control">
             <option disabled selected>Selecciona datos a mostrar</option>
             <option value="10" {{ request('PorPagina') == 10 ? 'selected' : '' }}>10</option>
@@ -31,3 +25,37 @@
     </div>
 </form>
 <script src="{{ asset('js/compras/filtrar.js') }}"></script>
+<script>
+    let proveedorSelectTS;
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("filtro-form-compras");
+        const limpiarBtn = document.getElementById("limpiar-filtros-compras");
+
+        // Inicializar Tom Select y guardar la instancia
+        proveedorSelectTS = new TomSelect("#proveedorSelect", {
+            placeholder: "Buscar proveedor...",
+            plugins: ["remove_button"],
+            maxItems: 1,
+            allowEmptyOption: true,
+            create: false,
+            dropdownClass: "ts-dropdown",
+            controlInput: "<input>",
+        });
+
+        // Evento para limpiar filtros
+        if (limpiarBtn) {
+            limpiarBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                form.reset();
+                if (proveedorSelectTS) {
+                    proveedorSelectTS.clear(); // o .setValue('') si prefieres
+                }
+
+                filtro();
+            });
+        }
+    });
+</script>

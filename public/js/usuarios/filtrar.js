@@ -72,6 +72,12 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();
             e.stopPropagation();
             form.reset();
+
+            const tomSelectInstance = TomSelect.instances["proveedorSelect"];
+            if (tomSelectInstance) {
+                tomSelectInstance.clear();
+            }
+
             filtro();
         });
     } else {

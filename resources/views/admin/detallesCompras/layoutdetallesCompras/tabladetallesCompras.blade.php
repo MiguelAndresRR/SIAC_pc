@@ -2,7 +2,6 @@
     <table class="tableFixHead">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Producto</th>
                 <th>Cantidad</th>
                 <th>Precio Unidad</th>
@@ -15,29 +14,27 @@
             </tr>
         </thead>
         <tbody id="container-detallesCompras-table">
-            @foreach ($detallesCompras as $detalleCompra)
+            @foreach ($detallesCompras as $detalles)
                 <tr>
-                    <td>{{ $detalleCompra->id_detalle_compra }}</td>
-                    <td>{{ $detalleCompra->producto->nombre_producto }}</td>
-                    <td>{{ $detalleCompra->cantidad }}</td>
-                    <td>{{ $detalleCompra->precio_unidad }}</td>
-                    <td>{{ $detalleCompra->sub_total }}</td>
+                    <td>{{ $detalles->producto->nombre_producto }}</td>
+                    <td>{{ $detalles->cantidad_producto }}</td>
+                    <td>{{ $detalles->precio_unitario }}</td>
+                    <td>{{ $detalles->subtotal_compra }}</td>
                     <td id="botones">
-                        <button type="button" class="btn-agregar" data-id_detalle_compra="{{ $detalleCompra->id_detalle_compra }}"
-                            data-id_detalle_compra="{{ $detalleCompra->id_detalle_compra }}">
+                        <button type="button" class=".btn-ver" data-id_detalle_compra="{{ $detalles->id_detalle_compra }}"
+                            data-id_detalle_compra="{{ $detalles->id_detalle_compra }}">
                             <i class="fa-solid fa-cart-plus"></i>
                         </button>
-                        <button type="button" class="btn-editar" data-id_detalle_compra="{{ $detalleCompra->id_detalle_compra }}"
-                            data-id_detalle_compra="{{ $detalleCompra->id_detalle_compra }}">
+                        <button type="button" class="btn-editar" data-id_detalle_compra="{{ $detalles->id_detalle_compra }}">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                         <button type="button" class="borrar-boton btn btn-danger"
-                            data-id_detalle_compra="{{ $detalleCompra->id_detalle_compra }}">
+                            data-id_detalle_compra="{{ $detalles->id_detalle_compra }}">
                             <i class="fa-solid fa-trash"></i>
                         </button>
-                        @if ($detallesCompras->id_detalle_compra)
-                            <form id="formEliminar{{ $detalleCompra->id_detalle_compra }}" method="POST"
-                                action="{{ route('admin.detallesCompras.destroy', $detalleCompra->id_detalle_compra) }}" style="display: none;">
+                        @if ($detalles->id_detalle_compra)
+                            <form id="formEliminar{{ $detalles->id_detalle_compra }}" method="POST"
+                                action="{{ route('admin.detallesCompras.destroy', $detalles->id_detalle_compra) }}" style="display: none;">
                                 @csrf
                                 @method('DELETE')
                             </form>
