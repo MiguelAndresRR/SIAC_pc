@@ -12,24 +12,18 @@ class DetallesComprasController extends Controller
     // Mostrar lista de detalles de compra filtrados por compra
     public function index(Request $request, $id_compra)
     {
-        // Crear consulta base filtrando por id_compra
         $query = DetalleCompra::query()->where('id_compra', $id_compra);
+        // Crear consulta base filtrando por id_compra
         if ($request->filled('productoSelect')) {
-            $query->whereHas('productos', function ($query) use ($request) {
+            $query->whereHas('producto', function ($query) use ($request) {
                 $query->where('nombre_producto', 'like', '%' . $request->productoSelect . '%');
-            });
-        }
-        if ($request->filled('proveedorSelect')) {
-            $query->whereHas('proveedor', function ($query) use ($request) {
-                $query->where('nombre_proveedor', 'like', '%' . $request->proveedorSelect . '%');
             });
         }
         // Si hay búsqueda de productos con mínimo 3 caracteres
         if ($request->filled('buscar_productos') && strlen(trim($request->buscar_productos)) >= 3) {
             $palabras = explode(' ', $request->buscar_productos);
 
-            // Buscar coincidencias en nombre de producto
-            $query->where(function ($q) use ($palabras) {
+            $query->whereHas('producto', function ($q) use ($palabras) {
                 foreach ($palabras as $palabra) {
                     $q->where('nombre_producto', 'like', '%' . $palabra . '%');
                 }
@@ -66,6 +60,8 @@ class DetallesComprasController extends Controller
             'subtotal_compra' => $detalleCompra->subtotal_compra
         ]);
     }
+
+
 
     public function create($id_compra)
     {
@@ -104,6 +100,28 @@ class DetallesComprasController extends Controller
             'text' => 'El detalle de compra se ha creado correctamente.'
         ]);
     }
+    public function edit($id_detalle_compra)
+    {
+        $detalle = DetalleCompra::with(['compra', 'producto'])->find($id_detalle_compra);
+
+
+        if (!$detalle) {
+            return response()->json([
+                'error' => 'Detalle no encontrado'
+            ], 404);
+        }
+
+        return response()->json([
+            'id_detalle_compra' => $detalle->id_detalle_compra,
+            'id_compra'         => $detalle->id_compra,
+            'id_producto'       => $detalle->id_producto,
+            'cantidad_producto' => $detalle->cantidad_producto,
+            'precio_unitario'   => $detalle->precio_unitario,
+            'subtotal_compra'   => $detalle->subtotal_compra,
+            'producto'          => $detalle->producto->nombre_producto ?? 'Sin producto',
+            'compra'            => $detalle->compra->id_compra ?? 'Sin compra',
+        ]);
+    }
 
     // Actualizar un detalle de compra existente
     public function update(Request $request, DetalleCompra $detalleCompra)
@@ -115,7 +133,6 @@ class DetallesComprasController extends Controller
             'cantidad_producto' => 'required|integer|min:1',
             'precio_unitario' => 'required|numeric|min:0'
         ]);
-
         // Calcular subtotal
         $subtotal = $request->cantidad_producto * $request->precio_unitario;
 

@@ -104,7 +104,7 @@ input[type="number"]::-webkit-outer-spin-button {
     z-index: 1000;
 }
 
-.container-modal-editar.detallesCompras.mostrar {
+.container-modal-editar-detallesCompras.mostrar {
     opacity: 1;
     visibility: visible;
 }
@@ -127,7 +127,7 @@ form {
 .modificar-detallesCompras-container {
     background-color: white;
     opacity: none;
-    width: auto;
+    width: 45%;
     align-items: none;
     justify-content: none;
     flex-direction: none;

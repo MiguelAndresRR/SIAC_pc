@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData(form);
         const params = new URLSearchParams(formData).toString();
 
-        fetch(`/admin/compras/${id_compra}/detalles?${params}`, {
+        fetch(`/admin/compras/detalles/?${params}`, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },

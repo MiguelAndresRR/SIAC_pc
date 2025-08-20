@@ -1,7 +1,7 @@
-<form id="filtro-form-detallesCompras" method="GET" data-id-compra="{{ $id_compra}}">
+<form id="filtro-form-detallesCompras" method="GET" data-id_compra="{{ $id_compra }}">
     @csrf
     <div class="filtros">
-        <select id="productoSelect" name="productoSelect" class="form-control">
+        <select id="productoSelect" name="productoSelect" class="form-control" >
             <option value="">Buscar producto...</option>
             @foreach ($productos as $producto)
                 <option value="{{ $producto->id_producto }}">{{ $producto->nombre_producto }}</option>

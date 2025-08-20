@@ -117,16 +117,17 @@ Route::middleware('prevent-back')->group(function () {
             ->name('admin.detallesCompras.index');
 
         // Mostrar un detalle específico
-        Route::get('admin/detallesCompras/{detalle}', [DetallesComprasController::class, 'show'])
+        Route::get('admin/compras/{detalle}', [DetallesComprasController::class, 'show'])
             ->name('admin.detallesCompras.show');
 
         // Editar un detalle
-        Route::get('admin/detallesCompras/{detalle}/edit', [DetallesComprasController::class, 'edit'])
+        Route::get('admin/compras/detalles/editar/{id_detalle_compra}', [DetallesComprasController::class, 'edit'])
             ->name('admin.detallesCompras.edit');
 
         // Actualizar un detalle
-        Route::put('admin/detallesCompras/{detalle}', [DetallesComprasController::class, 'update'])
+        Route::put('/admin/detallesCompras/{detalleCompra}', [DetallesComprasController::class, 'update'])
             ->name('admin.detallesCompras.update');
+
 
         // Eliminar un detalle
         Route::delete('admin/detallesCompras/{detalle}', [DetallesComprasController::class, 'destroy'])

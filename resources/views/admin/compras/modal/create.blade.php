@@ -25,7 +25,6 @@
             <button type="submit">Crear</button>
         </form>
         <button type="button" class="btn" id="ocultar-modal-crear-compras">Cancelar</button>
-
     </div>
 </div>
 <script src="{{ asset('js/compras/crear.js') }}"></script>
