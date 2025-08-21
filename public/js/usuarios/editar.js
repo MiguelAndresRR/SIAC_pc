@@ -32,8 +32,6 @@ document.addEventListener("click", function (e) {
                 data.correo_usuario;
             document.getElementById("user-editar").value =
                 data.user;
-            document.getElementById("password-editar").value =
-                data.password;
             document.getElementById("id_rol-editar").value =
                 data.id_rol;
                 

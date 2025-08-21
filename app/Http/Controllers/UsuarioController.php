@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\usuarios\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\usuarios\Rol;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
@@ -129,7 +130,7 @@ class UsuarioController extends Controller
         $request->validate([
             'user' => 'required|string|min:5|max:50',
             'password' => [
-                'required',
+                'nullable',
                 'string',
                 'min:8',
                 'regex:/^(?=.*[A-Z])(?=(?:.*\d){3,})(?=.*[.!@#$%^&*()_\-+=\[\]{};:\'",.<>\/?\\|`~]).+$/'
@@ -141,9 +142,11 @@ class UsuarioController extends Controller
             'correo_usuario' => 'required|string|email|max:100',
             'id_rol' => 'required|exists:rol,id_rol'
         ]);
-        $request->merge([
-            'password' => Hash::make($request->password)
-        ]);
+        if ($request->filled('password')) {
+            $usuario->password = Hash::make($request->password);
+        }
+
+        $usuario->update($request->except('password'));
 
         $existingUsuario = User::where('documento_usuario', $request->documento_usuario)
             ->where('telefono_usuario', $request->telefono_usuario)
@@ -175,21 +178,21 @@ class UsuarioController extends Controller
         }
     }
 
-    public function destroy($id_usuario)
+    public function destroy(User $usuario)
     {
-        $usuario = User::find($id_usuario);
-        if (!$usuario) {
-            return redirect()->back()->with('message', [
+        // Evitar borrar el usuario autenticado
+        if (Auth::User()->id_usuario === $usuario->id_usuario) {
+            return redirect()->route('admin.usuarios.index')->with('message', [
                 'type' => 'error',
-                'text' => 'El usuario no existe en la base de datos.'
+                'text' => 'No puedes eliminar tu propio usuario mientras estás logueado.'
+            ]);
+        } else {
+            $usuario->delete();
+
+            return redirect()->route('admin.usuarios.index')->with('message', [
+                'type' => 'success',
+                'text' => 'Usuario eliminado correctamente.'
             ]);
         }
-
-        $usuario->delete();
-
-        return redirect()->back()->with('message', [
-            'type' => 'success',
-            'text' => 'El usuario se ha eliminado correctamente.'
-        ]);
     }
 }

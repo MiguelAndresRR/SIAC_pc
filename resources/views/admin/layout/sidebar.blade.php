@@ -34,7 +34,7 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-            <a href="#" class="nav_link"
+            <a href="#" id="logout" class="nav_link"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span class="span-subtittle">Cerrar Sesión</span>

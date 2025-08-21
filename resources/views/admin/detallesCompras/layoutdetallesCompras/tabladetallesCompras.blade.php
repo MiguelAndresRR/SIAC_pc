@@ -21,11 +21,7 @@
                     <td>{{ $detalles->precio_unitario }}</td>
                     <td>{{ $detalles->subtotal_compra }}</td>
                     <td id="botones">
-                        <button type="button" class=".btn-ver" data-id_detalle_compra="{{ $detalles->id_detalle_compra }}"
-                            data-id_detalle_compra="{{ $detalles->id_detalle_compra }}">
-                            <i class="fa-solid fa-cart-plus"></i>
-                        </button>
-                        <button type="button" class="btn-editar" data-id_detalle_compra="{{ $detalles->id_detalle_compra }}">
+                        <button type="button" class="btn-editar"  data-id_compra="{{ $id_compra }}" data-id_detalle_compra="{{ $detalles->id_detalle_compra }}">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                         <button type="button" class="borrar-boton btn btn-danger"

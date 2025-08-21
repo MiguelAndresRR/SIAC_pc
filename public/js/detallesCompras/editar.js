@@ -16,9 +16,10 @@ document.addEventListener("click", function (e) {
 
     e.preventDefault();
     const id_detalle_compra = btn.dataset.id_detalle_compra;
+    const idCompra = btn.dataset.id_compra;
     console.log("Botón editar clickeado, ID:", id_detalle_compra);
 
-    fetch(`/admin/compras/${id_compra}/detalles${id_detalle_compra}`)
+    fetch(`/admin/compras/detalles/editar/${id_detalle_compra}`)
         .then((response) => response.json())
         .then((data) => {
             console.log("datos recibidos", data);

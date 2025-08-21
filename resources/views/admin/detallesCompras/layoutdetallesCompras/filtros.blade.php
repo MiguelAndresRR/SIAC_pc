@@ -1,4 +1,4 @@
-<form id="filtro-form-detallesCompras" method="GET" data-id_compra="{{ $id_compra }}">
+<form id="filtro-form-detallesCompras" method="GET" data-id_compra_detalles="{{ $id_compra }}">
     @csrf
     <div class="filtros">
         <select id="productoSelect" name="productoSelect" class="form-control" >

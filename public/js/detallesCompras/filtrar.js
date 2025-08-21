@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Ejecutando filtro...");
         const formData = new FormData(form);
         const params = new URLSearchParams(formData).toString();
-
-        fetch(`/admin/compras/detalles/?${params}`, {
+        const idCompra = form.dataset.id_compra_detalles;
+        fetch(`/admin/compras/${idCompra}/detalles/?${params}`, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },

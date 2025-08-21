@@ -40,8 +40,8 @@
                         value="{{ old('user') }}" maxlength="50" required>
 
                     <label for="password-editar" class="form-label"><i class="fa-solid fa-lock"></i> Contraseña</label>
-                    <input type="password" class="form-control" id="password-editar" name="password" placeholder="Contraseña"
-                        value="{{ old('password') }}" required minlength="8" maxlength="60"
+                    <input type="password" class="form-control" id="password-editar" name="password" placeholder="Contraseña (opcional)"
+                        value="" minlength="8" maxlength="60"
                         pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
                         title="Debe contener al menos una letra mayúscula, un carácter especial y mínimo 8 caracteres.">
 

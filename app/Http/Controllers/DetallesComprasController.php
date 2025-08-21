@@ -16,7 +16,7 @@ class DetallesComprasController extends Controller
         // Crear consulta base filtrando por id_compra
         if ($request->filled('productoSelect')) {
             $query->whereHas('producto', function ($query) use ($request) {
-                $query->where('nombre_producto', 'like', '%' . $request->productoSelect . '%');
+                $query->where('id_producto', 'like', '%' . $request->productoSelect . '%');
             });
         }
         // Si hay búsqueda de productos con mínimo 3 caracteres
@@ -39,7 +39,7 @@ class DetallesComprasController extends Controller
         $compra = Compras::find($id_compra);
         // Si es petición AJAX, renderizar solo el contenido
         if ($request->ajax()) {
-            return view('admin.detallesCompras.index', compact('detallesCompras', 'id_compra', 'productos', 'compra'))->render();
+            return view('admin.detallesCompras.layoutdetallesCompras.tabladetallesCompras', compact('detallesCompras', 'id_compra', 'productos', 'compra'))->render();
         }
 
         // Vista completa

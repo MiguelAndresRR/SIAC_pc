@@ -16,7 +16,7 @@ class ProveedorController extends Controller
 
             $query->where(function ($q) use ($palabras) {
                 foreach ($palabras as $palabra) {
-                    $q->where('buscar_proveedor', 'like', '%' . $palabra . '%');
+                    $q->where('nombre_proveedor', 'like', '%' . $palabra . '%');
                 }
             });
         }

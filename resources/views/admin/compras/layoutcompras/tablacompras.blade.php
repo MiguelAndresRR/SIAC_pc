@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{ $compra->id_compra }}</td>
                     <td>{{ $compra->usuario->user }}</td>
-                    <td>{{ $compra->fecha_compra }}</td>
+                    <td>{{ \Carbon\Carbon::parse($compra->fecha_compra)->format('d/m/Y') }}</td>
                     <td>{{ $compra->proveedor->nombre_proveedor }}</td>
                     <td id="botones">
                         <button type="button" class="btn-agregar" data-id_compra="{{ $compra->id_compra }}"

@@ -12,6 +12,14 @@ Route::middleware('prevent-back')->group(function () {
     Route::redirect('/', 'login');
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
+    Route::prefix('admin')->group(function () {
+        Route::get('usuarios', [UsuarioController::class, 'index'])->name('admin.usuarios.index');
+        Route::get('compras', [ComprasController::class, 'index'])->name('admin.compras.index');
+        Route::get('detallesCompras', [DetallesComprasController::class, 'index'])->name('admin.detallesCompras.index');
+        Route::get('proveedores', [ProveedorController::class, 'index'])->name('admin.proveedores.index');
+        Route::get('productos', [ProductoController::class, 'index'])->name('admin.productos.index');
+    });
+
     Route::middleware('auth')->group(function () {
         Route::get('/admin/dashboard', function () {
             return view('admin.dashboard');
@@ -19,7 +27,6 @@ Route::middleware('prevent-back')->group(function () {
         Route::get('/user/dashboard', function () {
             return view('user.dashboard');
         })->name('user.dashboard');
-
         // Mostrar la lista de productos
         Route::get('admin/productos/index', [ProductoController::class, 'index'])->name('admin.productos.index');
 

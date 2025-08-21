@@ -14,7 +14,7 @@ document.addEventListener("click", function (e) {
     const id_proveedor = btn.dataset.id_proveedor;
     console.log("Botón editar clickeado, ID:", id_proveedor);
 
-    fetch(`/admin/proveedores/index/${id_proveedor}`)
+    fetch(`/admin/proveedores/${id_proveedor}`)
         .then((response) => response.json())
         .then((data) => {
             console.log('datos recibidos', data)

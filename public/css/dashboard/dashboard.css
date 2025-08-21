@@ -63,14 +63,14 @@ body {
 }
 
 .sidebar a i {
-    flex: 0 0 30px; 
-    text-align: center;      
-    font-size: 18px;         
+    flex: 0 0 30px;
+    text-align: center;
+    font-size: 18px;
 }
 
 .sidebar a span {
-    flex: 1;                
-    text-align: left;     
+    flex: 1;
+    text-align: left;
     margin-left: 10px;
     white-space: nowrap;
 }
@@ -121,9 +121,8 @@ body {
     color: white;
     text-align: center;
 
-    padding: 5px;
+    padding: 20px;
     font-size: 14px;
-    margin-top: auto;
     margin-bottom: 10px;
     border-top: 1px solid #ffffff;
     border-bottom: 1px solid #ffffff;
@@ -132,4 +131,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
+}
+#logout {
+    margin-top: auto;
 }
