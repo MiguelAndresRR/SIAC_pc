@@ -142,12 +142,8 @@ class UsuarioController extends Controller
             'correo_usuario' => 'required|string|email|max:100',
             'id_rol' => 'required|exists:rol,id_rol'
         ]);
-        if ($request->filled('password')) {
-            $usuario->password = Hash::make($request->password);
-        }
 
-        $usuario->update($request->except('password'));
-
+        // Verificar duplicados
         $existingUsuario = User::where('documento_usuario', $request->documento_usuario)
             ->where('telefono_usuario', $request->telefono_usuario)
             ->where('correo_usuario', $request->correo_usuario)
@@ -158,25 +154,24 @@ class UsuarioController extends Controller
         if ($existingUsuario) {
             return redirect()->route('admin.usuarios.index')->with('message', [
                 'type' => 'error',
-                'text' => 'El usuarios ya existe en la base de datos.'
-            ]);
-        } else {
-            $usuario->nombre_usuario = $request->nombre_usuario;
-            $usuario->apellido_usuario = $request->apellido_usuario;
-            $usuario->documento_usuario = $request->documento_usuario;
-            $usuario->telefono_usuario = $request->telefono_usuario;
-            $usuario->correo_usuario = $request->correo_usuario;
-            $usuario->user = $request->user;
-            $usuario->password = $request->password;
-            $usuario->id_rol = $request->id_rol;
-
-            $usuario->save();
-            return redirect()->route('admin.usuarios.index')->with('message', [
-                'type' => 'success',
-                'text' => 'El usuario se ha actualizado correctamente.'
+                'text' => 'El usuario ya existe en la base de datos.'
             ]);
         }
+        
+        $usuario->fill($request->except('password'));
+
+        if ($request->filled('password')) {
+            $usuario->password = Hash::make($request->password);
+        }
+
+        $usuario->save();
+
+        return redirect()->route('admin.usuarios.index')->with('message', [
+            'type' => 'success',
+            'text' => 'El usuario se ha actualizado correctamente.'
+        ]);
     }
+
 
     public function destroy(User $usuario)
     {

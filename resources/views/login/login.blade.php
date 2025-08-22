@@ -59,13 +59,20 @@
                         <input type="password" class="form-control" name="password"
                             placeholder="Introduce tu contraseña" autocomplete="off" required>
                     </div>
-
+                    {{-- <?php
+                    $contraseña = "Alvtururu578!";
+                    $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT, ['cost' => 12]);
+                    echo $contraseña_hash;
+                    ?> --}}
                     <button type="submit" class="btn btn-primary mt-2">Ingresar</button>
                 </form>
             </div>
         </div>
     </div>
-    <script src="{{asset('js/dashboard/formulario.js')}}"></script>
+    <?php
+    
+    ?>
+    <script src="{{ asset('js/dashboard/formulario.js') }}"></script>
 </body>
 
 </html>
