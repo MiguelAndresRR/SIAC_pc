@@ -25,7 +25,7 @@
         width: 100%;
         padding: 10px;
         border-radius: 10px;
-        background-color: #ffffff;
+        background-color: #f3f3f3;
         color: #000000;
         font-size: 16px;
         margin-bottom: 10px;
@@ -68,7 +68,9 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .modificar-compras-container button {
-    width: 100%;
+    display: block;
+    width: 50%;
+    margin: 0 auto 10px auto;
     border-radius: 10px;
     border: 2px solid transparent;
     outline: none;
@@ -76,7 +78,6 @@ input[type="number"]::-webkit-outer-spin-button {
     color: #ffffff;
     font-size: 16px;
     padding: 10px;
-    margin-bottom: 10px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     &:hover {
@@ -131,4 +132,7 @@ form {
     align-items: none;
     justify-content: none;
     flex-direction: none;
+    & i {
+        padding: 10px;
+    }
 }

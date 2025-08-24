@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\proveedor\Proveedor;
 use App\Models\usuarios\User;
 
-class Compras extends Model
+class Compra extends Model
 {
     use HasFactory;
 
@@ -22,7 +22,8 @@ class Compras extends Model
     protected $fillable = [
         'id_proveedor',
         'fecha_compra',
-        'id_usuario'
+        'id_usuario',
+        'total_compra'
     ];
 
     public function proveedor(): BelongsTo

@@ -22,23 +22,20 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
-
     & input {
         border: 2px solid transparent;
         outline: none;
         width: 100%;
         padding: 10px;
         border-radius: 10px;
-        background-color: #ffffff;
         color: #000000;
         font-size: 16px;
+        background-color: #f3f3f3;
         width: 100%;
         margin-bottom: 10px;
-
         &:focus {
             border: 2px solid #9e12e4;
             box-shadow: 0 0 5px #9e12e4;
-
         }
     }
 }
@@ -55,7 +52,9 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: #f0f0f0 url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 0.75rem center;
+    background: #f0f0f0
+        url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')
+        no-repeat right 0.75rem center;
     padding-right: 2rem;
     border-radius: 0.75rem;
 
@@ -113,7 +112,6 @@ input[type="number"]::-webkit-outer-spin-button {
 .container-modal-editar-proveedores.mostrar {
     opacity: 1;
     visibility: visible;
-
 }
 
 .container-modal-editar-proveedores.modal {
@@ -130,16 +128,6 @@ form {
     width: 100%;
     display: flex;
 }
-
-.modificar-proveedores-container {
-    background-color: white;
-    opacity: none;
-    width: 50%;
-    align-items: none;
-    justify-content: none;
-    flex-direction: none;
-}
-
 .modificar-proveedores-container {
     border-radius: 10px;
     height: auto;
@@ -160,33 +148,10 @@ form {
     margin-bottom: 20px;
 }
 
-.modificar-proveedores-container form {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-
-    & input {
-        border: 2px solid transparent;
-        outline: none;
-        width: 100%;
-        padding: 10px;
-        border-radius: 10px;
-        background-color: #ffffff;
-        color: #000000;
-        font-size: 16px;
-        width: 100%;
-        margin-bottom: 10px;
-
-        &:focus {
-            border: 2px solid #9e12e4;
-            box-shadow: 0 0 5px #9e12e4;
-
-        }
-    }
-}
-
 .modificar-proveedores-container button {
-    width: 100%;
+    display: block;
+    width: 50%;
+    margin: 0 auto 10px auto;
     border-radius: 10px;
     border: 2px solid transparent;
     outline: none;
@@ -194,7 +159,6 @@ form {
     color: #ffffff;
     font-size: 16px;
     padding: 10px;
-    margin-bottom: 10px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 
@@ -207,11 +171,14 @@ form {
     }
 }
 
-.modificar-proveedores-container{
+.modificar-proveedores-container {
     background-color: white;
     opacity: none;
-    width: auto;
+    width: 45%;
     align-items: none;
     justify-content: none;
     flex-direction: none;
+    & i {
+        padding: 10px;
+    }
 }

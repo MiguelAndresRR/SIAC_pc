@@ -160,10 +160,12 @@ table {
     border-spacing: 0;
 }
 .container-compras-class {
+    width: auto;
     height: 70vh;
     overflow-y: auto;
 }
 .tableFixHead thead tr th {
+    width: auto;
     position: sticky;
     top: 0;
     z-index: 1;

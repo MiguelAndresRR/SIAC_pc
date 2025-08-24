@@ -70,7 +70,7 @@
         width: 100%;
         padding: 10px;
         border-radius: 10px;
-        background-color: #ffffff;
+        background-color: #f3f3f3;
         color: #000000;
         font-size: 16px;
         margin-bottom: 10px;
@@ -89,15 +89,12 @@
     width: 100%;
     padding: 10px;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: #f3f3f3;
     color: #000000;
     font-size: 16px;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: #f0f0f0
-        url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')
-        no-repeat right 0.75rem center;
     padding-right: 2rem;
     border-radius: 0.75rem;
     &:focus {
@@ -113,7 +110,9 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
 }
 .registrar-detallesCompras-container button {
-    width: 100%;
+    display: block;
+    width: 50%;
+    margin: 0 auto 10px auto;
     border-radius: 10px;
     border: 2px solid transparent;
     outline: none;
@@ -121,7 +120,6 @@ input[type="number"]::-webkit-outer-spin-button {
     color: #ffffff;
     font-size: 16px;
     padding: 10px;
-    margin-bottom: 10px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     &:hover {
@@ -170,12 +168,16 @@ form {
 }
 
 .registrar-detallesCompras-container {
+    height: auto;
     background-color: white;
     opacity: none;
     width: 45%;
     align-items: none;
     justify-content: none;
     flex-direction: none;
+    & i {
+        padding: 10px;
+    }
 }
 
 .form-eliminar {
@@ -215,7 +217,7 @@ form {
 #limpiar-filtros-detallesCompras {
     padding: 10px;
     width: 100%;
-    gap : 10px;
+    gap: 10px;
     border-radius: 10px;
     border: 2px solid transparent;
     outline: none;
@@ -235,4 +237,9 @@ form {
         transform: scale(1.05);
         border: 2px solid #e47012;
     }
+}
+.TotalCompra {
+    width: auto;
+    align-content: right;
+    margin-left: auto;
 }

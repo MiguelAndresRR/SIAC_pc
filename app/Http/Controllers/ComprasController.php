@@ -5,17 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\compras\DetalleCompra;
-use App\Models\compras\Compras;
-use App\Models\productos\Producto;
+use App\Models\compras\Compra;
 use App\Models\proveedor\Proveedor;
 
 class ComprasController extends Controller
 {
 
-    public function index(Request $request)
+    public function index(Request $request, DetalleCompra $id_compra)
     {
         //filtros
-        $query = Compras::query();
+        $query = Compra::query();
         //filtro proveedor
         if ($request->filled('proveedorSelect')) {
             $query->whereHas('proveedor', function ($query) use ($request) {
@@ -45,7 +44,7 @@ class ComprasController extends Controller
         return view('admin.compras.index', compact('compras', 'proveedores'));
     }
 
-    public function store(Request $request, Compras $compra)
+    public function store(Request $request, Compra $compra)
     {
         // Validar los datos de la solicitud
         $request->validate([
@@ -54,7 +53,7 @@ class ComprasController extends Controller
 
         ]);
         // Verificar si el proveedor existe
-        $compra = Compras::create([
+        $compra = Compra::create([
             'fecha_compra' => $request->fecha_compra,
             'id_usuario' => Auth::user()->id_usuario,
             'id_proveedor' => $request->id_proveedor
@@ -66,7 +65,7 @@ class ComprasController extends Controller
         ]);
     }
 
-    public function show(Compras $compra)
+    public function show(Compra $compra)
     {
         // Retornar los detalles de la compra
         return response()->json([
@@ -75,11 +74,12 @@ class ComprasController extends Controller
             'id_usuario' => $compra->id_usuario,
             'usuario' => $compra->usuario ? $compra->usuario->user : 'sin usuario',
             'id_proveedor' => $compra->id_proveedor,
-            'proveedor' => $compra->proveedor ? $compra->proveedor->nombre_proveedor : 'sin proveedor'
+            'proveedor' => $compra->proveedor ? $compra->proveedor->nombre_proveedor : 'sin proveedor',
+            'total_compra' => $compra->total_compra ?? 'sin compras'
         ]);
     }
 
-    public function update(Request $request, Compras $compra)
+    public function update(Request $request, Compra $compra)
     {
         // Validar los datos de la solicitud
         $request->validate([
@@ -99,7 +99,7 @@ class ComprasController extends Controller
     public function destroy($id_compra)
     {
         // Eliminar la compra
-        $compra = Compras::find($id_compra);
+        $compra = Compra::find($id_compra);
         if (! $compra) {
             return redirect()->back()->with('message', [
                 'type' => 'error',

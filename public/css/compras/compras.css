@@ -8,9 +8,10 @@
 }
 
 .registrar-compras-container {
+    align-items: center;
     border-radius: 10px;
     height: auto;
-    width: 100%;
+    width: auto;
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -37,7 +38,7 @@
         width: 100%;
         padding: 10px;
         border-radius: 10px;
-        background-color: #ffffff;
+        background-color: #f3f3f3;
         color: #000000;
         font-size: 16px;
         margin-bottom: 10px;
@@ -62,11 +63,9 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: #f0f0f0 url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 0.75rem center;
     padding-right: 2rem;
     border-radius: 0.75rem;
-
-    &:focus {
+    & &:focus {
         border: 2px solid #9e12e4;
         box-shadow: 0 0 5px #9e12e4;
         transition: all 0.3s ease-in-out;
@@ -79,8 +78,10 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-.registrar-compras-container button {
-    width: 100%;
+.registrar-compras-container .button_crear_compra {
+    display: block;
+    width: 50%;
+    margin: 0 auto 10px auto;
     border-radius: 10px;
     border: 2px solid transparent;
     outline: none;
@@ -88,7 +89,6 @@ input[type="number"]::-webkit-outer-spin-button {
     color: #ffffff;
     font-size: 16px;
     padding: 10px;
-    margin-bottom: 10px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 
@@ -115,14 +115,12 @@ input[type="number"]::-webkit-outer-spin-button {
     align-items: center;
     justify-content: center;
     z-index: 1000;
-
 }
 
 .container-modal-crear-compras.mostrar {
     opacity: 1;
     visibility: visible;
 }
-
 
 .container-modal-crear-compras .modal {
     width: 100%;
@@ -145,7 +143,11 @@ form {
     width: auto;
     align-items: none;
     justify-content: none;
-    flex-direction: none;}
+    flex-direction: none;
+    & i {
+        padding: 10px;
+    }
+}
 
 .form-eliminar {
     margin: 0;
@@ -159,7 +161,6 @@ form {
     justify-content: left;
     gap: 10px;
     width: 100%;
-
 }
 
 .form-control {
@@ -213,4 +214,8 @@ form {
     display: flex;
     align-items: center;
     text-align: center;
+}
+
+.tabla-compras {
+    width: 100;
 }

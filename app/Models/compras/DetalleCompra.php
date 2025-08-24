@@ -4,7 +4,7 @@ namespace App\Models\compras;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\compras\Compras;
+use App\Models\compras\Compra;
 use App\Models\productos\Producto;
 use App\Models\inventario\Inventario;
 
@@ -26,7 +26,7 @@ class DetalleCompra extends Model
 
     public function compra(): BelongsTo
     {
-        return $this->belongsTo(Compras::class, 'id_compra');
+        return $this->belongsTo(Compra::class, 'id_compra');
     }
 
     public function producto(): BelongsTo

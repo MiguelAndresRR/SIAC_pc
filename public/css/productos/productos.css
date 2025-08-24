@@ -37,7 +37,7 @@
         width: 100%;
         padding: 10px;
         border-radius: 10px;
-        background-color: #ffffff;
+        background-color: #f3f3f3;
         color: #000000;
         font-size: 16px;
         margin-bottom: 10px;
@@ -146,6 +146,9 @@ form {
     align-items: none;
     justify-content: none;
     flex-direction: none;
+    & i{
+        padding: 10px;
+    }
 }
 
 .form-eliminar {

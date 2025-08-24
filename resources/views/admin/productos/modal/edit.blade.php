@@ -5,7 +5,7 @@
             action="{{ route('admin.productos.update', ['producto' => $producto->id_producto ?? 0]) }}">
             @csrf
             @method('PUT')
-            <label for="nombre_producto"><i class="fa-solid fa-cubes"></i>Producto</label>
+            <label for="nombre_producto"><i class="fa-solid fa-cubes" style="color: #8b542f;"></i>Producto</label>
             <input type="text" class="form-control" id="nombre_producto" name="nombre_producto"
                 value="{{ old('nombre_producto') }}" placeholder="Nombre del producto" required><br>
             <label for="precio_producto"><i class="fa-sharp fa-solid fa-coins" style="color: #FFD43B;"></i>Precio del

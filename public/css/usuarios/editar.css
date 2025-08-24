@@ -26,7 +26,7 @@
     & input {
         border: 2px solid transparent;
         outline: none;
-        width: 100%;
+        width: auto;
         padding: 10px;
         border-radius: 10px;
         background-color: #ffffff;
@@ -38,7 +38,6 @@
         &:focus {
             border: 2px solid #9e12e4;
             box-shadow: 0 0 5px #9e12e4;
-
         }
     }
 }
@@ -55,7 +54,9 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: #f0f0f0 url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 0.75rem center;
+    background: #f0f0f0
+        url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')
+        no-repeat right 0.75rem center;
     padding-right: 2rem;
     border-radius: 0.75rem;
 
@@ -132,15 +133,6 @@ form {
 }
 
 .modificar-usuario-container {
-    background-color: white;
-    opacity: none;
-    width: 50%;
-    align-items: none;
-    justify-content: none;
-    flex-direction: none;
-}
-
-.modificar-usuario-container {
     border-radius: 10px;
     height: auto;
     width: 100%;
@@ -180,13 +172,14 @@ form {
         &:focus {
             border: 2px solid #9e12e4;
             box-shadow: 0 0 5px #9e12e4;
-
         }
     }
 }
 
 .modificar-usuario-container button {
-    width: 100%;
+    display: block;
+    width: 50%;
+    margin: 0 auto 10px auto;
     border-radius: 10px;
     border: 2px solid transparent;
     outline: none;
@@ -194,7 +187,6 @@ form {
     color: #ffffff;
     font-size: 16px;
     padding: 10px;
-    margin-bottom: 10px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 
@@ -237,11 +229,15 @@ form {
     z-index: 1;
     opacity: 0.6;
 }
-.modificar-usuario-container{
+.modificar-usuario-container {
     background-color: white;
     opacity: none;
-    width: auto;
+    height: auto;
+    width: 45%;
     align-items: none;
     justify-content: none;
     flex-direction: none;
+    & i {
+        padding: 10px;
+    }
 }

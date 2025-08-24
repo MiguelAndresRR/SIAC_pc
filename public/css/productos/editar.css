@@ -22,14 +22,13 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
-
     & input {
         border: 2px solid transparent;
         outline: none;
         width: 100%;
         padding: 10px;
         border-radius: 10px;
-        background-color: #ffffff;
+        background-color: #f3f3f3;
         color: #000000;
         font-size: 16px;
         width: 100%;
@@ -38,7 +37,6 @@
         &:focus {
             border: 2px solid #9e12e4;
             box-shadow: 0 0 5px #9e12e4;
-
         }
     }
 }
@@ -55,7 +53,9 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: #f0f0f0 url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 0.75rem center;
+    background: #f0f0f0
+        url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')
+        no-repeat right 0.75rem center;
     padding-right: 2rem;
     border-radius: 0.75rem;
 
@@ -137,4 +137,7 @@ form {
     align-items: none;
     justify-content: none;
     flex-direction: none;
+    & i {
+        padding: 10px;
+    }
 }

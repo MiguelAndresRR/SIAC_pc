@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\compras\DetalleCompra;
 use App\Models\productos\Producto;
-use App\Models\compras\Compras;
+use App\Models\compras\Compra;
 
 class DetallesComprasController extends Controller
 {
     // Mostrar lista de detalles de compra filtrados por compra
     public function index(Request $request, $id_compra)
     {
+        $detalleCompras = DetalleCompra::where('id_compra', $id_compra)->get();
+        $total_compra = DetalleCompra::where('id_compra', $id_compra)->sum('subtotal_compra');
+        $compra = Compra::findOrFail($id_compra);
+        $compra->total_compra = $total_compra;
+        $compra->save();
+
         $query = DetalleCompra::query()->where('id_compra', $id_compra);
         // Crear consulta base filtrando por id_compra
         if ($request->filled('productoSelect')) {
@@ -36,14 +42,14 @@ class DetallesComprasController extends Controller
 
         // Obtener lista de productos para selección
         $productos = Producto::with('unidad')->get();
-        $compra = Compras::find($id_compra);
+        $compra = Compra::find($id_compra);
         // Si es petición AJAX, renderizar solo el contenido
         if ($request->ajax()) {
             return view('admin.detallesCompras.layoutdetallesCompras.tabladetallesCompras', compact('detallesCompras', 'id_compra', 'productos', 'compra'))->render();
         }
 
         // Vista completa
-        return view('admin.detallesCompras.index', compact('detallesCompras', 'id_compra', 'productos', 'compra'));
+        return view('admin.detallesCompras.index', compact('detallesCompras', 'id_compra', 'productos', 'compra', 'total_compra'));
     }
 
     // Mostrar un detalle de compra específico en JSON
@@ -67,7 +73,7 @@ class DetallesComprasController extends Controller
     {
         // Obtener lista de productos para el formulario
         $productos = Producto::all();
-        $compra = Compras::find($id_compra);
+        $compra = Compra::find($id_compra);
         return view('admin.detallesCompras.create', compact('productos', 'id_compra', 'compra'));
     }
 
@@ -104,7 +110,6 @@ class DetallesComprasController extends Controller
     {
         $detalle = DetalleCompra::with(['compra', 'producto'])->find($id_detalle_compra);
 
-
         if (!$detalle) {
             return response()->json([
                 'error' => 'Detalle no encontrado'
@@ -124,7 +129,7 @@ class DetallesComprasController extends Controller
     }
 
     // Actualizar un detalle de compra existente
-    public function update(Request $request, DetalleCompra $detalleCompra)
+    public function update(Request $request, DetalleCompra $detalleCompra, Compra $compras)
     {
         // Validar datos
         $request->validate([
@@ -143,6 +148,8 @@ class DetallesComprasController extends Controller
         $detalleCompra->precio_unitario = $request->precio_unitario;
         $detalleCompra->subtotal_compra = $subtotal;
         $detalleCompra->save();
+
+
 
         // Redirigir con mensaje
         return redirect()->route('admin.detallesCompras.index', $detalleCompra->id_compra)->with('message', [

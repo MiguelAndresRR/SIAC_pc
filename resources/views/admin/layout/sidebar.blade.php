@@ -3,10 +3,6 @@
                 <i class="fa-solid fa-house"></i>
                 <span class="span-subtittle">Inicio</span>
             </a>
-            <a onclick="window.location.href='{{ route('admin.dashboard') }}'" class="nav_link">
-                <i class="fa-solid fa-user"></i>
-                <span class="span-subtittle">Perfil</span>
-            </a>
             <a onclick="window.location.href='{{ route('admin.productos.index') }}'" class="nav_link">
                 <i class="fa-solid fa-box"></i>
                 <span class="span-subtittle">Productos</span>
@@ -16,8 +12,12 @@
                 <span class="span-subtittle">Proveedores</span>
             </a>
             <a onclick="window.location.href='{{ route('admin.dashboard') }}'" class="nav_link">
-                <i class="fa-solid fa-paper-plane"></i>
-                <span class="span-subtittle">Reportes</span>
+                <i class="fa-solid fa-receipt"></i>
+                <span class="span-subtittle">Ventas</span>
+            </a>
+            <a onclick="window.location.href='{{ route('admin.dashboard') }}'" class="nav_link">
+                <i class="fa-solid fa-cubes-stacked"></i>
+                <span class="span-subtittle">Inventario</span>
             </a>
             <a onclick="window.location.href='{{ route('admin.compras.index') }}'" class="nav_link">
                 <i class="fa-solid fa-bag-shopping"></i>
@@ -31,6 +31,10 @@
                 <i class="fa-solid fa-hand-holding-heart"></i>
                 <span class="span-subtittle">Clientes</span>
             </a>
+            <a onclick="window.location.href='{{ route('admin.dashboard') }}'" class="nav_link">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span class="span-subtittle">Reportes</span>
+            </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
@@ -39,7 +43,7 @@
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span class="span-subtittle">Cerrar Sesión</span>
             </a>
-            <span class="usuarioLogin">{{ Auth::user()->user}} ({{ Auth::user()->rol->nombre_rol }})</span>
+            <span class="usuarioLogin">{{ Auth::user()->user }} ({{ Auth::user()->rol->nombre_rol }})</span>
 
         </div>
 

@@ -12,13 +12,13 @@
                 value="{{ old('nombre_proveedor') }}" placeholder="Nombre del proveedor" required>
 
             <label for="telefono_proveedor">
-                <i class="fa-solid fa-phone"></i> Teléfono
+                <i class="fa-solid fa-phone"  style="color: #ff0000;"></i> Teléfono
             </label>
             <input type="text" class="form-control" id="telefono_proveedor" name="telefono_proveedor"
                 value="{{ old('telefono_proveedor') }}" placeholder="Teléfono del proveedor" required>
 
             <label for="nit_proveedor">
-                <i class="fa-solid fa-id-card"></i> NIT
+                <i class="fa-solid fa-industry" style="color: #1eff00;"></i> NIT
             </label>
             <input type="text" class="form-control" id="nit_proveedor" name="nit_proveedor"
                 value="{{ old('nit_proveedor') }}" placeholder="NIT del proveedor" required>
@@ -30,7 +30,7 @@
                 value="{{ old('direccion_proveedor') }}" placeholder="Dirección del proveedor" required>
 
             <label for="correo_proveedor">
-                <i class="fa-solid fa-envelope"></i> Correo
+                <i class="fa-solid fa-envelope" style="color: #ffe282;"></i> Correo
             </label>
             <input type="email" class="form-control" id="correo_proveedor" name="correo_proveedor"
                 value="{{ old('correo_proveedor') }}" placeholder="Correo del proveedor" required>
