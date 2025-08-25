@@ -232,12 +232,55 @@ form {
 .modificar-usuario-container {
     background-color: white;
     opacity: none;
-    height: auto;
-    width: 45%;
+    width: 60%;
     align-items: none;
     justify-content: none;
     flex-direction: none;
     & i {
-        padding: 10px;
+        padding: 5px;
     }
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+.datosAcceso{
+    box-shadow: #000000;
+    padding-left: 15px;
+    border-left: 6px solid #9e12e4;
+    border-radius: 25px;
+    width: 50%;
+    & #id_rol-editar,#id_rol {
+        width: 100%;
+    }
+}
+.datosPersonales{
+    width: 50%;
+    & .form-group{
+        width: 100%;
+    }
+}
+.contenedor-doble{
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgb(226, 226, 226);
+        display: flex;
+    justify-content: space-between;
+    gap: 20px;     
 }

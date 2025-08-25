@@ -7,6 +7,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\DetallesComprasController;
+use App\Http\Controllers\ClientesController;
 
 Route::middleware('prevent-back')->group(function () {
     Route::redirect('/', 'login');
@@ -18,6 +19,7 @@ Route::middleware('prevent-back')->group(function () {
         Route::get('detallesCompras', [DetallesComprasController::class, 'index'])->name('admin.detallesCompras.index');
         Route::get('proveedores', [ProveedorController::class, 'index'])->name('admin.proveedores.index');
         Route::get('productos', [ProductoController::class, 'index'])->name('admin.productos.index');
+        Route::get('clientes', [ClientesController::class, 'index'])->name('admin.clientes.index');
     });
 
     Route::middleware('auth')->group(function () {
@@ -140,6 +142,27 @@ Route::middleware('prevent-back')->group(function () {
         Route::delete('admin/detallesCompras/{detalle}', [DetallesComprasController::class, 'destroy'])
             ->name('admin.detallesCompras.destroy');
 
+        //clientes
+        //mostrar lista de clientes
+        Route::get('admin/clientes/index', [ClientesController::class, 'index'])->name('admin.clientes.index');
+
+        // Formulario para crear un nuevo cliente
+        Route::get('admin/clientes/create', [ClientesController::class, 'create'])->name('admin.clientes.create');
+
+        // Guardar nuevo producto (form create)
+        Route::post('admin/clientes/index', [ClientesController::class, 'store'])->name('admin.clientes.store');
+
+        // Mostrar el formulario de edición
+        Route::get('admin/clientes/{cliente}', [ClientesController::class, 'edit'])->name('admin.clientes.edit');
+
+        // Actualizar producto (form edit)  
+        Route::get('admin/clientes/{cliente}', [ClientesController::class, 'show'])->name('admin.clientes.show');
+
+        //Actualiza producto
+        Route::put('admin/clientes/{cliente}', [ClientesController::class, 'update'])->name('admin.clientes.update');
+
+        // Eliminar producto
+        Route::delete('admin/clientes/{cliente}', [ClientesController::class, 'destroy'])->name('admin.clientes.destroy');
 
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });

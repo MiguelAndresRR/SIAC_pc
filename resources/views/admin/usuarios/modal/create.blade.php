@@ -1,33 +1,50 @@
-<div class="container-modal-crear" >
+<div class="container-modal-crear">
     <div class="registrar-usuario-container">
         <h2>Registrar usuario</h2>
         <form action="{{ route('admin.usuarios.store') }}" method="POST" enctype="multipart/form-data"
             id="formularioUsuarios">
             @csrf
             <div class="contenedor-doble">
-                <div class="form-group datosPersonales">
+                <div class="datosPersonales">
                     <h2>Datos Personales</h2>
-                    <label for="nombre_usuario" class="form-label"><i class="fa-solid fa-user"></i> Nombre</label>
-                    <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario"
-                        placeholder="Nombre" maxlength="50" required>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nombre_usuario" class="form-label"><i class="fa-solid fa-user"></i>
+                                Nombre</label>
+                            <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario"
+                                placeholder="Nombre" maxlength="50" required>
+                        </div>
 
-                    <label for="apellido_usuario" class="form-label"><i class="fa-solid fa-user"></i> Apellido</label>
-                    <input type="text" class="form-control" id="apellido_usuario" name="apellido_usuario"
-                        placeholder="Apellido" maxlength="50" required>
-                    <label for="documento_usuario" class="form-label"><i class="fa-solid fa-id-card" required></i>
-                        Documento</label>
-                    <input type="number" class="form-control" id="documento_usuario" name="documento_usuario"
-                        placeholder="Número de documento" required>
+                        <div class="form-group">
+                            <label for="apellido_usuario" class="form-label"><i class="fa-solid fa-user"></i>
+                                Apellido</label>
+                            <input type="text" class="form-control" id="apellido_usuario" name="apellido_usuario"
+                                placeholder="Apellido" maxlength="50" required>
+                        </div>
 
-                    <label for="telefono_usuario" class="form-label"><i class="fa-solid fa-phone"></i> Teléfono</label>
-                    <input type="tel" class="form-control" id="telefono_usuario" name="telefono_usuario"
-                        placeholder="Teléfono" maxlength="10" pattern="[0-9]{7,10}" required>
+                        <div class="form-group">
+                            <label for="documento_usuario" class="form-label"><i class="fa-solid fa-id-card"></i>
+                                Documento</label>
+                            <input type="number" class="form-control" id="documento_usuario" name="documento_usuario"
+                                placeholder="Número de documento" required>
+                        </div>
 
-                    <label for="correo_usuario" class="form-label"><i class="fa-solid fa-envelope"></i> Correo</label>
-                    <input type="email" class="form-control" id="correo_usuario" name="correo_usuario"
-                        placeholder="Correo electrónico" maxlength="50" required>
+                        <div class="form-group">
+                            <label for="telefono_usuario" class="form-label"><i class="fa-solid fa-phone"></i>
+                                Teléfono</label>
+                            <input type="tel" class="form-control" id="telefono_usuario" name="telefono_usuario"
+                                placeholder="Teléfono" maxlength="10" pattern="[0-9]{7,10}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="correo_usuario" class="form-label"><i class="fa-solid fa-envelope"></i>
+                                Correo</label>
+                            <input type="email" class="form-control" id="correo_usuario" name="correo_usuario"
+                                placeholder="Correo electrónico" maxlength="50" required>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group datosAcceso">
+                <div class="datosAcceso">
                     <h2>Datos de Acceso</h2>
                     <label for="user" class="form-label"><i class="fa-solid fa-user"></i> Usuario</label>
                     <input type="text" class="form-control" id="user" name="user" placeholder="Usuario"
@@ -52,8 +69,8 @@
             </div>
             <br>
             <button type="submit" class="btn btn-success">Crear</button>
+                    <button type="close" class="btn btn-secondary" id="ocultar-modal-crear1">Cancelar</button>
         </form>
-        <button type="close" class="btn btn-secondary" id="ocultar-modal-crear1">Cancelar</button>
     </div>
 </div>
 

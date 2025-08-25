@@ -31,8 +31,8 @@ class ClientesController extends Controller
     public function store(Request $request, Cliente $cliente)
     {
         $request->validate([
-            'nombre_cliente' => 'required|string|max:',
-            'apellido_cliente' => 'required|string|max:',
+            'nombre_cliente' => 'required|string|max:50',
+            'apellido_cliente' => 'required|string|max:50',
             'documento_cliente' => 'required|digits_between:6,10',
             'telefono_cliente' => 'required|digits_between:6,10',
             'direccion_cliente' => 'required|string|min:5|max:50',
@@ -53,7 +53,7 @@ class ClientesController extends Controller
                 'text' => 'El cliente ya existe en la base de datos.'
             ]);
         } else {
-            $producto = Cliente::create($request->all());
+            $cliente = Cliente::create($request->all());
             return redirect()->route('admin.clientes.index')->with('message', [
                 'type' => 'success',
                 'text' => 'El cliente se ha creado correctamente.'
@@ -72,12 +72,11 @@ class ClientesController extends Controller
         ]);
     }
 
-
     public function update(Request $request, Cliente $cliente)
     {
         $request->validate([
-            'nombre_cliente' => 'required|string|max:',
-            'apellido_cliente' => 'required|string|max:',
+            'nombre_cliente' => 'required|string|max:50',
+            'apellido_cliente' => 'required|string|max:50',
             'documento_cliente' => 'required|digits_between:6,10',
             'telefono_cliente' => 'required|digits_between:6,10',
             'direccion_cliente' => 'required|string|min:5|max:50',
@@ -90,6 +89,7 @@ class ClientesController extends Controller
             ->where('documento_cliente', $request->documento_cliente)
             ->where('telefono_cliente', $request->telefono_cliente)
             ->where('correo_cliente', $request->correo_cliente)
+            ->where('id_cliente', '!=', $cliente->id_cliente)
             ->first();
 
         if ($existingCliente) {
@@ -103,7 +103,7 @@ class ClientesController extends Controller
             $cliente->documento_cliente = $request->documento_cliente;
             $cliente->telefono_cliente = $request->telefono_cliente;
             $cliente->direccion_cliente = $request->direccion_cliente;
-            $cliente->corre_cliente = $request->corre_cliente;
+            $cliente->correo_cliente = $request->correo_cliente;
             $cliente->save();
             return redirect()->route('admin.clientes.index')->with('message', [
                 'type' => 'success',

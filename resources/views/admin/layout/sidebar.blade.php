@@ -27,7 +27,7 @@
                 <i class="fa-solid fa-users"></i>
                 <span class="span-subtittle">Usuarios</span>
             </a>
-            <a onclick="window.location.href='{{ route('admin.dashboard') }}'" class="nav_link">
+            <a onclick="window.location.href='{{ route('admin.clientes.index') }}'" class="nav_link">
                 <i class="fa-solid fa-hand-holding-heart"></i>
                 <span class="span-subtittle">Clientes</span>
             </a>

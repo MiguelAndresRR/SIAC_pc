@@ -1,4 +1,4 @@
-.content-usuarios {
+.content-clientes {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,7 @@
     overflow-y: auto;
 }
 
-.registrar-usuario-container {
+.registrar-clientes-container {
     border-radius: 10px;
     height: auto;
     width: 100%;
@@ -19,14 +19,14 @@
     margin-bottom: 20px;
 }
 
-.registrar-usuario-container h2 {
+.registrar-clientes-container h2 {
     place-items: left;
     justify-items: left;
     padding: 4px;
     margin-bottom: 20px;
 }
 
-.registrar-usuario-container form {
+.registrar-clientes-container form {
     display: flex;
     flex-direction: column;
     gap: 3px;
@@ -34,10 +34,10 @@
     & input {
         border: 2px solid transparent;
         outline: none;
-        width: 100%;
+        width: auto;
         padding: 10px;
         border-radius: 10px;
-        background-color: #ffffff;
+        background-color: #f3f3f3;
         color: #000000;
         font-size: 16px;
         margin-bottom: 10px;
@@ -56,7 +56,7 @@
     width: 100%;
     padding: 10px;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: #f3f3f3;
     color: #000000;
     font-size: 16px;
     appearance: none;
@@ -81,7 +81,7 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-.registrar-usuario-container button {
+.registrar-clientes-container button {
     display: block;
     width: 50%;
     margin: 0 auto 10px auto;
@@ -104,7 +104,7 @@ input[type="number"]::-webkit-outer-spin-button {
     }
 }
 
-.container-modal-crear {
+.container-modal-crear-clientes {
     position: fixed;
     top: 0;
     left: 0;
@@ -120,16 +120,16 @@ input[type="number"]::-webkit-outer-spin-button {
     z-index: 1000;
 }
 
-.container-modal-crear.mostrar {
+.container-modal-crear-clientes.mostrar {
     opacity: 1;
     visibility: visible;
 }
 
-.container-modal-crear .modal {
+.container-modal-crear-clientes .modal {
     width: 100%;
     display: flex;
     margin: 0 500px;
-    padding: 20px;
+    padding: 50px;
     background-color: #000000;
     z-index: 1;
     opacity: 0.6;
@@ -140,10 +140,10 @@ form {
     display: flex;
 }
 
-.registrar-usuario-container {
+.registrar-clientes-container {
     background-color: white;
     opacity: none;
-    width: 60%;
+    width: 45%;
     align-items: none;
     justify-content: none;
     flex-direction: none;
@@ -167,6 +167,7 @@ form {
 }
 
 .form-control {
+    width: auto;
     display: flex;
     align-items: center;
     gap: 3px;
@@ -188,31 +189,6 @@ form {
         box-shadow: 0 0 5px #9e12e4;
     }
 }
-
-#limpiar-filtros-usuarios {
-    padding: 10px;
-    border-radius: 10px;
-    border: 2px solid transparent;
-    outline: none;
-    background-color: #000000;
-    color: #ffffff;
-    font-size: 16px;
-    justify-content: center;
-    width: 500px;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    position: relative;
-    z-index: 10;
-
-    &:hover {
-        background-color: #f48637 !important;
-        border-radius: 10px;
-        color: #000000 !important;
-        transform: scale(1.05);
-        border: 2px solid #e47012;
-    }
-}
-
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -233,20 +209,27 @@ form {
     border-radius: 6px;
     border: 1px solid #ccc;
 }
-.datosAcceso{
-    width: 50%;
-    & #id_rol-editar,#id_rol {
-        width: 50%;
+
+#limpiar-filtros-clientes {
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    outline: none;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 16px;
+    justify-content: center;
+    width: 20%;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+
+    &:hover {
+        background-color: #f48637 !important;
+        border-radius: 10px;
+        color: #000000 !important;
+        transform: scale(1.05);
+        border: 2px solid #e47012;
     }
-}
-.datosPersonales{
-    width: 50%;
-    & .form-group{
-        width: 100%;
-    }
-}
-.contenedor-doble{
-        display: flex;
-    justify-content: space-between;
-    gap: 20px;     
 }
