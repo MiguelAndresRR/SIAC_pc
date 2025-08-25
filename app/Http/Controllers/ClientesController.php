@@ -10,16 +10,19 @@ class ClientesController extends Controller
     public function index(Request $request)
     {
         $query = Cliente::query();
-        // if ($request->filled('buscar_productos') && strlen(trim($request->buscar_productos)) >= 3) {
-        //     $palabras = explode(' ', $request->buscar_productos);
+        if ($request->filled('buscar_nombre_cliente') && strlen(trim($request->buscar_nombre_cliente)) >= 3) {
+            $termino_busqueda = trim($request->buscar_nombre_cliente);
 
-        //     $query->where(function ($q) use ($palabras) {
-        //         foreach ($palabras as $palabra) {
-        //             $q->where('nombre_producto', 'like', '%' . $palabra . '%');
-        //         }
-        //     });
-        // }
+            $query->where(function ($q) use ($termino_busqueda) {
+                $q->where('nombre_cliente', 'like', '%' . $termino_busqueda . '%')
+                    ->orWhere('apellido_cliente', 'like', '%' . $termino_busqueda . '%');
+            });
+        }
+        if ($request->filled('buscar_documento_cliente')) {
+            $documento = preg_replace('/\D/', '', $request->buscar_documento_cliente);
 
+            $query->where('documento_cliente', 'like', $documento . '%');
+        }
         $porPagina = $request->input('PorPagina', 10); // 10 por defecto
         $clientes = $query->paginate($porPagina);
         if ($request->ajax()) {

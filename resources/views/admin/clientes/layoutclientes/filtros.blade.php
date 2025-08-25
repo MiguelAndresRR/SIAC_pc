@@ -2,10 +2,10 @@
     @csrf
     <div class="filtros">
 
-        <input type="text" id="buscar_proveedores_nombre" name="buscar_proveedor" class="form-control"
-            placeholder="Buscar proveedor...">
-        <input type="text" id="buscar_proveedores_nit" name="nit_proveedor" class="form-control"
-            placeholder="Buscar NIT...">
+        <input type="text" id="buscar_nombre_cliente" name="buscar_nombre_cliente" class="form-control"
+            placeholder="Buscar nombre cliente">
+        <input type="text" id="buscar_documento_cliente" name="buscar_documento_cliente" class="form-control"
+            placeholder="Buscar documento...">
         <select name="entries" id="entries" class="form-control">
             <option disabled selected>Selecciona datos a mostrar</option>
             <option value="15" {{ request('PorPagina') == 15 ? 'selected' : '' }}>15</option>

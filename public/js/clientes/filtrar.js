@@ -43,27 +43,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("change", filtro);
 
-    // const nombreInput = document.getElementById("nombre_usuario-buscar");
-    // const documentoInput = document.getElementById("documento_usuario-buscar");
+    const nombreInput = document.getElementById("buscar_nombre_cliente");
+    const documentoInput = document.getElementById("buscar_documento_cliente");
     const limpiarBtn = document.getElementById("limpiar-filtros-clientes");
 
-    // console.log("Nombre input encontrado:", nombreInput);
-    // console.log("Documento input encontrado:", documentoInput);
+    console.log("Nombre input encontrado:", nombreInput);
+    console.log("Documento input encontrado:", documentoInput);
     console.log("Limpiar botón encontrado:", limpiarBtn);
 
-    // if (nombreInput) {
-    //     nombreInput.addEventListener("input", () => {
-    //         clearTimeout(window.searchTimer);
-    //         window.searchTimer = setTimeout(filtro, 50);
-    //     });
-    // }
+    if (nombreInput) {
+        nombreInput.addEventListener("input", () => {
+            clearTimeout(window.searchTimer);
+            window.searchTimer = setTimeout(filtro, 300);
+        });
+    }
 
-    // if (documentoInput) {
-    //     documentoInput.addEventListener("input", () => {
-    //         clearTimeout(window.searchTimer);
-    //         window.searchTimer = setTimeout(filtro, 50);
-    //     });
-    // }
+    if (documentoInput) {
+        documentoInput.addEventListener("input", () => {
+            clearTimeout(window.searchTimer);
+            window.searchTimer = setTimeout(filtro, 300);
+        });
+    }
 
     if (limpiarBtn) {
         console.log("Agregando evento click al botón limpiar");
