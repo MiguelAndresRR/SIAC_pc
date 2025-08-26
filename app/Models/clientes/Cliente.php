@@ -2,7 +2,7 @@
 
 namespace App\Models\clientes;
 
-use app\Models\ventas\DetalleVenta;
+use app\Models\ventas\Venta;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,7 +26,7 @@ class Cliente extends Model
         'direccion_cliente',
         'correo_cliente'
     ];
-    public function detallesVentas(): hasMany{
-        return $this->hasMany(DetalleVenta::class, 'id_cliente');
+    public function venta(): hasMany{
+        return $this->hasMany(Venta::class, 'id_cliente');
     }
 }

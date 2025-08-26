@@ -14,14 +14,14 @@
     <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="{{ asset('css/compras/compras.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ventas/ventas.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="{{ asset('css/compras/editar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/compras/tabla.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/compras/paginacion.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ventas/editar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ventas/tabla.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ventas/paginacion.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/compras/mostrar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/compras/inputSearch.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ventas/mostrar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ventas/inputSearch.css') }}">
 
 
     
@@ -49,16 +49,16 @@
         @endif
     </div>
     @include('admin.layout.sidebar')
-    <div class="content-compras">
+    <div class="content-ventas">
         <div class="header">
-            <h1><i class="fa-solid fa-bag-shopping"></i>Compras</h1>
+            <h1><i class="fa-solid fa-bag-shopping"></i>Ventas</h1>
         </div>
-        @include('admin.compras.layoutcompras.filtros')
-        <div id="tabla-compras">
-            @include('admin.compras.layoutcompras.tablacompras')
+        @include('admin.ventas.layoutventas.filtros')
+        <div id="tabla-ventas">
+            @include('admin.ventas.layoutventas.tablaventas')
         </div>
     </div>
-    @include('admin.compras.modal.edit')
-    @include('admin.compras.modal.create')
+    @include('admin.ventas.modal.edit')
+    @include('admin.ventas.modal.create')
 </body>
 </html>

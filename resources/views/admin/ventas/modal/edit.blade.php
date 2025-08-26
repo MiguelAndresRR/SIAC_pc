@@ -1,29 +1,41 @@
-<div class="container-modal-editar-compras">
-    <div class="modificar-compras-container">
-        <h2>Modificar Compra</h2>
-        <form id="form_editar-compras" method="POST" enctype="multipart/form-data" action="">
+<div class="container-modal-editar-ventas">
+    <div class="modificar-ventas-container">
+        <h2>Modificar Venta</h2>
+        <form method="POST" id="form_editar-ventas">
             @csrf
             @method('PUT')
-            <label for="user"><i class="fa-solid fa-cubes" style="color: #8b542f;"></i>Usuario</label>
-            <input type="text" class="form-control" id="user" name="user"
-                value="" readonly ><br>
-            <label for="fecha_compra"><i class="fa-regular fa-calendar-days"></i>Fecha de compra:</label>
-            <input type="date" class="form-control" id="fecha_compra" name="fecha_compra"
-                value="{{ date('Y-m-d') }}" required><br>
-            <label for="id_proveedor"><i class="fa-solid fa-truck"></i>Proveedor</label>
-            <select name="id_proveedor" id="id_proveedor" class="form-control" required>
-                <option value="" disabled selected>Selecciona proveedor</option>
-                @foreach ($proveedores as $proveedor)
-                    <option value="{{ $proveedor->id_proveedor }}">
-                        {{ $proveedor->nombre_proveedor }}
+            <label for="id_cliente-editar"><i class="fa-solid fa-hand-holding-heart"></i> Cliente</label>
+            <select id="id_cliente-editar" name="id_cliente" required>
+                <option value="">Buscar Cliente</option>
+                @foreach ($clientes as $cliente)
+                    <option value="{{ $cliente->id_cliente }}">
+                        {{ $cliente->nombre_cliente }}-
+                        {{ $cliente->documento_cliente }}
                     </option>
                 @endforeach
             </select><br>
-            <button type="submit">Guardar</button>
-            <p class="error" id="errorMessage"></p>
+            <label for="id_usuario"><i class="fa-solid fa-cubes" style="color: #8b542f;"></i>Usuario</label>
+            <input type="text" class="form-control" id="user" name="id_usuario" value="" readonly><br>
+            <label for="fecha_venta"><i class="fa-regular fa-calendar-days"></i>Fecha de compra:</label>
+            <input type="date" class="form-control" id="fecha_venta" name="fecha_venta" value="{{ date('Y-m-d') }}"
+                required><br>
+            <button type="submit">Actualizar</button>
+            <button type="submit" class="btn" id="ocultar-modal-editar-ventas">Salir</button>
         </form>
-        <button type="submit" class="btn" id="ocultar-modal-editar-compras">Salir</button>
     </div>
 </div>
 
-<script src="{{ asset('js/compras/editar.js') }}"></script>
+<script src="{{ asset('js/ventas/editar.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        clienteSelect = new TomSelect('#id_cliente-editar', {
+            placeholder: 'Buscar Cliente',
+            plugins: ['remove_button'],
+            maxItems: 1,
+            allowEmptyOption: true,
+            create: false,
+            dropdownClass: 'ts-dropdown',
+            controlInput: '<input>',
+        });
+    });
+</script>

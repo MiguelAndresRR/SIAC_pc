@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="telefono_cliente-editar"><i class="fa-solid fa-phone"></i> Teléfono</label>
+                    <label for="telefono_cliente-editar"><i class="fa-solid fa-phone"  style="color: #ff0000;"></i> Teléfono</label>
                     <input type="text" value="{{ old('telefono_cliente') }}" id="telefono_cliente-editar" name="telefono_cliente" required>
                 </div>
 
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="correo_cliente-editar"><i class="fa-solid fa-envelope"></i> Correo</label>
+                    <label for="correo_cliente-editar"><i class="fa-solid fa-envelope" style="color: #ffe282;"></i> Correo</label>
                     <input type="email"  value="{{ old('correo_cliente') }}" id="correo_cliente-editar" name="correo_cliente" required>
                 </div>
             </div>

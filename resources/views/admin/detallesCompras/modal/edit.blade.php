@@ -20,7 +20,7 @@
             <label for="precio_unitario"><i class="fa-solid fa-dollar-sign" style="color: #006b05;"></i>Precio Unidad</label>
             <input type="number" class="form-control" id="precio_unitario_edit" name="precio_unitario"
                 value="{{ old('precio_unitario') }}" placeholder="Precio unitario producto..." required><br>
-            <button type="submit">Crear</button>
+            <button type="submit">Actualizar</button>
         </form>
         <button type="submit" class="btn" id="ocultar-modal-editar-detallesCompras">Salir</button>
     </div>

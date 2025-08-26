@@ -1,5 +1,5 @@
 /* Fondo del modal: ocupa toda la pantalla, centro contenido, oculto por defecto */
-.container-modal-show-compras {
+.container-modal-show-ventas {
     position: fixed;
     top: 0;
     left: 0;
@@ -16,13 +16,13 @@
 }
 
 /* Cuando se muestra, se activa visibilidad y se permite interacción */
-.container-modal-show-compras.mostrar {
+.container-modal-show-ventas.mostrar {
     opacity: 1;
     visibility: visible;
 }
 
 /* Contenedor interno del modal */
-.container-modal-show-compras .modal {
+.container-modal-show-ventas .modal {
     background-color: white;
     border-radius: 10px;
     padding: 30px;
@@ -31,12 +31,12 @@
     font-family: Arial, sans-serif;
 }
 
-.container-modal-show-compras h2 {
+.container-modal-show-ventas h2 {
     margin-bottom: 20px;
     color: #000;
 }
 
-.container-modal-show-compras input {
+.container-modal-show-ventas input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -47,7 +47,7 @@
     background-color: #f9f9f9;
 }
 
-.container-modal-show-compras button#ocultar-modal-show-compras {
+.container-modal-show-ventas button#ocultar-modal-show-ventas {
     width: 100%;
     border-radius: 10px;
     background-color: #000000;
@@ -60,7 +60,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-.container-modal-show-compras button#ocultar-modal-show-compras:hover {
+.container-modal-show-ventas button#ocultar-modal-show-ventas:hover {
     background-color: #ffffff;
     border-radius: 10px;
     color: #000000; 
@@ -68,6 +68,16 @@
     border: 2px solid #9e12e4;
 }
 
-#fechaInicio, #fechaFin {
-    width: auto;
+.filtros .ts-control{
+    width: 100%;
+    
+}
+.filtros * {
+    width: 100%;
+    &.inputdate{
+        width: 25%;
+    }
+}
+#fechaFin,#fechaInicio{
+    width: 25%;
 }

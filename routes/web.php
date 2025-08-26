@@ -8,6 +8,7 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\DetallesComprasController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\VentasController;
 
 Route::middleware('prevent-back')->group(function () {
     Route::redirect('/', 'login');
@@ -20,6 +21,7 @@ Route::middleware('prevent-back')->group(function () {
         Route::get('proveedores', [ProveedorController::class, 'index'])->name('admin.proveedores.index');
         Route::get('productos', [ProductoController::class, 'index'])->name('admin.productos.index');
         Route::get('clientes', [ClientesController::class, 'index'])->name('admin.clientes.index');
+        Route::get('ventas', [ClientesController::class, 'index'])->name('admin.ventas.index');
     });
 
     Route::middleware('auth')->group(function () {
@@ -163,6 +165,27 @@ Route::middleware('prevent-back')->group(function () {
 
         // Eliminar producto
         Route::delete('admin/clientes/{cliente}', [ClientesController::class, 'destroy'])->name('admin.clientes.destroy');
+
+        //ventas
+        Route::get('admin/ventas/index', [VentasController::class, 'index'])->name('admin.ventas.index');
+
+        //Formulario para crear una nueva compras
+        Route::get('admin/ventas/create', [VentasController::class, 'create'])->name('admin.ventas.create');
+
+        //Guardar nueva compra (form create)
+        Route::post('admin/ventas/index', [VentasController::class, 'store'])->name('admin.ventas.store');
+
+        //Mostrar el formulario de edición
+        Route::get('admin/ventas/index/{venta}', [VentasController::class, 'edit'])->name('admin.ventas.edit');
+
+        //Mostrar compras
+        Route::get('admin/ventas/{venta}', [VentasController::class, 'show'])->name('admin.ventas.show');
+
+        //Actualizar compra (form edit)
+        Route::put('admin/ventas/{venta}', [VentasController::class, 'update'])->name('admin.ventas.update');
+
+        //Eliminar compra
+        Route::delete('admin/ventas/{venta}', [VentasController::class, 'destroy'])->name('admin.ventas.destroy');
 
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });

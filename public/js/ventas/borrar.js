@@ -2,7 +2,7 @@ document.addEventListener("click", function (e) {
     const btn = e.target.closest(".borrar-boton");
     if (!btn) return;
 
-    const id_compra = btn.dataset.id_compra;
+    const id_venta = btn.dataset.id_venta;
 
     Swal.fire({
         title: "¿Estás seguro?",
@@ -18,7 +18,7 @@ document.addEventListener("click", function (e) {
         buttonsStyling: false
     }).then((result) => {
         if (result.isConfirmed) {
-            document.getElementById("formEliminar" + id_compra).submit();
+            document.getElementById("formEliminar" + id_venta).submit();
         }
     });
 });

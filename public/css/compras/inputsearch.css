@@ -1,5 +1,7 @@
 /* Campo de selección principal */
 .ts-control {
+    width: 100% !important;
+    background-color: #f3f3f3;
     padding: 10px;
     border-radius: 10px;
     border: 2px solid transparent;
@@ -9,6 +11,9 @@
     display: flex;
     align-items: center;
     transition: all 0.3s ease-in-out;
+    & #proveedorSelect{
+            background-color: #ffffff !important;
+    }
 }
 .ts-wrapper:not(.dropdown-active) .ts-dropdown {
     display: none;
@@ -29,7 +34,7 @@
 
 /* Dropdown de opciones */
 .ts-dropdown {
-    width: 450px;
+    width: 100%;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 21);
     border: 2px solid transparent;
@@ -51,19 +56,17 @@
 
 .ts-dropdown .option:hover {
     background-color: #9e12e4;
-    color : #ffffff;
+    color: #ffffff;
     border-radius: 10px;
     font-weight: bold;
-    
 }
-
 
 /* Opción seleccionada */
 .ts-dropdown .selected {
+    width: auto;
     background-color: #9e12e4;
     border-radius: 10px;
     font-weight: bold;
-        width: 450px;
 }
 
 /* Placeholder */
@@ -73,7 +76,7 @@
 
 /* A veces el fondo está en el contenedor principal */
 .ts-wrapper {
-  background: none !important;
+    background: none !important;
 }
 .ts-wrapper.form-control {
     outline: none !important;
@@ -85,16 +88,15 @@
     outline: none !important;
     box-shadow: none !important;
 }
-#productoSelect1{
+#productoSelect1 {
     background-color: white;
     width: 440px;
     border-radius: 10px;
     outline: none;
     color: #000000;
     font-size: 16px;
-    margin-right: 10PX;
+    margin-right: 10px;
     display: flex;
     align-items: center;
     transition: all 0.3s ease-in-out;
 }
-

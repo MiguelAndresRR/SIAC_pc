@@ -1,6 +1,5 @@
 /* Campo de selección principal */
 .ts-control {
-
     padding: 10px;
     border-radius: 10px;
     border: 2px solid transparent;
@@ -30,7 +29,7 @@
 
 /* Dropdown de opciones */
 .ts-dropdown {
-    width: auto;
+    width: 100%;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 21);
     border: 2px solid transparent;
@@ -41,7 +40,6 @@
 
 /* Opciones individuales */
 .ts-dropdown .option {
-
     padding: 10px;
     font-size: 16px;
     color: #000000;
@@ -60,11 +58,10 @@
 
 /* Opción seleccionada */
 .ts-dropdown .selected {
-    
+    width: 100%;
     background-color: #9e12e4;
     border-radius: 10px;
     font-weight: bold;
-    width: 450px;
 }
 
 /* Placeholder */

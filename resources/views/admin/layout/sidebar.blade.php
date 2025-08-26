@@ -11,7 +11,7 @@
                 <i class="fa-solid fa-truck"></i>
                 <span class="span-subtittle">Proveedores</span>
             </a>
-            <a onclick="window.location.href='{{ route('admin.dashboard') }}'" class="nav_link">
+            <a onclick="window.location.href='{{ route('admin.ventas.index') }}'" class="nav_link">
                 <i class="fa-solid fa-receipt"></i>
                 <span class="span-subtittle">Ventas</span>
             </a>

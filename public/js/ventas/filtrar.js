@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("filtro-form-compras");
+    const form = document.getElementById("filtro-form-ventas");
     console.log("Form encontrado:", form);
 
     if (!form) {
-        console.error("No se encontró el formulario filtro-form-compras");
+        console.error("No se encontró el formulario filtro-form-ventas");
         return;
     }
 
@@ -12,14 +12,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData(form);
         const params = new URLSearchParams(formData).toString();
 
-        fetch(`/admin/compras/index?${params}`, {
+        fetch(`/admin/ventas/index?${params}`, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },
         })
             .then((res) => res.text())
             .then((html) => {
-                document.getElementById("tabla-compras").innerHTML = html;
+                document.getElementById("tabla-ventas").innerHTML = html;
 
                 if (typeof window.asignarEventosBotones === "function") {
                     console.log("Reasignando eventos a .btn-agregar");
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("change", filtro);
 
-    const limpiarBtn = document.getElementById("limpiar-filtros-compras");
+    const limpiarBtn = document.getElementById("limpiar-filtros-ventas");
 
     console.log("Limpiar botón encontrado:", limpiarBtn);
 
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
             filtro();
         });
     } else {
-        console.error("No se encontró el botón limpiar-filtros-compras");
+        console.error("No se encontró el botón limpiar-filtros-ventas");
     }
 
 
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
             })
                 .then((res) => res.text())
                 .then((html) => {
-                    document.getElementById("tabla-compras").innerHTML = html;
+                    document.getElementById("tabla-ventas").innerHTML = html;
                     if (typeof window.asignarEventosBotones === "function") {
                         window.asignarEventosBotones();
                     }
