@@ -1,4 +1,4 @@
-<div class="container-detallesCompras-class">
+<div class="container-detallesVentas-class">
     <table class="tableFixHead">
         <thead>
             <tr>
@@ -7,30 +7,30 @@
                 <th>Precio Unidad</th>
                 <th>Total</th>
                 <th>
-                    <button type="submit" class="btn" id='crear-modal-detallesCompras'>
+                    <button type="submit" class="btn" id='crear-modal-detallesVentas'>
                         <i class="fa-solid fa-plus"></i>
                     </button>
                 </th>
             </tr>
         </thead>
-        <tbody id="container-detallesCompras-table">
-            @foreach ($detallesCompras as $detalles)
+        <tbody id="container-detallesVentas-table">
+            @foreach ($detallesVentas as $detalles)
                 <tr>
-                    <td>{{ $detalles->producto->nombre_producto }}</td>
-                    <td>{{ $detalles->cantidad_producto }}</td>
-                    <td>{{ $detalles->precio_unitario }}</td>
-                    <td>{{ $detalles->subtotal_compra }}</td>
+                    <td>{{ $detalles->producto->nombre_producto}} - {{ $detalles->producto->categoria->categoria }}</td>
+                    <td>{{ $detalles->cantidad_venta}}</td>
+                    <td>{{ $detalles->precio_unitario_venta}}</td>
+                    <td>{{ $detalles->subtotal_venta}}</td>
                     <td id="botones">
-                        <button type="button" class="btn-editar"  data-id_compra="{{ $id_compra }}" data-id_detalle_compra="{{ $detalles->id_detalle_compra }}">
+                        <button type="button" class="btn-agregar"  data-id_venta="{{ $id_venta }}" data-id_detalle_venta="{{ $detalles->id_detalle_venta }}">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                         <button type="button" class="borrar-boton btn btn-danger"
-                            data-id_detalle_compra="{{ $detalles->id_detalle_compra }}">
+                            data-id_detalle_venta="{{ $detalles->id_detalle_venta }}">
                             <i class="fa-solid fa-trash"></i>
                         </button>
-                        @if ($detalles->id_detalle_compra)
-                            <form id="formEliminar{{ $detalles->id_detalle_compra }}" method="POST"
-                                action="{{ route('admin.detallesCompras.destroy', $detalles->id_detalle_compra) }}" style="display: none;">
+                        @if ($detalles->id_detalle_venta)
+                            <form id="formEliminar{{ $detalles->id_detalle_venta }}" method="POST"
+                                action="{{ route('admin.detallesVentas.destroy', $detalles->id_detalle_venta) }}" style="display: none;">
                                 @csrf
                                 @method('DELETE')
                             </form>
@@ -42,6 +42,6 @@
     </table>
 </div>
 <div class="paginacion">
-    @include('admin.detallesCompras.layoutdetallesCompras.paginacion')
+    @include('admin.detallesVentas.layoutdetallesVentas.paginacion')
 </div>
-<script src="{{ asset('js/detallesCompras/borrar.js') }}"></script>
+<script src="{{ asset('js/detallesVentas/borrar.js') }}"></script>

@@ -56,14 +56,15 @@ class DetallesComprasController extends Controller
     public function show(DetalleCompra $detalleCompra)
     {
         return response()->json([
-            'id_detalle_compra' => $detalleCompra->id_detalle_compra,
-            'id_compra' => $detalleCompra->id_compra,
-            'compra' => $detalleCompra->compra ? $detalleCompra->compra->id_compra : 'sin compra',
-            'id_producto' => $detalleCompra->id_producto,
-            'producto' => $detalleCompra->producto ? $detalleCompra->producto->nombre_producto : 'sin producto',
-            'cantidad_producto' => $detalleCompra->cantidad_producto,
-            'precio_unitario' => $detalleCompra->precio_unitario,
-            'subtotal_compra' => $detalleCompra->subtotal_compra
+            'id_detalle_compra'         => $detalleCompra->id_detalle_compra,
+            'id_compra'                 => $detalleCompra->id_compra,
+            'compra'                    => $detalleCompra->compra ? $detalleCompra->compra->id_compra : 'sin compra',
+            'id_producto'               => $detalleCompra->id_producto,
+            'producto'                  => $detalleCompra->producto ? $detalleCompra->producto->nombre_producto : 'sin producto',
+            'cantidad_producto'         => $detalleCompra->cantidad_producto,
+            'precio_unitario'           => $detalleCompra->precio_unitario,
+            'subtotal_compra'           => $detalleCompra->subtotal_compra,
+            'fecha_vencimiento'         => $detalleCompra->fecha_vencimiento
         ]);
     }
 
@@ -82,10 +83,11 @@ class DetallesComprasController extends Controller
     {
         // Validar datos recibidos
         $request->validate([
-            'id_compra' => 'required|exists:compra,id_compra',
-            'id_producto' => 'required|exists:producto,id_producto',
-            'cantidad_producto' => 'required|integer|min:1',
-            'precio_unitario' => 'required|numeric|min:0'
+            'id_compra'             => 'required|exists:compra,id_compra',
+            'id_producto'           => 'required|exists:producto,id_producto',
+            'cantidad_producto'     => 'required|integer|min:1',
+            'precio_unitario'       => 'required|numeric|min:0',
+            'fecha_vencimiento'     => 'nullable|date'
         ]);
 
         // Calcular subtotal
@@ -93,11 +95,12 @@ class DetallesComprasController extends Controller
 
         // Crear registro
         $detalleCompra = DetalleCompra::create([
-            'id_compra' => $request->id_compra,
-            'id_producto' => $request->id_producto,
-            'cantidad_producto' => $request->cantidad_producto,
-            'precio_unitario' => $request->precio_unitario,
-            'subtotal_compra' => $subtotal_compra
+            'id_compra'             => $request->id_compra,
+            'id_producto'           => $request->id_producto,
+            'cantidad_producto'     => $request->cantidad_producto,
+            'precio_unitario'       => $request->precio_unitario,
+            'subtotal_compra'       => $subtotal_compra,
+            'fecha_vencimiento'     => $request->fecha_vencimiento
         ]);
 
         // Redirigir con mensaje de éxito
@@ -125,6 +128,7 @@ class DetallesComprasController extends Controller
             'subtotal_compra'   => $detalle->subtotal_compra,
             'producto'          => $detalle->producto->nombre_producto ?? 'Sin producto',
             'compra'            => $detalle->compra->id_compra ?? 'Sin compra',
+            'fecha_vencimiento' => $detalle->fecha_vencimiento ?? 'Sin fecha'
         ]);
     }
 
@@ -133,20 +137,22 @@ class DetallesComprasController extends Controller
     {
         // Validar datos
         $request->validate([
-            'id_compra' => 'required|exists:compra,id_compra',
-            'id_producto' => 'required|exists:producto,id_producto',
+            'id_compra'         => 'required|exists:compra,id_compra',
+            'id_producto'       => 'required|exists:producto,id_producto',
             'cantidad_producto' => 'required|integer|min:1',
-            'precio_unitario' => 'required|numeric|min:0'
+            'precio_unitario'   => 'required|numeric|min:0',
+            'fecha_vencimiento' => 'nullable|date'
         ]);
         // Calcular subtotal
         $subtotal = $request->cantidad_producto * $request->precio_unitario;
 
         // Actualizar campos
-        $detalleCompra->id_compra = $request->id_compra;
-        $detalleCompra->id_producto = $request->id_producto;
-        $detalleCompra->cantidad_producto = $request->cantidad_producto;
-        $detalleCompra->precio_unitario = $request->precio_unitario;
-        $detalleCompra->subtotal_compra = $subtotal;
+        $detalleCompra->id_compra           = $request->id_compra;
+        $detalleCompra->id_producto         = $request->id_producto;
+        $detalleCompra->cantidad_producto   = $request->cantidad_producto;
+        $detalleCompra->precio_unitario     = $request->precio_unitario;
+        $detalleCompra->subtotal_compra     = $subtotal;
+        $detalleCompra->fecha_vencimiento   = $request->fecha_vencimiento;
         $detalleCompra->save();
 
 

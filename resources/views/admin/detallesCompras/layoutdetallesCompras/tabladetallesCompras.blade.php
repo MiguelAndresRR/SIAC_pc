@@ -6,6 +6,7 @@
                 <th>Cantidad</th>
                 <th>Precio Unidad</th>
                 <th>Total</th>
+                <th> Vencimiento </th>
                 <th>
                     <button type="submit" class="btn" id='crear-modal-detallesCompras'>
                         <i class="fa-solid fa-plus"></i>
@@ -20,6 +21,7 @@
                     <td>{{ $detalles->cantidad_producto }}</td>
                     <td>{{ $detalles->precio_unitario }}</td>
                     <td>{{ $detalles->subtotal_compra }}</td>
+                    <td>{{ $detalles->fecha_vencimiento ?? 'sin fecha'}}</td>
                     <td id="botones">
                         <button type="button" class="btn-editar"  data-id_compra="{{ $id_compra }}" data-id_detalle_compra="{{ $detalles->id_detalle_compra }}">
                             <i class="fa-solid fa-pen-to-square"></i>

@@ -10,14 +10,20 @@
                 @foreach ($productos as $producto)
                     <option value="{{ $producto->id_producto }}">
                         {{ $producto->nombre_producto }} -
-                        {{ $producto->unidad->unidad_peso?? 'Sin unidad' }}
+                        {{ $producto->unidad->unidad_peso ?? 'Sin unidad' }}
                     </option>
                 @endforeach
             </select><br>
-            <label for="cantidad_producto"><i class="fa-solid fa-box-open" style="color: #f86300a9;"></i></i>Cantidad</label>
+            <label for="cantidad_producto"><i class="fa-solid fa-box-open"
+                    style="color: #f86300a9;"></i></i>Cantidad</label>
             <input type="number" class="form-control" id="cantidad" name="cantidad_producto"
                 value="{{ old('cantidad_producto') }}" placeholder="cantidad comprada" required><br>
-            <label for="precio_unitario"><i class="fa-solid fa-dollar-sign" style="color: #006b05;"></i>Precio Unidad</label>
+            <label for="fecha_vencimiento"><i class="fa-solid fa-calendar-days" style="color: #0051f4;"></i>Fecha
+                Vencimiento</label>
+            <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento"
+                value="{{ old('fecha_vencimiento') }}" placeholder="Fecha de vencimiento"><br>
+            <label for="precio_unitario"><i class="fa-solid fa-dollar-sign" style="color: #006b05;"></i>Precio
+                Unidad</label>
             <input type="number" class="form-control" id="precio_unitario" name="precio_unitario"
                 placeholder="Precio unitario producto..." required><br>
             <button type="submit">Crear</button>

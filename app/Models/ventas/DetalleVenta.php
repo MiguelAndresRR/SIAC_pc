@@ -2,6 +2,7 @@
 
 namespace App\Models\ventas;
 
+use App\Models\inventario\Inventario;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\productos\Producto;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,7 +23,8 @@ class DetalleVenta extends Model
         'id_venta',
         'id_producto',
         'cantidad_venta',
-        'subtotal_venta'
+        'subtotal_venta',
+        'precio_unitario_venta'
     ];
     public function venta(): BelongsTo
     {
@@ -31,5 +33,8 @@ class DetalleVenta extends Model
         public function producto(): BelongsTo
     {
         return $this->belongsTo(Producto::class, 'id_producto');
+    }
+    public function inventario(): HasMany{
+        return $this->hasMany(Inventario::class, 'id_detalle_venta');
     }
 }

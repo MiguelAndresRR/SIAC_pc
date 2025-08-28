@@ -1,5 +1,5 @@
 /* Fondo del modal: ocupa toda la pantalla, centro contenido, oculto por defecto */
-.container-modal-show-detallesCompras {
+.container-modal-show-detallesVentas {
     position: fixed;
     top: 0;
     left: 0;
@@ -16,13 +16,13 @@
 }
 
 /* Cuando se muestra, se activa visibilidad y se permite interacción */
-.container-modal-show-detallesCompras.mostrar {
+.container-modal-show-detallesVentas.mostrar {
     opacity: 1;
     visibility: visible;
 }
 
 /* Contenedor interno del modal */
-.container-modal-show-detallesCompras .modal {
+.container-modal-show-detallesVentas .modal {
     background-color: white;
     border-radius: 10px;
     padding: 30px;
@@ -31,12 +31,12 @@
     font-family: Arial, sans-serif;
 }
 
-.container-modal-show-detallesCompras h2 {
+.container-modal-show-detallesVentas h2 {
     margin-bottom: 20px;
     color: #000;
 }
 
-.container-modal-show-detallesCompras input {
+.container-modal-show-detallesVentas input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -47,7 +47,7 @@
     background-color: #f9f9f9;
 }
 
-.container-modal-show-detallesCompras button#ocultar-modal-show-detallesCompras {
+.container-modal-show-detallesVentas button#ocultar-modal-show-detallesVentas {
     width: 100%;
     border-radius: 10px;
     background-color: #000000;
@@ -60,7 +60,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-.container-modal-show-detallesCompras button#ocultar-modal-show-detallesCompras:hover {
+.container-modal-show-detallesVentas button#ocultar-modal-show-detallesVentas:hover {
     background-color: #ffffff;
     border-radius: 10px;
     color: #000000; 

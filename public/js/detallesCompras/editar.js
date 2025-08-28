@@ -29,6 +29,9 @@ document.addEventListener("click", function (e) {
             document.querySelector("#cantidad").value = data.cantidad_producto;
             document.querySelector("#precio_unitario_edit").value =
                 data.precio_unitario;
+            document.querySelector("#fecha_vencimiento").value =
+                data.fecha_vencimiento;
+            // Actualizar la acción del formulario con el ID correcto
             document.getElementById(
                 "form_editar-detallesCompras"
             ).action = `/admin/detallesCompras/${data.id_detalle_compra}`;

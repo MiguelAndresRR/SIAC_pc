@@ -9,7 +9,6 @@
             <option disabled selected>Clientes</option>
             @foreach ($clientes as $cliente)
                 <option value="{{ $cliente->id_cliente }}">
-                    {{ $cliente->nombre_cliente }} {{ $cliente->apellido_cliente }} -
                     {{ $cliente->documento_cliente }}
                 </option>
             @endforeach

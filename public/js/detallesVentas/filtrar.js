@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("filtro-form-detallesCompras");
+    const form = document.getElementById("filtro-form-detallesVentas");
     console.log("Form encontrado:", form);
 
     if (!form) {
-        console.error("No se encontró el formulario filtro-form-detallesCompras");
+        console.error("No se encontró el formulario filtro-form-detallesVentas");
         return;
     }
 
@@ -11,15 +11,15 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Ejecutando filtro...");
         const formData = new FormData(form);
         const params = new URLSearchParams(formData).toString();
-        const idCompra = form.dataset.id_compra_detalles;
-        fetch(`/admin/compras/${idCompra}/detalles/?${params}`, {
+        const idVenta = form.dataset.id_venta_detalle;
+        fetch(`/admin/ventas/${idVenta}/detalles/?${params}`, {
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
             },
         })
             .then((res) => res.text())
             .then((html) => {
-                document.getElementById("tabla-detallesCompras").innerHTML = html;
+                document.getElementById("tabla-detallesVentas").innerHTML = html;
 
                 if (typeof window.asignarEventosBotones === "function") {
                     console.log("Reasignando eventos a .btn-agregar");
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("change", filtro);
 
-    const limpiarBtn = document.getElementById("limpiar-filtros-detallesCompras");
+    const limpiarBtn = document.getElementById("limpiar-filtros-detallesVentas");
 
     console.log("Limpiar botón encontrado:", limpiarBtn);
 
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
             filtro();
         });
     } else {
-        console.error("No se encontró el botón limpiar-filtros-detallesCompras");
+        console.error("No se encontró el botón limpiar-filtros-detallesVentas");
     }
 
 
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
             })
                 .then((res) => res.text())
                 .then((html) => {
-                    document.getElementById("tabla-detallesCompras").innerHTML = html;
+                    document.getElementById("tabla-detallesVentas").innerHTML = html;
                     if (typeof window.asignarEventosBotones === "function") {
                         window.asignarEventosBotones();
                     }

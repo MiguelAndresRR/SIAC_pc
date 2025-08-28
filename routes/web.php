@@ -9,6 +9,7 @@ use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\DetallesComprasController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\VentasController;
+use App\Http\Controllers\DetallesVentasController;
 
 Route::middleware('prevent-back')->group(function () {
     Route::redirect('/', 'login');
@@ -22,6 +23,7 @@ Route::middleware('prevent-back')->group(function () {
         Route::get('productos', [ProductoController::class, 'index'])->name('admin.productos.index');
         Route::get('clientes', [ClientesController::class, 'index'])->name('admin.clientes.index');
         Route::get('ventas', [ClientesController::class, 'index'])->name('admin.ventas.index');
+        Route::get('detallesVentas', [DetallesVentasController::class, 'index'])->name('admin.detallesVentas.index');
     });
 
     Route::middleware('auth')->group(function () {
@@ -186,6 +188,35 @@ Route::middleware('prevent-back')->group(function () {
 
         //Eliminar compra
         Route::delete('admin/ventas/{venta}', [VentasController::class, 'destroy'])->name('admin.ventas.destroy');
+
+        // Detalles de venta
+        Route::get('admin/ventas/{id_venta}/detalles', [DetallesVentasController::class, 'index'])
+            ->name('admin.detallesVentas.index');
+
+        // Formulario para crear un nuevo detalle de una venta
+        Route::get('admin/ventas/{id_venta}/detalles/create', [DetallesVentasController::class, 'create'])
+            ->name('admin.detallesVentas.create');
+
+        // Guardar nuevo detalle
+        Route::post('admin/ventas/{id_venta}/detalles', [DetallesVentasController::class, 'store'])
+            ->name('admin.detallesVentas.store');
+
+        // Mostrar un detalle específico
+        Route::get('admin/ventas/{id_venta}/detalles/{id_detalle_venta}', [DetallesVentasController::class, 'show'])
+            ->name('admin.detallesVentas.show');
+
+        // Editar un detalle
+        Route::get('admin/ventas/detalles/editar/{id_detalle_venta}', [DetallesVentasController::class, 'edit'])
+            ->name('admin.detallesVentas.edit');
+
+        // Actualizar un detalle
+        Route::put('/admin/detallesVentas/{detalleVenta}', [DetallesVentasController::class, 'update'])
+            ->name('admin.detallesVentas.update');
+
+
+        // Eliminar un detalle
+        Route::delete('admin/ventas/detalles/{id_detalle_venta}', [DetallesVentasController::class, 'destroy'])
+            ->name('admin.detallesVentas.destroy');
 
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });

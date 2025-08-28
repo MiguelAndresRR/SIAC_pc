@@ -1,7 +1,7 @@
-<form id="filtro-form-detallesCompras" method="GET" data-id_compra_detalles="{{ $id_compra }}">
+<form id="filtro-form-detallesVentas" method="GET" data-id_venta_detalle="{{ $id_venta }}">
     @csrf
     <div class="filtros">
-        <select id="productoSelect" name="productoSelect" class="form-control" >
+        <select id="productoSelectVenta" name="productoSelectVenta" class="form-control">
             <option value="">Buscar producto...</option>
             @foreach ($productos as $producto)
                 <option value="{{ $producto->id_producto }}">{{ $producto->nombre_producto }}</option>
@@ -15,21 +15,42 @@
             <option value="25" {{ request('PorPagina') == 25 ? 'selected' : '' }}>25</option>
             <option value="30" {{ request('PorPagina') == 30 ? 'selected' : '' }}>30</option>
         </select>
-        <button name="form-control" type="button" id="limpiar-filtros-detallesCompras" ><i
-                class="fa-solid fa-eraser" style="color: #ffffff;"></i></button>
+        <button name="form-control" type="button" id="limpiar-filtros-detallesVentas"><i class="fa-solid fa-eraser"
+                style="color: #ffffff;"></i></button>
     </div>
 </form>
-<script src="{{ asset('js/detallesCompras/filtrar.js') }}"></script>
+<script src="{{ asset('js/detallesVentas/filtrar.js') }}"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new TomSelect('#productoSelect', {
-            placeholder: 'Buscar producto...',
-            plugins: ['remove_button'],
+    let productoSelectFiltro;
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("filtro-form-detallesVentas");
+        const limpiarBtn = document.getElementById("limpiar-filtros-detallesVentas");
+
+        // Inicializar Tom Select y guardar la instancia
+        proveedorSelectTS = new TomSelect("#productoSelectVenta", {
+            placeholder: "Buscar producto...",
+            plugins: ["remove_button"],
             maxItems: 1,
             allowEmptyOption: true,
             create: false,
-            dropdownClass: 'ts-dropdown',
-            controlInput: '<input>',
+            dropdownClass: "ts-dropdown",
+            controlInput: "<input>",
         });
+
+        // Evento para limpiar filtros
+        if (limpiarBtn) {
+            limpiarBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                form.reset();
+                if (productoSelectFiltro) {
+                    productoSelectFiltro.clear();
+                }
+
+                filtro();
+            });
+        }
     });
 </script>

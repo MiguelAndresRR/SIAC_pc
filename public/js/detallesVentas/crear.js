@@ -1,7 +1,7 @@
 function asignarEventosModalCrear() {
-    const btnAbrirModal = document.querySelector("#crear-modal-detallesCompras");
-    const btnCerrarModal = document.querySelector("#ocultar-modal-crear-detallesCompras");
-    const contModal = document.querySelector(".container-modal-crear-detallesCompras");
+    const btnAbrirModal = document.querySelector("#crear-modal-detallesVentas");
+    const btnCerrarModal = document.querySelector("#ocultar-modal-crear-detallesVentas");
+    const contModal = document.querySelector(".container-modal-crear-detallesVentas");
 
     if (btnAbrirModal) {
         btnAbrirModal.addEventListener("click", (e) => {

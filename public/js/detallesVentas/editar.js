@@ -1,8 +1,8 @@
 const btnOcultarModalEdit = document.querySelector(
-    "#ocultar-modal-editar-detallesCompras"
+    "#ocultar-modal-editar-detallesVentas"
 );
 const contModalEdit = document.querySelector(
-    ".container-modal-editar-detallesCompras"
+    ".container-modal-editar-detallesVentas"
 );
 
 btnOcultarModalEdit.addEventListener("click", (e) => {
@@ -11,27 +11,34 @@ btnOcultarModalEdit.addEventListener("click", (e) => {
 });
 
 document.addEventListener("click", function (e) {
-    const btn = e.target.closest(".btn-editar");
+    const btn = e.target.closest(".btn-agregar");
     if (!btn) return;
 
     e.preventDefault();
-    const id_detalle_compra = btn.dataset.id_detalle_compra;
-    const idCompra = btn.dataset.id_compra;
-    console.log("Botón editar clickeado, ID:", id_detalle_compra);
+    const id_detalle_venta = btn.dataset.id_detalle_venta;
+    const id_venta = btn.dataset.id_venta;
+    console.log("Botón editar clickeado, ID:", id_detalle_venta);
 
-    fetch(`/admin/compras/detalles/editar/${id_detalle_compra}`)
+    fetch(`/admin/ventas/detalles/editar/${id_detalle_venta}`)
         .then((response) => response.json())
         .then((data) => {
             console.log("datos recibidos", data);
-            document.querySelector("#id_compra_edit").value = data.id_compra;
-            let select = document.querySelector("#productoSelect1").tomselect;
+            document.querySelector("#id_venta_edit").value = data.id_venta;
+            let select = document.querySelector(
+                "#productoSelectEditar"
+            ).tomselect;
             select.setValue(String(data.id_producto), true);
-            document.querySelector("#cantidad").value = data.cantidad_producto;
-            document.querySelector("#precio_unitario_edit").value =
-                data.precio_unitario;
+            document.querySelector("#cantidad_venta").value =
+                data.cantidad_venta;
+            document.querySelector("#precio_unitario_venta-edit").value =
+                data.precio_unitario_venta;
+            console.log(
+                "Precio unitario recibido:",
+                data.precio_unitario_venta
+            );
             document.getElementById(
-                "form_editar-detallesCompras"
-            ).action = `/admin/detallesCompras/${data.id_detalle_compra}`;
+                "form_editar-detallesVentas"
+            ).action = `/admin/detallesVentas/${data.id_detalle_venta}`;
             console.log("Modal mostrado");
             contModalEdit.classList.add("mostrar");
         })

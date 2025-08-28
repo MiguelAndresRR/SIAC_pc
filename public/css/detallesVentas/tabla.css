@@ -136,7 +136,7 @@ thead {
         -webkit-user-select: none; /* Safari */
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+/Edge */
-        & #crear-modal-detallesCompras {
+        & #crear-modal-detallesVentas {
             background-color: #ffffff;
             width: 100%;
             color: #000000;
@@ -159,7 +159,7 @@ table {
     width: 100%;
     border-spacing: 0;
 }
-.container-detallesCompras-class {
+.container-detallesVentas-class {
     height: 70vh;
     overflow-y: auto;
 }

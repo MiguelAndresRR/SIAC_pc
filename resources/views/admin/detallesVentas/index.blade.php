@@ -14,14 +14,14 @@
     <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="{{ asset('css/detallesCompras/detallesCompras.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesVentas/detallesVentas.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="{{ asset('css/detallesCompras/editar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/detallesCompras/tabla.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/detallesCompras/paginacion.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesVentas/editar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesVentas/tabla.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesVentas/paginacion.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/detallesCompras/mostrar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/detallesCompras/inputSearch.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesVentas/mostrar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesVentas/inputSearch.css') }}">
 
 
     <link
@@ -48,26 +48,26 @@
         @endif
     </div>
     @include('admin.layout.sidebar')
-    <div class="content-detallesCompras">
+    <div class="content-detallesVentas">
         <div class="header">
-            <div class="header-detallesCompras">
-                <h1><i class="fa-solid fa-bag-shopping"></i>Detalles Compra #{{ $id_compra }}</h1>
+            <div class="header-detallesVentas">
+                <h1><i class="fa-solid fa-bag-shopping"></i>Detalles Venta #{{ $id_venta }}</h1>
             </div>
-            <div class="header-detallesCompras">
-                <a href="{{ route('admin.compras.index') }}" class="btn-back">
+            <div class="header-detallesVentas">
+                <a href="{{ route('admin.ventas.index') }}" class="btn-back">
                     <i class="fa-regular fa-circle-left"></i>
                 </a>
             </div>
-            <h1 class="TotalCompra">Total Compra: {{$total_compra}}</h1>
+            <h1 class="Totalventa">Total Venta: {{$venta->total_venta}}</h1>
         </div>
-        @include('admin.detallesCompras.layoutdetallesCompras.filtros')
-        <div id="tabla-detallesCompras">
-            @include('admin.detallesCompras.layoutdetallesCompras.tabladetallesCompras')
+        @include('admin.detallesVentas.layoutdetallesVentas.filtros')
+        <div id="tabla-detallesVentas">
+            @include('admin.detallesVentas.layoutdetallesVentas.tabladetallesVentas')
         </div>
     </div>
-    @include('admin.detallesCompras.modal.edit')
-    @include('admin.detallesCompras.modal.mostrar')
-    @include('admin.detallesCompras.modal.create')
+    @include('admin.detallesVentas.modal.edit')
+    @include('admin.detallesVentas.modal.mostrar')
+    @include('admin.detallesVentas.modal.create')
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-.content-detallesCompras {
+.content-detallesVentas {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
 }
-.header-detallesCompras {
+.header-detallesVentas {
     align-items: center;
     justify-content: space-between;
     display: flex;
@@ -40,7 +40,7 @@
     }
 }
 
-.registrar-detallesCompras-container {
+.registrar-detallesVentas-container {
     border-radius: 10px;
     height: auto;
     width: 100%;
@@ -52,14 +52,14 @@
     margin-bottom: 20px;
 }
 
-.registrar-detallesCompras-container h2 {
+.registrar-detallesVentas-container h2 {
     place-items: left;
     justify-items: left;
     padding: 4px;
     margin-bottom: 20px;
 }
 
-.registrar-detallesCompras-container form {
+.registrar-detallesVentas-container form {
     display: flex;
     flex-direction: column;
     gap: 3px;
@@ -112,7 +112,7 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-.registrar-detallesCompras-container button {
+.registrar-detallesVentas-container button {
     display: block;
     width: 50%;
     margin: 0 auto 10px auto;
@@ -134,7 +134,7 @@ input[type="number"]::-webkit-outer-spin-button {
     }
 }
 
-.container-modal-crear-detallesCompras {
+.container-modal-crear-detallesVentas {
     position: fixed;
     top: 0;
     left: 0;
@@ -150,12 +150,12 @@ input[type="number"]::-webkit-outer-spin-button {
     z-index: 1000;
 }
 
-.container-modal-crear-detallesCompras.mostrar {
+.container-modal-crear-detallesVentas.mostrar {
     opacity: 1;
     visibility: visible;
 }
 
-.container-modal-crear-detallesCompras .modal {
+.container-modal-crear-detallesVentas .modal {
     width: 100%;
     display: flex;
     margin: 0 500px;
@@ -170,7 +170,7 @@ form {
     display: flex;
 }
 
-.registrar-detallesCompras-container {
+.registrar-detallesVentas-container {
     background-color: white;
     opacity: none;
     width: 45%;
@@ -213,7 +213,7 @@ form {
         box-shadow: 0 0 5px #9e12e4;
     }
 }
-#limpiar-filtros-detallesCompras {
+#limpiar-filtros-detallesVentas {
     padding: 10px;
     width: 100%;
     gap: 10px;
@@ -236,4 +236,9 @@ form {
         transform: scale(1.05);
         border: 2px solid #e47012;
     }
+}
+.Totalventa {
+    width: auto;
+    align-content: right;
+    margin-left: auto;
 }

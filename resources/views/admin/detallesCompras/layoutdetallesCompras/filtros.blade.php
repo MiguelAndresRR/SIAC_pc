@@ -21,15 +21,36 @@
 </form>
 <script src="{{ asset('js/detallesCompras/filtrar.js') }}"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new TomSelect('#productoSelect', {
-            placeholder: 'Buscar producto...',
-            plugins: ['remove_button'],
+    let productoSelectFiltroCompras;
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("filtro-form-detallesCompras");
+        const limpiarBtn = document.getElementById("limpiar-filtros-detallesCompras");
+
+        // Inicializar Tom Select y guardar la instancia
+        proveedorSelectTS = new TomSelect("#productoSelect", {
+            placeholder: "Buscar producto...",
+            plugins: ["remove_button"],
             maxItems: 1,
             allowEmptyOption: true,
             create: false,
-            dropdownClass: 'ts-dropdown',
-            controlInput: '<input>',
+            dropdownClass: "ts-dropdown",
+            controlInput: "<input>",
         });
+
+        // Evento para limpiar filtros
+        if (limpiarBtn) {
+            limpiarBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                form.reset();
+                if (productoSelectFiltroCompras) {
+                    productoSelectFiltroCompras.clear();
+                }
+
+                filtro();
+            });
+        }
     });
 </script>

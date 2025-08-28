@@ -1,46 +1,37 @@
-<div class="container-modal-crear-detallesCompras">
-    <div class="registrar-detallesCompras-container">
+<div class="container-modal-crear-detallesVentas">
+    <div class="registrar-detallesVentas-container">
         <h2>Registrar Detalle Compra</h2>
-        <form action="{{ route('admin.detallesCompras.store', ['id_compra' => $compra->id_compra]) }}" method="POST">
+        <form action="{{ route('admin.detallesVentas.store', ['id_venta' => $venta->id_venta]) }}" method="POST">
             @csrf
-            <input type="hidden" name="id_compra" value="{{ $id_compra }}">
+            <input type="hidden" name="id_venta" value="{{ $id_venta }}">
             <label for="nombre_producto"><i class="fa-solid fa-cubes" style="color: #8b542f;"></i>Producto</label>
-            <select id="productoSelect2" name="id_producto" required class="form-control">
+            <select id="productoSelectCrear" name="id_producto" required class="form-control">
                 <option value="">Buscar producto...</option>
                 @foreach ($productos as $producto)
-                    <option value="{{ $producto->id_producto }}">
+                    <option value="{{ $producto->id_producto }}" data-precio="{{ $producto->precio_producto }}">
                         {{ $producto->nombre_producto }} -
-                        {{ $producto->unidad->unidad_peso?? 'Sin unidad' }}
+                        {{ $producto->unidad->unidad_peso ?? 'Sin unidad' }}
                     </option>
                 @endforeach
             </select><br>
-            <label for="cantidad_producto"><i class="fa-solid fa-box-open" style="color: #f86300a9;"></i></i>Cantidad</label>
-            <input type="number" class="form-control" id="cantidad" name="cantidad_producto"
-                value="{{ old('cantidad_producto') }}" placeholder="cantidad comprada" required><br>
-            <label for="precio_unitario"><i class="fa-solid fa-dollar-sign" style="color: #006b05;"></i>Precio Unidad</label>
-            <input type="number" class="form-control" id="precio_unitario" name="precio_unitario"
-                placeholder="Precio unitario producto..." required><br>
+            <label for="cantidad_venta"><i class="fa-solid fa-box-open"
+                    style="color: #f86300a9;"></i></i>Cantidad</label>
+            <input type="number" class="form-control" id="cantidad" name="cantidad_venta"
+                value="{{ old('cantidad_venta') }}" placeholder="cantidad comprada" required><br>
             <button type="submit">Crear</button>
         </form>
-        <button type="button" class="btn" id="ocultar-modal-crear-detallesCompras">Cancelar</button>
+        <button type="button" class="btn" id="ocultar-modal-crear-detallesVentas">Cancelar</button>
     </div>
 </div>
-<script src="{{ asset('js/detallesCompras/crear.js') }}"></script>
+<script src="{{ asset('js/detallesVentas/crear.js') }}"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new TomSelect('#productoSelect1', {
-            plugins: ['remove_button'],
-            maxItems: 1,
-            allowEmptyOption: true,
-            create: false,
-            dropdownClass: 'ts-dropdown',
-            controlInput: '<input>',
-        });
+    document.getElementById('productoSelectCrear').addEventListener('change', function() {
+        let precio = this.options[this.selectedIndex].getAttribute('data-precio');
+        document.getElementById('precio_producto').value = precio ? precio : '';
+        document.getElementById('precio_unitario').value = precio ? precio : '';
     });
-</script>
-<script>
     document.addEventListener('DOMContentLoaded', function() {
-        new TomSelect('#productoSelect2', {
+        new TomSelect('#productoSelectCrear', {
             plugins: ['remove_button'],
             maxItems: 1,
             allowEmptyOption: true,

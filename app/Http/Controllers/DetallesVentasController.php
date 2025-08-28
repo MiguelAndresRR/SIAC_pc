@@ -9,6 +9,7 @@ use App\Models\productos\Producto;
 
 
 
+
 class DetallesVentasController extends Controller
 {
     // Mostrar lista de detalles de compra filtrados por compra
@@ -22,21 +23,21 @@ class DetallesVentasController extends Controller
 
         $query = DetalleVenta::query()->where('id_venta', $id_venta);
         // Crear consulta base filtrando por id_compra
-        // if ($request->filled('productoSelect')) {
-        //     $query->whereHas('producto', function ($query) use ($request) {
-        //         $query->where('id_producto', 'like', '%' . $request->productoSelect . '%');
-        //     });
-        // }
+        if ($request->filled('productoSelectVenta')) {
+            $query->whereHas('producto', function ($query) use ($request) {
+                $query->where('id_producto', 'like', '%' . $request->productoSelectVenta . '%');
+            });
+        }
         // Si hay búsqueda de productos con mínimo 3 caracteres
-        // if ($request->filled('buscar_productos') && strlen(trim($request->buscar_productos)) >= 3) {
-        //     $palabras = explode(' ', $request->buscar_productos);
+        if ($request->filled('buscar_productos') && strlen(trim($request->buscar_productos)) >= 3) {
+            $palabras = explode(' ', $request->buscar_productos);
 
-        //     $query->whereHas('producto', function ($q) use ($palabras) {
-        //         foreach ($palabras as $palabra) {
-        //             $q->where('nombre_producto', 'like', '%' . $palabra . '%');
-        //         }
-        //     });
-        // }
+            $query->whereHas('producto', function ($q) use ($palabras) {
+                foreach ($palabras as $palabra) {
+                    $q->where('nombre_producto', 'like', '%' . $palabra . '%');
+                }
+            });
+        }
 
         // Paginación
         $porPagina = $request->input('PorPagina', 10);
@@ -44,13 +45,14 @@ class DetallesVentasController extends Controller
 
         // Obtener lista de productos para selección
         $venta = Venta::find($id_venta);
+        $productos = Producto::with('unidad')->get();
         // Si es petición AJAX, renderizar solo el contenido
         if ($request->ajax()) {
-            return view('admin.detallesVentas.layoutdetallesVentas.tabladetallesVentas', compact('detallesVentas'))->render();
+            return view('admin.detallesVentas.layoutdetallesVentas.tabladetallesVentas', compact('detallesVentas', 'id_venta', 'productos', 'venta'))->render();
         }
 
         // Vista completa
-        return view('admin.detallesVentas.index', compact('detallesVentas'));
+        return view('admin.detallesVentas.index', compact('detallesVentas', 'id_venta', 'productos', 'venta'));
     }
 
     // Mostrar un detalle de compra específico en JSON
@@ -58,6 +60,7 @@ class DetallesVentasController extends Controller
     {
         return response()->json([
             'id_venta' => $detalleVenta->id_venta,
+            'id_detalle_venta' => $detalleVenta->id_detalle_venta,
             'id_producto' => $detalleVenta->id_producto,
             'producto' => $detalleVenta->producto ? $detalleVenta->producto->nombre_producto : 'sin producto',
             'cantidad_venta' => $detalleVenta->cantidad_venta,
@@ -77,25 +80,27 @@ class DetallesVentasController extends Controller
     }
 
     // Guardar un nuevo detalle de compra
-    public function store(Request $request, $id_venta ,$id_producto)
+    public function store(Request $request, $id_venta)
     {
+        $producto = Producto::findOrFail($request->id_producto);
+        $subtotal_venta = $request->cantidad_producto * $producto->precio_producto;
         // Validar datos recibidos
         $request->validate([
             'id_venta' => 'required|exists:venta,id_venta',
             'id_producto' => 'required|exists:producto,id_producto',
             'cantidad_venta' => 'required|integer|min:1',
-            'subtotal_venta' => 'required|numeric|min:0'
         ]);
 
         // Calcular subtotal
-        $subtotal_venta = $request->cantidad_venta * $id_producto->precio_producto;
+        $subtotal_venta = $request->cantidad_venta * $producto->precio_producto;
 
         // Crear registro
         $detalleVenta = DetalleVenta::create([
             'id_venta' => $request->id_venta,
             'id_producto' => $request->id_producto,
-            'cantidad_producto' => $request->cantidad_producto,
-            'subtotal_compra' => $subtotal_venta
+            'cantidad_venta' => $request->cantidad_venta,
+            'precio_unitario_venta' => $producto->precio_producto,
+            'subtotal_venta' => $subtotal_venta
         ]);
 
         // Redirigir con mensaje de éxito
@@ -115,14 +120,13 @@ class DetallesVentasController extends Controller
         }
 
         return response()->json([
-            'id_detalle_venta'  => $detalle->id_venta,
-            'id_venta'          => $detalle->id_compra,
-            'id_producto'       => $detalle->id_producto,
-            'cantidad_venta'    => $detalle->cantidad_producto,
-            'precio_producto'   => $detalle->precio_unitario,
-            'subtotal_venta'   => $detalle->subtotal_compra,
-            'producto'          => $detalle->producto->nombre_producto ?? 'Sin producto',
-            'venta'            => $detalle->venta->id_venta ?? 'Sin venta',
+            'id_detalle_venta'        => $detalle->id_detalle_venta,
+            'id_venta'                => $detalle->id_venta,
+            'id_producto'             => $detalle->id_producto,
+            'cantidad_venta'          => $detalle->cantidad_venta,
+            'precio_unitario_venta'   => $detalle->precio_unitario_venta,
+            'producto'                => $detalle->producto->nombre_producto ?? 'Sin producto',
+            'venta'                   => $detalle->venta->id_venta ?? 'Sin venta',
         ]);
     }
 
@@ -131,19 +135,20 @@ class DetallesVentasController extends Controller
     {
         // Validar datos
         $request->validate([
-            'id_compra' => 'required|exists:compra,id_compra',
+            'id_venta' => 'required|exists:venta,id_venta',
             'id_producto' => 'required|exists:producto,id_producto',
-            'cantidad_producto' => 'required|integer|min:1',
-            'precio_unitario' => 'required|numeric|min:0'
+            'cantidad_venta' => 'required|integer|min:1',
+            'precio_unitario_venta' => 'required|numeric|min:0'
         ]);
         // Calcular subtotal
-        $subtotal = $request->cantidad_producto * $request->precio_unitario;
+        $subtotal = $request->cantidad_venta * $request->precio_unitario_venta;
 
         // Actualizar campos
         $detalleVenta->id_venta = $request->id_venta;
         $detalleVenta->id_producto = $request->id_producto;
         $detalleVenta->cantidad_venta = $request->cantidad_venta;
         $detalleVenta->subtotal_venta = $subtotal;
+        $detalleVenta->precio_unitario_venta = $request->precio_unitario_venta;
         $detalleVenta->save();
 
 

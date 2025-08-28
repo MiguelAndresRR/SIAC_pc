@@ -21,7 +21,8 @@ class DetalleCompra extends Model
         'cantidad_producto',
         'precio_unitario',
         'subtotal_compra',
-        'total_compra'
+        'total_compra',
+        'fecha_vencimiento'
     ];
 
     public function compra(): BelongsTo

@@ -9,7 +9,7 @@
                 <option value="">Buscar Cliente</option>
                 @foreach ($clientes as $cliente)
                     <option value="{{ $cliente->id_cliente }}">
-                        {{ $cliente->nombre_cliente }}-
+                        {{ $cliente->nombre_cliente }} -
                         {{ $cliente->documento_cliente }}
                     </option>
                 @endforeach

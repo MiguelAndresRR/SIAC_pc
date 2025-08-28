@@ -31,8 +31,7 @@
                         @endif
                     </td>
                     <td id="botones">
-                        <button type="button" class="btn-agregar" data-id_venta="{{ $venta->id_venta }}"
-                            data-id_venta="{{ $venta->id_venta }}">
+                        <button type="button" class="btn-agregar" data-id_venta="{{ $venta->id_venta}}">
                             <i class="fa-solid fa-cart-plus"></i>
                         </button>
                         <button type="button" class="btn-editar" data-id_venta="{{ $venta->id_venta }}">
