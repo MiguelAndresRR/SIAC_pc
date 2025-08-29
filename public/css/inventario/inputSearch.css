@@ -1,0 +1,102 @@
+/* Campo de selección principal */
+.ts-control {
+    width: 100% !important;
+    background-color: #f3f3f3;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    outline: none;
+    color: #000000;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    & #proveedorSelect{
+            background-color: #ffffff !important;
+    }
+}
+.ts-wrapper:not(.dropdown-active) .ts-dropdown {
+    display: none;
+}
+.ts-control:focus-within {
+    border: 2px solid #9e12e4;
+    box-shadow: 0 0 5px #9e12e4;
+}
+
+/* Input dentro del control */
+.ts-control input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    flex: 1;
+    background-color: transparent;
+}
+
+/* Dropdown de opciones */
+.ts-dropdown {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 21);
+    border: 2px solid transparent;
+    margin-top: 5px;
+    z-index: 9999;
+    padding: 0;
+}
+
+/* Opciones individuales */
+.ts-dropdown .option {
+    padding: 10px;
+    font-size: 16px;
+    color: #000000;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 3px;
+    border-bottom: none;
+}
+
+.ts-dropdown .option:hover {
+    background-color: #9e12e4;
+    color: #ffffff;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* Opción seleccionada */
+.ts-dropdown .selected {
+    width: auto;
+    background-color: #9e12e4;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* Placeholder */
+.ts-control::placeholder {
+    color: #ffffff;
+}
+
+/* A veces el fondo está en el contenedor principal */
+.ts-wrapper {
+    background: none !important;
+}
+.ts-wrapper.form-control {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none;
+    padding: 0;
+}
+.ts-wrapper.form-control.focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+#productoSelect1 {
+    background-color: white;
+    width: 440px;
+    border-radius: 10px;
+    outline: none;
+    color: #000000;
+    font-size: 16px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}

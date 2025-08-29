@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\models\productos\Producto;
 use App\models\compras\DetalleCompra;
-use App\models\ventas\DetalleVenta;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\inventario\DetalleInventario;
 
 class Inventario extends Model
 {
@@ -18,10 +19,9 @@ class Inventario extends Model
     public $timestamps = false;
 
     protected $table = "inventario";
-    protected $filtable = [
+    protected $fillable = [
         'id_producto',
         'id_detalle_compra',
-        'id_detalle_venta',
         'stock'
     ];
     
@@ -33,8 +33,8 @@ class Inventario extends Model
     {
         return $this->belongsTo(DetalleCompra::class, 'id_detalle_compra');
     }
-        public function detalleVenta(): BelongsTo
+    public function detalleInventario(): HasMany
     {
-        return $this->belongsTo(DetalleVenta::class, 'id_detalle_venta');
+        return $this->hasMany(DetalleInventario::class, 'id_inventario');
     }
 }

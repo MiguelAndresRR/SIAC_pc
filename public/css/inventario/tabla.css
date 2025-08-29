@@ -4,6 +4,10 @@ table td {
     font-size: 14px;
     border-collapse: collapse;
 }
+
+table th {
+    padding: 16px !important;
+}
 table td {
     border-bottom: #cecece 2px solid;
     border-right: #cecece 2px solid;
@@ -14,12 +18,15 @@ table {
     background-color: black;
     table-layout: fixed;
 }
+th:nth-child(4),
+td:nth-child(4) {
+    width: 140px;
+} /* Fecha */
 tbody {
     background-color: #ffffff;
     color: #000000;
     & td {
         text-align: center;
-        width: 10px;
     }
 }
 .btn-confirmar {
@@ -62,7 +69,7 @@ tbody {
     border: 2px solid #9e12e4;
 }
 #botones button {
-    width: 30%;
+    width: 90%;
     border-radius: 10px;
     background-color: #000000;
     color: #ffffff;
@@ -71,26 +78,11 @@ tbody {
     outline: none;
     transition: all 0.3s ease-in-out;
 }
-#botones .btn-agregar:hover {
-    background-color: #e204ff;
-    transform: scale(1.05);
-    border: #ff3ec5 2px solid;
-}
 
-#botones .btn-editar:hover {
+#botones .btn-detalleInventario:hover {
     background-color: #ffd904;
     transform: scale(1.05);
     border: #ffb53e 2px solid;
-}
-#botones .btn-ver:hover {
-    background-color: #9e12e4;
-    transform: scale(1.05);
-    border: #ff00e6 2px solid;
-}
-#botones .borrar-boton:hover {
-    background-color: #fe2252;
-    transform: scale(1.05);
-    border: #ff2600 2px solid;
 }
 /* encabezado tabla */
 thead {
@@ -108,7 +100,7 @@ thead {
         -webkit-user-select: none; /* Safari */
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+/Edge */
-        & #crear-modal-compras {
+        & #crear-modal-inventario {
             background-color: #ffffff;
             width: 100%;
             color: #000000;
@@ -131,14 +123,18 @@ table {
     width: 100%;
     border-spacing: 0;
 }
-.container-compras-class {
-    width: auto;
+.container-inventario-class {
     height: 70vh;
     overflow-y: auto;
 }
 .tableFixHead thead tr th {
-    width: auto;
     position: sticky;
     top: 0;
     z-index: 1;
+}
+td#botones {
+    min-width: 150px;
+}
+#botones button {
+    box-sizing: border-box;
 }

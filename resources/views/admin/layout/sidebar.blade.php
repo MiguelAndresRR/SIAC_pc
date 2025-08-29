@@ -15,7 +15,7 @@
                 <i class="fa-solid fa-receipt"></i>
                 <span class="span-subtittle">Ventas</span>
             </a>
-            <a onclick="window.location.href='{{ route('admin.dashboard') }}'" class="nav_link">
+            <a onclick="window.location.href='{{ route('admin.inventario.index') }}'" class="nav_link">
                 <i class="fa-solid fa-cubes-stacked"></i>
                 <span class="span-subtittle">Inventario</span>
             </a>

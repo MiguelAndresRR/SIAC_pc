@@ -10,6 +10,8 @@ use App\Http\Controllers\DetallesComprasController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\VentasController;
 use App\Http\Controllers\DetallesVentasController;
+use App\Http\Controllers\InventarioController;
+use App\Http\Controllers\DetallesInventarioController;
 
 Route::middleware('prevent-back')->group(function () {
     Route::redirect('/', 'login');
@@ -218,6 +220,11 @@ Route::middleware('prevent-back')->group(function () {
         Route::delete('admin/ventas/detalles/{id_detalle_venta}', [DetallesVentasController::class, 'destroy'])
             ->name('admin.detallesVentas.destroy');
 
+        //inventario
+        Route::post('admin/inventario/store/{id_producto}', [InventarioController::class, 'store'])->name('admin.inventario.store');
+        Route::get('admin/inventario/index', [InventarioController::class, 'index'])->name('admin.inventario.index');
+
+        Route::get('admin/inventario/{id_producto}/detalles', [DetallesInventarioController::class, 'index'])->name('admin.detallesInventario.index');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });
 });
