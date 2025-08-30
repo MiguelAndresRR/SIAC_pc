@@ -223,8 +223,8 @@ Route::middleware('prevent-back')->group(function () {
         //inventario
         Route::post('admin/inventario/store/{id_producto}', [InventarioController::class, 'store'])->name('admin.inventario.store');
         Route::get('admin/inventario/index', [InventarioController::class, 'index'])->name('admin.inventario.index');
-
         Route::get('admin/inventario/{id_producto}/detalles', [DetallesInventarioController::class, 'index'])->name('admin.detallesInventario.index');
+
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });
 });

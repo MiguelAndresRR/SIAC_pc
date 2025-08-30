@@ -3,10 +3,10 @@
 namespace App\Models\productos;
 
 use App\Models\compras\DetalleCompra;
+use App\Models\ventas\DetalleVenta;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\productos\Categoria;
 use App\Models\productos\Unidad;
-use App\Models\ventas\Venta;
 use App\Models\inventario\Inventario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -44,9 +44,5 @@ class Producto extends Model
     public function inventario(): HasMany
     {
         return $this->hasMany(Inventario::class, 'id_producto');
-    }
-        public function venta(): HasMany
-    {
-        return $this->hasMany(Venta::class, 'id_producto');
     }
 }

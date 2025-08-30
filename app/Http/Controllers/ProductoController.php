@@ -132,7 +132,8 @@ class ProductoController extends Controller
                 'text' => 'El producto no existe en la base de datos.'
             ]);
         }
-
+        $producto->detalleVenta()->delete();
+        $producto->inventario()->delete();
         $producto->delete();
         return redirect()->back()->with('message', [
             'type' => 'success',

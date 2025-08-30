@@ -29,12 +29,10 @@
                         @endif
                     </td>
                     <td id="botones">
-                        <button type="button" class="btn-agregar" data-id_compra="{{ $compra->id_compra }}"
-                            data-id_compra="{{ $compra->id_compra }}">
+                        <button type="button" class="btn-agregar" data-id_compra="{{ $compra->id_compra }}">
                             <i class="fa-solid fa-cart-plus"></i>
                         </button>
-                        <button type="button" class="btn-editar" data-id_compra="{{ $compra->id_compra }}"
-                            data-id_compra="{{ $compra->id_compra }}">
+                        <button type="button" class="btn-editar" data-id_compra="{{ $compra->id_compra }}">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                         <button type="button" class="borrar-boton btn btn-danger"
