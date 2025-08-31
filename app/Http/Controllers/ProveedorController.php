@@ -125,7 +125,7 @@ class ProveedorController extends Controller
                 'text' => 'El proveedor no existe en la base de datos.'
             ]);
         }
-
+        
         $proveedor->delete();
 
         return redirect()->back()->with('message', [

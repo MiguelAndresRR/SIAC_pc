@@ -23,9 +23,6 @@ Route::middleware('prevent-back')->group(function () {
         Route::get('detallesCompras', [DetallesComprasController::class, 'index'])->name('admin.detallesCompras.index');
         Route::get('proveedores', [ProveedorController::class, 'index'])->name('admin.proveedores.index');
         Route::get('productos', [ProductoController::class, 'index'])->name('admin.productos.index');
-        Route::get('clientes', [ClientesController::class, 'index'])->name('admin.clientes.index');
-        Route::get('ventas', [ClientesController::class, 'index'])->name('admin.ventas.index');
-        Route::get('detallesVentas', [DetallesVentasController::class, 'index'])->name('admin.detallesVentas.index');
     });
 
     Route::middleware('auth')->group(function () {

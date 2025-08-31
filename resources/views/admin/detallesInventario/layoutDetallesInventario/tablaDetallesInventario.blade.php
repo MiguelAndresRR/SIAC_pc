@@ -13,7 +13,7 @@
                 <tr>
                     <td>{{$inventario->id_detalle_compra}}</td>
                     <td>#{{$inventario->detalleCompra->id_compra }}</td>
-                    <td>{{$inventario->detalleCompra->Compra->fecha_compra }}</td>
+                    <td>{{\Carbon\Carbon::parse($inventario->detalleCompra->Compra->fecha_compra)->format('d/m/Y') }}</td>
                     <td>
                         @if ($inventario->stock_lote <= 0)
                             <span class="text-red-600 font-bold">Sin stock ({{ $inventario->stock_lote }})</span>

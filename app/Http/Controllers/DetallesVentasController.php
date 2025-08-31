@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\ventas\DetalleVenta;
 use App\Models\ventas\Venta;
 use App\Models\productos\Producto;
-
-
-
+use App\Models\inventario\DetalleInventario;
+use App\Models\inventario\Inventario;
 
 class DetallesVentasController extends Controller
 {
@@ -46,6 +45,7 @@ class DetallesVentasController extends Controller
         // Obtener lista de productos para selección
         $venta = Venta::find($id_venta);
         $productos = Producto::with('unidad')->get();
+
         // Si es petición AJAX, renderizar solo el contenido
         if ($request->ajax()) {
             return view('admin.detallesVentas.layoutdetallesVentas.tabladetallesVentas', compact('detallesVentas', 'id_venta', 'productos', 'venta'))->render();
@@ -94,6 +94,8 @@ class DetallesVentasController extends Controller
         // Calcular subtotal
         $subtotal_venta = $request->cantidad_venta * $producto->precio_producto;
 
+
+
         // Crear registro
         $detalleVenta = DetalleVenta::create([
             'id_venta' => $request->id_venta,
@@ -102,6 +104,7 @@ class DetallesVentasController extends Controller
             'precio_unitario_venta' => $producto->precio_producto,
             'subtotal_venta' => $subtotal_venta
         ]);
+        $this->descontarStock($detalleVenta->id_producto, $detalleVenta->cantidad_venta);
 
         // Redirigir con mensaje de éxito
         return redirect()->route('admin.detallesVentas.index', $id_venta)->with('message', [
@@ -109,6 +112,72 @@ class DetallesVentasController extends Controller
             'text' => 'El detalle de la venta se ha creado correctamente.'
         ]);
     }
+
+    //actualiza el stock en el inventario
+    private function actualizarStockInventario($id_producto, $diferencia)
+    {
+        if ($diferencia > 0) {
+            $this->descontarStock($id_producto, $diferencia);
+        } elseif ($diferencia < 0) {
+            $this->devolverStock($id_producto, abs($diferencia));
+        }
+    }
+
+    private function descontarStock($id_producto, $cantidad_venta)
+    {
+        $lotes = DetalleInventario::WhereHas('detalleCompra', function ($query) use ($id_producto) {
+            $query->where('id_producto', $id_producto);
+        })
+            ->where('stock_lote', '>', 0)
+            ->orderBy('id_detalle_inventario', 'asc')
+            ->get();
+
+        $restante = $cantidad_venta;
+
+        foreach ($lotes as $lote) {
+            if ($restante <= 0) break;
+            if ($lote->stock_lote >= $restante) {
+                $lote->stock_lote -= $restante;
+                $lote->save();
+                $restante = 0;
+            } else {
+                $restante -= $lote->stock_lote;
+                $lote->stock_lote = 0;
+                $lote->save();
+            }
+        }
+    }
+
+    //la funcion devuelve el stock en el inventario
+    private function devolverStock($id_producto, $cantidad_venta)
+    {
+        $lotes = DetalleInventario::WhereHas('detalleCompra', function ($query) use ($id_producto) {
+            $query->where('id_producto', $id_producto);
+        })
+            ->orderBy('id_detalle_inventario', 'desc')
+            ->get();
+
+        $restante = $cantidad_venta;
+
+        foreach ($lotes as $lote) {
+            $espacio_faltante = $lote->detalleCompra->cantidad_producto - $lote->stock_lote;
+
+            if ($espacio_faltante <= 0) continue;
+
+            if ($restante <= $espacio_faltante) {
+                $lote->stock_lote += $restante;
+                $lote->save();
+                $restante = 0;
+                break;
+            } else {
+                $lote->stock_lote += $espacio_faltante;
+                $lote->save();
+                $restante -= $espacio_faltante;
+            }
+        }
+    }
+
+
     public function edit($id_detalle_venta)
     {
         $detalle = DetalleVenta::with(['venta', 'producto'])->find($id_detalle_venta);
@@ -135,22 +204,29 @@ class DetallesVentasController extends Controller
     {
         // Validar datos
         $request->validate([
-            'id_venta' => 'required|exists:venta,id_venta',
-            'id_producto' => 'required|exists:producto,id_producto',
-            'cantidad_venta' => 'required|integer|min:1',
+            'id_venta'              => 'required|exists:venta,id_venta',
+            'id_producto'           => 'required|exists:producto,id_producto',
+            'cantidad_venta'        => 'required|integer|min:1',
             'precio_unitario_venta' => 'required|numeric|min:0'
         ]);
+        //Guardar la cantidad anterior
+
+        $cantidad_anterior = $detalleVenta->cantidad_venta;
+
         // Calcular subtotal
         $subtotal = $request->cantidad_venta * $request->precio_unitario_venta;
 
         // Actualizar campos
-        $detalleVenta->id_venta = $request->id_venta;
-        $detalleVenta->id_producto = $request->id_producto;
-        $detalleVenta->cantidad_venta = $request->cantidad_venta;
-        $detalleVenta->subtotal_venta = $subtotal;
+        $detalleVenta->id_venta              = $request->id_venta;
+        $detalleVenta->id_producto           = $request->id_producto;
+        $detalleVenta->cantidad_venta        = $request->cantidad_venta;
+        $detalleVenta->subtotal_venta        = $subtotal;
         $detalleVenta->precio_unitario_venta = $request->precio_unitario_venta;
         $detalleVenta->save();
 
+        $diferencia = $request->cantidad_venta - $cantidad_anterior;
+
+        $this->actualizarStockInventario($detalleVenta->id_producto, $diferencia);
 
 
         // Redirigir con mensaje
@@ -171,7 +247,7 @@ class DetallesVentasController extends Controller
                 'text' => 'El detalle de la venta no existe en la base de datos.'
             ]);
         }
-
+        $this->devolverStock($detalleVenta->id_producto, $detalleVenta->cantidad_venta);
         // Eliminar registro
         $detalleVenta->delete();
 

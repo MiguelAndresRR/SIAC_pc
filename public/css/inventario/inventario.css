@@ -6,78 +6,34 @@
     width: 100vw;
     overflow-y: auto;
 }
-
-.registrar-inventario-container {
+.header-detallesInventario {
     align-items: center;
-    border-radius: 10px;
-    height: auto;
-    width: auto;
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 30px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.registrar-inventario-container h2 {
-    place-items: left;
-    justify-items: left;
-    padding: 4px;
-    margin-bottom: 20px;
-}
-
-.registrar-inventario-container form {
+    justify-content: space-between;
     display: flex;
-    flex-direction: column;
-    gap: 3px;
-
-    & input {
+    float: left;
+    & .btn-back {
+        float: left;
+        margin-left: 10px;
+        width: 150px;
+        float: right;
+        border-radius: 10px;
         border: 2px solid transparent;
         outline: none;
-        width: 100%;
+        background-color: black;
+        color: #ffffff;
+        font-size: 20px;
         padding: 10px;
-        border-radius: 10px;
-        background-color: #f3f3f3;
-        color: #000000;
-        font-size: 16px;
-        margin-bottom: 10px;
-
-        &:focus {
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+            background-color: #ffffff;
+            border-radius: 10px;
+            color: #000000;
+            transform: scale(1.03);
             border: 2px solid #9e12e4;
-            box-shadow: 0 0 5px #9e12e4;
-            transition: all 0.1s ease-in-out;
         }
     }
 }
-
-& select {
-    border: 2px solid transparent;
-    outline: none;
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    color: #000000;
-    font-size: 16px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    padding-right: 2rem;
-    border-radius: 0.75rem;
-    & &:focus {
-        border: 2px solid #9e12e4;
-        box-shadow: 0 0 5px #9e12e4;
-        transition: all 0.3s ease-in-out;
-    }
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
 .form-eliminar {
     margin: 0;
     padding: 0;

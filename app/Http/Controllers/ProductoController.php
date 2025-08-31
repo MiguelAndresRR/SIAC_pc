@@ -7,11 +7,9 @@ use App\Models\productos\Unidad;
 use App\Models\productos\Producto;
 use Illuminate\Http\Request;
 
+
 class ProductoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $query = Producto::query();
@@ -132,9 +130,14 @@ class ProductoController extends Controller
                 'text' => 'El producto no existe en la base de datos.'
             ]);
         }
-        $producto->detalleVenta()->delete();
-        $producto->inventario()->delete();
-        $producto->delete();
+foreach ($producto->detalleCompra as $detalleCompra) {
+    $detalleCompra->detalleInventario()->delete();
+}
+$producto->detalleCompra()->delete();
+
+$producto->detalleVenta()->delete();
+$producto->inventario()->delete();
+$producto->delete();
         return redirect()->back()->with('message', [
             'type' => 'success',
             'text' => 'El producto se ha eliminado correctamente.'

@@ -53,12 +53,8 @@
         <div class="header">
             <div class="header-detallesInventario">
                 <h1><i class="fa-solid fa-bag-shopping">
-
-                    </i>inventario / @foreach ($detallesInventario as $inventario)
-                        {{ $inventario->detalleCompra->Producto->nombre_producto }}
-                    @endforeach
+                    </i>inventario / {{ $nombreProducto}}
                 </h1>
-
             </div>
             <div class="header-detallesInventario">
                 <a href="{{ route('admin.inventario.index') }}" class="btn-back">

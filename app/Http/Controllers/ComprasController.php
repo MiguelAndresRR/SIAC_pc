@@ -107,6 +107,9 @@ class ComprasController extends Controller
             ]);
         }
         // Verificar si la compra tiene detalles asociados y eliminarlos
+        foreach ($compra->detalleCompra as $detalleCompra) {
+            $detalleCompra->detalleInventario()->delete();
+        }
         $compra->detalleCompra()->delete();
         $compra->delete();
         return redirect()->back()->with('message', [

@@ -34,7 +34,4 @@ class DetalleVenta extends Model
     {
         return $this->belongsTo(Producto::class, 'id_producto');
     }
-    public function inventario(): HasMany{
-        return $this->hasMany(Inventario::class, 'id_detalle_venta');
-    }
 }
