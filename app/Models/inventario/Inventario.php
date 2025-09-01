@@ -22,7 +22,7 @@ class Inventario extends Model
     protected $fillable = [
         'id_producto',
         'id_detalle_compra',
-        'stock'
+        'stock_total'
     ];
     
     public function producto(): BelongsTo
