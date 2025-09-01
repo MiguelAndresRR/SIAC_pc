@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\compras\DetalleCompra;
 use App\Models\productos\Producto;
 use App\Models\compras\Compra;
+use App\Models\inventario\DetalleInventario;
 
 class DetallesComprasController extends Controller
 {
@@ -165,10 +166,12 @@ class DetallesComprasController extends Controller
     }
 
     // Eliminar un detalle de compra
+    // Eliminar un detalle de compra
     public function destroy($id_detalle_compra)
     {
         // Buscar registro
         $detalleCompra = DetalleCompra::find($id_detalle_compra);
+
         if (! $detalleCompra) {
             return redirect()->back()->with('message', [
                 'type' => 'error',
@@ -176,10 +179,21 @@ class DetallesComprasController extends Controller
             ]);
         }
 
-        // Eliminar registro
+        // Verificar stock en inventario asociado
+        $stock_lote = DetalleInventario::where('id_detalle_compra', $id_detalle_compra)
+            ->sum('stock_lote');
+
+        // Si el stock actual es menor al comprado, significa que ya hubo ventas
+        if ($stock_lote < $detalleCompra->cantidad_producto) {
+            return redirect()->back()->with('message', [
+                'type' => 'error',
+                'text' => 'No se puede eliminar este detalle de compra porque ya hay ventas asociadas.'
+            ]);
+        }
+
+        // Si nunca se usó, se puede eliminar
         $detalleCompra->delete();
 
-        // Redirigir con mensaje
         return redirect()->back()->with('message', [
             'type' => 'success',
             'text' => 'El detalle de compra ha sido eliminado correctamente.'

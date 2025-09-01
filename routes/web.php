@@ -12,6 +12,7 @@ use App\Http\Controllers\VentasController;
 use App\Http\Controllers\DetallesVentasController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\DetallesInventarioController;
+use App\Http\Controllers\DashboardController;
 
 Route::middleware('prevent-back')->group(function () {
     Route::redirect('/', 'login');
@@ -26,9 +27,11 @@ Route::middleware('prevent-back')->group(function () {
     });
 
     Route::middleware('auth')->group(function () {
-        Route::get('/admin/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
+        // Dashboard de admin con datos del controlador
+        Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+            ->name('admin.dashboard');
+
+        // Dashboard de usuario simple
         Route::get('/user/dashboard', function () {
             return view('user.dashboard');
         })->name('user.dashboard');

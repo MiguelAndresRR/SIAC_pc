@@ -93,18 +93,27 @@ class DetallesVentasController extends Controller
 
         // Calcular subtotal
         $subtotal_venta = $request->cantidad_venta * $producto->precio_producto;
+        // Verificar stock disponible
+        $total_stock = DetalleInventario::whereHas('detalleCompra', function ($query) use ($request) {
+            $query->where('id_producto', $request->id_producto);
+        })->sum('stock_lote');
 
-
-
-        // Crear registro
-        $detalleVenta = DetalleVenta::create([
-            'id_venta' => $request->id_venta,
-            'id_producto' => $request->id_producto,
-            'cantidad_venta' => $request->cantidad_venta,
-            'precio_unitario_venta' => $producto->precio_producto,
-            'subtotal_venta' => $subtotal_venta
-        ]);
-        $this->descontarStock($detalleVenta->id_producto, $detalleVenta->cantidad_venta);
+        if ($request->cantidad_venta > $total_stock) {
+            return redirect()->back()->withInput()->with('message', [
+                'type' => 'error',
+                'text' => 'No hay suficiente stock disponible para el producto seleccionado.'
+            ]);
+        } else {
+            // Crear registro
+            $detalleVenta = DetalleVenta::create([
+                'id_venta' => $request->id_venta,
+                'id_producto' => $request->id_producto,
+                'cantidad_venta' => $request->cantidad_venta,
+                'precio_unitario_venta' => $producto->precio_producto,
+                'subtotal_venta' => $subtotal_venta
+            ]);
+            $this->descontarStock($detalleVenta->id_producto, $detalleVenta->cantidad_venta);
+        }
 
         // Redirigir con mensaje de éxito
         return redirect()->route('admin.detallesVentas.index', $id_venta)->with('message', [
@@ -216,18 +225,32 @@ class DetallesVentasController extends Controller
         // Calcular subtotal
         $subtotal = $request->cantidad_venta * $request->precio_unitario_venta;
 
-        // Actualizar campos
-        $detalleVenta->id_venta              = $request->id_venta;
-        $detalleVenta->id_producto           = $request->id_producto;
-        $detalleVenta->cantidad_venta        = $request->cantidad_venta;
-        $detalleVenta->subtotal_venta        = $subtotal;
-        $detalleVenta->precio_unitario_venta = $request->precio_unitario_venta;
-        $detalleVenta->save();
+        if ($request->cantidad_venta != $cantidad_anterior) {
+            // Verificar stock disponible
+            $total_stock = DetalleInventario::whereHas('detalleCompra', function ($query) use ($request) {
+                $query->where('id_producto', $request->id_producto);
+            })->sum('stock_lote');
 
-        $diferencia = $request->cantidad_venta - $cantidad_anterior;
+            $diferencia = $request->cantidad_venta - $cantidad_anterior;
+            if ($diferencia > 0 && $diferencia > $total_stock) {
+                return redirect()->back()->withInput()->with('message', [
+                    'type' => 'error',
+                    'text' => 'No hay suficiente stock disponible para el producto seleccionado.'
+                ]);
+            } else {
+                // Actualizar campos
+                $detalleVenta->id_venta              = $request->id_venta;
+                $detalleVenta->id_producto           = $request->id_producto;
+                $detalleVenta->cantidad_venta        = $request->cantidad_venta;
+                $detalleVenta->subtotal_venta        = $subtotal;
+                $detalleVenta->precio_unitario_venta = $request->precio_unitario_venta;
+                $detalleVenta->save();
 
-        $this->actualizarStockInventario($detalleVenta->id_producto, $diferencia);
+                $diferencia = $request->cantidad_venta - $cantidad_anterior;
 
+                $this->actualizarStockInventario($detalleVenta->id_producto, $diferencia);
+            }
+        }
 
         // Redirigir con mensaje
         return redirect()->route('admin.detallesVentas.index', $detalleVenta->id_venta)->with('message', [
