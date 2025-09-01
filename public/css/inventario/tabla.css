@@ -5,9 +5,6 @@ table td {
     border-collapse: collapse;
 }
 
-table th {
-    padding: 16px !important;
-}
 table td {
     border-bottom: #cecece 2px solid;
     border-right: #cecece 2px solid;
@@ -18,10 +15,14 @@ table {
     background-color: black;
     table-layout: fixed;
 }
+th:nth-child(1),
+td:nth-child(1) {
+    width: 100px;
+}
 th:nth-child(4),
 td:nth-child(4) {
     width: 140px;
-} /* Fecha */
+}
 tbody {
     background-color: #ffffff;
     color: #000000;
