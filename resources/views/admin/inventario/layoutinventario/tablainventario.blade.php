@@ -5,7 +5,7 @@
                 <th>Codigo</th>
                 <th>Producto</th>
                 <th>Stock</th>
-                <th>Mas detalles</th>
+                <th>Lotes</th>
             </tr>
         </thead>
         <tbody id="container-inventario-table">
@@ -14,15 +14,23 @@
                     <td>{{ $inventario->producto->id_producto }}</td>
                     <td>{{ $inventario->producto->nombre_producto }}</td>
                     <td>
-                        @if ($inventario->stock <= 0)
-                            <span class="text-red-600 font-bold">Sin stock ({{ $inventario->stock }})</span>
-                        @elseif ($inventario->stock <= 5)
-                            <span class="text-yellow-600 font-bold">Poco stock ({{ $inventario->stock }})</span>
+                        @if ($inventario->stock_total <= 0)
+                            <span
+                                class="inline-block px-3 py-1 rounded-lg text-white bg-red-600 text-sm font-bold shadow-md">
+                                Sin stock ({{ $inventario->stock_total }})
+                            </span>
+                        @elseif ($inventario->stock_total <= 5)
+                            <span
+                                class="inline-block px-3 py-1 rounded-lg text-yellow-800 bg-yellow-300 text-sm font-bold shadow-md">
+                                Poco stock ({{ $inventario->stock_total }})
+                            </span>
                         @else
-                            <span class="text-green-600">{{ $inventario->stock }}</span>
+                            <span
+                                class="inline-block px-3 py-1 rounded-lg text-green-800 bg-green-300 text-sm font-bold shadow-md">
+                                {{ $inventario->stock_total }}
+                            </span>
                         @endif
                     </td>
-
                     <td id="botones">
                         <button type="button" class="btn-detalleInventario"
                             data-id_producto="{{ $inventario->producto->id_producto }}">
@@ -38,4 +46,4 @@
 <div class="paginacion">
     @include('admin.inventario.layoutinventario.paginacion')
 </div>
-<script src="{{ asset('js/inventario/verDetalles.js')}}"></script>
+<script src="{{ asset('js/inventario/verDetalles.js') }}"></script>
