@@ -69,7 +69,7 @@ class VentasController extends Controller
     public function show(Venta $venta)
     {
         return response()->json([
-            'id_venta'=> $venta->id_venta,
+            'id_venta' => $venta->id_venta,
             'id_cliente' => $venta->id_cliente,
             'id_usuario' => $venta->id_usuario,
             'usuario' => $venta->usuario ? $venta->usuario->user : 'sin usuario',
@@ -99,17 +99,22 @@ class VentasController extends Controller
 
     public function destroy($id_venta)
     {
-        // Eliminar la venta
+        // Buscar la venta
         $venta = Venta::find($id_venta);
-        if (! $id_venta) {
+
+        if (!$venta) {
             return redirect()->back()->with('message', [
                 'type' => 'error',
-                'text' => 'LA venta no existe en la base de datos.'
+                'text' => 'La venta no existe en la base de datos.'
             ]);
         }
-        // Verificar si la compra tiene detalles asociados y eliminarlos
+
+        // Eliminar los detalles asociados
         $venta->detalleVenta()->delete();
+
+        // Eliminar la venta
         $venta->delete();
+
         return redirect()->back()->with('message', [
             'type' => 'success',
             'text' => 'La venta y sus detalles han sido eliminados correctamente.'

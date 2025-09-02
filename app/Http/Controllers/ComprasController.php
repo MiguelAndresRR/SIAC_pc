@@ -98,20 +98,23 @@ class ComprasController extends Controller
 
     public function destroy($id_compra)
     {
-        // Eliminar la compra
         $compra = Compra::find($id_compra);
-        if (! $compra) {
+
+        if (!$compra) {
             return redirect()->back()->with('message', [
                 'type' => 'error',
-                'text' => 'LA compra no existe en la base de datos.'
+                'text' => 'La compra no existe en la base de datos.'
             ]);
         }
-        // Verificar si la compra tiene detalles asociados y eliminarlos
-        foreach ($compra->detalleCompra as $detalleCompra) {
-            $detalleCompra->detalleInventario()->delete();
-        }
+
+        $compra->detalleCompra->each(function ($detalle) {
+            $detalle->detalleInventario()->delete();
+        });
+
         $compra->detalleCompra()->delete();
+
         $compra->delete();
+
         return redirect()->back()->with('message', [
             'type' => 'success',
             'text' => 'La compra y sus detalles han sido eliminados correctamente.'

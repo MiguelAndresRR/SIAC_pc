@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\compras\DetalleCompra;
 use App\Models\productos\Producto;
 use App\Models\compras\Compra;
+use App\Models\inventario\Inventario;
 use App\Models\inventario\DetalleInventario;
+use App\Models\ventas\DetalleVenta;
+use Illuminate\Support\Facades\Log;
 
 class DetallesComprasController extends Controller
 {
@@ -84,32 +87,57 @@ class DetallesComprasController extends Controller
     {
         // Validar datos recibidos
         $request->validate([
-            'id_compra'             => 'required|exists:compra,id_compra',
             'id_producto'           => 'required|exists:producto,id_producto',
             'cantidad_producto'     => 'required|integer|min:1',
             'precio_unitario'       => 'required|numeric|min:0',
             'fecha_vencimiento'     => 'nullable|date'
         ]);
-
         // Calcular subtotal
         $subtotal_compra = $request->cantidad_producto * $request->precio_unitario;
-
-        // Crear registro
+        // Crear registro detalle compra
         $detalleCompra = DetalleCompra::create([
-            'id_compra'             => $request->id_compra,
+            'id_compra'             => $id_compra,
             'id_producto'           => $request->id_producto,
             'cantidad_producto'     => $request->cantidad_producto,
             'precio_unitario'       => $request->precio_unitario,
             'subtotal_compra'       => $subtotal_compra,
             'fecha_vencimiento'     => $request->fecha_vencimiento
         ]);
-
+        // Actualizar inventario
+        $inventario = Inventario::where('id_producto', $request->id_producto)->first();
+        if ($inventario) {
+            $inventario->stock_total += $request->cantidad_producto;
+            $inventario->save();
+        } else {
+            Inventario::create([
+                'id_producto' => $request->id_producto,
+                'stock_total' => $request->cantidad_producto,
+                // otros campos si son necesarios
+            ]);
+        }
+        // Actualizar detalle inventario
+        $inventario = Inventario::where('id_producto', $request->id_producto)->first();
+        if ($inventario) {
+            $detallesCompra = DetalleCompra::where('id_producto', $request->id_producto)->get();
+            foreach ($detallesCompra as $detalle) {
+                DetalleInventario::firstOrCreate(
+                    [
+                        'id_inventario'     => $inventario->id_inventario,
+                        'id_detalle_compra' => $detalle->id_detalle_compra,
+                    ],
+                    [
+                        'stock_lote'        => $detalle->cantidad_producto,
+                    ]
+                );
+            }
+        }
         // Redirigir con mensaje de éxito
         return redirect()->route('admin.detallesCompras.index', $id_compra)->with('message', [
             'type' => 'success',
-            'text' => 'El detalle de compra se ha creado correctamente.'
+            'text' => 'El detalle de compra se ha creado correctamente y el inventario actualizado.'
         ]);
     }
+
     public function edit($id_detalle_compra)
     {
         $detalle = DetalleCompra::with(['compra', 'producto'])->find($id_detalle_compra);
@@ -134,44 +162,69 @@ class DetallesComprasController extends Controller
     }
 
     // Actualizar un detalle de compra existente
-    public function update(Request $request, DetalleCompra $detalleCompra, Compra $compras)
-    {
-        // Validar datos
-        $request->validate([
-            'id_compra'         => 'required|exists:compra,id_compra',
-            'id_producto'       => 'required|exists:producto,id_producto',
-            'cantidad_producto' => 'required|integer|min:1',
-            'precio_unitario'   => 'required|numeric|min:0',
-            'fecha_vencimiento' => 'nullable|date'
-        ]);
-        // Calcular subtotal
-        $subtotal = $request->cantidad_producto * $request->precio_unitario;
+public function update(Request $request, DetalleCompra $detalleCompra)
+{
+    // Validar datos
+    $request->validate([
+        'id_compra'         => 'required|exists:compra,id_compra',
+        'id_producto'       => 'required|exists:producto,id_producto',
+        'cantidad_producto' => 'required|integer|min:1',
+        'precio_unitario'   => 'required|numeric|min:0',
+        'fecha_vencimiento' => 'nullable|date'
+    ]);
 
-        // Actualizar campos
-        $detalleCompra->id_compra           = $request->id_compra;
-        $detalleCompra->id_producto         = $request->id_producto;
-        $detalleCompra->cantidad_producto   = $request->cantidad_producto;
-        $detalleCompra->precio_unitario     = $request->precio_unitario;
-        $detalleCompra->subtotal_compra     = $subtotal;
-        $detalleCompra->fecha_vencimiento   = $request->fecha_vencimiento;
-        $detalleCompra->save();
+    $inventario = Inventario::where('id_producto', $request->id_producto)->first();
+    if (!$inventario) {
+        return back()->withErrors(['id_producto' => 'No existe inventario para este producto.']);
+    }
 
+    // Validar stock global considerando ventas del producto
+    $cantidad_vendida = DetalleVenta::where('id_producto', $request->id_producto)->sum('cantidad_venta');
+    $stock_disponible = $inventario->stock_total - $cantidad_vendida;
+    $diferencia = $request->cantidad_producto - $detalleCompra->cantidad_producto;
 
-
-        // Redirigir con mensaje
-        return redirect()->route('admin.detallesCompras.index', $detalleCompra->id_compra)->with('message', [
-            'type' => 'success',
-            'text' => 'El detalle de compra se ha actualizado correctamente.'
+    if ($stock_disponible - $diferencia < 0) {
+        return back()->withErrors([
+            'cantidad_producto' => 'No hay suficiente stock disponible considerando las ventas realizadas del producto.'
         ]);
     }
 
-    // Eliminar un detalle de compra
+    // Actualizar DetalleCompra
+    $detalleCompra->id_compra         = $request->id_compra;
+    $detalleCompra->id_producto       = $request->id_producto;
+    $detalleCompra->cantidad_producto = $request->cantidad_producto;
+    $detalleCompra->precio_unitario   = $request->precio_unitario;
+    $detalleCompra->subtotal_compra   = $request->cantidad_producto * $request->precio_unitario;
+    $detalleCompra->fecha_vencimiento = $request->fecha_vencimiento;
+    $detalleCompra->save();
+
+    // Actualizar o crear DetalleInventario
+    DetalleInventario::updateOrCreate(
+        [
+            'id_inventario'     => $inventario->id_inventario,
+            'id_detalle_compra' => $detalleCompra->id_detalle_compra,
+        ],
+        [
+            'stock_lote' => $request->cantidad_producto,
+        ]
+    );
+
+    return redirect()->route('admin.detallesCompras.index', $detalleCompra->id_compra)->with('message', [
+        'type' => 'success',
+        'text' => 'El detalle de compra se ha actualizado correctamente.'
+    ]);
+}
+
+
+
+
+
+
     // Eliminar un detalle de compra
     public function destroy($id_detalle_compra)
     {
         // Buscar registro
         $detalleCompra = DetalleCompra::find($id_detalle_compra);
-
         if (! $detalleCompra) {
             return redirect()->back()->with('message', [
                 'type' => 'error',
@@ -179,21 +232,10 @@ class DetallesComprasController extends Controller
             ]);
         }
 
-        // Verificar stock en inventario asociado
-        $stock_lote = DetalleInventario::where('id_detalle_compra', $id_detalle_compra)
-            ->sum('stock_lote');
-
-        // Si el stock actual es menor al comprado, significa que ya hubo ventas
-        if ($stock_lote < $detalleCompra->cantidad_producto) {
-            return redirect()->back()->with('message', [
-                'type' => 'error',
-                'text' => 'No se puede eliminar este detalle de compra porque ya hay ventas asociadas.'
-            ]);
-        }
-
-        // Si nunca se usó, se puede eliminar
+        // Eliminar registro
         $detalleCompra->delete();
 
+        // Redirigir con mensaje
         return redirect()->back()->with('message', [
             'type' => 'success',
             'text' => 'El detalle de compra ha sido eliminado correctamente.'

@@ -1,7 +1,7 @@
         <div class="sidebar collapsed" id="sidebar">
             <a onclick="window.location.href='{{ route('admin.dashboard') }}'" class="nav_link">
-                <i class="fa-solid fa-house"></i>
-                <span class="span-subtittle">Inicio</span>
+                <i class="fa-solid fa-chart-line"></i>
+                <span class="span-subtittle">dashboard</span>
             </a>
             <a onclick="window.location.href='{{ route('admin.productos.index') }}'" class="nav_link">
                 <i class="fa-solid fa-box"></i>

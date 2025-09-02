@@ -118,6 +118,7 @@ class ClientesController extends Controller
     public function destroy($id_cliente)
     {
         $cliente = Cliente::find($id_cliente);
+
         if (!$cliente) {
             return redirect()->back()->with('message', [
                 'type' => 'error',
@@ -125,7 +126,16 @@ class ClientesController extends Controller
             ]);
         }
 
+        // Verificar si tiene ventas
+        if ($cliente->ventas()->exists()) {
+            return redirect()->back()->with('message', [
+                'type' => 'error',
+                'text' => 'No se puede eliminar el cliente porque tiene ventas registradas.'
+            ]);
+        }
+
         $cliente->delete();
+
         return redirect()->back()->with('message', [
             'type' => 'success',
             'text' => 'El cliente se ha eliminado correctamente.'

@@ -25,7 +25,7 @@ class Proveedor extends Model
         'correo_proveedor'
     ];
 
-    public function compra(): HasMany
+    public function compras(): HasMany
     {
         return $this->hasMany(Compra::class, 'id_proveedor');
     }

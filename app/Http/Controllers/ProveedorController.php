@@ -119,13 +119,22 @@ class ProveedorController extends Controller
     public function destroy($id_proveedor)
     {
         $proveedor = Proveedor::find($id_proveedor);
+
         if (!$proveedor) {
             return redirect()->back()->with('message', [
                 'type' => 'error',
                 'text' => 'El proveedor no existe en la base de datos.'
             ]);
         }
-        
+
+        // Verificar si tiene compras
+        if ($proveedor->compras()->exists()) {
+            return redirect()->back()->with('message', [
+                'type' => 'error',
+                'text' => 'No se puede eliminar el proveedor porque tiene compras registradas.'
+            ]);
+        }
+
         $proveedor->delete();
 
         return redirect()->back()->with('message', [

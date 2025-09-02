@@ -16,8 +16,29 @@
         rel="stylesheet">
 </head>
 
-<body>
+<body class="flex">
     @include('admin.layout.sidebar')
+    <div class="containerdashboard">
+        <div class="header">
+            <h1><i class="fa-solid fa-chart-line"></i>DASHBBOARD</h1>
+        </div>
+        <div class="dashboard-data">
+            <div class="informacion">
+                @include('admin.dashboard.graficos2')
+            </div>
+            <div class="informacion">
+                @include('admin.dashboard.graficos')
+            </div>
+            <div class="informacion">
+                @include('admin.dashboard.graficos3')
+            </div>
+            <div class="informacion">
+                @include('admin.dashboard.resumenes')
+            </div>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>
