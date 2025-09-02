@@ -239,11 +239,7 @@ class DetallesVentasController extends Controller
                 ]);
             } else {
                 // Actualizar campos
-                $detalleVenta->id_venta              = $request->id_venta;
-                $detalleVenta->id_producto           = $request->id_producto;
                 $detalleVenta->cantidad_venta        = $request->cantidad_venta;
-                $detalleVenta->subtotal_venta        = $subtotal;
-                $detalleVenta->precio_unitario_venta = $request->precio_unitario_venta;
                 $detalleVenta->save();
 
                 $diferencia = $request->cantidad_venta - $cantidad_anterior;
@@ -251,7 +247,12 @@ class DetallesVentasController extends Controller
                 $this->actualizarStockInventario($detalleVenta->id_producto, $diferencia);
             }
         }
-
+        $detalleVenta->id_venta              = $request->id_venta;
+        $detalleVenta->id_producto           = $request->id_producto;
+        $detalleVenta->cantidad_venta        = $request->cantidad_venta;
+        $detalleVenta->subtotal_venta        = $subtotal;
+        $detalleVenta->precio_unitario_venta = $request->precio_unitario_venta;
+        $detalleVenta->save();
         // Redirigir con mensaje
         return redirect()->route('admin.detallesVentas.index', $detalleVenta->id_venta)->with('message', [
             'type' => 'success',

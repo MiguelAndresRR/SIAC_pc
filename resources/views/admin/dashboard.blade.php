@@ -20,7 +20,7 @@
     @include('admin.layout.sidebar')
     <div class="containerdashboard">
         <div class="header">
-            <h1><i class="fa-solid fa-chart-line"></i>DASHBBOARD</h1>
+            <h1><i class="fa-solid fa-chart-line"></i>Dashboard</h1>
         </div>
         <div class="dashboard-data">
             <div class="informacion">
@@ -30,7 +30,7 @@
                 @include('admin.dashboard.graficos')
             </div>
             <div class="informacion">
-                @include('admin.dashboard.graficos3')
+                @include('admin.dashboard.resumen2')
             </div>
             <div class="informacion">
                 @include('admin.dashboard.resumenes')

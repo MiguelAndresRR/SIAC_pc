@@ -99,7 +99,6 @@ class VentasController extends Controller
 
     public function destroy($id_venta)
     {
-        // Buscar la venta
         $venta = Venta::find($id_venta);
 
         if (!$venta) {
@@ -109,15 +108,22 @@ class VentasController extends Controller
             ]);
         }
 
-        // Eliminar los detalles asociados
-        $venta->detalleVenta()->delete();
+        // Verificar si algún detalle de la venta tiene registros asociados (por ejemplo, devoluciones o stock movido)
+        $tieneDetallesAsociados = $venta->detalleVenta()->exists();
 
-        // Eliminar la venta
+        if ($tieneDetallesAsociados) {
+            return redirect()->back()->with('message', [
+                'type' => 'error',
+                'text' => 'No se puede eliminar la venta porque tiene detalles registrados.'
+            ]);
+        }
+
+        // Si no tiene detalles, eliminar la venta
         $venta->delete();
 
         return redirect()->back()->with('message', [
             'type' => 'success',
-            'text' => 'La venta y sus detalles han sido eliminados correctamente.'
+            'text' => 'La venta ha sido eliminada correctamente.'
         ]);
     }
 }

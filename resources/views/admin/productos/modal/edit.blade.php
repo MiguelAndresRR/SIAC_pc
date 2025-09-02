@@ -37,7 +37,7 @@
                     </option>
                 @endforeach
             </select><br>
-            <button type="submit">Guardar</button>
+            <button type="submit">Actualizar</button>
             <p class="error" id="errorMessage"></p>
         </form>
         <button type="submit" class="btn" id="ocultar-modal-editar-productos">

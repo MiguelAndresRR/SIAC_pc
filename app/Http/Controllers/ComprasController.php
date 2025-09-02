@@ -107,12 +107,24 @@ class ComprasController extends Controller
             ]);
         }
 
+        // Verificar si algún detalle tiene ventas asociadas
+        $tieneVentas = $compra->detalleCompra()->whereHas('detalleVenta')->exists();
+        if ($tieneVentas) {
+            return redirect()->back()->with('message', [
+                'type' => 'error',
+                'text' => 'No se puede eliminar la compra porque uno o más detalles ya tienen ventas registradas.'
+            ]);
+        }
+
+        // Eliminar detalles de inventario
         $compra->detalleCompra->each(function ($detalle) {
             $detalle->detalleInventario()->delete();
         });
 
+        // Eliminar detalles de compra
         $compra->detalleCompra()->delete();
 
+        // Eliminar la compra
         $compra->delete();
 
         return redirect()->back()->with('message', [

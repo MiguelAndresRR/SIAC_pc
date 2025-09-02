@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>clientes</title>
+    <title>Clientes</title>
     <meta charset="UTF-8">
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -45,7 +45,7 @@
     @include('admin.layout.sidebar')
     <div class="content-clientes">
         <div class="header">
-            <h1><i class="fa-solid fa-user"></i>clientes</h1>
+            <h1><i class="fa-solid fa-hand-holding-heart"></i>Clientes</h1>
         </div>
         @include('admin.clientes.layoutclientes.filtros')
         <div id="tabla-clientes">

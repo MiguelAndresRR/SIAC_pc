@@ -34,11 +34,14 @@ class DashboardController extends Controller
             ->limit(6)
             ->get();
 
-        // Productos sin stock (0)
-        $productosSinStock = Inventario::where('stock_total', '==', 0)->count();
+        $productosSinStock = Inventario::where('stock_total', 0)
+            ->join('producto', 'inventario.id_producto', '=', 'producto.id_producto')
+            ->pluck('producto.nombre_producto');
 
-        // Productos con poco stock (≤5)
-        $productosPocoStock = Inventario::where('stock_total', '<=', 5)->count();
+        $productosPocoStock = Inventario::where('stock_total', '>=', 1)
+            ->where('stock_total', '<=', 15)
+            ->join('producto', 'inventario.id_producto', '=', 'producto.id_producto')
+            ->pluck('producto.nombre_producto');
 
         return view('admin.dashboard', [
             'ventasTotales' => $ventasTotales,
