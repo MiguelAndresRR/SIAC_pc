@@ -130,14 +130,21 @@ class ProductoController extends Controller
                 'text' => 'El producto no existe en la base de datos.'
             ]);
         }
-foreach ($producto->detalleCompra as $detalleCompra) {
-    $detalleCompra->detalleInventario()->delete();
-}
-$producto->detalleCompra()->delete();
 
-$producto->detalleVenta()->delete();
-$producto->inventario()->delete();
-$producto->delete();
+        // Verificar si tiene compras o ventas asociadas
+        if ($producto->detalleCompra()->exists() || $producto->detalleVenta()->exists()) {
+            return redirect()->back()->with('message', [
+                'type' => 'error',
+                'text' => 'No se puede eliminar el producto porque tiene registros asociados en compras o ventas.'
+            ]);
+        }
+        foreach ($producto->detalleCompra as $detalleCompra) {
+            $detalleCompra->detalleInventario()->delete();
+        }
+        $producto->detalleCompra()->delete();
+        $producto->detalleVenta()->delete();
+        $producto->inventario()->delete();
+        $producto->delete();
         return redirect()->back()->with('message', [
             'type' => 'success',
             'text' => 'El producto se ha eliminado correctamente.'

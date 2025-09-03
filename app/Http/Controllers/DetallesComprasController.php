@@ -9,8 +9,6 @@ use App\Models\compras\Compra;
 use App\Models\inventario\Inventario;
 use App\Models\inventario\DetalleInventario;
 use App\Models\ventas\DetalleVenta;
-use Illuminate\Support\Facades\Log;
-
 class DetallesComprasController extends Controller
 {
     // Mostrar lista de detalles de compra filtrados por compra
@@ -60,15 +58,15 @@ class DetallesComprasController extends Controller
     public function show(DetalleCompra $detalleCompra)
     {
         return response()->json([
-            'id_detalle_compra'         => $detalleCompra->id_detalle_compra,
-            'id_compra'                 => $detalleCompra->id_compra,
-            'compra'                    => $detalleCompra->compra ? $detalleCompra->compra->id_compra : 'sin compra',
-            'id_producto'               => $detalleCompra->id_producto,
-            'producto'                  => $detalleCompra->producto ? $detalleCompra->producto->nombre_producto : 'sin producto',
-            'cantidad_producto'         => $detalleCompra->cantidad_producto,
-            'precio_unitario'           => $detalleCompra->precio_unitario,
-            'subtotal_compra'           => $detalleCompra->subtotal_compra,
-            'fecha_vencimiento'         => $detalleCompra->fecha_vencimiento
+            'id_detalle_compra' => $detalleCompra->id_detalle_compra,
+            'id_compra' => $detalleCompra->id_compra,
+            'compra' => $detalleCompra->compra ? $detalleCompra->compra->id_compra : 'sin compra',
+            'id_producto' => $detalleCompra->id_producto,
+            'producto' => $detalleCompra->producto ? $detalleCompra->producto->nombre_producto : 'sin producto',
+            'cantidad_producto' => $detalleCompra->cantidad_producto,
+            'precio_unitario' => $detalleCompra->precio_unitario,
+            'subtotal_compra' => $detalleCompra->subtotal_compra,
+            'fecha_vencimiento' => $detalleCompra->fecha_vencimiento
         ]);
     }
 
@@ -87,21 +85,21 @@ class DetallesComprasController extends Controller
     {
         // Validar datos recibidos
         $request->validate([
-            'id_producto'           => 'required|exists:producto,id_producto',
-            'cantidad_producto'     => 'required|integer|min:1',
-            'precio_unitario'       => 'required|numeric|min:0',
-            'fecha_vencimiento'     => 'nullable|date'
+            'id_producto' => 'required|exists:producto,id_producto',
+            'cantidad_producto' => 'required|integer|min:1',
+            'precio_unitario' => 'required|numeric|min:0',
+            'fecha_vencimiento' => 'nullable|date'
         ]);
         // Calcular subtotal
         $subtotal_compra = $request->cantidad_producto * $request->precio_unitario;
         // Crear registro detalle compra
         $detalleCompra = DetalleCompra::create([
-            'id_compra'             => $id_compra,
-            'id_producto'           => $request->id_producto,
-            'cantidad_producto'     => $request->cantidad_producto,
-            'precio_unitario'       => $request->precio_unitario,
-            'subtotal_compra'       => $subtotal_compra,
-            'fecha_vencimiento'     => $request->fecha_vencimiento
+            'id_compra' => $id_compra,
+            'id_producto' => $request->id_producto,
+            'cantidad_producto' => $request->cantidad_producto,
+            'precio_unitario' => $request->precio_unitario,
+            'subtotal_compra' => $subtotal_compra,
+            'fecha_vencimiento' => $request->fecha_vencimiento
         ]);
         // Actualizar inventario
         $inventario = Inventario::where('id_producto', $request->id_producto)->first();
@@ -122,11 +120,11 @@ class DetallesComprasController extends Controller
             foreach ($detallesCompra as $detalle) {
                 DetalleInventario::firstOrCreate(
                     [
-                        'id_inventario'     => $inventario->id_inventario,
+                        'id_inventario' => $inventario->id_inventario,
                         'id_detalle_compra' => $detalle->id_detalle_compra,
                     ],
                     [
-                        'stock_lote'        => $detalle->cantidad_producto,
+                        'stock_lote' => $detalle->cantidad_producto,
                     ]
                 );
             }
@@ -150,70 +148,70 @@ class DetallesComprasController extends Controller
 
         return response()->json([
             'id_detalle_compra' => $detalle->id_detalle_compra,
-            'id_compra'         => $detalle->id_compra,
-            'id_producto'       => $detalle->id_producto,
+            'id_compra' => $detalle->id_compra,
+            'id_producto' => $detalle->id_producto,
             'cantidad_producto' => $detalle->cantidad_producto,
-            'precio_unitario'   => $detalle->precio_unitario,
-            'subtotal_compra'   => $detalle->subtotal_compra,
-            'producto'          => $detalle->producto->nombre_producto ?? 'Sin producto',
-            'compra'            => $detalle->compra->id_compra ?? 'Sin compra',
+            'precio_unitario' => $detalle->precio_unitario,
+            'subtotal_compra' => $detalle->subtotal_compra,
+            'producto' => $detalle->producto->nombre_producto ?? 'Sin producto',
+            'compra' => $detalle->compra->id_compra ?? 'Sin compra',
             'fecha_vencimiento' => $detalle->fecha_vencimiento ?? 'Sin fecha'
         ]);
     }
 
     // Actualizar un detalle de compra existente
-public function update(Request $request, DetalleCompra $detalleCompra)
-{
-    // Validar datos
-    $request->validate([
-        'id_compra'         => 'required|exists:compra,id_compra',
-        'id_producto'       => 'required|exists:producto,id_producto',
-        'cantidad_producto' => 'required|integer|min:1',
-        'precio_unitario'   => 'required|numeric|min:0',
-        'fecha_vencimiento' => 'nullable|date'
-    ]);
+    public function update(Request $request, DetalleCompra $detalleCompra)
+    {
+        // Validar datos
+        $request->validate([
+            'id_compra' => 'required|exists:compra,id_compra',
+            'id_producto' => 'required|exists:producto,id_producto',
+            'cantidad_producto' => 'required|integer|min:1',
+            'precio_unitario' => 'required|numeric|min:0',
+            'fecha_vencimiento' => 'nullable|date'
+        ]);
 
-    $inventario = Inventario::where('id_producto', $request->id_producto)->first();
-    if (!$inventario) {
-        return back()->withErrors(['id_producto' => 'No existe inventario para este producto.']);
-    }
+        $inventario = Inventario::where('id_producto', $request->id_producto)->first();
+        if (!$inventario) {
+            return back()->withErrors(['id_producto' => 'No existe inventario para este producto.']);
+        }
 
-    // Validar stock global considerando ventas del producto
-    $cantidad_vendida = DetalleVenta::where('id_producto', $request->id_producto)->sum('cantidad_venta');
-    $stock_disponible = $inventario->stock_total - $cantidad_vendida;
-    $diferencia = $request->cantidad_producto - $detalleCompra->cantidad_producto;
+        // Validar stock global considerando ventas del producto
+        $cantidad_vendida = DetalleVenta::where('id_producto', $request->id_producto)->sum('cantidad_venta');
+        $stock_disponible = $inventario->stock_total - $cantidad_vendida;
+        $diferencia = $request->cantidad_producto - $detalleCompra->cantidad_producto;
 
-    if ($stock_disponible - $diferencia < 0) {
-        return back()->withErrors([
-            'cantidad_producto' => 'No hay suficiente stock disponible considerando las ventas realizadas del producto.'
+        if ($stock_disponible - $diferencia < 0) {
+            return back()->withErrors([
+                'cantidad_producto' => 'No hay suficiente stock disponible considerando las ventas realizadas del producto.'
+            ]);
+        }
+
+        // Actualizar DetalleCompra
+        $detalleCompra->id_compra = $request->id_compra;
+        $detalleCompra->id_producto = $request->id_producto;
+        $detalleCompra->cantidad_producto = $request->cantidad_producto;
+        $detalleCompra->precio_unitario = $request->precio_unitario;
+        $detalleCompra->subtotal_compra = $request->cantidad_producto * $request->precio_unitario;
+        $detalleCompra->fecha_vencimiento = $request->fecha_vencimiento;
+        $detalleCompra->save();
+
+        // Actualizar o crear DetalleInventario
+        DetalleInventario::updateOrCreate(
+            [
+                'id_inventario' => $inventario->id_inventario,
+                'id_detalle_compra' => $detalleCompra->id_detalle_compra,
+            ],
+            [
+                'stock_lote' => $request->cantidad_producto,
+            ]
+        );
+
+        return redirect()->route('admin.detallesCompras.index', $detalleCompra->id_compra)->with('message', [
+            'type' => 'success',
+            'text' => 'El detalle de compra se ha actualizado correctamente.'
         ]);
     }
-
-    // Actualizar DetalleCompra
-    $detalleCompra->id_compra         = $request->id_compra;
-    $detalleCompra->id_producto       = $request->id_producto;
-    $detalleCompra->cantidad_producto = $request->cantidad_producto;
-    $detalleCompra->precio_unitario   = $request->precio_unitario;
-    $detalleCompra->subtotal_compra   = $request->cantidad_producto * $request->precio_unitario;
-    $detalleCompra->fecha_vencimiento = $request->fecha_vencimiento;
-    $detalleCompra->save();
-
-    // Actualizar o crear DetalleInventario
-    DetalleInventario::updateOrCreate(
-        [
-            'id_inventario'     => $inventario->id_inventario,
-            'id_detalle_compra' => $detalleCompra->id_detalle_compra,
-        ],
-        [
-            'stock_lote' => $request->cantidad_producto,
-        ]
-    );
-
-    return redirect()->route('admin.detallesCompras.index', $detalleCompra->id_compra)->with('message', [
-        'type' => 'success',
-        'text' => 'El detalle de compra se ha actualizado correctamente.'
-    ]);
-}
 
 
 
@@ -225,20 +223,26 @@ public function update(Request $request, DetalleCompra $detalleCompra)
     {
         // Buscar registro
         $detalleCompra = DetalleCompra::find($id_detalle_compra);
-        if (! $detalleCompra) {
+        if (!$detalleCompra) {
             return redirect()->back()->with('message', [
                 'type' => 'error',
                 'text' => 'El detalle de compra no existe en la base de datos.'
             ]);
         }
 
-        // Eliminar registro
-        $detalleCompra->delete();
-
-        // Redirigir con mensaje
-        return redirect()->back()->with('message', [
-            'type' => 'success',
-            'text' => 'El detalle de compra ha sido eliminado correctamente.'
-        ]);
+        $stock_lote = DetalleInventario::where('id_detalle_compra', $id_detalle_compra)->value('stock_lote');
+        if ($detalleCompra->detalleInventario()->exists() && $detalleCompra->cantidad_producto == $stock_lote) {
+            $detalleCompra->detalleInventario()->delete();
+            $detalleCompra->delete();
+            return redirect()->back()->with('message', [
+                'type' => 'success',
+                'text' => 'El detalle de compra ha sido eliminado correctamente.'
+            ]);
+        } else {
+            return redirect()->back()->with('message', [
+                'type' => 'error',
+                'text' => 'El lote ya presento ventas y no se puede borrar.'
+            ]);
+        }
     }
 }
