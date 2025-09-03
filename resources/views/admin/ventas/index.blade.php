@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Compras</title>
+    <title>Ventas</title>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('css/ventas/inputSearch.css') }}">
 
 
-    
+
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
@@ -52,6 +52,9 @@
     <div class="content-ventas">
         <div class="header">
             <h1><i class="fa-solid fa-bag-shopping"></i>Ventas</h1>
+            <a onclick="window.location.href='{{ route('admin.compras.index') }}'" class="pdfGenerar">
+                <i class="fa fa-file-pdf"></i> Generar PDF
+            </a>
         </div>
         @include('admin.ventas.layoutventas.filtros')
         <div id="tabla-ventas">
@@ -61,4 +64,5 @@
     @include('admin.ventas.modal.edit')
     @include('admin.ventas.modal.create')
 </body>
+
 </html>

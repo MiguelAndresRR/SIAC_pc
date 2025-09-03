@@ -11,7 +11,7 @@
     </div>
 
     <div class="grid-card" id="poco-stock">
-        <h4>Poco Stock</h4>
+        <h4>Bajo Stock</h4>
         <div>
             <ul>
                 @foreach ($productosPocoStock as $producto)
@@ -20,5 +20,4 @@
             </ul>
         </div>
     </div>
-
 </div>

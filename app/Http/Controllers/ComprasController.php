@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\compras\DetalleCompra;
 use App\Models\compras\Compra;
 use App\Models\proveedor\Proveedor;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class ComprasController extends Controller
 {
@@ -43,6 +44,42 @@ class ComprasController extends Controller
 
         return view('admin.compras.index', compact('compras', 'proveedores'));
     }
+
+    public function generarPDF(Request $request)
+    {
+        //filtros
+        $query = Compra::query();
+        //filtro proveedor
+        if ($request->filled('proveedorSelect')) {
+            $query->whereHas('proveedor', function ($query) use ($request) {
+                $query->where('nombre_proveedor', 'like', '%' . $request->proveedorSelect . '%');
+            });
+        }
+        //filtro fechas de compra
+        if ($request->filled('fechaInicio') && $request->filled('fechaFin')) {
+            $query->whereBetween('fecha_compra', [
+                $request->fechaInicio,
+                $request->fechaFin
+            ]);
+        } elseif ($request->filled('fechaInicio')) {
+            $query->where('fecha_compra', '>=', $request->fechaInicio);
+        } elseif ($request->filled('fechaFin')) {
+            $query->where('fecha_compra', '<=', $request->fechaFin);
+        }
+
+        $compras = $query->get();
+
+        $data = [
+            'titulo' => 'Reporte de Compras',
+            'fecha'  => now()->format('d/m/Y'),
+            'compras' => $compras
+        ];
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.compras_pdf', $data);
+        return $pdf->stream('reporte_compras.pdf');
+    }
+
+
 
     public function store(Request $request, Compra $compra)
     {

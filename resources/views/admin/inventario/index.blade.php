@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('css/inventario/inputSearch.css') }}">
 
 
-    
+
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
@@ -52,6 +52,9 @@
     <div class="content-inventario">
         <div class="header">
             <h1><i class="fa-solid fa-bag-shopping"></i>Inventario</h1>
+            <a onclick="window.location.href='{{ route('admin.compras.index') }}'" class="pdfGenerar">
+                <i class="fa fa-file-pdf"></i> Generar PDF
+            </a>
         </div>
         @include('admin.inventario.layoutinventario.filtros')
         <div id="tabla-inventario">
@@ -59,4 +62,5 @@
         </div>
     </div>
 </body>
+
 </html>

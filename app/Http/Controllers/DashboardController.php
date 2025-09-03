@@ -18,21 +18,23 @@ class DashboardController extends Controller
         // Ganancias totales
         $gananciasTotales = DetalleVenta::sum('subtotal_venta');
 
-        // Productos más vendidos (top 6)
-        $productosMasVendidos = DetalleVenta::join('producto', 'detalle_venta.id_producto', '=', 'producto.id_producto')
-            ->select('producto.nombre_producto', DB::raw('SUM(detalle_venta.cantidad_venta) as total'))
-            ->groupBy('producto.nombre_producto')
-            ->orderByDesc('total')
-            ->limit(6)
+        // Productos más vendidos (top 5)
+        $productosMasVendidos = Producto::leftJoin('detalle_venta', 'producto.id_producto', '=', 'detalle_venta.id_producto')
+            ->select('producto.nombre_producto', DB::raw('COALESCE(SUM(detalle_venta.cantidad_venta), 0) as total'))
+            ->groupBy('producto.id_producto', 'producto.nombre_producto')
+            ->orderBy('total', 'desc')
+            ->limit(5)
             ->get();
 
-        // Productos menos vendidos (top 6)
-        $productosMenosVendidos = DetalleVenta::join('producto', 'detalle_venta.id_producto', '=', 'producto.id_producto')
-            ->select('producto.nombre_producto', DB::raw('SUM(detalle_venta.cantidad_venta) as total'))
-            ->groupBy('producto.nombre_producto')
-            ->orderBy('total')
-            ->limit(6)
+        // Productos menos vendidos (top 5)
+        $productosMenosVendidos = Producto::leftJoin('detalle_venta', 'producto.id_producto', '=', 'detalle_venta.id_producto')
+            ->select('producto.nombre_producto', DB::raw('COALESCE(SUM(detalle_venta.cantidad_venta), 0) as total'))
+            ->groupBy('producto.id_producto', 'producto.nombre_producto')
+            ->orderBy('total', 'asc')
+            ->limit(5)
             ->get();
+
+
 
         $productosSinStock = Inventario::where('stock_total', 0)
             ->join('producto', 'inventario.id_producto', '=', 'producto.id_producto')

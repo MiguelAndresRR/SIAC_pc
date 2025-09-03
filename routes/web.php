@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\UsuarioController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\DetallesVentasController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\DetallesInventarioController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReportesController;
 
 Route::middleware('prevent-back')->group(function () {
     Route::redirect('/', 'login');
@@ -40,7 +42,6 @@ Route::middleware('prevent-back')->group(function () {
 
         // Formulario para crear un nuevo producto
         Route::get('admin/productos/create', [ProductoController::class, 'create'])->name('admin.productos.create');
-
         // Guardar nuevo producto (form create)
         Route::post('admin/productos/index', [ProductoController::class, 'store'])->name('admin.productos.store');
 
@@ -100,6 +101,10 @@ Route::middleware('prevent-back')->group(function () {
 
         //compras
         Route::get('admin/compras/index', [ComprasController::class, 'index'])->name('admin.compras.index');
+
+        //Generar Compras 
+        Route::get('admin/compras/pdf', [ComprasController::class, 'generarPDF'])->name('admin.reportes.compras_pdf');
+
 
         //Formulario para crear una nueva compras
         Route::get('admin/compras/create', [ComprasController::class, 'create'])->name('admin.compras.create');
@@ -225,6 +230,7 @@ Route::middleware('prevent-back')->group(function () {
         Route::get('admin/inventario/index', [InventarioController::class, 'index'])->name('admin.inventario.index');
         Route::get('admin/inventario/{id_producto}/detalles', [DetallesInventarioController::class, 'index'])->name('admin.detallesInventario.index');
 
+        //cerrar sesion
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });
 });

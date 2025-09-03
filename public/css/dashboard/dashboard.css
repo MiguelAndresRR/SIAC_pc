@@ -229,14 +229,6 @@ h4 {
     font-weight: 600;
 }
 
-p {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    font-size: 2em;
-    margin: 0;
-    font-weight: 700;
-}
-
 .grid-card#sin-stock {
     border-left: 5px solid #e74c3c;
 }
@@ -254,4 +246,31 @@ p {
 }
 .dataProductos {
     height: 100%;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* empuja el botón a la derecha */
+    width: 100%; /* ocupar todo el ancho */
+    margin-bottom: 20px;
+}
+
+.pdfGenerar {
+    border-radius: 10px;
+    border: 2px solid transparent;
+    outline: none;
+    background-color: black;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none; /* quitar subrayado */
+}
+
+.pdfGenerar:hover {
+    background-color: #ff0000;
+    color: #000000;
+    transform: scale(1.03);
+    border: 2px solid #ffffff;
 }

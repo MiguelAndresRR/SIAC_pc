@@ -9,6 +9,7 @@ use App\Models\compras\Compra;
 use App\Models\inventario\Inventario;
 use App\Models\inventario\DetalleInventario;
 use App\Models\ventas\DetalleVenta;
+
 class DetallesComprasController extends Controller
 {
     // Mostrar lista de detalles de compra filtrados por compra
@@ -160,62 +161,67 @@ class DetallesComprasController extends Controller
     }
 
     // Actualizar un detalle de compra existente
-    public function update(Request $request, DetalleCompra $detalleCompra)
-    {
-        // Validar datos
-        $request->validate([
-            'id_compra' => 'required|exists:compra,id_compra',
-            'id_producto' => 'required|exists:producto,id_producto',
-            'cantidad_producto' => 'required|integer|min:1',
-            'precio_unitario' => 'required|numeric|min:0',
-            'fecha_vencimiento' => 'nullable|date'
-        ]);
+public function update(Request $request, DetalleCompra $detalleCompra)
+{
+    // Validar datos
+    $request->validate([
+        'id_compra' => 'required|exists:compra,id_compra',
+        'id_producto' => 'required|exists:producto,id_producto',
+        'cantidad_producto' => 'required|integer|min:1',
+        'precio_unitario' => 'required|numeric|min:0',
+        'fecha_vencimiento' => 'nullable|date'
+    ]);
 
-        $inventario = Inventario::where('id_producto', $request->id_producto)->first();
-        if (!$inventario) {
-            return back()->withErrors(['id_producto' => 'No existe inventario para este producto.']);
-        }
+    // Stock actual en inventario de este detalle
+    $stock_lote = DetalleInventario::where('id_detalle_compra', $detalleCompra->id_detalle_compra)
+        ->value('stock_lote') ?? 0;
 
-        // Validar stock global considerando ventas del producto
-        $cantidad_vendida = DetalleVenta::where('id_producto', $request->id_producto)->sum('cantidad_venta');
-        $stock_disponible = $inventario->stock_total - $cantidad_vendida;
-        $diferencia = $request->cantidad_producto - $detalleCompra->cantidad_producto;
+    // Diferencia con lo que viene del request
+    $validarStock = $request->cantidad_producto - $detalleCompra->cantidad_producto;
 
-        if ($stock_disponible - $diferencia < 0) {
-            return back()->withErrors([
-                'cantidad_producto' => 'No hay suficiente stock disponible considerando las ventas realizadas del producto.'
-            ]);
-        }
-
-        // Actualizar DetalleCompra
-        $detalleCompra->id_compra = $request->id_compra;
-        $detalleCompra->id_producto = $request->id_producto;
-        $detalleCompra->cantidad_producto = $request->cantidad_producto;
-        $detalleCompra->precio_unitario = $request->precio_unitario;
-        $detalleCompra->subtotal_compra = $request->cantidad_producto * $request->precio_unitario;
-        $detalleCompra->fecha_vencimiento = $request->fecha_vencimiento;
-        $detalleCompra->save();
-
-        // Actualizar o crear DetalleInventario
-        DetalleInventario::updateOrCreate(
-            [
-                'id_inventario' => $inventario->id_inventario,
-                'id_detalle_compra' => $detalleCompra->id_detalle_compra,
-            ],
-            [
-                'stock_lote' => $request->cantidad_producto,
-            ]
-        );
-
-        return redirect()->route('admin.detallesCompras.index', $detalleCompra->id_compra)->with('message', [
-            'type' => 'success',
-            'text' => 'El detalle de compra se ha actualizado correctamente.'
+    // Validar que no quede negativo
+    if ($stock_lote + $validarStock < 0) {
+        return redirect()->back()->with('message', [
+            'type' => 'error',
+            'text' => 'No se puede actualizar porque el inventario quedaría negativo.'
         ]);
     }
 
+    // Actualizar detalle compra
+    $detalleCompra->update([
+        'id_compra' => $request->id_compra,
+        'id_producto' => $request->id_producto,
+        'cantidad_producto' => $request->cantidad_producto,
+        'precio_unitario' => $request->precio_unitario,
+        'subtotal_compra' => $request->cantidad_producto * $request->precio_unitario,
+        'fecha_vencimiento' => $request->fecha_vencimiento,
+    ]);
 
+    // Buscar o crear inventario asociado al producto
+    $inventario = Inventario::firstOrCreate(
+        ['id_producto' => $request->id_producto],
+        ['stock_total' => 0]
+    );
 
+    // Nuevo stock del lote
+    $nuevo_stock = $stock_lote + $validarStock;
 
+    // Actualizar o crear detalle inventario
+    DetalleInventario::updateOrCreate(
+        [
+            'id_inventario' => $inventario->id_inventario,
+            'id_detalle_compra' => $detalleCompra->id_detalle_compra,
+        ],
+        [
+            'stock_lote' => $nuevo_stock,
+        ]
+    );
+
+    return redirect()->route('admin.detallesCompras.index', $detalleCompra->id_compra)->with('message', [
+        'type' => 'success',
+        'text' => 'El detalle de compra se ha actualizado correctamente.'
+    ]);
+}
 
 
     // Eliminar un detalle de compra

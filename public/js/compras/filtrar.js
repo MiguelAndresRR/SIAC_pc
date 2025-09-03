@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("No se encontró el botón limpiar-filtros-compras");
     }
 
-
     document.addEventListener("click", function (e) {
         if (e.target.matches(".pagination a")) {
             e.preventDefault();
@@ -83,4 +82,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         }
     });
+    const pdfBtn = document.querySelector(".pdfGenerar");
+
+    if (pdfBtn) {
+        pdfBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const params = new URLSearchParams(formData).toString();
+
+            const pdfUrl = `/admin/compras/pdf?${params}`;
+
+            window.location.href = pdfUrl;
+        });
+    }
 });

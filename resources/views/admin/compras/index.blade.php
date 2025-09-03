@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('css/compras/inputSearch.css') }}">
 
 
-    
+
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
@@ -51,7 +51,10 @@
     @include('admin.layout.sidebar')
     <div class="content-compras">
         <div class="header">
-            <h1><i class="fa-solid fa-bag-shopping"></i>Compras</h1>
+            <h1><i class="fa-solid fa-bag-shopping"></i> Compras</h1>
+            <a href="{{ route('admin.reportes.compras_pdf') }}" class="pdfGenerar">
+                <i class="fa fa-file-pdf"></i> Generar PDF
+            </a>
         </div>
         @include('admin.compras.layoutcompras.filtros')
         <div id="tabla-compras">
@@ -61,4 +64,5 @@
     @include('admin.compras.modal.edit')
     @include('admin.compras.modal.create')
 </body>
+
 </html>

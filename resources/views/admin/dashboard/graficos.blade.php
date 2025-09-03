@@ -8,10 +8,10 @@
 <script>
     Chart.register(ChartDataLabels);
 
-    const productosMasVendidos = @json($productosMasVendidos);
-    if (productosMasVendidos && productosMasVendidos.length > 0) {
-        const etiquetas = productosMasVendidos.map(producto => producto.nombre_producto);
-        const datos = productosMasVendidos.map(producto => producto.total);
+    const productosMenosVendidos = @json($productosMenosVendidos);
+    if (productosMenosVendidos && productosMenosVendidos.length > 0) {
+        const etiquetas = productosMenosVendidos.map(producto => producto.nombre_producto);
+        const datos = productosMenosVendidos.map(producto => producto.total);
 
         const ctx = document.getElementById('myChart');
 
@@ -52,7 +52,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Productos Más Vendidos',
+                        text: 'Productos Menos Vendidos',
                         font: {
                             size: 18,
                             weight: 'bold'

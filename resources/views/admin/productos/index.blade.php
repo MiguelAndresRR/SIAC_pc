@@ -46,6 +46,9 @@
     <div class="content-productos">
         <div class="header">
             <h1><i class="fa-solid fa-cubes"></i>Productos</h1>
+            <a onclick="window.location.href='{{ route('admin.compras.index') }}'" class="pdfGenerar">
+                <i class="fa fa-file-pdf"></i> Generar PDF
+            </a>
         </div>
         @include('admin.productos.layoutproductos.filtros')
         <div id="tabla-productos">

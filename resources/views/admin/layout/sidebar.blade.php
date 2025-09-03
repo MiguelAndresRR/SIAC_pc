@@ -31,10 +31,6 @@
                 <i class="fa-solid fa-hand-holding-heart"></i>
                 <span class="span-subtittle">Clientes</span>
             </a>
-            <a onclick="window.location.href='{{ route('admin.dashboard') }}'" class="nav_link">
-                <i class="fa-solid fa-paper-plane"></i>
-                <span class="span-subtittle">Reportes</span>
-            </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>

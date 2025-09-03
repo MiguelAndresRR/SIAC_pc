@@ -6,6 +6,7 @@ use App\Models\productos\Categoria;
 use App\Models\productos\Unidad;
 use App\Models\productos\Producto;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 
 class ProductoController extends Controller
@@ -43,10 +44,8 @@ class ProductoController extends Controller
 
         return view('admin.productos.index', compact('productos', 'categorias', 'unidades', 'porPagina'));
     }
-    public function create()
-    {
-        //
-    }
+
+
     public function store(Request $request, Producto $producto)
     {
         $request->validate([
