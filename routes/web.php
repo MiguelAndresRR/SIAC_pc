@@ -39,9 +39,13 @@ Route::middleware('prevent-back')->group(function () {
         })->name('user.dashboard');
         // Mostrar la lista de productos
         Route::get('admin/productos/index', [ProductoController::class, 'index'])->name('admin.productos.index');
-
+        
+        //Generar Reportes Productos
+        Route::get('admin/productos/pdf', [ProductoController::class, 'generarPDF'])->name('admin.reportes.productos_pdf');
+        
         // Formulario para crear un nuevo producto
         Route::get('admin/productos/create', [ProductoController::class, 'create'])->name('admin.productos.create');
+
         // Guardar nuevo producto (form create)
         Route::post('admin/productos/index', [ProductoController::class, 'store'])->name('admin.productos.store');
 
@@ -102,7 +106,7 @@ Route::middleware('prevent-back')->group(function () {
         //compras
         Route::get('admin/compras/index', [ComprasController::class, 'index'])->name('admin.compras.index');
 
-        //Generar Compras 
+        //Generar Reporte Compras 
         Route::get('admin/compras/pdf', [ComprasController::class, 'generarPDF'])->name('admin.reportes.compras_pdf');
 
 
@@ -177,6 +181,9 @@ Route::middleware('prevent-back')->group(function () {
 
         //ventas
         Route::get('admin/ventas/index', [VentasController::class, 'index'])->name('admin.ventas.index');
+
+        //Generar Reporte
+        Route::get('admin/ventas/pdf', [VentasController::class, 'generarPDF'])->name('admin.reportes.ventas_pdf');
 
         //Formulario para crear una nueva compras
         Route::get('admin/ventas/create', [VentasController::class, 'create'])->name('admin.ventas.create');

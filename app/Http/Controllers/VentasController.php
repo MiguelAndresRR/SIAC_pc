@@ -46,6 +46,62 @@ class VentasController extends Controller
         return view('admin.ventas.index', compact('ventas', 'clientes', 'usuarios'));
     }
 
+    public function generarPDF(Request $request)
+    {
+        //filtros
+        $query = Venta::query();
+        //filtro cliente
+        if ($request->filled('clienteSelect')) {
+            $query->whereHas('cliente', function ($query) use ($request) {
+                $query->where('id_cliente', 'like', '%' . $request->clienteSelect . '%');
+            });
+        }
+        //filtro fechas de compra
+        if ($request->filled('fechaInicio') && $request->filled('fechaFin')) {
+            $query->whereBetween('fecha_venta', [
+                $request->fechaInicio,
+                $request->fechaFin
+            ]);
+        } elseif ($request->filled('fechaInicio')) {
+            $query->where('fecha_venta', '>=', $request->fechaInicio);
+        } elseif ($request->filled('fechaFin')) {
+            $query->where('fecha_venta', '<=', $request->fechaFin);
+        }
+        //filtro fechas de compra
+        if ($request->filled('fechaInicio') && $request->filled('fechaFin')) {
+            $query->whereBetween('fecha_venta', [
+                $request->fechaInicio,
+                $request->fechaFin
+            ]);
+        } elseif ($request->filled('fechaInicio')) {
+            $query->where('fecha_venta', '>=', $request->fechaInicio);
+        } elseif ($request->filled('fechaFin')) {
+            $query->where('fecha_venta', '<=', $request->fechaFin);
+        }
+        $cantidad = $query->count();
+        $ventas = $query->get();
+        if ($cantidad == 0) {
+            return redirect()->back()->with('message', [
+                'type' => 'error',
+                'text' => 'No se puede generar el pdf si hay 0 registros'
+            ]);
+        }
+        $totalGeneral = $ventas->sum(function ($venta) {
+            return $venta->detalleVenta->sum('subtotal_venta');
+        });
+        $data = [
+            'titulo' => 'Reporte de Ventas Semilleros',
+            'fecha'  => now()->format('d/m/Y'),
+            'desde' => $request->input('fechaInicio') ?: 'sin fecha',
+            'hasta' => $request->input('fechaFin') ?: 'sin fecha',
+            'ventas' => $ventas,
+            'totalGeneral' => $totalGeneral
+        ];
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.ventas_pdf', $data);
+        return $pdf->stream('reporte ventas.pdf');
+    }
+
     public function store(Request $request, Venta $venta)
     {
         // Validar los datos de la solicitud

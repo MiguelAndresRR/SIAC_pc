@@ -36,4 +36,5 @@ class InventarioController extends Controller
 
         return view('admin.inventario.index', compact('inventarioProductos'));
     }
+    
 }

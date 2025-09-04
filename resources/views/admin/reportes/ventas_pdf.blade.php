@@ -26,45 +26,65 @@
         th {
             background-color: #f2f2f2;
         }
+
+        img {
+            width: 120px;
+            height: auto;
+        }
     </style>
 </head>
 
 <body>
-    <h1>{{ $titulo }}</h1>
-    <p>Fecha: {{ $fecha }}</p>
+    <div class="header">
+        <div class="header-left">
+            <h1>{{ $titulo }}</h1>
+            <img src="{{ public_path('img/logoSemilleros.jpg') }}" alt="Logo">
+            <hr>
+            <p>Fecha: {{ $fecha }}</p>
+            <p>Desde: {{ $desde }} Hasta: {{ $hasta }}</p>
+        </div>
+        <div class="header-right">
+
+        </div>
+    </div>
+
     @foreach ($ventas as $venta)
-        <h3>Venta # {{ $venta->id_compra }}</h3>
+        <h3>Venta # {{ $venta->id_venta }}</h3>
         <p>Vendedor: {{ $venta->usuario->nombre_usuario }}
         </p>
-        <p>Cliente: {{$venta->cliente->nombre_cliente}}</p>
+        <p>Cliente: {{ $venta->cliente->nombre_cliente }} {{ $venta->cliente->apellido_cliente }}</p>
         <p>Fecha: {{ \Carbon\Carbon::parse($venta->fecha_venta)->format('d/m/Y') }}</p>
-        <p>Total Precio: {{$venta->total_venta}}</p>
+        <p>Total Precio: {{ $venta->total_venta }}</p>
         <table>
             <thead>
                 <tr>
-                    <th>Lote</th>
                     <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unidad</th>
+                    <th>cantidad_venta</th>
+                    <th>Precio Unitario</th>
                     <th>Total</th>
-                    <th>Fecha Vencimiento</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($compra->detalleCompra as $detalle)
+                @forelse ($venta->detalleVenta as $detalle)
                     <tr>
-                        <td>{{ $detalle->id_detalle_compra }}</td>
                         <td>{{ $detalle->producto->nombre_producto }}</td>
-                        <td>{{ $detalle->cantidad_producto }}</td>
-                        <td>{{ $detalle->precio_unitario }}</td>
-                        <td>{{ $detalle->subtotal_compra }}</td>
-                        <td>{{ $detalle->fecha_vencimiento ? \Carbon\Carbon::parse($detalles->fecha_vencimiento)->format('d/m/Y') : 'sin fecha' }}
+                        <td>{{ $detalle->cantidad_venta }}</td>
+                        <td>{{ $detalle->precio_unitario_venta }}</td>
+                        <td>{{ $detalle->subtotal_venta }}</td>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="6" style="text-align:center;"><em>No se registraron productos</em></td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
+        <br>
+        <hr>
     @endforeach
+    <h2>Resumen General</h2>
+    <p>El total de las ventas seleccionadas es: ${{ $totalGeneral }}</p>
 </body>
 
 </html>

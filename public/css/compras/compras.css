@@ -211,6 +211,7 @@ form {
 }
 
 .inputdate {
+    width: 10px;
     display: flex;
     align-items: center;
     text-align: center;

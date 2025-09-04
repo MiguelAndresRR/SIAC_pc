@@ -52,7 +52,7 @@
     <div class="content-ventas">
         <div class="header">
             <h1><i class="fa-solid fa-bag-shopping"></i>Ventas</h1>
-            <a onclick="window.location.href='{{ route('admin.compras.index') }}'" class="pdfGenerar">
+            <a onclick="window.location.href='{{ route('admin.reportes.ventas_pdf') }}'" class="pdfGenerar">
                 <i class="fa fa-file-pdf"></i> Generar PDF
             </a>
         </div>

@@ -66,13 +66,25 @@ class ComprasController extends Controller
         } elseif ($request->filled('fechaFin')) {
             $query->where('fecha_compra', '<=', $request->fechaFin);
         }
-
+        $cantidad = $query->count();
         $compras = $query->get();
-
+        if ($cantidad == 0) {
+            return redirect()->back()->with('message', [
+                'type' => 'error',
+                'text' => 'No se puede generar el pdf si hay 0 registros'
+            ]);
+        }
+        $totalGeneral = $compras->sum(function ($compra) {
+            return $compra->detalleCompra->sum('subtotal_compra');
+        });
         $data = [
-            'titulo' => 'Reporte de Compras',
+            'titulo' => 'Reporte de Compras Semilleros',
             'fecha'  => now()->format('d/m/Y'),
-            'compras' => $compras
+            'desde' => $request->input('fechaInicio') ?: 'sin fecha',
+            'hasta' => $request->input('fechaFin') ?: 'sin fecha',
+            'compras' => $compras,
+            'totalGeneral' => $totalGeneral
+
         ];
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.compras_pdf', $data);

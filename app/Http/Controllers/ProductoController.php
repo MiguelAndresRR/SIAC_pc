@@ -45,6 +45,54 @@ class ProductoController extends Controller
         return view('admin.productos.index', compact('productos', 'categorias', 'unidades', 'porPagina'));
     }
 
+    public function generarPDF(Request $request)
+    {
+        $query = Producto::query();
+
+        $categoria = null;
+        $unidad = null;
+        if ($request->filled('buscar_productos') && strlen(trim($request->buscar_productos)) >= 3) {
+            $palabras = explode(' ', $request->buscar_productos);
+
+            $query->where(function ($q) use ($palabras) {
+                foreach ($palabras as $palabra) {
+                    $q->where('nombre_producto', 'like', '%' . $palabra . '%');
+                }
+            });
+        }
+
+        if ($request->filled('categoria')) {
+            $query->where('id_categoria_producto', $request->categoria);
+            $categoria = Categoria::find($request->input('categoria'));
+        }
+
+        if ($request->filled('unidad')) {
+            $query->where('id_unidad_peso_producto', $request->unidad);
+            $unidad = Unidad::find($request->input('unidad'));
+        }
+
+        $cantidad = $query->count();
+        $productos = $query->get();
+        if ($cantidad == 0) {
+            return redirect()->back()->with('message', [
+                'type' => 'error',
+                'text' => 'No se puede generar el pdf si hay 0 registros'
+            ]);
+        }
+
+        $data = [
+            'titulo'    => 'Reporte de Compras Semilleros',
+            'fecha'     => now()->format('d/m/Y'),
+            'productos' => $productos,
+            'categoria' => $categoria ? $categoria->categoria : 'Todas',
+            'unidad'    => $unidad ? $unidad->unidad_peso : 'Todas',
+        ];
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.productos_pdf', $data);
+        return $pdf->stream('reporte productos.pdf');
+    }
+
+
 
     public function store(Request $request, Producto $producto)
     {

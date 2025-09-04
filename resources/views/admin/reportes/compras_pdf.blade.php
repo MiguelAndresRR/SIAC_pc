@@ -26,17 +26,39 @@
         th {
             background-color: #f2f2f2;
         }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+
+        img {
+            width: 120px;
+            height: auto;
+        }
     </style>
 </head>
 
 <body>
-    <h1>{{ $titulo }}</h1>
-    <p>Fecha: {{ $fecha }}</p>
-    <img src="{{ public_path('img/fcb3d0d432b3cf67e3ea03bcc96b5223.jpg') }}" alt="Logo" width="50px" height="50px">
+    <div class="header">
+        <div class="header-left">
+            <h1>{{ $titulo }}</h1>
+            <img src="{{ public_path('img/logoSemilleros.jpg') }}" alt="Logo">
+            <hr>
+            <p>Fecha: {{ $fecha }}</p>
+            <p>Desde: {{ $desde }} Hasta: {{ $hasta }}</p>
+        </div>
+        <div class="header-right">
+
+        </div>
+    </div>
+
     @foreach ($compras as $compra)
         <h3>Compra # {{ $compra->id_compra }}</h3>
-        <p>Comprador: {{ $compra->usuario->nombre_usuario }}
-        </p>
+        <p>Comprador: {{ $compra->usuario->nombre_usuario }}</p>
         <p>Fecha: {{ \Carbon\Carbon::parse($compra->fecha_compra)->format('d/m/Y') }}</p>
         <p>Proveedor: {{ $compra->proveedor->nombre_proveedor }}</p>
         <table>
@@ -51,20 +73,30 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($compra->detalleCompra as $detalle)
+                @forelse($compra->detalleCompra as $detalle)
                     <tr>
-                        <td>{{ $detalle->id_detalle_compra}}</td>
-                        <td>{{ $detalle->producto->nombre_producto }}</td>
-                        <td>{{ $detalle->cantidad_producto }}</td>
-                        <td>{{ $detalle->precio_unitario }}</td>
-                        <td>{{ $detalle->subtotal_compra }}</td>
-                        <td>{{ $detalle->fecha_vencimiento ? \Carbon\Carbon::parse($detalles->fecha_vencimiento)->format('d/m/Y') : 'sin fecha' }}
+                        <td>{{ $detalle->id_detalle_compra ?? 'sin lotes' }}</td>
+                        <td>{{ $detalle->producto->nombre_producto ?? 'sin productos' }}</td>
+                        <td>{{ $detalle->cantidad_producto ?? 'sin cantidades' }}</td>
+                        <td>${{ $detalle->precio_unitario ?? 'sin precios unitarios' }}</td>
+                        <td>${{ $detalle->subtotal_compra ?? 'sin subtotales' }}</td>
+                        <td>
+                            {{ $detalle->fecha_vencimiento ? \Carbon\Carbon::parse($detalle->fecha_vencimiento)->format('d/m/Y') : 'sin fecha de vencimiento' }}
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="6" style="text-align:center;"><em>No se registraron productos</em></td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
+        <br>
+        <hr>
     @endforeach
+
+    <h2>Resumen General</h2>
+    <p>El total de las compras seleccionadas es: ${{ $totalGeneral }}</p>
 </body>
 
 </html>

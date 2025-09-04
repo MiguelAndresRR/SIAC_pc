@@ -93,4 +93,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         }
     });
+    const pdfBtn = document.querySelector(".pdfGenerar");
+
+    if (pdfBtn) {
+        pdfBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const params = new URLSearchParams(formData).toString();
+
+            const pdfUrl = `/admin/productos/pdf?${params}`;
+
+            window.location.href = pdfUrl;
+        });
+    }
 });
