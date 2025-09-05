@@ -4,12 +4,15 @@ const inputsEdit = document.querySelectorAll("#form_editar1 input");
 const expresionesedit = {
     nombre: /^[a-zA-ZÁ-ÿ\s]{3,25}$/,
     user: /^[a-zA-Z0-9_]{3,16}$/,
+    numero: /^[0-9]{1,10}$/,
 };
 
 const campos = {
     usuario: false,
     apellido: false,
     user: false,
+    telefono: false,
+    documento: false,
 };
 
 const validarFormularioEdit = (e) => {
@@ -22,6 +25,12 @@ const validarFormularioEdit = (e) => {
             break;
         case "user":
             validarCampoEdit(expresionesedit.user, e.target, "user");
+            break;
+        case "telefono_usuario":
+            validarCampoEdit(expresionesedit.numero, e.target, "telefono");
+            break;
+        case "documento_usuario":
+            validarCampoEdit(expresionesedit.numero, e.target, "documento");
             break;
     }
 };
@@ -58,7 +67,7 @@ formularioEdit.addEventListener("submit", (e) => {
 
     inputsEdit.forEach((input) => validarFormularioEdit({ target: input }));
 
-    if (campos.usuario && campos.apellido && campos.user) {
+    if (campos.usuario && campos.apellido && campos.user && campos.telefono && campos.documento) {
         formularioEdit.submit();
     } else {
         alert("Por favor completa los campos correctamente.");

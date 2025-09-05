@@ -24,14 +24,14 @@
                             <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group__usuario" id="grupo__documento">
                             <label for="documento_usuario" class="form-label"><i class="fa-solid fa-id-card"></i>
                                 Documento</label>
                             <input type="number" class="form-control" id="documento_usuario" name="documento_usuario"
                                 placeholder="Número de documento"required>
                             <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group__usuario" id="grupo__telefono">
                             <label for="telefono_usuario" class="form-label"><i class="fa-solid fa-phone"></i>
                                 Teléfono</label>
                             <input type="number" class="form-control" id="telefono_usuario" name="telefono_usuario"

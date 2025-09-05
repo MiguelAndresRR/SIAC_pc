@@ -26,20 +26,22 @@
                             <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group__usuario" id="grupo__documento_edit">
                             <label for="documento_usuario-editar" class="form-label"><i class="fa-solid fa-id-card"></i>
                                 Documento</label>
                             <input type="number" class="form-control" id="documento_usuario-editar"
                                 name="documento_usuario" value="{{ old('documento_usuario') }}"
-                                placeholder="Número de documento" maxlength="10" pattern="[0-9]{7,10}" required>
+                                placeholder="Número de documento"required>
+                            <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group__usuario" id="grupo__telefono_edit">
                             <label for="telefono_usuario-editar" class="form-label"><i class="fa-solid fa-phone"></i>
                                 Teléfono</label>
-                            <input type="tel" class="form-control" id="telefono_usuario-editar"
+                            <input type="number" class="form-control" id="telefono_usuario-editar"
                                 name="telefono_usuario" value="{{ old('telefono_usuario') }}" placeholder="Teléfono"
-                                maxlength="10" pattern="[0-9]{7,10}" required>
+                                required>
+                            <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
                         </div>
 
                         <div class="form-group">
