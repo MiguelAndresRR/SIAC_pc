@@ -1,9 +1,21 @@
 const btnOcultarModalEdit = document.querySelector("#ocultar-modal-editar2");
 const contModalEdit = document.querySelector("#container-modal-editar2");
 
+function resetValidacionesEdit() {
+    document
+        .querySelectorAll("#form_editar1 .form-group__usuario")
+        .forEach((grupo) => {
+            grupo.classList.remove(
+                "form-group__usuario__correcto",
+                "form-group__usuario__incorrecto"
+            );
+        });
+}
+
 if (btnOcultarModalEdit) {
     btnOcultarModalEdit.addEventListener("click", (e) => {
         e.preventDefault();
+        resetValidacionesEdit()
         contModalEdit.classList.remove("mostrar");
     });
 }
@@ -19,7 +31,7 @@ document.addEventListener("click", function (e) {
     fetch(`/admin/usuarios/index/${id_usuario}`)
         .then((response) => response.json())
         .then((data) => {
-            console.log('datos recibidos', data)
+            console.log("datos recibidos", data);
             document.getElementById("nombre_usuario-editar").value =
                 data.nombre_usuario;
             document.getElementById("apellido_usuario-editar").value =
@@ -30,12 +42,12 @@ document.addEventListener("click", function (e) {
                 data.telefono_usuario;
             document.getElementById("correo_usuario-editar").value =
                 data.correo_usuario;
-            document.getElementById("user-editar").value =
-                data.user;
-            document.getElementById("id_rol-editar").value =
-                data.id_rol;
-                
-            document.getElementById("form_editar1").action = `/admin/usuarios/${id_usuario}`;
+            document.getElementById("user-editar").value = data.user;
+            document.getElementById("id_rol-editar").value = data.id_rol;
+
+            document.getElementById(
+                "form_editar1"
+            ).action = `/admin/usuarios/${id_usuario}`;
             contModalEdit.classList.add("mostrar");
         })
         .catch((error) => console.error("Error al cargar datos:", error));

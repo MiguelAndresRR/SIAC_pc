@@ -233,20 +233,43 @@ form {
     border-radius: 6px;
     border: 1px solid #ccc;
 }
-.datosAcceso{
+.datosAcceso {
     width: 50%;
-    & #id_rol-editar,#id_rol {
+    & #id_rol-editar,
+    #id_rol {
         width: 50%;
     }
 }
-.datosPersonales{
+.datosPersonales {
     width: 50%;
-    & .form-group{
+    & .form-group {
         width: 100%;
     }
 }
-.contenedor-doble{
-        display: flex;
+.contenedor-doble {
+    display: flex;
     justify-content: space-between;
-    gap: 20px;     
+    gap: 20px;
+}
+.form-group__usuario__incorrecto input {
+    border: 2px solid red;
+}
+.form-group,
+.form-group__usuario {
+    position: relative;
+}
+.alertaInput {
+    opacity: 0;
+    font-size: 0.8rem;
+    color: #dc3545;
+
+}
+
+.form-control:focus + .alertaInput {
+    display: block;
+}
+
+.form-group__usuario__incorrecto p {
+    color: red;
+    opacity: 1;
 }

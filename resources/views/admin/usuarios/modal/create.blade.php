@@ -8,35 +8,38 @@
                 <div class="datosPersonales">
                     <h2>Datos Personales</h2>
                     <div class="form-grid">
-                        <div class="form-group">
+                        <div class="form-group__usuario" id="grupo__usuario">
                             <label for="nombre_usuario" class="form-label"><i class="fa-solid fa-user"></i>
                                 Nombre</label>
                             <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario"
-                                placeholder="Nombre" maxlength="50" required>
+                                placeholder="Nombre" maxlength="25" required>
+                            <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group__usuario" id="grupo__apellido">
                             <label for="apellido_usuario" class="form-label"><i class="fa-solid fa-user"></i>
                                 Apellido</label>
                             <input type="text" class="form-control" id="apellido_usuario" name="apellido_usuario"
-                                placeholder="Apellido" maxlength="50" required>
+                                placeholder="Apellido" maxlength="25" required>
+                            <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
                         </div>
 
                         <div class="form-group">
                             <label for="documento_usuario" class="form-label"><i class="fa-solid fa-id-card"></i>
                                 Documento</label>
                             <input type="number" class="form-control" id="documento_usuario" name="documento_usuario"
-                                placeholder="Número de documento" required>
+                                placeholder="Número de documento"required>
+                            <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
                         </div>
-
                         <div class="form-group">
                             <label for="telefono_usuario" class="form-label"><i class="fa-solid fa-phone"></i>
                                 Teléfono</label>
-                            <input type="tel" class="form-control" id="telefono_usuario" name="telefono_usuario"
-                                placeholder="Teléfono" maxlength="10" pattern="[0-9]{7,10}" required>
+                            <input type="number" class="form-control" id="telefono_usuario" name="telefono_usuario"
+                                placeholder="Teléfono"required>
+                            <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group__usuario" id="grupo_correo">
                             <label for="correo_usuario" class="form-label"><i class="fa-solid fa-envelope"></i>
                                 Correo</label>
                             <input type="email" class="form-control" id="correo_usuario" name="correo_usuario"
@@ -46,30 +49,38 @@
                 </div>
                 <div class="datosAcceso">
                     <h2>Datos de Acceso</h2>
-                    <label for="user" class="form-label"><i class="fa-solid fa-user"></i> Usuario</label>
-                    <input type="text" class="form-control" id="user" name="user" placeholder="Usuario"
-                        maxlength="50" required>
-                    <label for="password" class="form-label"><i class="fa-solid fa-lock"></i> Contraseña</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña"
-                        required minlength="8" maxlength="60"
-                        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
-                        title="Debe contener al menos una letra mayúscula, un carácter especial y mínimo 8 caracteres.">
-                    <label for="id_rol" class="form-label"><i class="fa-solid fa-user-tag"></i> Rol</label>
-                    <select name="id_rol" id="id_rol" class="form-control" required>
-                        <option value="" disabled {{ old('id_rol') ? '' : 'selected' }} required>
-                            Selecciona rol
-                        </option>
-                        @foreach ($roles as $rol)
-                            <option value="{{ $rol->id_rol }}" {{ old('id_rol') == $rol->id_rol ? 'selected' : '' }}>
-                                {{ $rol->nombre_rol }}
+                    <div class="form-group__usuario" id="grupo__user">
+                        <label for="user" class="form-label"><i class="fa-solid fa-user"></i> Usuario</label>
+                        <input type="text" class="form-control" id="user" name="user" placeholder="Usuario"
+                            maxlength="50" required>
+                        <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
+                    </div>
+                    <div class="form-group_usuario">
+                        <label for="password" class="form-label"><i class="fa-solid fa-lock"></i> Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="Contraseña" required minlength="8" maxlength="60"
+                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+                            title="Debe contener al menos una letra mayúscula, un carácter especial y mínimo 8 caracteres.">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_rol" class="form-label"><i class="fa-solid fa-user-tag"></i> Rol</label>
+                        <select name="id_rol" id="id_rol" class="form-control" required>
+                            <option value="" disabled {{ old('id_rol') ? '' : 'selected' }} required>
+                                Selecciona rol
                             </option>
-                        @endforeach
-                    </select>
+                            @foreach ($roles as $rol)
+                                <option value="{{ $rol->id_rol }}"
+                                    {{ old('id_rol') == $rol->id_rol ? 'selected' : '' }}>
+                                    {{ $rol->nombre_rol }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
             <br>
             <button type="submit" class="btn btn-success">Crear</button>
-                    <button type="close" class="btn btn-secondary" id="ocultar-modal-crear1">Cancelar</button>
+            <button type="close" class="btn btn-secondary" id="ocultar-modal-crear1">Cancelar</button>
         </form>
     </div>
 </div>

@@ -14,10 +14,22 @@ function asignarEventosModalCrear() {
     if (btnCerrarModal) {
         btnCerrarModal.addEventListener("click", (e) => {
             e.preventDefault();
+            resetValidaciones();
+            formularioCrear.reset();
             contModal.classList.remove("mostrar");
             console.log("✅ Modal cerrado");
         });
     }
+}
+function resetValidaciones() {
+    document
+        .querySelectorAll("#formularioUsuarios .form-group__usuario")
+        .forEach((grupo) => {
+            grupo.classList.remove(
+                "form-group__usuario__correcto",
+                "form-group__usuario__incorrecto"
+            );
+        });
 }
 
 // Al cargar la página

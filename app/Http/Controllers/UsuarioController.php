@@ -82,13 +82,26 @@ class UsuarioController extends Controller
             ->where('id_usuario', '!=', $usuario->id_usuario)
             ->first();
 
+        $nombre = ucwords(strtolower($request->nombre_usuario));
+        $apellido = ucwords(strtolower($request->apellido_usuario));
+
+
         if ($existingUsuario) {
             return redirect()->route('admin.usuarios.index')->with('message', [
                 'type' => 'error',
                 'text' => 'El usuario ya existe en la base de datos.'
             ]);
         } else {
-            $usuario = User::create($request->all());
+            $usuario = User::create([
+                'nombre_usuario' => $nombre,
+                'apellido_usuario' => $apellido,
+                'documento_usuario' => $request->documento_usuario,
+                'telefono_usuario' => $request->telefono_usuario,
+                'id_rol' => $request->id_rol,
+                'correo_usuario' => $request->correo_usuario,
+                'user' => $request->user,
+                'password' => $request->password
+            ]);
             return redirect()->route('admin.usuarios.index')->with('message', [
                 'type' => 'success',
                 'text' => 'El usuario se ha creado correctamente.'
@@ -142,6 +155,8 @@ class UsuarioController extends Controller
             'correo_usuario' => 'required|string|email|max:100',
             'id_rol' => 'required|exists:rol,id_rol'
         ]);
+        $nombre = ucwords(strtolower($request->nombre_usuario));
+        $apellido = ucwords(strtolower($request->apellido_usuario));
 
         // Verificar duplicados
         $existingUsuario = User::where('documento_usuario', $request->documento_usuario)
@@ -157,13 +172,14 @@ class UsuarioController extends Controller
                 'text' => 'El usuario ya existe en la base de datos.'
             ]);
         }
-        
+
         $usuario->fill($request->except('password'));
 
         if ($request->filled('password')) {
             $usuario->password = Hash::make($request->password);
         }
-
+        $usuario->nombre_usuario = $nombre;
+        $usuario->apellido_usuario = $apellido;
         $usuario->save();
 
         return redirect()->route('admin.usuarios.index')->with('message', [
