@@ -197,9 +197,14 @@ class UsuarioController extends Controller
                 'type' => 'error',
                 'text' => 'No puedes eliminar tu propio usuario mientras estás logueado.'
             ]);
+        }
+        if ($usuario->compras()->exist()) {
+            return redirect()->back()->with('message', [
+                'type' => 'error',
+                'text' => 'No se puede eliminar el usuario porque tiene compras registradas.'
+            ]);
         } else {
             $usuario->delete();
-
             return redirect()->route('admin.usuarios.index')->with('message', [
                 'type' => 'success',
                 'text' => 'Usuario eliminado correctamente.'
