@@ -1,8 +1,7 @@
 <div class="container-modal-crear">
     <div class="registrar-usuario-container">
         <h2>Registrar usuario</h2>
-        <form action="{{ route('admin.usuarios.store') }}" method="POST" enctype="multipart/form-data"
-            id="formularioUsuarios">
+        <form method="POST" enctype="multipart/form-data" id="formularioUsuarios">
             @csrf
             <div class="contenedor-doble">
                 <div class="datosPersonales">
@@ -28,15 +27,15 @@
                             <label for="documento_usuario" class="form-label"><i class="fa-solid fa-id-card"></i>
                                 Documento</label>
                             <input type="number" class="form-control" id="documento_usuario" name="documento_usuario"
-                                placeholder="Número de documento"required>
-                            <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
+                                placeholder="Número de documento" required>
+                            <p class="alertaInput">Debe de 1 a 10 digitos, sin simbolos especiales</p>
                         </div>
                         <div class="form-group__usuario" id="grupo__telefono">
                             <label for="telefono_usuario" class="form-label"><i class="fa-solid fa-phone"></i>
                                 Teléfono</label>
                             <input type="number" class="form-control" id="telefono_usuario" name="telefono_usuario"
-                                placeholder="Teléfono"required>
-                            <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
+                                placeholder="Teléfono" required>
+                            <p class="alertaInput">Debe de 1 a 10 digitos, sin simbolos especiales</p>
                         </div>
 
                         <div class="form-group__usuario" id="grupo_correo">
@@ -78,10 +77,10 @@
                     </div>
                 </div>
             </div>
-            <br>
             <button type="submit" class="btn btn-success">Crear</button>
-            <button type="close" class="btn btn-secondary" id="ocultar-modal-crear1">Cancelar</button>
+            <button type="button" class="btn btn-secondary" id="ocultar-modal-crear1">Cancelar</button>
         </form>
+
     </div>
 </div>
 

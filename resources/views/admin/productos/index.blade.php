@@ -59,12 +59,12 @@
     @include('admin.productos.modal.create')
     @include('admin.productos.modal.show')
 
-    <!-- Scripts JavaScript -->
     <script src="{{ asset('js/productos/crear.js') }}"></script>
     <script src="{{ asset('js/productos/editar.js') }}"></script>
     <script src="{{ asset('js/productos/showboton.js') }}"></script>
     <script src="{{ asset('js/productos/borrar.js') }}"></script>
     <script src="{{ asset('js/productos/filtrar.js') }}"></script>
-
+    <script src="{{ asset('js/productos/validarFormularios.js') }}"></script>
+    <script src="{{ asset('js/productos/validarFormeEdit.js')}}"></script>
 </body>
 </head>

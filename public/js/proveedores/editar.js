@@ -1,10 +1,23 @@
 const btnOcultarModalEdit = document.querySelector("#ocultar-modal-editar-proveedores");
 const contModalEdit = document.querySelector(".container-modal-editar-proveedores");
+function resetValidacionesEdit() {
+    document
+        .querySelectorAll("#FormularioProveedorEditar .form-group__proveedor")
+        .forEach((grupo) => {
+            grupo.classList.remove(
+                "form-group__proveedor__correcto",
+                "form-group__proveedor__incorrecto"
+            );
+        });
+}
+if (btnOcultarModalEdit) {
+    btnOcultarModalEdit.addEventListener("click", (e) => {
+        e.preventDefault();
+        resetValidacionesEdit();
+        contModalEdit.classList.remove("mostrar");
+    });
+}
 
-btnOcultarModalEdit.addEventListener("click", (e) => {
-    e.preventDefault();
-    contModalEdit.classList.remove("mostrar");
-});
 
 document.addEventListener("click", function (e) {
     const btn = e.target.closest(".btn-editar");
@@ -12,12 +25,10 @@ document.addEventListener("click", function (e) {
 
     e.preventDefault();
     const id_proveedor = btn.dataset.id_proveedor;
-    console.log("Botón editar clickeado, ID:", id_proveedor);
 
     fetch(`/admin/proveedores/${id_proveedor}`)
         .then((response) => response.json())
         .then((data) => {
-            console.log('datos recibidos', data)
             document.getElementById("nombre_proveedor").value =
                 data.nombre_proveedor;
             document.getElementById("nit_proveedor").value =
@@ -28,7 +39,7 @@ document.addEventListener("click", function (e) {
                 data.telefono_proveedor;
             document.getElementById("correo_proveedor").value =
                 data.correo_proveedor;
-            document.getElementById("form_editar-proveedores").action = `/admin/proveedores/${id_proveedor}`;
+            document.getElementById("FormularioProveedorEditar").action = `/admin/proveedores/${id_proveedor}`;
             console.log("Modal mostrado");
             contModalEdit.classList.add("mostrar");
         })

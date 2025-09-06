@@ -7,7 +7,6 @@ function asignarEventosModalCrear() {
         btnAbrirModal.addEventListener("click", (e) => {
             e.preventDefault();
             contModal.classList.add("mostrar");
-            console.log("✅ Modal abierto");
         });
     }
 
@@ -17,7 +16,6 @@ function asignarEventosModalCrear() {
             resetValidaciones();
             formularioCrear.reset();
             contModal.classList.remove("mostrar");
-            console.log("✅ Modal cerrado");
         });
     }
 }

@@ -7,17 +7,26 @@ function asignarEventosModalCrear() {
         btnAbrirModal.addEventListener("click", (e) => {
             e.preventDefault();
             contModal.classList.add("mostrar");
-            console.log("✅ Modal abierto");
         });
     }
 
     if (btnCerrarModal) {
         btnCerrarModal.addEventListener("click", (e) => {
             e.preventDefault();
+            resetValidaciones();
             contModal.classList.remove("mostrar");
-            console.log("✅ Modal cerrado");
         });
     }
+}
+function resetValidaciones() {
+    document
+        .querySelectorAll("#formularioProveedor .form-group__proveedor")
+        .forEach((grupo) => {
+            grupo.classList.remove(
+                "form-group__proveedor__correcto",
+                "form-group__proveedor__incorrecto"
+            );
+        });
 }
 
 // Al cargar la página

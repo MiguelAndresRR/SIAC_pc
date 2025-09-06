@@ -3,9 +3,19 @@ const contModalEdit = document.querySelector(".container-modal-editar-productos"
 
 btnOcultarModalEdit.addEventListener("click", (e) => {
     e.preventDefault();
+    resetValidacionesEdit();
     contModalEdit.classList.remove("mostrar");
 });
-
+function resetValidacionesEdit() {
+    document
+        .querySelectorAll("#form_editar .form-group__producto")
+        .forEach((grupo) => {
+            grupo.classList.remove(
+                "form-group__producto__correcto",
+                "form-group__producto__incorrecto"
+            );
+        });
+}
 document.addEventListener("click", function (e) {
     const btn = e.target.closest(".btn-editar");
     if (!btn) return;

@@ -108,14 +108,19 @@ class ProductoController extends Controller
             ->where('nombre_producto', $request->nombre_producto)
             ->where('id_producto', '!=', $producto->id_producto)
             ->first();
-
+        $nombre = ucwords(strtolower($request->nombre_producto));
         if ($existingProduct) {
             return redirect()->route('admin.productos.index')->with('message', [
                 'type' => 'error',
                 'text' => 'El producto ya existe en la base de datos.'
             ]);
         } else {
-            $producto = Producto::create($request->all());
+            $producto = Producto::create([
+                'nombre_producto' => $nombre,
+                'precio_producto' => $request->precio_producto,
+                'id_categoria_producto' => $request->id_unidad_peso_producto,
+                'id_unidad_peso_producto' => $request->id_unidad_peso_producto,
+            ]);
             return redirect()->route('admin.productos.index')->with('message', [
                 'type' => 'success',
                 'text' => 'El producto se ha creado correctamente.'
@@ -150,13 +155,15 @@ class ProductoController extends Controller
             ->where('id_producto', '!=', $producto->id_producto)
             ->first();
 
+        $nombre = ucwords(strtolower($request->nombre_producto));
+
         if ($existingProduct) {
             return redirect()->route('admin.productos.index')->with('message', [
                 'type' => 'error',
                 'text' => 'El producto ya existe en la base de datos.'
             ]);
         } else {
-            $producto->nombre_producto = $request->nombre_producto;
+            $producto->nombre_producto = $nombre;
             $producto->precio_producto = $request->precio_producto;
             $producto->id_categoria_producto = $request->id_categoria_producto;
             $producto->id_unidad_peso_producto = $request->id_unidad_peso_producto;

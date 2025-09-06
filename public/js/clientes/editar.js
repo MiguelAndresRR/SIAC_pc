@@ -4,10 +4,20 @@ const btnOcultarModalEdit = document.querySelector(
 const contModalEdit = document.querySelector(
     "#container-modal-editar-clientes"
 );
-
+function resetValidacionesEdit() {
+    document
+        .querySelectorAll("#form_editar-clientes .form-group__cliente")
+        .forEach((grupo) => {
+            grupo.classList.remove(
+                "form-group__cliente__correcto",
+                "form-group__cliente__incorrecto"
+            );
+        });
+}
 if (btnOcultarModalEdit) {
     btnOcultarModalEdit.addEventListener("click", (e) => {
         e.preventDefault();
+        resetValidacionesEdit();
         contModalEdit.classList.remove("mostrar");
     });
 }

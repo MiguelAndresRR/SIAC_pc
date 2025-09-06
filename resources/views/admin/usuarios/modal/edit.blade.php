@@ -32,7 +32,7 @@
                             <input type="number" class="form-control" id="documento_usuario-editar"
                                 name="documento_usuario" value="{{ old('documento_usuario') }}"
                                 placeholder="Número de documento"required>
-                            <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
+                            <p class="alertaInput">Debe de 1 a 10 digitos, sin simbolos especiales</p>
                         </div>
 
                         <div class="form-group__usuario" id="grupo__telefono_edit">
@@ -41,7 +41,7 @@
                             <input type="number" class="form-control" id="telefono_usuario-editar"
                                 name="telefono_usuario" value="{{ old('telefono_usuario') }}" placeholder="Teléfono"
                                 required>
-                            <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
+                            <p class="alertaInput">Debe de 1 a 10 digitos, sin simbolos especiales</p>
                         </div>
 
                         <div class="form-group">

@@ -1,5 +1,5 @@
-const formularioCrear = document.getElementById("formularioUsuarios");
-const inputsCrear = document.querySelectorAll("#formularioUsuarios input");
+const formularioCrear = document.getElementById("formularioCliente");
+const inputsCrear = document.querySelectorAll("#formularioCliente input");
 
 const expresiones = {
     nombre: /^[a-zA-ZÁ-ÿ\s]{3,25}$/,
@@ -7,28 +7,24 @@ const expresiones = {
     numero: /^[0-9]{1,10}$/,
 };
 campos = {
-    usuario: false,
+    nombre: false,
     apellido: false,
-    user: false,
     documento: false,
     telefono: false,
 };
 
 const validarFormulario = (e) => {
     switch (e.target.name) {
-        case "nombre_usuario":
-            validarCampo(expresiones.nombre, e.target, "usuario");
+        case "nombre_cliente":
+            validarCampo(expresiones.nombre, e.target, "nombre");
             break;
-        case "apellido_usuario":
-            validarCampo(expresiones.nombre, e.target, "apellido");
+        case "apellido_cliente":
+            validarCampo(expresiones.nombre, e.target, "apellidos");
             break;
-        case "user":
-            validarCampo(expresiones.user, e.target, "user");
-            break;
-        case "documento_usuario":
+        case "documento_cliente":
             validarCampo(expresiones.numero, e.target, "documento");
             break;
-        case "telefono_usuario":
+        case "telefono_cliente":
             validarCampo(expresiones.numero, e.target, "telefono");
             break;
     }
@@ -38,18 +34,18 @@ const validarCampo = (expresion, input, campo) => {
     if (expresion.test(input.value)) {
         document
             .getElementById(`grupo__${campo}`)
-            .classList.remove("form-group__usuario__incorrecto");
+            .classList.remove("form-group__cliente__incorrecto");
         document
             .getElementById(`grupo__${campo}`)
-            .classList.add("form-group__usuario__correcto");
+            .classList.add("form-group__cliente__correcto");
         campos[campo] = true;
     } else {
         document
             .getElementById(`grupo__${campo}`)
-            .classList.add("form-group__usuario__incorrecto");
+            .classList.add("form-group__cliente__incorrecto");
         document
             .getElementById(`grupo__${campo}`)
-            .classList.remove("form-group__usuario__correcto");
+            .classList.remove("form-group__cliente__correcto");
         campos[campo] = false;
     }
 };
@@ -65,7 +61,11 @@ formularioCrear.addEventListener("submit", (e) => {
     inputsCrear.forEach((input) => validarFormulario({ target: input }));
 
     if (
-        campos.usuario && campos.apellido && campos.user && campos.telefono && campos.documento
+        campos.nombre &&
+        campos.apellido &&
+        campos.user &&
+        campos.documento &&
+        campos.telefono
     ) {
         formularioCrear.submit();
     } else {

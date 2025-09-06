@@ -2,7 +2,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 5px;
     width: 100vw;
     overflow-y: auto;
 }
@@ -22,20 +22,17 @@
 .registrar-proveedores-container h2 {
     place-items: left;
     justify-items: left;
-    padding: 4px;
-    margin-bottom: 20px;
 }
 
 .registrar-proveedores-container form {
     display: flex;
     flex-direction: column;
-    gap: 3px;
 
     & input {
         border: 2px solid transparent;
         outline: none;
-        width: auto;
-        padding: 10px;
+        width: 100%;
+        padding: 5px;
         border-radius: 10px;
         background-color: #f3f3f3;
         color: #000000;
@@ -212,4 +209,23 @@ form {
         transform: scale(1.05);
         border: 2px solid #e47012;
     }
+}
+.form-group,
+.form-group__proveedor {
+    position: relative;
+}
+.alertaInput {
+    opacity: 0;
+    font-size: 0.8rem;
+    color: #dc3545;
+
+}
+
+.form-control:focus + .alertaInput {
+    display: block;
+}
+
+.form-group__proveedor__incorrecto p {
+    color: red;
+    opacity: 1;
 }

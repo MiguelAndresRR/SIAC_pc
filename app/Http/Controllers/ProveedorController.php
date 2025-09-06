@@ -38,7 +38,7 @@ class ProveedorController extends Controller
         return view('admin.proveedores.index', compact('proveedores'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Proveedor $proveedor)
     {
         $request->validate([
             'nombre_proveedor' => 'required|string|min:5|max:50',
@@ -47,7 +47,7 @@ class ProveedorController extends Controller
             'telefono_proveedor' => 'required|digits_between:6,10',
             'correo_proveedor' => 'required|string|email|max:100'
         ]);
-
+        $nombre = ucwords(strtolower($request->nombre_proveedor));
         // Verificar si ya existe un proveedor con el mismo NIT o nombre
         $existingProveedor = Proveedor::where('nit_proveedor', $request->nit_proveedor)
             ->orWhere('nombre_proveedor', $request->nombre_proveedor)
@@ -59,7 +59,15 @@ class ProveedorController extends Controller
                 'text' => 'El proveedor ya existe en la base de datos.'
             ]);
         } else {
-            Proveedor::create($request->all());
+            $proveedor = Proveedor::create([
+            'nombre_proveedor' => $nombre,
+            'nit_proveedor' => $request->nit_proveedor,
+            'direccion_proveedor' => $request->direccion_proveedor,
+            'telefono_proveedor' => $request->telefono_proveedor,
+            'correo_proveedor' => $request->correo_proveedor
+            ]);
+
+
             return redirect()->route('admin.proveedores.index')->with('message', [
                 'type' => 'success',
                 'text' => 'El proveedor se ha creado correctamente.'
@@ -86,7 +94,7 @@ class ProveedorController extends Controller
             'telefono_proveedor' => 'required|digits_between:6,10',
             'correo_proveedor' => 'required|string|email|max:100'
         ]);
-
+        $nombre = ucwords(strtolower($request->nombre_proveedor));
 
         $existingProveedor = Proveedor::where('id_proveedor', $request->id_proveedor)
             ->where('nombre_proveedor', $request->nombre_proveedor)
@@ -102,10 +110,10 @@ class ProveedorController extends Controller
                 'text' => 'El proveedor ya existe en la base de datos.'
             ]);
         } else {
-            $proveedor->nombre_proveedor = $request->nombre_proveedor;
+            $proveedor->nombre_proveedor = $nombre;
+            $proveedor->telefono_proveedor = $request->telefono_proveedor;
             $proveedor->nit_proveedor = $request->nit_proveedor;
             $proveedor->direccion_proveedor = $request->direccion_proveedor;
-            $proveedor->telefono_proveedor = $request->telefono_proveedor;
             $proveedor->correo_proveedor = $request->correo_proveedor;
             $proveedor->save();
 

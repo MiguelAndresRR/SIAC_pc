@@ -5,13 +5,19 @@
             action="{{ route('admin.productos.update', ['producto' => $producto->id_producto ?? 0]) }}">
             @csrf
             @method('PUT')
+            <div class="form-group__producto" id="grupo__nombre_edit">
             <label for="nombre_producto"><i class="fa-solid fa-cubes" style="color: #8b542f;"></i>Producto</label>
             <input type="text" class="form-control" id="nombre_producto" name="nombre_producto"
-                value="{{ old('nombre_producto') }}" placeholder="Nombre del producto" required><br>
+                value="{{ old('nombre_producto') }}" placeholder="Nombre del producto" required>
+                    <p class="alertaInput">Debe tener de a 3-20 caracteres sin simbolos especiales</p>
+                </div>
+            <div class="form-group__producto" id="grupo__precio_edit">
             <label for="precio_producto"><i class="fa-sharp fa-solid fa-coins" style="color: #FFD43B;"></i>Precio del
                 producto</label>
             <input type="number" class="form-control" id="precio_producto" name="precio_producto"
-                value="{{ old('precio_producto') }}" placeholder="Precio del producto" required><br>
+                value="{{ old('precio_producto') }}" placeholder="Precio del producto" required>
+                    <p class="alertaInput">Debe de 1 a 10 digitos, sin simbolos especiales ni letras</p>
+                </div>
             <label for="id_categoria_producto"><i class="fa-sharp fa-solid fa-layer-group"
                     style="color: #ff0000;"></i>Categoría</label>
             <select name="id_categoria_producto" id="id_categoria_producto" class="form-control" required>

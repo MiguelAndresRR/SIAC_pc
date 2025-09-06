@@ -146,7 +146,8 @@ form {
     align-items: none;
     justify-content: none;
     flex-direction: none;
-    & i{
+
+    & i {
         padding: 10px;
     }
 }
@@ -211,4 +212,24 @@ form {
         transform: scale(1.05);
         border: 2px solid #e47012;
     }
+}
+
+.form-group__producto {
+    position: relative;
+}
+
+.alertaInput {
+    opacity: 0;
+    font-size: 0.8rem;
+    color: #dc3545;
+
+}
+
+.form-control:focus+.alertaInput {
+    display: block;
+}
+
+.form-group__producto__incorrecto p {
+    color: red;
+    opacity: 1;
 }

@@ -14,12 +14,22 @@ function asignarEventosModalCrear() {
     if (btnCerrarModal) {
         btnCerrarModal.addEventListener("click", (e) => {
             e.preventDefault();
+            resetValidaciones();
             contModal.classList.remove("mostrar");
             console.log("✅ Modal cerrado");
         });
     }
 }
-
+function resetValidaciones() {
+    document
+        .querySelectorAll("#FormularioProductosCrear .form-group__producto")
+        .forEach((grupo) => {
+            grupo.classList.remove(
+                "form-group__producto__correcto",
+                "form-group__producto__incorrecto"
+            );
+        });
+}
 // Al cargar la página
 asignarEventosModalCrear();
 window.asignarEventosModalCrear = asignarEventosModalCrear;

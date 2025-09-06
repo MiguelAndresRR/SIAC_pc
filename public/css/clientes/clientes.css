@@ -22,25 +22,20 @@
 .registrar-clientes-container h2 {
     place-items: left;
     justify-items: left;
-    padding: 4px;
-    margin-bottom: 20px;
 }
 
 .registrar-clientes-container form {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-
     & input {
         border: 2px solid transparent;
         outline: none;
-        width: auto;
-        padding: 10px;
+        width: 100%;
+        padding: 5px;
         border-radius: 10px;
         background-color: #f3f3f3;
         color: #000000;
         font-size: 16px;
-        margin-bottom: 10px;
 
         &:focus {
             border: 2px solid #9e12e4;
@@ -125,7 +120,7 @@ input[type="number"]::-webkit-outer-spin-button {
     visibility: visible;
 }
 
-.container-modal-crear-clientes .modal {
+.container-modal-crear-clientes.modal {
     width: 100%;
     display: flex;
     margin: 0 500px;
@@ -189,27 +184,6 @@ form {
         box-shadow: 0 0 5px #9e12e4;
     }
 }
-.form-grid {
-    width: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px 20px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    margin-bottom: 5px;
-}
-
-.form-group input {
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
 
 #limpiar-filtros-clientes {
     padding: 10px;
@@ -233,4 +207,23 @@ form {
         transform: scale(1.05);
         border: 2px solid #e47012;
     }
+}
+.form-group,
+.form-group__clientes {
+    position: relative;
+}
+.alertaInput {
+    opacity: 0;
+    font-size: 0.8rem;
+    color: #dc3545;
+
+}
+
+.form-control:focus + .alertaInput {
+    display: block;
+}
+
+.form-group__clientes__incorrecto p {
+    color: red;
+    opacity: 1;
 }

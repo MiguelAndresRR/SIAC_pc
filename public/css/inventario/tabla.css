@@ -1,10 +1,12 @@
 table th,
 table td {
-    padding: 16px;
+    padding: 6px;
     font-size: 14px;
     border-collapse: collapse;
 }
-
+.tabla_detalle_inventario td{
+    padding: 16px;
+}
 table td {
     border-bottom: #cecece 2px solid;
     border-right: #cecece 2px solid;

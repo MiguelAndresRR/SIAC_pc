@@ -8,7 +8,7 @@
                 <th>Stock Lote</th>
             </tr>
         </thead>
-        <tbody id="container-inventario-table">
+        <tbody class="tabla_detalle_inventario" id="container-inventario-table" padding="10px">
             @foreach ($detallesInventario as $inventario)
                 <tr>
                     <td>{{$inventario->id_detalle_compra}}</td>

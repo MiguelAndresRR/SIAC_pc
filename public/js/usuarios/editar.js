@@ -15,7 +15,7 @@ function resetValidacionesEdit() {
 if (btnOcultarModalEdit) {
     btnOcultarModalEdit.addEventListener("click", (e) => {
         e.preventDefault();
-        resetValidacionesEdit()
+        resetValidacionesEdit();
         contModalEdit.classList.remove("mostrar");
     });
 }

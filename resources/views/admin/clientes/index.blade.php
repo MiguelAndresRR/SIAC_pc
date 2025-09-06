@@ -60,5 +60,7 @@
     <script src="{{ asset('js/clientes/showboton.js') }}"></script>
     <script src="{{ asset('js/clientes/borrar.js') }}"></script>
     <script src="{{ asset('js/clientes/filtrar.js') }}"></script>
+    <script src="{{ asset('js/clientes/validarFormularios.js') }}"></script>
+    <script src="{{ asset('js/clientes/validarFormeEdit.js')}}"></script>
 </body>
 </html>
