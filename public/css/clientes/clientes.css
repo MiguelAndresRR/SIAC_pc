@@ -209,21 +209,18 @@ form {
     }
 }
 .form-group,
-.form-group__clientes {
+.form-group__cliente {
     position: relative;
 }
+
 .alertaInput {
     opacity: 0;
     font-size: 0.8rem;
     color: #dc3545;
-
+    transition: opacity 0.3s ease;
 }
 
-.form-control:focus + .alertaInput {
-    display: block;
-}
-
-.form-group__clientes__incorrecto p {
-    color: red;
+.form-group__cliente__incorrecto p {
+    color: #dc3545;
     opacity: 1;
 }

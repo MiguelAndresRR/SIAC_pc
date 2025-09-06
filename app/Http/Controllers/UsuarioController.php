@@ -159,14 +159,16 @@ class UsuarioController extends Controller
         $apellido = ucwords(strtolower($request->apellido_usuario));
 
         // Verificar duplicados
-        $existingUsuario = User::where('documento_usuario', $request->documento_usuario)
-            ->where('telefono_usuario', $request->telefono_usuario)
-            ->where('correo_usuario', $request->correo_usuario)
-            ->where('user', $request->user)
-            ->where('id_usuario', '!=', $usuario->id_usuario)
-            ->first();
+        $existe = User::where('id_usuario', '!=', $usuario->id_usuario)
+            ->where(function ($q) use ($request) {
+                $q->where('documento_usuario', $request->documento_usuario)
+                    ->orWhere('telefono_usuario', $request->telefono_usuario)
+                    ->orWhere('correo_usuario', $request->correo_usuario)
+                    ->orWhere('user', $request->user);
+            })
+            ->exists();
 
-        if ($existingUsuario) {
+        if ($existe) {
             return redirect()->route('admin.usuarios.index')->with('message', [
                 'type' => 'error',
                 'text' => 'El usuario ya existe en la base de datos.'
@@ -198,7 +200,7 @@ class UsuarioController extends Controller
                 'text' => 'No puedes eliminar tu propio usuario mientras estás logueado.'
             ]);
         }
-        if ($usuario->compras()->exist()) {
+        if ($usuario->compras()->exists()) {
             return redirect()->back()->with('message', [
                 'type' => 'error',
                 'text' => 'No se puede eliminar el usuario porque tiene compras registradas.'

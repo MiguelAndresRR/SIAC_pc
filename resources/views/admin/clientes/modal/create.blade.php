@@ -13,7 +13,7 @@
                     <p class="alertaInput">Debe tener de a 4-20 caracteres sin simbolos especiales</p>
                 </div>
 
-                <div class="form-group__cliente" id="grupo__apellidos">
+                <div class="form-group__cliente" id="grupo__apellido">
                     <label for="apellido_cliente"><i class="fa-solid fa-user"></i>
                         Apellido</label>
                     <input type="text" name="apellido_cliente" id="apellido_cliente" placeholder="Apellido del cliente"

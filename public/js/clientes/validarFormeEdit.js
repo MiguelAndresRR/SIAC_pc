@@ -3,11 +3,11 @@ const inputsEdit = document.querySelectorAll("#form_editar-clientes input");
 
 const expresionesedit = {
     nombre: /^[a-zA-ZÁ-ÿ\s]{3,25}$/,
-    user: /^[a-zA-Z0-9_]{3,16}$/,
+
     numero: /^[0-9]{1,10}$/,
 };
 
-const campos = {
+const campos1 = {
     nombre: false,
     apellido: false,
     telefono: false,
@@ -20,7 +20,7 @@ const validarFormularioEdit = (e) => {
             validarCampoEdit(expresionesedit.nombre, e.target, "nombre");
             break;
         case "apellido_cliente":
-            validarCampoEdit(expresionesedit.nombre, e.target, "apellidos");
+            validarCampoEdit(expresionesedit.nombre, e.target, "apellido");
             break;
         case "telefono_cliente":
             validarCampoEdit(expresionesedit.numero, e.target, "telefono");
@@ -36,19 +36,13 @@ const validarCampoEdit = (expresion, input, campo) => {
         document
             .getElementById(`grupo__${campo}_edit`)
             .classList.remove("form-group__cliente__incorrecto");
-        document
-            .getElementById(`grupo__${campo}_edit`)
-            .classList.add("form-group__cliente__correcto");
-        campos[campo] = true;
+        campos1[campo] = true;
     } else {
         document
             .getElementById(`grupo__${campo}_edit`)
             .classList.add("form-group__cliente__incorrecto");
-        document
-            .getElementById(`grupo__${campo}_edit`)
-            .classList.remove("form-group__cliente__correcto");
 
-        campos[campo] = false;
+        campos1[campo] = false;
     }
 };
 
@@ -59,10 +53,9 @@ inputsEdit.forEach((input) => {
 
 formularioEdit.addEventListener("submit", (e) => {
     e.preventDefault();
-
     inputsEdit.forEach((input) => validarFormularioEdit({ target: input }));
 
-    if (campos.nombre && campos.apellido && campos.user && campos.telefono && campos.documento) {
+    if (campos1.nombre && campos1.apellido && campos1.telefono && campos1.documento) {
         formularioEdit.submit();
     } else {
         alert("Por favor completa los campos correctamente.");

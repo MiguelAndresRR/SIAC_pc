@@ -2,6 +2,7 @@
 
 namespace App\Models\usuarios;
 
+use App\Models\compras\Compra;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\ventas\Venta;
 class User extends Authenticatable
@@ -36,6 +37,11 @@ class User extends Authenticatable
     public function venta()
     {
         return $this->hasMany(Venta::class, 'id_usuario');
+    }
+
+    public function compras()
+    {
+        return $this->hasMany(Compra::class, 'id_usuario');
     }
 
 }

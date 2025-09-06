@@ -3,10 +3,9 @@ const inputsCrear = document.querySelectorAll("#formularioCliente input");
 
 const expresiones = {
     nombre: /^[a-zA-ZÁ-ÿ\s]{3,25}$/,
-    user: /^[a-zA-Z0-9_]{3,16}$/,
     numero: /^[0-9]{1,10}$/,
 };
-campos = {
+const campos = {
     nombre: false,
     apellido: false,
     documento: false,
@@ -19,7 +18,7 @@ const validarFormulario = (e) => {
             validarCampo(expresiones.nombre, e.target, "nombre");
             break;
         case "apellido_cliente":
-            validarCampo(expresiones.nombre, e.target, "apellidos");
+            validarCampo(expresiones.nombre, e.target, "apellido");
             break;
         case "documento_cliente":
             validarCampo(expresiones.numero, e.target, "documento");
@@ -60,13 +59,7 @@ formularioCrear.addEventListener("submit", (e) => {
 
     inputsCrear.forEach((input) => validarFormulario({ target: input }));
 
-    if (
-        campos.nombre &&
-        campos.apellido &&
-        campos.user &&
-        campos.documento &&
-        campos.telefono
-    ) {
+    if ( campos.nombre && campos.apellido && campos.documento && campos.telefono) {
         formularioCrear.submit();
     } else {
         alert("Por favor completa los campos correctamente.");
