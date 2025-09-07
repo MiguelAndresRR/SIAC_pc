@@ -62,7 +62,9 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: #f0f0f0 url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 0.75rem center;
+    background: #f0f0f0
+        url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')
+        no-repeat right 0.75rem center;
     padding-right: 2rem;
     border-radius: 0.75rem;
 
@@ -115,14 +117,12 @@ input[type="number"]::-webkit-outer-spin-button {
     align-items: center;
     justify-content: center;
     z-index: 1000;
-
 }
 
 .container-modal-crear-productos.mostrar {
     opacity: 1;
     visibility: visible;
 }
-
 
 .container-modal-crear-productos .modal {
     width: 100%;
@@ -164,7 +164,6 @@ form {
     justify-content: left;
     gap: 10px;
     width: 100%;
-
 }
 
 .form-control {
@@ -222,14 +221,14 @@ form {
     opacity: 0;
     font-size: 0.8rem;
     color: #dc3545;
-
 }
 
-.form-control:focus+.alertaInput {
+.form-control:focus + .alertaInput {
     display: block;
 }
 
 .form-group__producto__incorrecto p {
     color: red;
     opacity: 1;
+    transition: opacity 0.3s ease;
 }

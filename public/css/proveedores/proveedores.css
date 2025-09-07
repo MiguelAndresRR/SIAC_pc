@@ -218,7 +218,6 @@ form {
     opacity: 0;
     font-size: 0.8rem;
     color: #dc3545;
-
 }
 
 .form-control:focus + .alertaInput {
@@ -228,4 +227,5 @@ form {
 .form-group__proveedor__incorrecto p {
     color: red;
     opacity: 1;
+    transition: opacity 0.3s ease;
 }
