@@ -88,7 +88,7 @@ class ComprasController extends Controller
         ];
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.compras_pdf', $data);
-        return $pdf->stream('reporte_compras.pdf');
+        return $pdf->download('reporte_compras.pdf');
     }
 
 

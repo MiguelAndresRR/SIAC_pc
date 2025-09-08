@@ -99,7 +99,7 @@ class VentasController extends Controller
         ];
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.ventas_pdf', $data);
-        return $pdf->stream('reporte ventas.pdf');
+        return $pdf->download('reporte_ventas.pdf');
     }
 
     public function store(Request $request, Venta $venta)

@@ -89,7 +89,7 @@ class ProductoController extends Controller
         ];
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.productos_pdf', $data);
-        return $pdf->stream('reporte productos.pdf');
+        return $pdf->download('reporte productos.pdf');
     }
 
 
