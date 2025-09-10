@@ -31,4 +31,3 @@
 <div class="paginacion">
     @include('admin.detallesInventario.layoutDetallesInventario.paginacion')
 </div>
-<script src="{{ asset('js/inventario/verDetalles.js')}}"></script>

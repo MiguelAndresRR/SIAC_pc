@@ -61,6 +61,6 @@
             @include('admin.inventario.layoutinventario.tablainventario')
         </div>
     </div>
+    <script src="{{ asset('js/inventario/verDetalles.js') }}"></script>
 </body>
-
 </html>
