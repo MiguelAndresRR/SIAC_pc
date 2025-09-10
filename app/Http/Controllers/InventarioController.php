@@ -36,5 +36,20 @@ class InventarioController extends Controller
 
         return view('admin.inventario.index', compact('inventarioProductos'));
     }
-    
+    public function generarPDF()
+    {
+        $inventario = Inventario::with('producto')->get();
+
+        $detalles = DetalleInventario::with(['detalleCompra.producto'])
+            ->where('stock_lote', '>', 0)
+            ->get();
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.inventario_pdf',[
+            'titulo' => 'Reportes de Inventario',
+            'inventario' => $inventario,
+            'detalles' => $detalles
+        ]);
+
+        return $pdf->download('reporte_inventario.pdf');
+    }
 }

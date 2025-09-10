@@ -233,8 +233,8 @@ Route::middleware('prevent-back')->group(function () {
             ->name('admin.detallesVentas.destroy');
 
         //inventario
-        Route::post('admin/inventario/store/{id_producto}', [InventarioController::class, 'store'])->name('admin.inventario.store');
         Route::get('admin/inventario/index', [InventarioController::class, 'index'])->name('admin.inventario.index');
+        Route::get('admin/inventario/pdf', [InventarioController::class, 'generarPDF'])->name('admin.reportes.inventario_pdf');
         Route::get('admin/inventario/{id_producto}/detalles', [DetallesInventarioController::class, 'index'])->name('admin.detallesInventario.index');
 
         //cerrar sesion
