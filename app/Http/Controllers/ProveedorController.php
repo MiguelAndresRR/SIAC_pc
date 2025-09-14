@@ -60,11 +60,11 @@ class ProveedorController extends Controller
             ]);
         } else {
             $proveedor = Proveedor::create([
-            'nombre_proveedor' => $nombre,
-            'nit_proveedor' => $request->nit_proveedor,
-            'direccion_proveedor' => $request->direccion_proveedor,
-            'telefono_proveedor' => $request->telefono_proveedor,
-            'correo_proveedor' => $request->correo_proveedor
+                'nombre_proveedor' => $nombre,
+                'nit_proveedor' => $request->nit_proveedor,
+                'direccion_proveedor' => $request->direccion_proveedor,
+                'telefono_proveedor' => $request->telefono_proveedor,
+                'correo_proveedor' => $request->correo_proveedor
             ]);
 
 
@@ -96,13 +96,13 @@ class ProveedorController extends Controller
         ]);
         $nombre = ucwords(strtolower($request->nombre_proveedor));
 
-        $existingProveedor = Proveedor::where('id_proveedor', $request->id_proveedor)
-            ->where('nombre_proveedor', $request->nombre_proveedor)
-            ->where('nit_proveedor', $request->nit_proveedor)
-            ->where('direccion_proveedor', $request->direccion_proveedor)
-            ->where('telefono_proveedor', $request->telefono_proveedor)
-            ->where('correo_proveedor', $request->correo_proveedor)
+        $existingProveedor = Proveedor::where(function ($query) use ($request) {
+            $query->where('nit_proveedor', $request->nit_proveedor)
+                ->orWhere('nombre_proveedor', $request->nombre_proveedor);
+        })
+            ->where('id_proveedor', '!=', $proveedor->id_proveedor)
             ->first();
+
 
         if ($existingProveedor) {
             return redirect()->route('admin.proveedores.index')->with('message', [

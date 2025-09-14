@@ -32,7 +32,7 @@ const validarCampoEdit = (expresion, input, campo) => {
             .getElementById(`grupo_${campo}_edit`)
             .classList.remove("form-group__proveedor__incorrecto");
         document
-            .getElementById(`grupo__${campo}_edit`)
+            .getElementById(`grupo_${campo}_edit`)
             .classList.add("form-group__proveedor__correcto");
 
         campos[campo] = true;
