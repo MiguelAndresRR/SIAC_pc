@@ -5,6 +5,7 @@ namespace App\Models\usuarios;
 use App\Models\compras\Compra;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\ventas\Venta;
+
 class User extends Authenticatable
 {
     protected $table = 'usuario';
@@ -43,5 +44,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Compra::class, 'id_usuario');
     }
-
 }

@@ -7,6 +7,7 @@ use App\Models\usuarios\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\usuarios\Rol;
 use Illuminate\Support\Facades\Auth;
+use App\Models\compras\Compra;
 
 class UsuarioController extends Controller
 {
@@ -86,27 +87,35 @@ class UsuarioController extends Controller
         $apellido = ucwords(strtolower($request->apellido_usuario));
 
 
-        if ($existingUsuario) {
+        $existe = User::where('id_usuario', '!=', $usuario->id_usuario)
+            ->where(function ($q) use ($request) {
+                $q->where('documento_usuario', $request->documento_usuario)
+                    ->orWhere('telefono_usuario', $request->telefono_usuario)
+                    ->orWhere('correo_usuario', $request->correo_usuario)
+                    ->orWhere('user', $request->user);
+            })
+            ->exists();
+
+        if ($existe) {
             return redirect()->route('admin.usuarios.index')->with('message', [
                 'type' => 'error',
                 'text' => 'El usuario ya existe en la base de datos.'
             ]);
-        } else {
-            $usuario = User::create([
-                'nombre_usuario' => $nombre,
-                'apellido_usuario' => $apellido,
-                'documento_usuario' => $request->documento_usuario,
-                'telefono_usuario' => $request->telefono_usuario,
-                'id_rol' => $request->id_rol,
-                'correo_usuario' => $request->correo_usuario,
-                'user' => $request->user,
-                'password' => $request->password
-            ]);
-            return redirect()->route('admin.usuarios.index')->with('message', [
-                'type' => 'success',
-                'text' => 'El usuario se ha creado correctamente.'
-            ]);
         }
+        $usuario = User::create([
+            'nombre_usuario' => $nombre,
+            'apellido_usuario' => $apellido,
+            'documento_usuario' => $request->documento_usuario,
+            'telefono_usuario' => $request->telefono_usuario,
+            'id_rol' => $request->id_rol,
+            'correo_usuario' => $request->correo_usuario,
+            'user' => $request->user,
+            'password' => $request->password
+        ]);
+        return redirect()->route('admin.usuarios.index')->with('message', [
+            'type' => 'success',
+            'text' => 'El usuario se ha creado correctamente.'
+        ]);
     }
     public function show(User $usuario)
     {
@@ -200,17 +209,16 @@ class UsuarioController extends Controller
                 'text' => 'No puedes eliminar tu propio usuario mientras estás logueado.'
             ]);
         }
-        if ($usuario->compras()->exists()) {
+        if ($usuario->compras()->exists() or $usuario->venta()->exists()) {
             return redirect()->back()->with('message', [
                 'type' => 'error',
                 'text' => 'No se puede eliminar el usuario porque tiene compras registradas.'
             ]);
-        } else {
-            $usuario->delete();
-            return redirect()->route('admin.usuarios.index')->with('message', [
-                'type' => 'success',
-                'text' => 'Usuario eliminado correctamente.'
-            ]);
         }
+        $usuario->delete();
+        return redirect()->route('admin.usuarios.index')->with('message', [
+            'type' => 'success',
+            'text' => 'Usuario eliminado correctamente.'
+        ]);
     }
 }
