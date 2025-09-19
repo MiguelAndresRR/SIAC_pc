@@ -1,4 +1,4 @@
-/* Fondo del modal: ocupa toda la pantalla, centro contenido, oculto por defecto */
+
 .container-modal-show-detallesCompras {
     position: fixed;
     top: 0;
@@ -15,13 +15,12 @@
     z-index: 1000;
 }
 
-/* Cuando se muestra, se activa visibilidad y se permite interacción */
 .container-modal-show-detallesCompras.mostrar {
     opacity: 1;
     visibility: visible;
 }
 
-/* Contenedor interno del modal */
+
 .container-modal-show-detallesCompras .modal {
     background-color: white;
     border-radius: 10px;

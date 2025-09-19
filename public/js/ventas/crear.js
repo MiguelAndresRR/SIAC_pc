@@ -1,3 +1,4 @@
+// nos muestra el modal para crear las ventas.
 function asignarEventosModalCrear() {
     const btnAbrirModal = document.querySelector("#crear-modal-ventas");
     const btnCerrarModal = document.querySelector("#ocultar-modal-crear-ventas");

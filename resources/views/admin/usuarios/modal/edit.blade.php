@@ -5,7 +5,6 @@
             @csrf
             @method('PUT')
             <div class="contenedor-doble">
-                <!-- DATOS PERSONALES -->
                 <div class="datosPersonales">
                     <h2>Datos Personales</h2>
                     <div class="form-grid">

@@ -17,7 +17,7 @@
 }
 
 .paginacion-active {
-    background-color: hsl(0, 0%, 0%); /* azul */
+    background-color: hsl(0, 0%, 0%);
     color: white;
     border: 2px solid transparent;
     transition: all 0.3s ease-in-out;
@@ -25,19 +25,19 @@
 
 .paginacion-active:hover {
     transform: scale(1.03);
-    background-color: #000000; /* azul más oscuro */
+    background-color: #000000;
     border: 2px solid #9e12e4;
     box-shadow: 0 0 5px #9e12e4;
 }
 
 .paginacion-number {
-    background-color: #000000; /* azul claro */
-    color: #ffffff; /* azul texto */
+    background-color: #000000;
+    color: #ffffff;
 }
 
 .paginacion-number:hover {
     transform: scale(1.03);
-    background-color: #000000; /* azul más oscuro */
+    background-color: #000000;
     border: 2px solid #9e12e4;
     box-shadow: 0 0 5px #9e12e4;
     box-shadow: #e412b3;
@@ -49,7 +49,7 @@
 }
 
 .paginacion-disabled {
-    background-color: #d1d5db; /* gris claro */
-    color: #6b7280; /* gris texto */
+    background-color: #d1d5db;
+    color: #6b7280;
     cursor: not-allowed;
 }

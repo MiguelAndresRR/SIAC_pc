@@ -64,5 +64,4 @@
     @include('admin.ventas.modal.edit')
     @include('admin.ventas.modal.create')
 </body>
-
 </html>

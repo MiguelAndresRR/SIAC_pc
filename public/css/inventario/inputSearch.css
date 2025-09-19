@@ -1,4 +1,3 @@
-/* Campo de selección principal */
 .ts-control {
     width: 100% !important;
     background-color: #f3f3f3;
@@ -23,7 +22,6 @@
     box-shadow: 0 0 5px #9e12e4;
 }
 
-/* Input dentro del control */
 .ts-control input {
     border: none;
     outline: none;
@@ -32,7 +30,6 @@
     background-color: transparent;
 }
 
-/* Dropdown de opciones */
 .ts-dropdown {
     width: 100%;
     border-radius: 10px;
@@ -42,8 +39,6 @@
     z-index: 9999;
     padding: 0;
 }
-
-/* Opciones individuales */
 .ts-dropdown .option {
     padding: 10px;
     font-size: 16px;
@@ -61,7 +56,6 @@
     font-weight: bold;
 }
 
-/* Opción seleccionada */
 .ts-dropdown .selected {
     width: auto;
     background-color: #9e12e4;
@@ -69,12 +63,10 @@
     font-weight: bold;
 }
 
-/* Placeholder */
 .ts-control::placeholder {
     color: #ffffff;
 }
 
-/* A veces el fondo está en el contenedor principal */
 .ts-wrapper {
     background: none !important;
 }

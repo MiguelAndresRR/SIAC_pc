@@ -1,3 +1,4 @@
+//despliega el modal para crear los detalles de la compra
 function asignarEventosModalCrear() {
     const btnAbrirModal = document.querySelector("#crear-modal-detallesCompras");
     const btnCerrarModal = document.querySelector("#ocultar-modal-crear-detallesCompras");

@@ -13,35 +13,34 @@ table {
     border-collapse: collapse;
     background-color: black;
 }
-/* Específico para columnas */
 th:nth-child(1),
 td:nth-child(1) {
     width: 50px;
-} /* ID */
+}
 th:nth-child(2),
 td:nth-child(2) {
     width: 50px;
-} /* Proveedor */
+}
 th:nth-child(3),
 td:nth-child(3) {
     width: 100px;
-} /* Producto*/
+}
 th:nth-child(4),
 td:nth-child(4) {
     width: 100px;
-} /* Fecha */
+}
 th:nth-child(5),
 td:nth-child(5) {
     width: 100px;
-} /* Cantidad */
+}
 th:nth-child(6),
 td:nth-child(6) {
     width: 80px;
-} /* Correo */
+}
 th:nth-child(7),
 td:nth-child(7) {
     width: 100px;
-} /* Botones */
+} 
 tbody {
     background-color: #ffffff;
     color: #000000;
@@ -120,7 +119,7 @@ tbody {
     transform: scale(1.05);
     border: #ff2600 2px solid;
 }
-/* encabezado tabla */
+
 thead {
     color: #ffffff;
     margin: 0;
