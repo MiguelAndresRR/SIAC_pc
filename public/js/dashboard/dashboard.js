@@ -1,3 +1,4 @@
+//Esta funcion es para la animacion del sidebar cuando tenga el mouse encima de el.
 const sidebar = document.getElementById("sidebar");
 
 sidebar.addEventListener("mouseenter", () => {

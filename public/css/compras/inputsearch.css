@@ -1,4 +1,3 @@
-/* Campo de selección principal */
 .ts-control {
     width: 100% !important;
     background-color: #f3f3f3;
@@ -74,7 +73,6 @@
     color: #ffffff;
 }
 
-/* A veces el fondo está en el contenedor principal */
 .ts-wrapper {
     background: none !important;
 }

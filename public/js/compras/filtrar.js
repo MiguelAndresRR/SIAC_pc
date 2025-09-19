@@ -1,3 +1,11 @@
+//Este script en JavaScript se ejecuta al cargar el DOM y se encarga de gestionar los filtros dinámicos de las compras en una tabla. Primero, 
+// obtiene el formulario de filtros y define la función filtro(), que envía los datos del formulario al servidor mediante fetch con AJAX, 
+// actualizando la tabla de compras sin recargar la página. Además, 
+// agrega eventos a los campos de búsqueda para ejecutar el filtro automáticamente tras un breve retraso al escribir, 
+// y al botón de limpiar para reiniciar los filtros y recargar los resultados. 
+// También intercepta los clics en los enlaces de paginación para mantener los filtros activos mientras se navega entre páginas. 
+// Finalmente, después de cada actualización de la tabla, 
+// vuelve a asignar los eventos necesarios a los botones de acciones (como ver o crear) si estas funciones globales están definidas.
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("filtro-form-compras");
     console.log("Form encontrado:", form);

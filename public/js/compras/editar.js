@@ -1,3 +1,4 @@
+//Este js nos permite mostrar todos los registros del formulario a editar.
 const btnOcultarModalEdit = document.querySelector(
     "#ocultar-modal-editar-compras"
 );

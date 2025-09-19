@@ -163,12 +163,11 @@ class DetallesComprasController extends Controller
     // Actualizar un detalle de compra existente
     public function update(Request $request, DetalleCompra $detalleCompra)
     {
-        // Validar datos
         $request->validate([
-            'id_compra' => 'required|exists:compra,id_compra',
-            'id_producto' => 'required|exists:producto,id_producto',
+            'id_compra'         => 'required|exists:compra,id_compra',
+            'id_producto'       => 'required|exists:producto,id_producto',
             'cantidad_producto' => 'required|integer|min:1',
-            'precio_unitario' => 'required|numeric|min:0',
+            'precio_unitario'   => 'required|numeric|min:0',
             'fecha_vencimiento' => 'nullable|date'
         ]);
 
@@ -176,7 +175,7 @@ class DetallesComprasController extends Controller
         $stock_lote = DetalleInventario::where('id_detalle_compra', $detalleCompra->id_detalle_compra)
             ->value('stock_lote') ?? 0;
 
-        // Diferencia con lo que viene del request
+        // Diferencia entre lo que viene y lo que había
         $validarStock = $request->cantidad_producto - $detalleCompra->cantidad_producto;
 
         // Validar que no quede negativo
@@ -186,44 +185,86 @@ class DetallesComprasController extends Controller
                 'text' => 'No se puede actualizar porque el inventario quedaría negativo.'
             ]);
         }
+
+        // Caso: cambio de producto
         if ($request->id_producto != $detalleCompra->id_producto) {
-            if ($request->cantidad_producto == $stock_lote) {
+            // Solo permitir si no se han vendido unidades (stock intacto)
+            if ($detalleCompra->cantidad_producto == $stock_lote) {
+
+                // 1. Eliminar el inventario viejo
+                DetalleInventario::where('id_detalle_compra', $detalleCompra->id_detalle_compra)->delete();
+
+                // 2. Actualizar el detalle de compra
+                $detalleCompra->update([
+                    'id_compra'         => $request->id_compra,
+                    'id_producto'       => $request->id_producto,
+                    'cantidad_producto' => $request->cantidad_producto,
+                    'precio_unitario'   => $request->precio_unitario,
+                    'subtotal_compra'   => $request->cantidad_producto * $request->precio_unitario,
+                    'fecha_vencimiento' => $request->fecha_vencimiento,
+                ]);
+
+                // 3. Crear o actualizar el inventario del nuevo producto
+                $inventario = Inventario::firstOrCreate(
+                    ['id_producto' => $request->id_producto],
+                    ['stock_total' => 0]
+                );
+
+                DetalleInventario::updateOrCreate(
+                    [
+                        'id_inventario'     => $inventario->id_inventario,
+                        'id_detalle_compra' => $detalleCompra->id_detalle_compra,
+                    ],
+                    [
+                        'stock_lote' => $request->cantidad_producto, // stock nuevo directo
+                    ]
+                );
+
+                return redirect()->back()->with('message', [
+                    'type' => 'success',
+                    'text' => 'El detalle de compra se cambió de producto y el inventario fue actualizado.'
+                ]);
             } else {
                 return back()->with('message', [
                     'type' => 'error',
-                    'text' => 'No se puede cambiar de producto ya que se realizaron ventas con este lote'
+                    'text' => 'No se puede cambiar de producto porque ya hubo ventas en este lote.'
                 ]);
             }
-        } else {
-            $detalleCompra->update([
-                'id_compra' => $request->id_compra,
-                'id_producto' => $request->id_producto,
-                'cantidad_producto' => $request->cantidad_producto,
-                'precio_unitario' => $request->precio_unitario,
-                'subtotal_compra' => $request->cantidad_producto * $request->precio_unitario,
-                'fecha_vencimiento' => $request->fecha_vencimiento,
-            ]);
-            $inventario = Inventario::firstOrCreate(
-                ['id_producto' => $request->id_producto],
-                ['stock_total' => 0]
-            );
-            $nuevo_stock = $stock_lote + $validarStock;
-
-            DetalleInventario::updateOrCreate(
-                [
-                    'id_inventario' => $inventario->id_inventario,
-                    'id_detalle_compra' => $detalleCompra->id_detalle_compra,
-                ],
-                [
-                    'stock_lote' => $nuevo_stock,
-                ]
-            );
-            return redirect()->back()->with('message', [
-                'type' => 'success',
-                'text' => 'El detalle de compra se ha modificado correctamente y el inventario actualizado.'
-            ]);
         }
+
+        // Caso: mismo producto, ajustar cantidad/precio
+        $detalleCompra->update([
+            'id_compra'         => $request->id_compra,
+            'id_producto'       => $request->id_producto,
+            'cantidad_producto' => $request->cantidad_producto,
+            'precio_unitario'   => $request->precio_unitario,
+            'subtotal_compra'   => $request->cantidad_producto * $request->precio_unitario,
+            'fecha_vencimiento' => $request->fecha_vencimiento,
+        ]);
+
+        $inventario = Inventario::firstOrCreate(
+            ['id_producto' => $request->id_producto],
+            ['stock_total' => 0]
+        );
+
+        $nuevo_stock = $stock_lote + $validarStock;
+
+        DetalleInventario::updateOrCreate(
+            [
+                'id_inventario'     => $inventario->id_inventario,
+                'id_detalle_compra' => $detalleCompra->id_detalle_compra,
+            ],
+            [
+                'stock_lote' => $nuevo_stock,
+            ]
+        );
+
+        return redirect()->back()->with('message', [
+            'type' => 'success',
+            'text' => 'El detalle de compra se ha modificado correctamente y el inventario actualizado.'
+        ]);
     }
+
 
 
     // Eliminar un detalle de compra

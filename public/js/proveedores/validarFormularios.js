@@ -1,3 +1,6 @@
+//Este script valida el formulario de crear, 
+// nos permite verificar que se cumplan las condiciones y si no es el caso nos arroja un error. 
+// Evitando que se pueda enviar.
 const formularioCrear = document.getElementById("formularioProveedor");
 const inputsCrear = document.querySelectorAll("#formularioProveedor input");
 

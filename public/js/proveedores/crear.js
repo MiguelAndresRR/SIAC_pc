@@ -1,3 +1,4 @@
+//Esta funcion nos permite mostrar el modal para crear el resgistro y tambien de cerrarlo
 function asignarEventosModalCrear() {
     const btnAbrirModal = document.querySelector("#crear-modal-proveedores");
     const btnCerrarModal = document.querySelector("#ocultar-modal-crear-proveedores");
@@ -18,6 +19,8 @@ function asignarEventosModalCrear() {
         });
     }
 }
+//Esta funcion nos permite que al cerrar el
+//modal dejen de mostrarse las validaciones del formulario
 function resetValidaciones() {
     document
         .querySelectorAll("#formularioProveedor .form-group__proveedor")

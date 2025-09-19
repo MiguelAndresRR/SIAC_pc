@@ -225,28 +225,37 @@ class DetallesVentasController extends Controller
         // Calcular subtotal
         $subtotal = $request->cantidad_venta * $request->precio_unitario_venta;
 
-        if ($request->cantidad_venta != $cantidad_anterior) {
-            // Verificar stock disponible
+        if ($request->id_producto != $detalleVenta->id_producto) {
+            $this->devolverStock($detalleVenta->id_producto, $detalleVenta->cantidad_venta);
+
             $total_stock = DetalleInventario::whereHas('detalleCompra', function ($query) use ($request) {
                 $query->where('id_producto', $request->id_producto);
             })->sum('stock_lote');
 
-            $diferencia = $request->cantidad_venta - $cantidad_anterior;
-            if ($diferencia > 0 && $diferencia > $total_stock) {
-                return redirect()->back()->withInput()->with('message', [
+            if ($request->cantidad_venta > $total_stock) {
+                return back()->with('message', [
                     'type' => 'error',
-                    'text' => 'No hay suficiente stock disponible para el producto seleccionado.'
+                    'text' => 'No hay suficiente stock disponible para el nuevo producto.'
                 ]);
-            } else {
-                // Actualizar campos
-                $detalleVenta->cantidad_venta        = $request->cantidad_venta;
-                $detalleVenta->save();
-
-                $diferencia = $request->cantidad_venta - $cantidad_anterior;
-
-                $this->actualizarStockInventario($detalleVenta->id_producto, $diferencia);
             }
+            $this->actualizarStockInventario($request->id_producto, $request->cantidad_venta);
+        } elseif ($request->cantidad_venta != $cantidad_anterior) {
+            $diferencia = $request->cantidad_venta - $cantidad_anterior;
+
+            if ($diferencia > 0) {
+                $stock_total = DetalleInventario::whereHas('detalleCompra', function ($query) use ($request) {
+                    $query->where('id_producto', $request->id_producto);
+                })->sum('stock_lote');
+                if ($diferencia > $stock_total) {
+                    return back()->withInput()->with('message', [
+                        'type' => 'error',
+                        'text' => 'No hay suficiente stock disponible para aumentar la cantidad.'
+                    ]);
+                }
+            }
+            $this->actualizarStockInventario($detalleVenta->id_producto, $diferencia);
         }
+
         $detalleVenta->id_venta              = $request->id_venta;
         $detalleVenta->id_producto           = $request->id_producto;
         $detalleVenta->cantidad_venta        = $request->cantidad_venta;

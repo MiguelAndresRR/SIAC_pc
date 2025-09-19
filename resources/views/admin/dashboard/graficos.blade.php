@@ -4,7 +4,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-
+{{-- Este script nos permite realizar un grafico de los productos menos vendidos --}}
 <script>
     Chart.register(ChartDataLabels);
 

@@ -1,3 +1,4 @@
+//Este js nos permite mostrar todos los registros del formulario para editar.
 const btnOcultarModalEdit = document.querySelector(
     "#ocultar-modal-editar-ventas"
 );
@@ -27,7 +28,6 @@ document.addEventListener("click", function (e) {
             document.getElementById(
                 "form_editar-ventas"
             ).action = `/admin/ventas/${id_venta}`;
-            console.log("Modal mostrado");
             contModalEdit.classList.add("mostrar");
         })
         .catch((error) => console.error("Error al cargar datos:", error));

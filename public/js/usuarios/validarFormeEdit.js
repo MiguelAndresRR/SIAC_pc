@@ -1,3 +1,6 @@
+//Este script valida el formulario de editar, 
+// nos permite verificar que se cumplan las condiciones y si no es el caso nos arroja un error. 
+// Evitando que se pueda enviar.
 const formularioEdit = document.getElementById("form_editar1");
 const inputsEdit = document.querySelectorAll("#form_editar1 input");
 

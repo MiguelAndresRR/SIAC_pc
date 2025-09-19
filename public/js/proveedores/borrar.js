@@ -1,3 +1,5 @@
+//Se activa cuando el usuario quiere borrar el registro, cuando se confirme
+//se enviara al controlador para que este registro sea borrado.
 document.addEventListener("click", function (e) {
     const btn = e.target.closest(".borrar-boton");
     if (!btn) return;

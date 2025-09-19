@@ -1,3 +1,4 @@
+//Este script nos permite llamar los datos para ver los detalles que tenga el registro.
 document.addEventListener("DOMContentLoaded", function () {
     const btnOcultarModalShow = document.querySelector("#ocultar-modal-proveedores");
     const contModalShow = document.querySelector(".container-modal-show-proveedores");

@@ -1,3 +1,4 @@
+{{-- Nos muestra una tarjeta sobre la ganancia totales y ventas totales --}}
 <div class="grid-container">
     <div class="grid-card" id="ganancias">
         <h4>Ganancias</h4>

@@ -1,3 +1,5 @@
+//Este js nos permite mostrar todos los registros del formulario para editar,
+//ademas de resetear la validacion de campos al cerrar el modal.
 const btnOcultarModalEdit = document.querySelector("#ocultar-modal-editar-proveedores");
 const contModalEdit = document.querySelector(".container-modal-editar-proveedores");
 function resetValidacionesEdit() {

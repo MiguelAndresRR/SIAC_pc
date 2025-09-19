@@ -1,3 +1,4 @@
+{{-- Son dos cartas que nos muestra los productos sin stock y con bajo stock --}}
 <div class="grid-container">
     <div class="grid-card" id="sin-stock">
         <h4>Sin Stock</h4>

@@ -177,7 +177,6 @@ body {
     text-align: center;
 }
 
-/* Contenedor UL que se ajusta pero no se desborda */
 .grid-card ul {
     list-style: none;
     padding: 0;
@@ -192,7 +191,6 @@ body {
     overflow-y: auto;
 }
 
-/* Scroll estilizado */
 .grid-card ul::-webkit-scrollbar {
     width: 6px;
 }
@@ -250,8 +248,8 @@ h4 {
 .header {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* empuja el botón a la derecha */
-    width: 100%; /* ocupar todo el ancho */
+    justify-content: space-between;
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -265,7 +263,7 @@ h4 {
     padding: 10px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    text-decoration: none; /* quitar subrayado */
+    text-decoration: none;
 }
 
 .pdfGenerar:hover {

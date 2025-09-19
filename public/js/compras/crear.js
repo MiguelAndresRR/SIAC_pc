@@ -1,3 +1,4 @@
+//Esta funcion nos permite mostrar el modal para crear el resgistro y tambien de cerrarlo
 function asignarEventosModalCrear() {
     const btnAbrirModal = document.querySelector("#crear-modal-compras");
     const btnCerrarModal = document.querySelector("#ocultar-modal-crear-compras");

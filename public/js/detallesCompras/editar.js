@@ -1,3 +1,4 @@
+//Este js nos permite mostrar todos los registros del formulario a editar.
 const btnOcultarModalEdit = document.querySelector(
     "#ocultar-modal-editar-detallesCompras"
 );
@@ -31,7 +32,6 @@ document.addEventListener("click", function (e) {
                 data.precio_unitario;
             document.querySelector("#fecha_vencimiento").value =
                 data.fecha_vencimiento;
-            // Actualizar la acción del formulario con el ID correcto
             document.getElementById(
                 "form_editar-detallesCompras"
             ).action = `/admin/detallesCompras/${data.id_detalle_compra}`;

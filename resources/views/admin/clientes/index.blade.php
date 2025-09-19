@@ -7,13 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Clientes</title>
     <meta charset="UTF-8">
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
+
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{ asset('css/clientes/clientes.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <link rel="stylesheet" href="{{ asset('css/clientes/editar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/clientes/tabla.css') }}">
     <link rel="stylesheet" href="{{ asset('css/clientes/paginacion.css') }}">
@@ -55,12 +54,16 @@
     @include('admin.clientes.modal.edit')
     @include('admin.clientes.modal.mostrar')
     @include('admin.clientes.modal.create')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/clientes/crear.js') }}"></script>
     <script src="{{ asset('js/clientes/editar.js') }}"></script>
     <script src="{{ asset('js/clientes/showboton.js') }}"></script>
     <script src="{{ asset('js/clientes/borrar.js') }}"></script>
     <script src="{{ asset('js/clientes/filtrar.js') }}"></script>
     <script src="{{ asset('js/clientes/validarFormularios.js') }}"></script>
-    <script src="{{ asset('js/clientes/validarFormeEdit.js')}}"></script>
+    <script src="{{ asset('js/clientes/validarFormeEdit.js') }}"></script>
 </body>
+
 </html>
