@@ -4,6 +4,8 @@ table td {
     font-size: 14px;
     border-collapse: collapse;
 }
+th:nth-child(1), td:nth-child(1) { width: 50px; }
+th:nth-child(6), td:nth-child(6) { width: 100px; }
 table td {
     border-bottom: #cecece 2px solid;
     border-right: #cecece 2px solid;
@@ -12,31 +14,6 @@ table {
     width: 100%;
     border-collapse: collapse;
     background-color: black;
-}
-/* Específico para columnas */
-th:nth-child(1),
-td:nth-child(1) {
-    width: 50px;
-} /* ID */
-th:nth-child(2),
-td:nth-child(2) {
-    width: 150px;
-} /* Producto */
-th:nth-child(3),
-td:nth-child(3) {
-    width: 100px;
-} /* Precio */
-th:nth-child(4),
-td:nth-child(4) {
-    width: 120px;
-} /* Categoría */
-th:nth-child(5),
-td:nth-child(5) {
-    width: 120px;
-} /* Unidad */
-th:nth-child(6),
-td:nth-child(6) {
-    width: 100px;
 }
 tbody {
     background-color: #ffffff;

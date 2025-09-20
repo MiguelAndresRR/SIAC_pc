@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Compras</title>
     <meta charset="UTF-8">
+    
+    
+    <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -15,7 +19,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{ asset('css/compras/compras.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ asset('css/compras/editar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/compras/tabla.css') }}">
     <link rel="stylesheet" href="{{ asset('css/compras/paginacion.css') }}">
@@ -63,6 +66,7 @@
     </div>
     @include('admin.compras.modal.edit')
     @include('admin.compras.modal.create')
+
 </body>
 
 </html>

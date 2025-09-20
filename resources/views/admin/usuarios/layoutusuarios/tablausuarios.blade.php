@@ -1,8 +1,7 @@
-<div class="container-productos-class">
+<div class="container-productos-class" >
     <table class="tableFixHead">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Usuario</th>
                 <th>Rol</th>
                 <th>Nombres</th>
@@ -21,7 +20,6 @@
         <tbody id="container-productos-table">
             @foreach ($usuarios as $usuario)
                 <tr>
-                    <td>{{ $usuario->id_usuario }}</td>
                     <td>{{ $usuario->user }}</td>
                     <td data-id-categoria="{{ $usuario->id_rol }}">{{ $usuario->rol ? $usuario->rol->nombre_rol : 'Sin rol' }}</td>
                     <td>{{$usuario->nombre_usuario}}</td>

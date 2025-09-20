@@ -284,3 +284,22 @@ form {
     justify-content: space-between;
     gap: 20px;     
 }
+
+.modificar-usuario-container {
+    background: #fff;
+    color: #000;
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.modificar-usuario-container::-webkit-scrollbar {
+    width: 6px;
+}
+.modificar-usuario-container::-webkit-scrollbar-thumb {
+    background-color: #9e12e4;
+    border-radius: 6px;
+}

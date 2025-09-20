@@ -2,13 +2,11 @@
     <table class="tableFixHead">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Proveedor</th>
                 <th>Telefono</th>
                 <th>NIT</th>
                 <th>Direccion</th>
                 <th>Correo</th>
-  
                 <th>
                     <button type="submit" class="btn" id='crear-modal-proveedores'>
                         <i class="fa-solid fa-plus"></i>
@@ -20,7 +18,7 @@
         <tbody id="container-proveedores-table">
             @foreach ($proveedores as $proveedor)
                 <tr>
-                    <td>{{ $proveedor->id_proveedor }}</td>
+
                     <td>{{ $proveedor->nombre_proveedor }}</td>
                     <td>{{ $proveedor->telefono_proveedor}}</td>
                     <td>{{ $proveedor->nit_proveedor}}</td>

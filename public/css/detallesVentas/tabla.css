@@ -4,6 +4,8 @@ table td {
     font-size: 14px;
     border-collapse: collapse;
 }
+th:nth-child(1), td:nth-child(1) { width: 50px; }
+th:nth-child(5), td:nth-child(5) { width: 100px; }
 table td {
     border-bottom: #cecece 2px solid;
     border-right: #cecece 2px solid;
@@ -13,35 +15,6 @@ table {
     border-collapse: collapse;
     background-color: black;
 }
-/* Específico para columnas */
-th:nth-child(1),
-td:nth-child(1) {
-    width: 50px;
-} /* ID */
-th:nth-child(2),
-td:nth-child(2) {
-    width: 50px;
-} /* Proveedor */
-th:nth-child(3),
-td:nth-child(3) {
-    width: 100px;
-} /* Producto*/
-th:nth-child(4),
-td:nth-child(4) {
-    width: 100px;
-} /* Fecha */
-th:nth-child(5),
-td:nth-child(5) {
-    width: 100px;
-} /* Cantidad */
-th:nth-child(6),
-td:nth-child(6) {
-    width: 80px;
-} /* Correo */
-th:nth-child(7),
-td:nth-child(7) {
-    width: 100px;
-} /* Botones */
 tbody {
     background-color: #ffffff;
     color: #000000;
@@ -90,7 +63,7 @@ tbody {
     border: 2px solid #9e12e4;
 }
 #botones button {
-    width: 30%;
+    width: 45%;
     border-radius: 10px;
     background-color: #000000;
     color: #ffffff;

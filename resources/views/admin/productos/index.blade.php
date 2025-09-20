@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Productos</title>
     <meta charset="UTF-8">
+    
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
     <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">

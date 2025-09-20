@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
 
+    //Valida que el usuario si el usuario no esta logeado
+    //con un rol nos retorna a la vista de login para logearnos
     public function showLogin()
     {
         if (Auth::check()) {
@@ -23,6 +25,8 @@ class AuthController extends Controller
         return view('login.login');
     }
 
+    //Recibe los datos de post, verifica primero el usuario, luego la contraseña y 
+    //valida que el usuario corresponda con el id del rol.
     public function login(Request $request)
     {
         $data = $request->validate([
@@ -47,7 +51,8 @@ class AuthController extends Controller
             ->withErrors(['login_error' => 'Usuario, contraseña o rol incorrectos.'])
             ->withInput();
     }
-
+    //Esta funcion hace que cuando el usuario le de al boton de cerrar sesion, invalida la session y 
+    //regenra el token, nos termina retornando al login.
     public function logout(Request $request)
     {
         Auth::logout();

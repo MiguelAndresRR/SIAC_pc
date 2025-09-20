@@ -123,12 +123,21 @@ form {
     width: 100%;
     display: flex;
 }
+.modificar-detallesVentas-container{
+    background: #fff;
+    color: #000;
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding: 20px;
+}
 
-.modificar-detallesVentas-container {
-    background-color: white;
-    opacity: none;
-    width: 45%;
-    align-items: none;
-    justify-content: none;
-    flex-direction: none;
+.modificar-detallesVentas-container::-webkit-scrollbar {
+    width: 6px;
+}
+.modificar-detallesVentas-container::-webkit-scrollbar-thumb {
+    background-color: #9e12e4;
+    border-radius: 6px;
 }

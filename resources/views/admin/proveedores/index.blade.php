@@ -8,12 +8,10 @@
     <title>Proveedores</title>
     <meta charset="UTF-8">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{ asset('css/proveedores/proveedores.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ asset('css/proveedores/editar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/proveedores/tabla.css') }}">
     <link rel="stylesheet" href="{{ asset('css/proveedores/paginacion.css') }}">
@@ -61,7 +59,10 @@
     <script src="{{ asset('js/proveedores/borrar.js') }}"></script>
     <script src="{{ asset('js/proveedores/filtrar.js') }}"></script>
     <script src="{{ asset('js/proveedores/validarFormularios.js') }}"></script>
-    <script src="{{ asset('js/proveedores/validarFormeEdit.js')}}"></script>
+    <script src="{{ asset('js/proveedores/validarFormeEdit.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

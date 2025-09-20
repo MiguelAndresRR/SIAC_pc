@@ -5,17 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Compras</title>
+    <title>Detalle Inventario</title>
     <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{ asset('css/inventario/inventario.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ asset('css/inventario/editar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/inventario/tabla.css') }}">
     <link rel="stylesheet" href="{{ asset('css/inventario/paginacion.css') }}">
@@ -53,7 +50,7 @@
         <div class="header">
             <div class="header-detallesInventario">
                 <h1><i class="fa-solid fa-bag-shopping">
-                    </i>inventario / {{ $nombreProducto}}
+                    </i>inventario / {{ $nombreProducto }}
                 </h1>
             </div>
             <div class="header-detallesInventario">
@@ -67,6 +64,11 @@
             @include('admin.detallesInventario.layoutDetallesInventario.tablaDetallesInventario')
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

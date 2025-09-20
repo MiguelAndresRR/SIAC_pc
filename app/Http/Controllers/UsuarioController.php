@@ -14,7 +14,8 @@ class UsuarioController extends Controller
 
     public function index(Request $request)
     {
-        $query = User::query();
+        $query = User::query()
+            ->where('id_usuario', '!=', 1);
         // Filtro por documento
         if ($request->filled('buscar_documento')) {
             $documento_usuario = preg_replace('/\D/', '', $request->buscar_documento);

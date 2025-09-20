@@ -38,11 +38,6 @@
             </nav>
         </header>
     </div>
-    <?php
-    // $contraseña = "chupalo";
-    // $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT, ['cost' => 12]);
-    // echo $contraseña_hash;
-    ?>
 </body>
 
 </html>

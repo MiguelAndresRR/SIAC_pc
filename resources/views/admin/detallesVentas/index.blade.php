@@ -7,15 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registrar Ventas</title>
     <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{ asset('css/detallesVentas/detallesVentas.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ asset('css/detallesVentas/editar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/detallesVentas/tabla.css') }}">
     <link rel="stylesheet" href="{{ asset('css/detallesVentas/paginacion.css') }}">
@@ -58,7 +55,7 @@
                     <i class="fa-regular fa-circle-left"></i>
                 </a>
             </div>
-            <h1 class="Totalventa">Total Venta: {{$venta->total_venta}}</h1>
+            <h1 class="Totalventa">Total Venta: {{ $venta->total_venta }}</h1>
         </div>
         @include('admin.detallesVentas.layoutdetallesVentas.filtros')
         <div id="tabla-detallesVentas">
@@ -68,6 +65,11 @@
     @include('admin.detallesVentas.modal.edit')
     @include('admin.detallesVentas.modal.mostrar')
     @include('admin.detallesVentas.modal.create')
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://kit.fontawesome.com/171f3dc321.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

@@ -272,3 +272,37 @@ h4 {
     transform: scale(1.03);
     border: 2px solid #ffffff;
 }
+#sidebar {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.containerdashboard {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.containerdashboard::-webkit-scrollbar {
+    display: none;
+}
+.containerdashboard{
+    background: #fff;
+    color: #000;
+    width: 100%;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding: 20px;
+}
+.dataProductos{
+    min-width: 100%;
+    min-height: 100%;
+    height: 100px;
+}

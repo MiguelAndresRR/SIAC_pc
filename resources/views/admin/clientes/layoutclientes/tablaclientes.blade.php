@@ -2,7 +2,6 @@
     <table class="tableFixHead">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Documento</th>
@@ -21,7 +20,6 @@
         <tbody id="container-clientes-table">
             @foreach ($clientes as $cliente)
                 <tr>
-                    <td>{{ $cliente->id_cliente }}</td>
                     <td>{{ $cliente->nombre_cliente }}</td>
                     <td>{{ $cliente->apellido_cliente}}</td>
                     <td>{{ $cliente->documento_cliente}}</td>

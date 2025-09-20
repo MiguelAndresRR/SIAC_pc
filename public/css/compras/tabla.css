@@ -4,6 +4,7 @@ table td {
     font-size: 14px;
     border-collapse: collapse;
 }
+
 table td {
     border-bottom: #cecece 2px solid;
     border-right: #cecece 2px solid;
@@ -141,4 +142,14 @@ table {
     position: sticky;
     top: 0;
     z-index: 1;
+}
+#tabla-compras {
+    th:nth-child(1),
+    td:nth-child(1) {
+        width: 50px;
+    }
+    th:nth-child(6),
+    td:nth-child(6) {
+        width: 150px;
+    }
 }

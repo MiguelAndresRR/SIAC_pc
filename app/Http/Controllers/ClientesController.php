@@ -7,6 +7,9 @@ use App\Models\clientes\Cliente;
 
 class ClientesController extends Controller
 {
+    //Esta funcion nos permite mostrar todoa los datos, cuenta con condicionales que en el
+    //caso de que se utilizen la consulta va a realizarce con esos parametros.
+    //Se maneja la paginacion y nos retorna los datos de la consulta con o sin filtros en la tabla y en el index.
     public function index(Request $request)
     {
         $query = Cliente::query();
@@ -31,6 +34,9 @@ class ClientesController extends Controller
 
         return view('admin.clientes.index', compact('clientes', 'porPagina'));
     }
+
+    //se encarga de guardar los campos del formulario en la base de datos, valida los datos enviados, 
+    //verifica que estos datos no coincidan con otro cliente y los guarda.
     public function store(Request $request, Cliente $cliente)
     {
         $request->validate([
@@ -63,6 +69,8 @@ class ClientesController extends Controller
             ]);
         }
     }
+
+    // esta funcion la usamos para el edit y para el show, que nos permite llamar los datos.
     public function show(Cliente $cliente)
     {
         return response()->json([
@@ -75,6 +83,7 @@ class ClientesController extends Controller
         ]);
     }
 
+    //Es igual que el store, valida que no se repitan los clientes y actualiza el mismo registro.
     public function update(Request $request, Cliente $cliente)
     {
         $request->validate([
@@ -115,6 +124,8 @@ class ClientesController extends Controller
         }
     }
 
+    //Esta funcion nos permite borrar clientes, pero en caso de que este tenga compras asociadas 
+    // no se podra borrar para mantener la trazabilidad. 
     public function destroy($id_cliente)
     {
         $cliente = Cliente::find($id_cliente);

@@ -60,7 +60,7 @@
                             placeholder="Introduce tu contraseña" autocomplete="off" required>
                     </div>
                     {{-- <?php
-                    $contraseña = "Alvtururu578!";
+                    $contraseña = 'Alvtururu578!';
                     $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT, ['cost' => 12]);
                     echo $contraseña_hash;
                     ?> --}}

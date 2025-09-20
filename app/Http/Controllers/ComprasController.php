@@ -11,7 +11,9 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class ComprasController extends Controller
 {
-
+    //Esta funcion nos permite mostrar todoa los datos, cuenta con condicionales que en el
+    //caso de que se utilizen la consulta va a realizarce con esos parametros.
+    //Se maneja la paginacion y nos retorna los datos de la consulta con o sin filtros en la tabla y en el index.
     public function index(Request $request, DetalleCompra $id_compra)
     {
         //filtros
@@ -45,6 +47,8 @@ class ComprasController extends Controller
         return view('admin.compras.index', compact('compras', 'proveedores'));
     }
 
+    //Esta funcion nos permite descargar PDF de los datos que esten consultados,
+    //ademas de funcionar con los filtros de la vista de compra
     public function generarPDF(Request $request)
     {
         //filtros
@@ -92,7 +96,8 @@ class ComprasController extends Controller
     }
 
 
-
+    //Nos permite crear compras con un proveedor, nos trae el usuario autoamticamente de quien creo la compra
+    //
     public function store(Request $request, Compra $compra)
     {
         // Validar los datos de la solicitud
