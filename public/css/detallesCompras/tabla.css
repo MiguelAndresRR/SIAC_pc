@@ -72,10 +72,11 @@ tbody {
     outline: none;
     transition: all 0.3s ease-in-out;
 }
-#botones .btn-agregar:hover {
-    background-color: #e204ff;
-    transform: scale(1.05);
-    border: #ff3ec5 2px solid;
+#botones .btn-agregar {
+    background-color: #FFBD3A;
+    &:hover {
+        transform: scale(1.05);
+    }
 }
 
 #botones .btn-editar {
