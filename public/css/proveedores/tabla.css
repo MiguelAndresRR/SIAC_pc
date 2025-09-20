@@ -81,19 +81,19 @@ tbody {
 }
 
 #botones .btn-editar {
-    background-color: #fade3e;
+    background-color: #FFBD3A;
     &:hover {
         transform: scale(1.05);
     }
 }
 #botones .btn-ver {
-    background-color: #de67fc;
+    background-color: #3A7DFF;
     &:hover {
         transform: scale(1.05);
     }
 }
 #botones .borrar-boton {
-    background-color: #fc3f3f;
+    background-color: #FF3A7C;
     &:hover {
         transform: scale(1.05);
     }

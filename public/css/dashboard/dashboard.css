@@ -34,7 +34,7 @@ body {
     width: 70px;
     transition: width 0.5s ease;
     overflow: hidden;
-    background-color: #2C2C2C;
+    background-color: #8000FF;
     height: 100vh;
     display: flex;
     flex-direction: column;
