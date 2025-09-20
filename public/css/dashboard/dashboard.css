@@ -34,7 +34,7 @@ body {
     width: 70px;
     transition: width 0.5s ease;
     overflow: hidden;
-    background-color: #000000;
+    background-color: #2C2C2C;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -257,7 +257,7 @@ h4 {
     border-radius: 10px;
     border: 2px solid transparent;
     outline: none;
-    background-color: black;
+    background-color: #2C2C2C;
     color: #ffffff;
     font-size: 20px;
     padding: 10px;
@@ -268,7 +268,7 @@ h4 {
 
 .pdfGenerar:hover {
     background-color: #ff0000;
-    color: #000000;
+    color: #ffffff;
     transform: scale(1.03);
     border: 2px solid #ffffff;
 }

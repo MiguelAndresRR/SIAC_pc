@@ -56,4 +56,4 @@
     @include('admin.compras.layoutcompras.paginacion')
 </div>
 <script src="{{ asset('js/compras/borrar.js') }}"></script>
-<script src="{{ asset('js/compras/agregarDetalles.js') }}"></script>
+<script src="{{ asset('js/compras/agregarDetallesCompras.js') }}"></script>

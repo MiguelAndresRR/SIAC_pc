@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('css/compras/paginacion.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/compras/mostrar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/compras/inputSearch.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/compras/inputsearchCompra.css') }}">
 
 
 
@@ -66,7 +66,5 @@
     </div>
     @include('admin.compras.modal.edit')
     @include('admin.compras.modal.create')
-
 </body>
-
 </html>

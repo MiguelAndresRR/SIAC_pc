@@ -19,7 +19,7 @@
         border-radius: 10px;
         border: 2px solid transparent;
         outline: none;
-        background-color: black;
+        background-color: #2C2C2C;
         color: #ffffff;
         font-size: 20px;
         padding: 10px;
@@ -76,7 +76,7 @@
     border-radius: 10px;
     border: 2px solid transparent;
     outline: none;
-    background-color: #000000;
+    background-color: #2C2C2C;
     color: #ffffff;
     font-size: 16px;
     justify-content: center;

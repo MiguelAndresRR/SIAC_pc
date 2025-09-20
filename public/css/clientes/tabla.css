@@ -11,17 +11,44 @@ table td {
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: black;
+    background-color: #2c2c2c;
 }
-th:nth-child(1), td:nth-child(1) { width: 50px; }    /* ID */
-th:nth-child(2), td:nth-child(2) { width: 120px; }   /* Usuario */
-th:nth-child(3), td:nth-child(3) { width: 120px; }   /* Rol */
-th:nth-child(4), td:nth-child(4) { width: 150px; }   /* Nombres */
-th:nth-child(5), td:nth-child(5) { width: 150px; }   /* Apellidos */
-th:nth-child(6), td:nth-child(6) { width: 200px; }   /* Correo */
-th:nth-child(7), td:nth-child(7) { width: 130px; }   /* Teléfono */
-th:nth-child(8), td:nth-child(8) { width: 130px; }   /* Documento */
-th:nth-child(9), td:nth-child(9) { width: 100px; }   /* Botones */
+th:nth-child(1),
+td:nth-child(1) {
+    width: 50px;
+} /* ID */
+th:nth-child(2),
+td:nth-child(2) {
+    width: 120px;
+} /* Usuario */
+th:nth-child(3),
+td:nth-child(3) {
+    width: 120px;
+} /* Rol */
+th:nth-child(4),
+td:nth-child(4) {
+    width: 150px;
+} /* Nombres */
+th:nth-child(5),
+td:nth-child(5) {
+    width: 150px;
+} /* Apellidos */
+th:nth-child(6),
+td:nth-child(6) {
+    width: 200px;
+} /* Correo */
+th:nth-child(7),
+td:nth-child(7) {
+    width: 130px;
+} /* Teléfono */
+th:nth-child(8),
+td:nth-child(8) {
+    width: 130px;
+} /* Documento */
+th:nth-child(9),
+td:nth-child(9) {
+    width: 100px;
+} /* Botones */
 tbody {
     background-color: #ffffff;
     color: #000000;
@@ -72,7 +99,7 @@ tbody {
 #botones button {
     width: 30%;
     border-radius: 10px;
-    background-color: #000000;
+    background-color: #e0e0e0;
     color: #ffffff;
     height: 40px;
     border: 2px solid transparent;
@@ -80,20 +107,23 @@ tbody {
     transition: all 0.3s ease-in-out;
 }
 
-#botones .btn-editar:hover {
-    background-color: #ffd904;
-    transform: scale(1.05);
-    border: #ffb53e 2px solid;
+#botones .btn-editar {
+    background-color: #fade3e;
+    &:hover {
+        transform: scale(1.05);
+    }
 }
-#botones .btn-ver:hover {
-    background-color: #9e12e4;
-    transform: scale(1.05);
-    border: #ff00e6 2px solid;
+#botones .btn-ver {
+    background-color: #de67fc;
+    &:hover {
+        transform: scale(1.05);
+    }
 }
-#botones .borrar-boton:hover {
-    background-color: #fe2252;
-    transform: scale(1.05);
-    border: #ff2600 2px solid;
+#botones .borrar-boton {
+    background-color: #fc3f3f;
+    &:hover {
+        transform: scale(1.05);
+    }
 }
 /* encabezado tabla */
 thead {
@@ -101,7 +131,7 @@ thead {
     margin: 0;
     & th {
         text-align: center;
-        background-color: #000000;
+        background-color: #2c2c2c;
         font-weight: bold;
         font-size: 16px;
         align-content: center;

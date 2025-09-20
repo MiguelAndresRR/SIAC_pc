@@ -55,14 +55,21 @@ class ClientesController extends Controller
             ->where('telefono_cliente', $request->telefono_cliente)
             ->where('correo_cliente', $request->correo_cliente)
             ->first();
-
+        $nombre = ucwords(strtolower($request->nombre_cliente));
+        $apellido = ucwords(strtolower($request->apellido_cliente));
         if ($existingCliente) {
             return redirect()->route('admin.clientes.index')->with('message', [
                 'type' => 'error',
                 'text' => 'El cliente ya existe en la base de datos.'
             ]);
         } else {
-            $cliente = Cliente::create($request->all());
+            $cliente = Cliente::create([
+                'nombre_cliente' => $nombre,
+                'apellido_cliente' => $apellido,
+                'documento_cliente' => $request->documento_cliente,
+                'telefono_cliente' => $request->telefono_cliente,
+                'correo_cliente' => $request->correo_cliente,
+            ]);
             return redirect()->route('admin.clientes.index')->with('message', [
                 'type' => 'success',
                 'text' => 'El cliente se ha creado correctamente.'
@@ -103,15 +110,16 @@ class ClientesController extends Controller
             ->where('correo_cliente', $request->correo_cliente)
             ->where('id_cliente', '!=', $cliente->id_cliente)
             ->first();
-
+        $nombre = ucwords(strtolower($request->nombre_cliente));
+        $apellido = ucwords(strtolower($request->apellido_cliente));
         if ($existingCliente) {
             return redirect()->route('admin.clientes.index')->with('message', [
                 'type' => 'error',
                 'text' => 'El cliente ya existe en la base de datos.'
             ]);
         } else {
-            $cliente->nombre_cliente = $request->nombre_cliente;
-            $cliente->apellido_cliente = $request->apellido_cliente;
+            $cliente->nombre_cliente = $nombre;
+            $cliente->apellido_cliente = $apellido;
             $cliente->documento_cliente = $request->documento_cliente;
             $cliente->telefono_cliente = $request->telefono_cliente;
             $cliente->direccion_cliente = $request->direccion_cliente;

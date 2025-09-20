@@ -59,4 +59,4 @@
     @include('admin.ventas.layoutventas.paginacion')
 </div>
 <script src="{{ asset('js/ventas/borrar.js') }}"></script>
-<script src="{{ asset('js/ventas/agregarDetalles.js') }}"></script>
+<script src="{{ asset('js/ventas/agregarDetallesVentas.js') }}"></script>

@@ -93,7 +93,7 @@ thead {
     margin: 0;
     & th {
         text-align: center;
-        background-color: #000000;
+        background-color: #2C2C2C;
         font-weight: bold;
         font-size: 16px;
         align-content: center;

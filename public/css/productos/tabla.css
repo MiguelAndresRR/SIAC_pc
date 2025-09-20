@@ -73,20 +73,23 @@ tbody {
     transition: all 0.3s ease-in-out;
 }
 
-#botones .btn-editar:hover {
-    background-color: #ffd904;
-    transform: scale(1.05);
-    border: #ffb53e 2px solid;
+#botones .btn-editar {
+    background-color: #fade3e;
+    &:hover {
+        transform: scale(1.05);
+    }
 }
-#botones .btn-ver:hover {
-    background-color: #9e12e4;
-    transform: scale(1.05);
-    border: #ff00e6 2px solid;
+#botones .btn-ver {
+    background-color: #de67fc;
+    &:hover {
+        transform: scale(1.05);
+    }
 }
-#botones .borrar-boton:hover {
-    background-color: #fe2252;
-    transform: scale(1.05);
-    border: #ff2600 2px solid;
+#botones .borrar-boton {
+    background-color: #fc3f3f;
+    &:hover {
+        transform: scale(1.05);
+    }
 }
 /* encabezado tabla */
 thead {
@@ -94,7 +97,7 @@ thead {
     margin: 0;
     & th {
         text-align: center;
-        background-color: #000000;
+        background-color: #2C2C2C;
         font-weight: bold;
         font-size: 16px;
         align-content: center;

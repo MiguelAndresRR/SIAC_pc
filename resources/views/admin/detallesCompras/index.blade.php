@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('css/detallesCompras/paginacion.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/detallesCompras/mostrar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/detallesCompras/inputSearch.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detallesCompras/inputsearchDetallesCompras.css') }}">
 
 
     <link
