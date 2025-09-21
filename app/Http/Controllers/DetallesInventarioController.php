@@ -10,6 +10,9 @@ use App\Models\productos\Producto;
 
 class DetallesInventarioController extends Controller
 {
+    //Desde este controlador manejamos cada detalle de inventario, osea cada detalle de compra relacionado al id_producto,
+    //Para poder separar datos, nos muestra cada lote, cantidad que le queda a un lote, etc. Nos muestra los datos solo si
+    //el stock es mayor a 0
     public function index(Request $request, $id_producto)
     {
         

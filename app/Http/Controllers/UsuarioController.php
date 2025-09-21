@@ -11,7 +11,7 @@ use App\Models\compras\Compra;
 
 class UsuarioController extends Controller
 {
-
+    //Nos trae todos los usuarios, y actualiza la tabla de registros si se utilizan los filtros
     public function index(Request $request)
     {
         $query = User::query()
@@ -51,10 +51,7 @@ class UsuarioController extends Controller
         return view('admin.usuarios.index', compact('usuarios', 'roles'));
     }
 
-    public function create()
-    {
-        //
-    }
+    //Nos permite crear un registro de usuarios, y valida que el usuario no exista en otro registro antes de crearlo.
     public function store(Request $request, User $usuario)
     {
         $request->validate([
@@ -133,6 +130,7 @@ class UsuarioController extends Controller
         ]);
     }
 
+
     public function edit(User $usuario)
     {
         return response()->json([
@@ -148,6 +146,7 @@ class UsuarioController extends Controller
         ]);
     }
 
+    //Nos actualiza el registro seleccionado, y verifica que no se vaya a actualizar a un usuario que ya existe
     public function update(Request $request, User $usuario)
     {
         $request->validate([
@@ -201,6 +200,7 @@ class UsuarioController extends Controller
     }
 
 
+    //Nos permite eliminar el registro de un usuario, verifica que si este usuario tiene compras o ventas registras, no se pueda borrar.
     public function destroy(User $usuario)
     {
         // Evitar borrar el usuario autenticado

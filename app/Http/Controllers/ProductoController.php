@@ -45,6 +45,7 @@ class ProductoController extends Controller
         return view('admin.productos.index', compact('productos', 'categorias', 'unidades', 'porPagina'));
     }
 
+    // Genera los datos de los productos filtrados en un PDF
     public function generarPDF(Request $request)
     {
         $query = Producto::query();
@@ -94,6 +95,7 @@ class ProductoController extends Controller
 
 
 
+    //Maneja todos los datos del formulario create, valida que el producto exista ya.
     public function store(Request $request, Producto $producto)
     {
         $request->validate([
@@ -127,6 +129,8 @@ class ProductoController extends Controller
             ]);
         }
     }
+
+    //Nos trae los datos para editar y para ver.
     public function show(Producto $producto)
     {
         return response()->json([
@@ -140,7 +144,7 @@ class ProductoController extends Controller
         ]);
     }
 
-
+    //Nos permite actualizar los registros de un producto, y valida que los datos no existan en otro producto.
     public function update(Request $request, Producto $producto)
     {
         $request->validate([
@@ -175,6 +179,8 @@ class ProductoController extends Controller
         }
     }
 
+    //Nos permite eliminar productos, en caso de que
+    //Antes de eliminar valida que no este asociado a otros registros, para evitar eliminar registros de cascada
     public function destroy($id_producto)
     {
         $producto = Producto::find($id_producto);

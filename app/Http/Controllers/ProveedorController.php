@@ -7,6 +7,8 @@ use App\Models\proveedor\Proveedor;
 
 class ProveedorController extends Controller
 {
+    //Nos trae todos los productos registrados de datos, 
+    //si se utilizan los filtros la tabla de la vista se actualiza con la nueva consulta.
     public function index(Request $request)
     {
         $query = Proveedor::query();
@@ -38,6 +40,8 @@ class ProveedorController extends Controller
         return view('admin.proveedores.index', compact('proveedores'));
     }
 
+    //Registra en la base de datos el registro del formulario enviado de crear proveedores
+    //Verifica que no exista el proveedor antes de crearlo.
     public function store(Request $request, Proveedor $proveedor)
     {
         $request->validate([
@@ -74,6 +78,8 @@ class ProveedorController extends Controller
             ]);
         }
     }
+
+    //Trae todos los datos para el show y para el formulario para editar.
     public function show(Proveedor $proveedor)
     {
         return response()->json([
@@ -85,6 +91,8 @@ class ProveedorController extends Controller
         ]);
     }
 
+    //Nos permite actualizar el registro del proveedor seleccionado, valida los request y
+    //verifica que no exista el proveedor.
     public function update(Request $request, Proveedor $proveedor)
     {
         $request->validate([
@@ -124,6 +132,8 @@ class ProveedorController extends Controller
         }
     }
 
+    //Nos permite borrar el registro seleccionado, en caso de que tenga compras
+    //asociadas no nos permite borrar el registro.
     public function destroy($id_proveedor)
     {
         $proveedor = Proveedor::find($id_proveedor);

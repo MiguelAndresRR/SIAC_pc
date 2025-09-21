@@ -12,6 +12,7 @@ use App\Models\ventas\DetalleVenta;
 
 class InventarioController extends Controller
 {
+    //Nos trae todos los productos creados, para registrarlos en la tabla inventario. Ademas realizamos un stock total con todos los detalles de inventario.
     public function index(Request $request)
     {
         $productos = Producto::pluck('id_producto');
@@ -36,6 +37,7 @@ class InventarioController extends Controller
 
         return view('admin.inventario.index', compact('inventarioProductos'));
     }
+    //Podemos generar un PDF con todos los productos, del inventario y un registro de los lotes de cada inventario.
     public function generarPDF()
     {
         $inventario = Inventario::with('producto')->get();

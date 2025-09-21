@@ -46,6 +46,7 @@ class VentasController extends Controller
         return view('admin.ventas.index', compact('ventas', 'clientes', 'usuarios'));
     }
 
+    //Genera un reporte de las ventas con cada producto registrado al cliente.
     public function generarPDF(Request $request)
     {
         //filtros

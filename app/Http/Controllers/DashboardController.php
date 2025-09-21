@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+    //Nos trae todos los datos para la vista del dashboard que funciona con chart.js, 
+    //nos trae las ventas totales, productos mas vendidos, menos vendidos, productos con bajo y sin stock.
     public function index()
     {
         // Ventas totales

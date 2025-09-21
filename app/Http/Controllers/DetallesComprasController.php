@@ -73,6 +73,8 @@ class DetallesComprasController extends Controller
 
 
 
+    //Nos permite traer los datos para el porfumario, en los selects del crear el detalle de la compra se necesita un producto
+    //y el id de la compra.
     public function create($id_compra)
     {
         // Obtener lista de productos para el formulario
@@ -137,6 +139,7 @@ class DetallesComprasController extends Controller
         ]);
     }
 
+    //Nos trae los detalles de compra con los datos de compra y producto.
     public function edit($id_detalle_compra)
     {
         $detalle = DetalleCompra::with(['compra', 'producto'])->find($id_detalle_compra);
@@ -160,7 +163,7 @@ class DetallesComprasController extends Controller
         ]);
     }
 
-    // Actualizar un detalle de compra existente
+    // Actualizar un detalle de compra existente 
     public function update(Request $request, DetalleCompra $detalleCompra)
     {
         $request->validate([
