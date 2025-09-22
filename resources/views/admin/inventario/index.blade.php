@@ -58,7 +58,7 @@
             @include('admin.inventario.layoutinventario.tablainventario')
         </div>
     </div>
-    <script src="{{ asset('js/inventario/verDetalles.js') }}"></script>
+    <script src="{{ asset('js/inventario/verDetallesInventario.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
