@@ -25,7 +25,9 @@
     padding: 4px;
     margin-bottom: 20px;
 }
-
+.header i{
+    margin-right: 5px;
+}
 .registrar-ventas-container form {
     display: flex;
     flex-direction: column;

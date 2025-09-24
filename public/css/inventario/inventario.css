@@ -38,7 +38,9 @@
     margin: 0;
     padding: 0;
 }
-
+.header i{
+    margin-right: 5px;
+}
 .filtros {
     display: flex;
     margin-bottom: 10px;

@@ -28,21 +28,15 @@ Route::middleware('prevent-back')->group(function () {
         Route::get('productos', [ProductoController::class, 'index'])->name('admin.productos.index');
     });
 
-    Route::middleware('auth')->group(function () {
-        // Dashboard de admin con datos del controlador
-        Route::get('/admin/dashboard', [DashboardController::class, 'index'])
-            ->name('admin.dashboard');
+    Route::middleware(['auth', 'role:1'])->group(function () {
+        Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-        // Dashboard de usuario simple
-        Route::get('/user/dashboard', function () {
-            return view('user.dashboard');
-        })->name('user.dashboard');
         // Mostrar la lista de productos
         Route::get('admin/productos/index', [ProductoController::class, 'index'])->name('admin.productos.index');
-        
+
         //Generar Reportes Productos
         Route::get('admin/productos/pdf', [ProductoController::class, 'generarPDF'])->name('admin.reportes.productos_pdf');
-        
+
         // Formulario para crear un nuevo producto
         Route::get('admin/productos/create', [ProductoController::class, 'create'])->name('admin.productos.create');
 
@@ -236,8 +230,31 @@ Route::middleware('prevent-back')->group(function () {
         Route::get('admin/inventario/index', [InventarioController::class, 'index'])->name('admin.inventario.index');
         Route::get('admin/inventario/pdf', [InventarioController::class, 'generarPDF'])->name('admin.reportes.inventario_pdf');
         Route::get('admin/inventario/{id_producto}/detalles', [DetallesInventarioController::class, 'index'])->name('admin.detallesInventario.index');
-
-        //cerrar sesion
-        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });
+
+    // 🔒 Rutas para Usuario corriente (rol 2)
+    Route::middleware(['auth', 'role:2'])->group(function () {
+        Route::get('user/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
+        Route::get('user/productos/index', [ProductoController::class, 'index'])->name('user.productos.index');
+        Route::get('user/proveedores/index', [ProveedorController::class, 'index'])->name('user.proveedores.index');
+        Route::get('user/inventario/index', [InventarioController::class, 'index'])->name('user.inventario.index');
+        Route::get('user/ventas/index', [VentasController::class, 'index'])->name('user.ventas.index');
+        Route::get('user/compras/index', [ComprasController::class, 'index'])->name('user.compras.index');
+        Route::get('user/usuarios/index', [UsuarioController::class, 'index'])->name('user.usuarios.index');
+        Route::get('user/clientes/index', [ClientesController::class, 'index'])->name('user.clientes.index');
+        Route::get('user/ventas/pdf', [VentasController::class, 'generarPDF'])->name('user.reportes.ventas_pdf');
+        Route::get('user/productos/pdf', [ProductoController::class, 'generarPDF'])->name('user.reportes.productos_pdf');
+        Route::get('user/inventario/pdf', [InventarioController::class, 'generarPDF'])->name('user.reportes.inventario_pdf');
+        Route::get('user/compras/pdf', [ComprasController::class, 'generarPDF'])->name('user.reportes.compras_pdf');
+        Route::get('user/ventas/pdf', [VentasController::class, 'generarPDF'])->name('user.reportes.ventas_pdf');
+        Route::get('user/ventas/{id_venta}/detalles', [DetallesVentasController::class, 'index'])
+            ->name('user.detallesVentas.index');
+        Route::get('user/compras/{id_compra}/detalles', [DetallesComprasController::class, 'index'])
+            ->name('user.detallesCompras.index');
+        Route::get('user/inventario/{id_producto}/detalles', [DetallesInventarioController::class, 'index'])->name('user.detallesInventario.index');
+    });
+
+
+    //cerrar sesion
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

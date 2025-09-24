@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\clientes\Cliente;
+use Illuminate\Support\Facades\Auth;
 
 class ClientesController extends Controller
 {
@@ -28,11 +29,19 @@ class ClientesController extends Controller
         }
         $porPagina = $request->input('PorPagina', 10); // 10 por defecto
         $clientes = $query->paginate($porPagina);
-        if ($request->ajax()) {
-            return view('admin.clientes.layoutclientes.tablaclientes', compact('clientes'))->render();
-        }
 
-        return view('admin.clientes.index', compact('clientes', 'porPagina'));
+        $user = Auth::user();
+        if ($user->id_rol == 1) {
+            if ($request->ajax()) {
+                return view('admin.clientes.layoutclientes.tablaclientes', compact('clientes'))->render();
+            }
+            return view('admin.clientes.index', compact('clientes', 'porPagina'));
+        } elseif ($user->id_rol == 2) {
+            if ($request->ajax()) {
+                return view('user.clientes.layoutclientes.tablaclientes', compact('clientes'))->render();
+            }
+            return view('user.clientes.index', compact('clientes', 'porPagina'));
+        }
     }
 
     //se encarga de guardar los campos del formulario en la base de datos, valida los datos enviados, 
@@ -69,6 +78,7 @@ class ClientesController extends Controller
                 'documento_cliente' => $request->documento_cliente,
                 'telefono_cliente' => $request->telefono_cliente,
                 'correo_cliente' => $request->correo_cliente,
+                'direccion_cliente' => $request->direccion_cliente
             ]);
             return redirect()->route('admin.clientes.index')->with('message', [
                 'type' => 'success',

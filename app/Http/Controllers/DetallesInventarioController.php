@@ -7,6 +7,7 @@ use App\Models\inventario\DetalleInventario;
 use App\Models\compras\DetalleCompra;
 use App\Models\inventario\Inventario;
 use App\Models\productos\Producto;
+use Illuminate\Support\Facades\Auth;
 
 class DetallesInventarioController extends Controller
 {
@@ -15,7 +16,7 @@ class DetallesInventarioController extends Controller
     //el stock es mayor a 0
     public function index(Request $request, $id_producto)
     {
-        
+
         $inventario = Inventario::where('id_producto', $id_producto)->first();
         if ($inventario) {
             $detallesCompra = DetalleCompra::where('id_producto', $id_producto)->get();
@@ -43,14 +44,20 @@ class DetallesInventarioController extends Controller
             ->with('inventario.producto')
             ->select('detalle_inventario.*')
             ->distinct();
-
         $nombreProducto = Producto::where('id_producto', $id_producto)->value('nombre_producto');
         $porPagina = $request->input('PorPagina', 10);
         $detallesInventario = $query->paginate($porPagina);
-
-        if ($request->ajax()) {
-            return view('admin.detallesInventario.layoutDetallesInventario.tablaDetallesInventario', compact('detallesInventario', 'detallesCompra', 'nombreProducto'))->render();
+        $user = Auth::user();
+        if ($user->id_rol == 1) {
+            if ($request->ajax()) {
+                return view('admin.detallesInventario.layoutDetallesInventario.tablaDetallesInventario', compact('detallesInventario', 'detallesCompra', 'nombreProducto'))->render();
+            }
+            return view('admin.detallesInventario.index', compact('detallesInventario', 'detallesCompra', 'nombreProducto'));
+        } elseif ($user->id_rol == 2) {
+            if ($request->ajax()) {
+                return view('user.detallesInventario.layoutDetallesInventario.tablaDetallesInventario', compact('detallesInventario', 'detallesCompra', 'nombreProducto'))->render();
+            }
+            return view('user.detallesInventario.index', compact('detallesInventario', 'detallesCompra', 'nombreProducto'));
         }
-        return view('admin.detallesInventario.index', compact('detallesInventario', 'detallesCompra', 'nombreProducto'));
     }
 }

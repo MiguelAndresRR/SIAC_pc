@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\productos\Producto;
 use App\Models\ventas\DetalleVenta;
 use App\Models\compras\Compra;
@@ -46,14 +46,25 @@ class DashboardController extends Controller
             ->where('stock_total', '<=', 15)
             ->join('producto', 'inventario.id_producto', '=', 'producto.id_producto')
             ->pluck('producto.nombre_producto');
-
-        return view('admin.dashboard', [
-            'ventasTotales' => $ventasTotales,
-            'gananciasTotales' => $gananciasTotales,
-            'productosMasVendidos' => $productosMasVendidos,
-            'productosMenosVendidos' => $productosMenosVendidos,
-            'productosSinStock' => $productosSinStock,
-            'productosPocoStock' => $productosPocoStock
-        ]);
+        $user = Auth::user();
+        if ($user->id_rol == 1) {
+            return view('admin.dashboard', [
+                'ventasTotales' => $ventasTotales,
+                'gananciasTotales' => $gananciasTotales,
+                'productosMasVendidos' => $productosMasVendidos,
+                'productosMenosVendidos' => $productosMenosVendidos,
+                'productosSinStock' => $productosSinStock,
+                'productosPocoStock' => $productosPocoStock
+            ]);
+        } elseif ($user->id_rol == 2) {
+            return view('user.dashboard', [
+                'ventasTotales' => $ventasTotales,
+                'gananciasTotales' => $gananciasTotales,
+                'productosMasVendidos' => $productosMasVendidos,
+                'productosMenosVendidos' => $productosMenosVendidos,
+                'productosSinStock' => $productosSinStock,
+                'productosPocoStock' => $productosPocoStock
+            ]);
+        }
     }
 }

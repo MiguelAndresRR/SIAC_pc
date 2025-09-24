@@ -19,8 +19,8 @@
                 <tr>
                     <td>{{ $detalles->producto->nombre_producto }}</td>
                     <td>{{ $detalles->cantidad_producto }}</td>
-                    <td>{{ $detalles->precio_unitario }}</td>
-                    <td>{{ $detalles->subtotal_compra }}</td>
+                    <td>COP{{ $detalles->precio_unitario }}</td>
+                    <td>COP{{ $detalles->subtotal_compra }}</td>
                     <td>{{$detalles->fecha_vencimiento ? \Carbon\Carbon::parse($detalles->fecha_vencimiento)->format('d/m/Y') : 'sin fecha' }}</td>
                     <td id="botones">
                         <button type="button" class="btn-editar"  data-id_compra="{{ $id_compra }}" data-id_detalle_compra="{{ $detalles->id_detalle_compra }}">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\productos\Categoria;
 use App\Models\productos\Unidad;
 use App\Models\productos\Producto;
@@ -38,11 +39,21 @@ class ProductoController extends Controller
         $productos = $query->paginate($porPagina);
         $categorias = Categoria::all();
         $unidades = Unidad::all();
-        if ($request->ajax()) {
-            return view('admin.productos.layoutproductos.tablaproductos', compact('productos', 'categorias', 'unidades'))->render();
-        }
+        $user = Auth::user();
+        if ($user->id_rol == 1) {
+            // Si es petición AJAX, renderizar solo el contenido
+            if ($request->ajax()) {
+                return view('admin.productos.layoutproductos.tablaproductos', compact('productos', 'categorias', 'unidades'))->render();
+            }
 
-        return view('admin.productos.index', compact('productos', 'categorias', 'unidades', 'porPagina'));
+            return view('admin.productos.index', compact('productos', 'categorias', 'unidades', 'porPagina'));
+        } elseif ($user->id_rol == 2) {
+            if ($request->ajax()) {
+                return view('user.productos.layoutproductos.tablaproductos', compact('productos', 'categorias', 'unidades'))->render();
+            }
+
+            return view('user.productos.index', compact('productos', 'categorias', 'unidades', 'porPagina'));
+        }
     }
 
     // Genera los datos de los productos filtrados en un PDF
@@ -88,9 +99,14 @@ class ProductoController extends Controller
             'categoria' => $categoria ? $categoria->categoria : 'Todas',
             'unidad'    => $unidad ? $unidad->unidad_peso : 'Todas',
         ];
-
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.productos_pdf', $data);
-        return $pdf->download('reporte productos.pdf');
+        $user = Auth::user();
+        if ($user->id_rol == 1) {
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.productos_pdf', $data);
+            return $pdf->download('reporte productos.pdf');
+        } elseif ($user->id_rol == 2) {
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('user.reportes.productos_pdf', $data);
+            return $pdf->download('reporte productos.pdf');
+        }
     }
 
 

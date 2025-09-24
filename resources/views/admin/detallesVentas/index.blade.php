@@ -56,7 +56,7 @@
                     <i class="fa-regular fa-circle-left"></i>
                 </a>
             </div>
-            <h1 class="Totalventa">Total Venta: {{ $venta->total_venta }}</h1>
+            <h1 class="Totalventa">Total Venta: COP{{ $venta->total_venta }}</h1>
         </div>
         @include('admin.detallesVentas.layoutdetallesVentas.filtros')
         <div id="tabla-detallesVentas">

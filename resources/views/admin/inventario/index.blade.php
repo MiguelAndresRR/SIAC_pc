@@ -47,7 +47,7 @@
     @include('admin.layout.sidebar')
     <div class="content-inventario">
         <div class="header">
-            <h1><i class="fa-solid fa-bag-shopping"></i>Inventario</h1>
+            <h1><i class="fa-solid fa-cubes-stacked"></i>Inventario</h1>
             <a onclick="window.location.href='{{ route('admin.reportes.inventario_pdf') }}'" class="pdfGenerar">
                 <i class="fa fa-file-pdf"></i> Generar PDF
             </a>

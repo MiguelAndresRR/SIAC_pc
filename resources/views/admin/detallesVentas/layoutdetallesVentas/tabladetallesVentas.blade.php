@@ -18,8 +18,8 @@
                 <tr>
                     <td>{{ $detalles->producto->nombre_producto}} - {{ $detalles->producto->categoria->categoria }}</td>
                     <td>{{ $detalles->cantidad_venta}}</td>
-                    <td>{{ $detalles->precio_unitario_venta}}</td>
-                    <td>{{ $detalles->subtotal_venta}}</td>
+                    <td>COP{{ $detalles->precio_unitario_venta}}</td>
+                    <td>COP{{ $detalles->subtotal_venta}}</td>
                     <td id="botones">
                         <button type="button" class="btn-agregar"  data-id_venta="{{ $id_venta }}" data-id_detalle_venta="{{ $detalles->id_detalle_venta }}">
                             <i class="fa-solid fa-pen-to-square"></i>

@@ -41,11 +41,10 @@ class AuthController extends Controller
 
         if ($user && Hash::check($data['password'], $user->password)) {
             Auth::login($user);
-            if ($user->id_rol == 1) {
-                return redirect()->route('admin.dashboard');
-            } elseif ($user->id_rol == 2) {
-                return redirect()->route('user.dashboard');
-            }
+
+            return $user->id_rol == 1
+                ? redirect()->route('admin.dashboard')
+                : redirect()->route('user.dashboard');
         }
         return back()
             ->withErrors(['login_error' => 'Usuario, contraseña o rol incorrectos.'])

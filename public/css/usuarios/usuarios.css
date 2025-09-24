@@ -18,7 +18,9 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
-
+.header i{
+    margin-right: 5px;
+}
 .registrar-usuario-container h2 {
     place-items: left;
     justify-items: left;

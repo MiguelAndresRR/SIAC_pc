@@ -49,8 +49,7 @@
     <div class="content-inventario">
         <div class="header">
             <div class="header-detallesInventario">
-                <h1><i class="fa-solid fa-bag-shopping">
-                    </i>inventario / {{ $nombreProducto }}
+                <h1><i class="fa-solid fa-cubes-stacked"></i>inventario / {{ $nombreProducto }}
                 </h1>
             </div>
             <div class="header-detallesInventario">

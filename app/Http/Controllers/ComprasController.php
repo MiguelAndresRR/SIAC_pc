@@ -40,11 +40,20 @@ class ComprasController extends Controller
         $porPagina = $request->input('PorPagina', 10);
         $compras = $query->paginate($porPagina);
         $proveedores = Proveedor::all();
-        if ($request->ajax()) {
-            return view('admin.compras.layoutcompras.tablacompras', compact('compras', 'proveedores'))->render();
-        }
+        $user = Auth::user();
+        if ($user->id_rol == 1) {
+            if ($request->ajax()) {
+                return view('admin.compras.layoutcompras.tablacompras', compact('compras', 'proveedores'))->render();
+            }
 
-        return view('admin.compras.index', compact('compras', 'proveedores'));
+            return view('admin.compras.index', compact('compras', 'proveedores'));
+        } elseif ($user->id_rol == 2) {
+            if ($request->ajax()) {
+                return view('user.compras.layoutcompras.tablacompras', compact('compras', 'proveedores'))->render();
+            }
+
+            return view('user.compras.index', compact('compras', 'proveedores'));
+        }
     }
 
     //Esta funcion nos permite descargar PDF de los datos que esten consultados,
@@ -90,9 +99,14 @@ class ComprasController extends Controller
             'totalGeneral' => $totalGeneral
 
         ];
-
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.compras_pdf', $data);
-        return $pdf->download('reporte_compras.pdf');
+        $user = Auth::user();
+        if ($user->id_rol == 1) {
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.compras_pdf', $data);
+            return $pdf->download('reporte_compras.pdf');
+        } elseif ($user->id_rol == 2) {
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reportes.compras_pdf', $data);
+            return $pdf->download('reporte_compras.pdf');
+        }
     }
 
 

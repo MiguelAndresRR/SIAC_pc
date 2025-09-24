@@ -9,6 +9,7 @@ use App\Models\compras\Compra;
 use App\Models\inventario\Inventario;
 use App\Models\inventario\DetalleInventario;
 use App\Models\ventas\DetalleVenta;
+use Illuminate\Support\Facades\Auth;
 
 class DetallesComprasController extends Controller
 {
@@ -46,13 +47,24 @@ class DetallesComprasController extends Controller
         // Obtener lista de productos para selección
         $productos = Producto::with('unidad')->get();
         $compra = Compra::find($id_compra);
-        // Si es petición AJAX, renderizar solo el contenido
-        if ($request->ajax()) {
-            return view('admin.detallesCompras.layoutdetallesCompras.tabladetallesCompras', compact('detallesCompras', 'id_compra', 'productos', 'compra'))->render();
-        }
 
-        // Vista completa
-        return view('admin.detallesCompras.index', compact('detallesCompras', 'id_compra', 'productos', 'compra', 'total_compra'));
+        $user = Auth::user();
+        if ($user->id_rol == 1) {
+            // Si es petición AJAX, renderizar solo el contenido
+            if ($request->ajax()) {
+                return view('admin.detallesCompras.layoutdetallesCompras.tabladetallesCompras', compact('detallesCompras', 'id_compra', 'productos', 'compra'))->render();
+            }
+
+            // Vista completa
+            return view('admin.detallesCompras.index', compact('detallesCompras', 'id_compra', 'productos', 'compra', 'total_compra'));
+        } elseif ($user->id_rol == 2) {
+            if ($request->ajax()) {
+                return view('user.detallesCompras.layoutdetallesCompras.tabladetallesCompras', compact('detallesCompras', 'id_compra', 'productos', 'compra'))->render();
+            }
+
+            // Vista completa
+            return view('user.detallesCompras.index', compact('detallesCompras', 'id_compra', 'productos', 'compra', 'total_compra'));
+        }
     }
 
     // Mostrar un detalle de compra específico en JSON

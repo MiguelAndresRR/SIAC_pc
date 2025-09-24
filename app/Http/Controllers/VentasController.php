@@ -39,11 +39,20 @@ class VentasController extends Controller
         $clientes = Cliente::All();
         $porPagina = $request->input('PorPagina', 10);
         $ventas = $query->paginate($porPagina);
-        if ($request->ajax()) {
-            return view('admin.ventas.layoutventas.tablaventas', compact('ventas', 'clientes', 'usuarios'))->render();
-        }
+        $user = Auth::user();
+        if ($user->id_rol == 1) {
+            if ($request->ajax()) {
+                return view('admin.ventas.layoutventas.tablaventas', compact('ventas', 'clientes', 'usuarios'))->render();
+            }
 
-        return view('admin.ventas.index', compact('ventas', 'clientes', 'usuarios'));
+            return view('admin.ventas.index', compact('ventas', 'clientes', 'usuarios'));
+        } elseif ($user->id_rol == 2) {
+            if ($request->ajax()) {
+                return view('user.ventas.layoutventas.tablaventas', compact('ventas', 'clientes', 'usuarios'))->render();
+            }
+
+            return view('user.ventas.index', compact('ventas', 'clientes', 'usuarios'));
+        }
     }
 
     //Genera un reporte de las ventas con cada producto registrado al cliente.

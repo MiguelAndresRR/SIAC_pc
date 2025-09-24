@@ -42,13 +42,22 @@ class UsuarioController extends Controller
 
         $porPagina = $request->input('entries', 15);
         $usuarios = $query->paginate($porPagina)->appends($request->query());
+        $user = Auth::user();
+        if ($user->id_rol == 1) {
+            if ($request->ajax()) {
+                return view('admin.usuarios.layoutusuarios.tablausuarios', compact('usuarios'))->render();
+            }
 
-        if ($request->ajax()) {
-            return view('admin.usuarios.layoutusuarios.tablausuarios', compact('usuarios'))->render();
+            $roles = Rol::all();
+            return view('admin.usuarios.index', compact('usuarios', 'roles'));
+        } elseif ($user->id_rol == 2) {
+            if ($request->ajax()) {
+                return view('user.usuarios.layoutusuarios.tablausuarios', compact('usuarios'))->render();
+            }
+
+            $roles = Rol::all();
+            return view('user.usuarios.index', compact('usuarios', 'roles'));
         }
-
-        $roles = Rol::all();
-        return view('admin.usuarios.index', compact('usuarios', 'roles'));
     }
 
     //Nos permite crear un registro de usuarios, y valida que el usuario no exista en otro registro antes de crearlo.

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\proveedor\Proveedor;
-
+use Illuminate\Support\Facades\Auth;
 class ProveedorController extends Controller
 {
     //Nos trae todos los productos registrados de datos, 
@@ -32,12 +32,20 @@ class ProveedorController extends Controller
 
         $porPagina = $request->input('entries', 15);
         $proveedores = $query->paginate($porPagina)->appends($request->query());
+        $user = Auth::user();
+        if ($user->id_rol == 1) {
+            if ($request->ajax()) {
+                return view('admin.proveedores.layoutproveedores.tablaproveedores', compact('proveedores'))->render();
+            }
 
-        if ($request->ajax()) {
-            return view('admin.proveedores.layoutproveedores.tablaproveedores', compact('proveedores'))->render();
+            return view('admin.proveedores.index', compact('proveedores'));
+        } elseif ($user->id_rol == 2) {
+            if ($request->ajax()) {
+                return view('user.proveedores.layoutproveedores.tablaproveedores', compact('proveedores'))->render();
+            }
+
+            return view('user.proveedores.index', compact('proveedores'));
         }
-
-        return view('admin.proveedores.index', compact('proveedores'));
     }
 
     //Registra en la base de datos el registro del formulario enviado de crear proveedores

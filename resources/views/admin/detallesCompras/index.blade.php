@@ -55,7 +55,7 @@
                     <i class="fa-regular fa-circle-left"></i>
                 </a>
             </div>
-            <h1 class="TotalCompra">Total Compra: {{ $total_compra }}</h1>
+            <h1 class="TotalCompra">Total Compra: COP{{ $total_compra }}</h1>
         </div>
         @include('admin.detallesCompras.layoutdetallesCompras.filtros')
         <div id="tabla-detallesCompras">

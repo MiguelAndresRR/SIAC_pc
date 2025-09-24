@@ -20,7 +20,7 @@
                 <tr>
                     <td>{{ $producto->id_producto }}</td>
                     <td>{{ $producto->nombre_producto }}</td>
-                    <td>$ {{ $producto->precio_producto }}</td>
+                    <td>COP{{ $producto->precio_producto }}</td>
                     <td data-id-categoria="{{ $producto->id_categoria_producto }}">{{ $producto->categoria->categoria }}
                     </td>
                     <td data-id-unidad="{{ $producto->id_unidad_peso_producto }}">{{ $producto->unidad->unidad_peso }}

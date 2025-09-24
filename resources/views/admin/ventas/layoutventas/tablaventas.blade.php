@@ -27,7 +27,7 @@
                         @if($venta->total_venta == 0)
                             sin ventas
                         @else
-                            {{ number_format($venta->total_venta,2)}}
+                            COP{{ number_format($venta->total_venta,2)}}
                         @endif
                     </td>
                     <td id="botones">

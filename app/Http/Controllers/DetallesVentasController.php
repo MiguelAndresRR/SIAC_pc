@@ -8,6 +8,7 @@ use App\Models\ventas\Venta;
 use App\Models\productos\Producto;
 use App\Models\inventario\DetalleInventario;
 use App\Models\inventario\Inventario;
+use Illuminate\Support\Facades\Auth;
 
 class DetallesVentasController extends Controller
 {
@@ -45,14 +46,24 @@ class DetallesVentasController extends Controller
         // Obtener lista de productos para selección
         $venta = Venta::find($id_venta);
         $productos = Producto::with('unidad')->get();
+        $user = Auth::user();
+        if ($user->id_rol == 1) {
+            // Si es petición AJAX, renderizar solo el contenido
+            if ($request->ajax()) {
+                return view('admin.detallesVentas.layoutdetallesVentas.tabladetallesVentas', compact('detallesVentas', 'id_venta', 'productos', 'venta'))->render();
+            }
 
-        // Si es petición AJAX, renderizar solo el contenido
-        if ($request->ajax()) {
-            return view('admin.detallesVentas.layoutdetallesVentas.tabladetallesVentas', compact('detallesVentas', 'id_venta', 'productos', 'venta'))->render();
+            // Vista completa
+            return view('admin.detallesVentas.index', compact('detallesVentas', 'id_venta', 'productos', 'venta'));
+        } elseif ($user->id_rol == 2) {
+            // Si es petición AJAX, renderizar solo el contenido
+            if ($request->ajax()) {
+                return view('user.detallesVentas.layoutdetallesVentas.tabladetallesVentas', compact('detallesVentas', 'id_venta', 'productos', 'venta'))->render();
+            }
+
+            // Vista completa
+            return view('user.detallesVentas.index', compact('detallesVentas', 'id_venta', 'productos', 'venta'));
         }
-
-        // Vista completa
-        return view('admin.detallesVentas.index', compact('detallesVentas', 'id_venta', 'productos', 'venta'));
     }
 
     // Mostrar un detalle de compra específico en JSON

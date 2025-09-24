@@ -22,10 +22,10 @@
                     <td>{{ \Carbon\Carbon::parse($compra->fecha_compra)->format('d/m/Y') }}</td>
                     <td>{{ $compra->proveedor->nombre_proveedor }}</td>
                     <td>
-                        @if($compra->total_compra == 0)
+                        @if ($compra->total_compra == 0)
                             sin compras
                         @else
-                            {{ number_format($compra->total_compra,2)}}
+                            COP{{ number_format($compra->total_compra, 2) }}
                         @endif
                     </td>
                     <td id="botones">
@@ -41,7 +41,8 @@
                         </button>
                         @if ($compra->id_compra)
                             <form id="formEliminar{{ $compra->id_compra }}" method="POST"
-                                action="{{ route('admin.compras.destroy', $compra->id_compra) }}" style="display: none;">
+                                action="{{ route('admin.compras.destroy', $compra->id_compra) }}"
+                                style="display: none;">
                                 @csrf
                                 @method('DELETE')
                             </form>
