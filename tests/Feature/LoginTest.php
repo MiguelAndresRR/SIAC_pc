@@ -7,26 +7,22 @@ use App\Models\usuarios\User;
 
 class LoginTest extends TestCase
 {
-    public function LoginTest()
+    public function test_login_usuario_correcto()
     {
         $user = 'macro';
         $password = 'Alvtururu578!';
         $rol = 1;
 
-        // Llamada al login
         $response = $this->post('/login', [
             'user' => $user,
             'password' => $password,
             'rol' => $rol
         ]);
 
-        // Verifica que el login redirige a la ruta esperada
-        $response->assertStatus(302); // 302 si tu login redirige
-        $response->assertRedirect(route('admin.dashboard')); // Ajusta según tu controlador
+        $response->assertStatus(302);
+        $response->assertRedirect(route('admin.dashboard'));
 
-        // Verifica que el usuario quedó autenticado
         $usuario = User::where('user', $user)->first();
         $this->assertAuthenticatedAs($usuario);
-        
     }
 }

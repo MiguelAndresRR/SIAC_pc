@@ -16,7 +16,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Producto extends Model
 {
     use HasFactory;
-
+    protected static function newFactory()
+    {
+        return \Database\Factories\ProductoFactory::new();
+    }
     protected $table = 'producto';
 
     public $timestamps = false;

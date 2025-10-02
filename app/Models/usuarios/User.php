@@ -27,7 +27,6 @@ class User extends Authenticatable
 
     protected $hidden = [
         'password',
-        'user'
     ];
 
     public function rol()

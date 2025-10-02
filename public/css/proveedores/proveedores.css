@@ -250,3 +250,6 @@ form {
 .header i{
     margin-right: 5px;
 }
+select #id_proveedor{
+    width: auto;
+}
